@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+#leftbox {
+	float:left;
+    width:450px;
+    height:250px;
+	padding:10px;
+    margin:5px;
+    border:3px solid red; 
+	background-image: url("https://78.media.tumblr.com/87c49f93c0d2bcf903ed06c5625c6551/tumblr_oxxpufSaSr1wstv1oo1_540.png");
+}
+
+#rightbox {
+	float:right;
+    width:500px;
+    height:500px;
+    margin:5px;
+    border:3px solid blue; 
+	
+}
+</style>
+<script>
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+
+
+</script>
+</head>
+<body>
+ 
+<p>Someone please help me</p>
+
+<section id="rightbox">
+<p>Desks and Chairs  </p>
+<img id="chair" src="https://78.media.tumblr.com/7598524717d12d0d650f4ae705ca6d40/tumblr_oxpv2ir36j1wstv1oo1_75sq.png" draggable="true" ondragstart="drag(event)">
+<img id="desk" src="https://78.media.tumblr.com/469669a60a14d59577a28957857161aa/tumblr_oxpv2ir36j1wstv1oo2_75sq.png" draggable="true" ondragstart="drag(event)">
+</section>
+
+<section id="leftbox" ondrop="drop(event)" ondragover="allowDrop(event)">
+<p>Hello </p>
+<!--
+<img id="HQsecond" src="https://78.media.tumblr.com/87c49f93c0d2bcf903ed06c5625c6551/tumblr_oxxpufSaSr1wstv1oo1_540.png">
+-->
+</section>
+
+</body>
+</html>

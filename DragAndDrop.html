@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head> 
+
+<style type="text/css"> 
+body {
+
+<!--background-image: url("https://images-na.ssl-images-amazon.com/images/I/91F2OielJSL._SL1500_.jpg");-->
+}
+
+#leftbox {
+	float:left;
+    width:700px;
+    height;800px;
+    margin:5px;
+    border:3px solid red; 
+	background-image: url("https://images-na.ssl-images-amazon.com/images/I/91F2OielJSL._SL1500_.jpg");
+	ondrop="drop(event)";
+	ondragover="allowDrop(event)";
+}
+
+
+#rightbox {
+	float:right;
+    width:500px;
+    height;500px;
+    margin:5px;
+    border:3px solid blue; 
+	
+}
+
+</style>
+<script>
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+</script>
+
+</head>
+<body>
+<h1></h1>
+<!--<button type="button" onclick="myFunction()">Set background image</button>-->
+
+
+<section id="rightbox">
+<p>Desks and Chairs  </p>
+<img id="chair" src="https://78.media.tumblr.com/7598524717d12d0d650f4ae705ca6d40/tumblr_oxpv2ir36j1wstv1oo1_75sq.png" draggable="true" ondragstart="drag(event)">
+<img id="desk" src="https://78.media.tumblr.com/469669a60a14d59577a28957857161aa/tumblr_oxpv2ir36j1wstv1oo2_75sq.png" draggable="true" ondragstart="drag(event)">
+</section>
+
+<section id="leftbox">
+<img id="HQsecond" src="https://78.media.tumblr.com/4c110b0622c44a9c5aee332201539e16/tumblr_oxmlfy3Em81wstv1oo1_540.png">
+</section>
+
+
+<script>
+function myFunction() {
+    document.body.style.backgroundColor = "#f3f3f3";
+    document.body.style.backgroundImage = "url('https://images-na.ssl-images-amazon.com/images/I/91F2OielJSL._SL1500_.jpg')";
+}
+
+
+function doFirst(){
+	myChair = document.getElementById('chair');
+	myChair.addEventListener("dragstart", startDrag, false);
+	leftbox = document.getElementById('leftbox');
+	leftbox.addEventListener("dragenter", function(e){e.preventDefault();},false);
+	leftbox.addEventListener("dragover", function(e){e.preventDefault();},false);
+	leftbox.addEventListener("drop", dropped,false);
+}
+
+function startDrag(e) {
+	var code = '<img id="chair" src="https://78.media.tumblr.com/7598524717d12d0d650f4ae705ca6d40/tumblr_oxpv2ir36j1wstv1oo1_75sq.png">';
+	e.dataTransfer.setData('Text', code);
+}
+
+function dropped(e) {
+	e.preventDefault();
+	//leftbox.innerHTML = e.dataTransfer.getData('Text');
+}
+window.addEventListener("load", doFirst, false);
+
+
+
+</script>
+
+</body>
+</html>
