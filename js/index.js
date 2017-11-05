@@ -1,4 +1,4 @@
-DevExpress.viz.currentTheme("generic.dark");
+DevExpress.viz.currentTheme("generic.light");
 window.onload = function() {
     var viewModel = {
 		//vectorMapOptions is the name of the dxVectorMap element we created
