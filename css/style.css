@@ -6,12 +6,12 @@
 }
 #sidebar{
     background:#223547;
-    width:200px;
+    width:100px;
     height:100%;
     display:block;
     position:absolute;
     left:0px;
-    top:0px;
+    top:70px;
 }
 #sidebarRight{
     background:#223547;
@@ -20,15 +20,30 @@
     display:block;
     position:absolute;
     right:0px;
-    top:0px;
+    top:70px;
 }
 ul{
     margin:0px;
     padding:0px;
 }
 ul li{
-    
+    list-style:none;
 }
 ul li a{
     color:#ffffff;
+}
+nav{
+   width:100%;
+   background:#223547; 
+}
+#topMenuUl{
+    width:89%;
+    margin: 0 auto;
+    padding: 0;   
+}
+#topMenuUl li {
+    list-style:none;
+    display: inline-block;
+    padding: 20px;
+    
 }
