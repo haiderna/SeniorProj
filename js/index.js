@@ -1,8 +1,10 @@
-DevExpress.viz.currentTheme("generic.light");
+DevExpress.viz.currentTheme('generic.light');
 window.onload = function() {
+    document.body.style.backgroundImage = "url('ihttps://i.pinimg.com/originals/c9/b7/60/c9b7600c6075039fddb6e1e1993daede.gif')";
     var viewModel = {
 		//vectorMapOptions is the name of the dxVectorMap element we created
         vectorMapOptions: {
+            
             maxZoomFactor: 4,
             projection: DevExpress.viz.map.projection({
                 to: function (coordinates) {
@@ -40,4 +42,5 @@ window.onload = function() {
     };
     
     ko.applyBindings(viewModel, $("#vector-map-demo").get(0));
+    
 };

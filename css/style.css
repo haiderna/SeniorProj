@@ -3,6 +3,7 @@
     left:100px;
     height: 400px;
     display: block;
+    background-image: url("https://i.pinimg.com/originals/c9/b7/60/c9b7600c6075039fddb6e1e1993daede.gif");
 }
 #sidebar{
     background:#223547;
@@ -45,5 +46,54 @@ nav{
     list-style:none;
     display: inline-block;
     padding: 20px;
+    position:relative;
+}
+#topMenuUl li a{
+    display: block;
+    padding: 24px 14px; 
+}
+
+#FloorDrop {
     
+    display:none;
+    position: absolute;
+    margin: 0x;
+    padding: 0;
+    float: left;
+    background-color: #fff;
+    
+}
+
+#topMenuUl li:hover ul{
+    display: block;
+}
+/*#FloorDrop:hover ul{
+    
+    display:block;
+     position: absolute;
+    margin: 0x;
+    padding: 0;
+    float: left;
+    background-color: #fff;
+    
+    
+}*/
+
+#FloorDrop li {
+    list-style: none;
+    color: black;
+    width: 180px; 
+}
+#FloorDrop li a {
+    color: black;
+    padding: 12px 14px;
+}
+#FloorDrop li a:hover {
+    color: black;
+    padding: 12px 14px;
+    background-color: grey;
+}
+
+body{
+    background-image: url("https://i.pinimg.com/originals/c9/b7/60/c9b7600c6075039fddb6e1e1993daede.gif");
 }
