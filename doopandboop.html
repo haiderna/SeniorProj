@@ -1,60 +1,75 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<style>
-#leftbox {
-	float:left;
-    width:450px;
-    height:250px;
-	padding:10px;
-    margin:5px;
-    border:3px solid red; 
-	background-image: url("https://78.media.tumblr.com/87c49f93c0d2bcf903ed06c5625c6551/tumblr_oxxpufSaSr1wstv1oo1_540.png");
-}
-
-#rightbox {
-	float:right;
-    width:500px;
-    height:500px;
-    margin:5px;
-    border:3px solid blue; 
-	
-}
-</style>
-<script>
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
-}
-
-
-</script>
+	<title>Build them up, break them down!</title>
+	<link rel="stylesheet" href="css/shtoyle.css" />
 </head>
+
 <body>
- 
-<p>Someone please help me</p>
 
-<section id="rightbox">
-<p>Desks and Chairs  </p>
-<img id="chair" src="https://78.media.tumblr.com/7598524717d12d0d650f4ae705ca6d40/tumblr_oxpv2ir36j1wstv1oo1_75sq.png" draggable="true" ondragstart="drag(event)">
-<img id="desk" src="https://78.media.tumblr.com/469669a60a14d59577a28957857161aa/tumblr_oxpv2ir36j1wstv1oo2_75sq.png" draggable="true" ondragstart="drag(event)">
-</section>
+	<div id="main">
+		<h1> This is the first scrap! </h1>
+		<p> Oh baby we are just getting started </p>
+	</div>
+	
+	<div id="top">
+	</div>
+	
+	<div class="wrapper">
 
-<section id="leftbox" ondrop="drop(event)" ondragover="allowDrop(event)">
-<p>Hello </p>
-<!--
-<img id="HQsecond" src="https://78.media.tumblr.com/87c49f93c0d2bcf903ed06c5625c6551/tumblr_oxxpufSaSr1wstv1oo1_540.png">
--->
-</section>
+        <nav id="sidebar">
+            <!-- Sidebar Header -->
+            <div class="sidebar-header">
+                <h3>Collapsible Sidebar</div>
+                <strong>BS</strong>
+            </div>
 
+            <!-- Sidebar Links -->
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+                        <i class="glyphicon glyphicon-home"></i>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="glyphicon glyphicon-briefcase"></i>
+                        About
+                    </a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+                        <i class="glyphicon glyphicon-duplicate"></i>
+                        Pages
+                    </a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li><a href="#">Page 1</a></li>
+                        <li><a href="#">Page 2</a></li>
+                        <li><a href="#">Page 3</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="glyphicon glyphicon-link"></i>
+                        Portfolio
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="glyphicon glyphicon-send"></i>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                <i class="glyphicon glyphicon-align-left"></i>
+                Toggle Sidebar
+            </button>
+        <div>
+
+</div>
+	
 </body>
 </html>

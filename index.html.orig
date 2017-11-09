@@ -19,7 +19,7 @@
     <nav>
         <ul id="topMenuUl">
              <li><img src="https://78.media.tumblr.com/17d7bd6a9eea9ba2563d209c4bd76e69/tumblr_inline_oz0n3rDjWp1v0eaoy_540.png" alt="logo"></li>
-
+<<<<<<< HEAD
               <li><a href="#">Floorplan</a>
                   <ul id="FloorDrop">
                     <li><a href="#">HeadQuarters</a></li>
@@ -29,6 +29,10 @@
                   </ul>
               </li>
                <li><a href="#">Floor</a></li>
+=======
+             <li><a href="#">Floorplan</a></li>
+             <li><a href="#">Floor</a></li>
+>>>>>>> a995ae1a54913110eb49a5b3e93ab6d70b8c9c12
         </ul>
     </nav>
     <div id="sidebar"> 
