@@ -56,11 +56,10 @@ nav{
     padding: 0;   
 }
 #topMenuUl li {
-	text-decoration: none;
+    text-decoration: none;
     list-style-type: none;
     display: inline-block;
     padding: 20px;
-<<<<<<< HEAD
     position:relative;
 }
 #topMenuUl li a{
