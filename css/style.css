@@ -8,14 +8,25 @@
 }
 #sidebar{
     background:#223547;
-    width:100px;
+    width:50px;
     height:100%;
     display:block;
     position:absolute;
     left:0px;
     top:70px;
-	text-align: left;
+    text-align: left;
 }
+#sidebar ul li:hover ul{
+    display: inline-block;
+}
+
+#deskMenu{
+    display:none;
+    position: absolute;
+    padding: 24px 14px;
+     background-color: #223547;
+}
+
 #sidebarRight{
     background:#223547;
     width:200px;
