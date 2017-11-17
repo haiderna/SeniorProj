@@ -27,6 +27,10 @@
      background-color: #223547;
 }
 
+#Type {
+    display: inline;
+}
+
 #sidebarRight{
     background:#223547;
     width:200px;
