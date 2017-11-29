@@ -1,4 +1,4 @@
-DevExpress.viz.currentTheme('generic.light');
+DevExpress.viz.currentTheme('generic.dark');
 window.onload = function() {
     document.body.style.backgroundImage = "url('ihttps://i.pinimg.com/originals/c9/b7/60/c9b7600c6075039fddb6e1e1993daede.gif')";
     var viewModel = {

@@ -10,8 +10,17 @@
     <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/17.1.7/css/dx.common.css" />
     <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/17.1.7/css/dx.dark.css" />
 	<link rel="stylesheet" href ="css/style.css" />
-    
-	
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#draggable" ).draggable();
+  } );
+  </script>
 </head>
 
 <body>
@@ -95,20 +104,31 @@
              <li><a href="#">People</a></li>
         </ul>
     </div>
-    <div class="dx-viewport demo-container">
+<!--    <div class="dx-viewport demo-container">
         <div id="vector-map-demo">
-			<!-- dxVectorMap is the interface to base it off of; naming it vectorMapOptions for reference-->
+			 dxVectorMap is the interface to base it off of; naming it vectorMapOptions for reference
             <div id="vector-map" data-bind="dxVectorMap: vectorMapOptions"></div>
         </div>
     </div>
 	
-	<!-- source scripts -->
+	 source scripts 
     <script src='https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/js/jquery-3.1.0.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
-	<script src="https://cdn3.devexpress.com/jslib/17.1.7/js/dx.all.js"></script>
+	<script src="https://cdn3.devexpress.com/jslib/17.1.7/js/dx.all.js"></script>-->
 	
 	<!-- user custom scripts -->
+   
+    <img id="HQsecond" src="https://78.media.tumblr.com/4c110b0622c44a9c5aee332201539e16/tumblr_oxmlfy3Em81wstv1oo1_540.png">
+   
+        
+        
+        
     <script src="js/data.js"></script>
     <script src="js/index.js"></script>
+    
+    <div id="draggable" class="ui-widget-content">
+  <p>Drag me around</p>
+</div>
+ 
 </body>
 </html>

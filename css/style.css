@@ -6,6 +6,11 @@
     display: block;
     background-image: url("https://i.pinimg.com/originals/c9/b7/60/c9b7600c6075039fddb6e1e1993daede.gif");
 }
+
+#vector-map-demo {
+
+    background-image: url("https://i.pinimg.com/originals/c9/b7/60/c9b7600c6075039fddb6e1e1993daede.gif");
+}
 #sidebar{
     background:#223547;
     width:50px;
@@ -130,6 +135,17 @@ nav{
 }
 
 body{
-    background-image: url("https://i.pinimg.com/originals/c9/b7/60/c9b7600c6075039fddb6e1e1993daede.gif");
+    background-image: url("http://exchangedownloads.smarttech.com/public/content/23/23632dac-9e95-4bfd-95be-fda964b17ae8/previews/medium/0001.png");
 }
+  #draggable { 
+      width: 88px; 
+      height: 67px; 
+      padding: 0.5em; 
+/*      background-color: green;*/
+      background-image: url("https://78.media.tumblr.com/f3aac4996df58eac683a3c7065febb00/tumblr_ozj4w6Xoq41wstv1oo1_250.png");
+  }
 
+  #HQsecond {
+      marin-top: 100px; 
+      margin-left: 100px;
+  }
