@@ -42,6 +42,7 @@
 
   <div class="wrapper">
     <!-- Left Sidebar -->
+
     <nav id="sidebar" class="active">
 <!--       <div class="sidebar-header">
         <h3> WillowTree
@@ -50,9 +51,50 @@
 
       <ul class="list-unstyled components">
         <!-- <p>Seating Chart</p> -->
-        <li><a href="#">
+        <!-- <li><a href="#">
 	            	 	<i class="glyphicon glyphicon-object-align-vertical"></i> Add Desk 
-	    </a></li>
+      </a>
+    </li> -->
+    <li>
+      <!-- Link with dropdown items -->
+      <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false">
+                <i class="glyphicon glyphicon-object-align-vertical"></i> Add Desk
+              </a>
+      <ul class="collapse list-unstyled" id="pageSubmenu1">
+        <!-- <li><a href="#">Hey</a></li>
+        <li><a href="#">This is</a></li>
+        <li><a href="#">Where</a></li>
+        <li><a href="#">People Go</a></li> -->
+        <ul id="deskMenu">
+          <li><a href="#">Information</a>
+              <ul id="DeskInfoMenu">
+                  <li> 
+                      <form action="/action_page.php" class="form-group" >
+                          Name: <input id="deskName" type="text" name="FirstName" placeholder="Clyde Miller"><br>
+                      <input type="submit" class="btn btn-default" value="Submit">
+                        </form>
+                  </li>
+                  <li id="Type">
+                      <p>Type</p>
+                      <button id="singleDesk" onclick="myFunction()"><img src="Single Desk.png" width="40" height="40"></button>
+                      <button id="LargeConf"><img src="Large Conf.png" width="40" height="40"></button>
+                      <button id="SmallConf"><img src="Small conf.png" width="40" height="40"></button>
+                  </li>
+                  <li id="Dimensions">
+                       <form action="/action_page.php" >
+                          W: <input id="deskWidth" type="text" name="W" placeholder="25" ><br>
+                          L: <input id="deskHeight" type="text" name="L" placeholder="25"><br>
+                      <input type="submit" class="btn btn-default" value="Submit">
+                        </form>
+                  </li>
+                  
+              </ul>
+          </li>
+          <li><a href="#">Projects</a></li>
+          <li><button id="ExportButton" type="button" class="btn btn-primary" onclick="desks">PLACE DESK </button></li>
+        </ul>
+
+      </ul>
 
         <li><a href="#">
 	            		<i class="glyphicon glyphicon-folder-open"></i> Projects
@@ -150,6 +192,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="https://cdn3.devexpress.com/jslib/17.2.4/js/dx.all.js"></script>
 
+  <script> 
+  function desks() { 
+    var desk = desker($('#deskName'),$('#deskWidth'),$('#deskHeight') );
+    document.write(desk.name);
+  }
+    </script>
 </body>
 
 </html>

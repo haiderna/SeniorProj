@@ -20,6 +20,11 @@
   $( function() {
     $( "#draggable" ).draggable();
   } );
+
+function myFunction() {
+    var btn = document.createElement("#draggable");
+    document.body.appendChild(btn);
+}
   </script>
 </head>
 
@@ -49,7 +54,7 @@
     </nav>
     <div id="sidebar"> 
         <ul>
-             <li><img src="https://78.media.tumblr.com/d30ea88d7ec4da40bd68fb4392ff338d/tumblr_ozdj7m658f1wstv1oo1_75sq.png" alt="desk">
+             <li><img src="addDesk.png" alt="desk">
                  <ul id="deskMenu">
                     <li><a href="#">Information</a>
                         <ul id="DeskInfoMenu">
@@ -61,7 +66,7 @@
                             </li>
                             <li id="Type">
                                 <p>Type</p>
-                                <button id="singleDesk"><img src="Single Desk.png" width="40" height="40"></button>
+                                <button id="singleDesk" onclick="myFunction()"><img src="Single Desk.png" width="40" height="40"></button>
                                 <button id="LargeConf"><img src="Large Conf.png" width="40" height="40"></button>
                                 <button id="SmallConf"><img src="Small conf.png" width="40" height="40"></button>
                             </li>
@@ -74,19 +79,55 @@
                             </li>
                             
                         </ul>
-                        
-                        
-                        
-                       
                     </li>
                     <li><a href="#">Projects</a></li>
                     <li><button id="ExportButton" type="button" onclick="alert('Place Desk in Map')">PLACE DESK </button></li>
                   </ul>
              
              </li>
-             <li><img src="https://78.media.tumblr.com/62a5c04159485ce7e8041a3bd28cdcb5/tumblr_ozdj7m658f1wstv1oo2_75sq.png" alt="project"></li>
-             <li><img src="https://78.media.tumblr.com/dff42348dad85fc7ef748fb0a9e19371/tumblr_ozdj7m658f1wstv1oo3_75sq.png" alt="people"></li>
-             <li><img src="https://78.media.tumblr.com/2d0138848949e8238473f31f7ed0ed32/tumblr_ozdj7m658f1wstv1oo4_75sq.png" alt="floorplans"></li>
+             
+             
+             <li id="Proj"><img src="addProject.png" alt="project">
+                 <ul id="ProjectSubMenu">
+                      <li>Projects </li>
+                       <li id="CreateProj">Create New Project
+                          <ul id="CreateProjectList">
+                               <li>Create Project </li>
+                               <li>Name  </li>
+                                <li>Color 
+                                    <form action="/action_page.php">
+                                        <input type="color" name="favcolor" value="#ff0000">
+                                        <input type="submit">
+                                    </form> 
+                                </li>
+                   
+                          </ul>
+     
+                      </li>
+                      <li>Projects Search 
+                        <div class="search-container">
+                            <form action="/action_page.php">
+                                <input type="text" placeholder="Search.." name="search">
+                                 <button type="submit"><img src="Search Glass.png" width="20" height="20"></button>
+                            </form>
+                        </div>
+                 
+                      </li>
+           
+                      <li>
+                          <ul>
+                              
+                          <li>Grocery App </li>
+                          <li>Banking App </li>
+                          <li>Toothbrush App </li>
+                     
+                          </ul>
+                          
+                      </li>
+                 </ul>
+             </li>
+             <li><img src="People.png" alt="people"></li>
+             <li><img src="Floorplans.png" alt="floorplans"></li>
         </ul>
     </div>
         
@@ -114,9 +155,9 @@
 	 source scripts 
     <script src='https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/js/jquery-3.1.0.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
-	<script src="https://cdn3.devexpress.com/jslib/17.1.7/js/dx.all.js"></script>-->
+	<script src="https://cdn3.devexpress.com/jslib/17.1.7/js/dx.all.js"></script>
 	
-	<!-- user custom scripts -->
+	 user custom scripts -->
    
     <img id="HQsecond" src="HQSecondEdit.png">
    
@@ -126,9 +167,9 @@
     <script src="js/data.js"></script>
     <script src="js/index.js"></script>
     
-    <div id="draggable" class="ui-widget-content">
+<!--    <div id="draggable" class="ui-widget-content">
   <p>Drag me around</p>
-</div>
+</div>-->
  
 </body>
 </html>

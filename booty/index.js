@@ -35,3 +35,12 @@ $(function(){
         }
      })
 });
+function desk(name, width, height) {
+    this.project = project;
+    this.name = name; 
+    this.height = height;
+    this.width = width;
+
+}
+
+

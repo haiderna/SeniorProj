@@ -410,3 +410,17 @@ a, a:hover, a:focus {
         transform: translateX(50%);
     }
 }
+#deskMenu{
+    list-style: none
+    display:inline-block;
+    position: absolute;
+    padding: 75px 10px;
+    margin-left: 100px;
+    margin-top: 0px;
+     background-color: #223547;
+     text-decoration: none
+     
+}
+#DeskInfoMenu {
+    list-style: none
+}

@@ -28,9 +28,35 @@
 #deskMenu{
     display:none;
     position: absolute;
-    padding: 24px 14px;
+    padding: 50px 28px;
      background-color: #223547;
 }
+
+#sidebar ul #Proj:hover ul {
+    display: inline-block;
+}
+
+#ProjectSubMenu {
+    display:none;
+    position: absolute;
+    padding: 50px 28px;
+    color: white;
+     background-color: #223547;
+     
+}
+
+/*#ProjectSubMenu:hover #CreateProj {
+     display: inline-block;
+}*/
+
+#CreateProjectList{
+    display: inline-block;
+    position: absolute;
+    padding: 50px 50px;
+    color: white;
+     background-color: #223547;
+}
+
 
 #Type {
     display: inline;
