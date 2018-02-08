@@ -26,6 +26,27 @@ function myFunction() {
     document.body.appendChild(btn);
 }
   </script>
+
+  <script>//dynamic search
+	function myFunction() {
+		// Declare variables
+		var input, filter, ul, li, a, i;
+		input = document.getElementById('myInput');
+		filter = input.value.toUpperCase();
+		ul = document.getElementById("myUL");
+		li = ul.getElementsByTagName('li');
+
+		// Loop through all list items, and hide those who don't match the search query
+		for (i = 0; i < li.length; i++) {
+			a = li[i].getElementsByTagName("a")[0];
+			if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+				li[i].style.display = "";
+			} else {
+				li[i].style.display = "none";
+			}
+		}
+	}
+</script>
 </head>
 
 <body>
@@ -126,8 +147,51 @@ function myFunction() {
                       </li>
                  </ul>
              </li>
-             <li><img src="People.png" alt="people"></li>
-             <li><img src="Floorplans.png" alt="floorplans"></li>
+             <li id="People"><img src="People.png" alt="people">
+				<ul id="PeopleSub">
+					<li>People <button id="PeopleButton" type="button" onclick=#>Add Person</button></li></li>
+					<li>Search People
+					<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+						<ul id="myUL">
+							<li><a href="#">Adele</a></li>
+							<li><a href="#">Agnes</a></li>
+
+							<li><a href="#">Billy</a></li>
+							<li><a href="#">Bob</a></li>
+
+							<li><a href="#">Calvin</a></li>
+							<li><a href="#">Christina</a></li>
+							<li><a href="#">Cindy</a></li>
+						</ul>
+						<!--<div class="search-container">
+							<form action="/action_page.php">
+								<input type="text" placeholder="Search.." name="search">
+								<button type="submit"><img src="Search Glass.png" width="20" height="20"></button>
+							</form>
+						</div>-->
+					</li>
+				</ul>
+			</li>
+             <li><img src="Floorplans.png" alt="floorplans">
+				<ul id="FloorplanSub">
+                      <li>People <button id="FloorplanButton" type="button" onclick=#>New Floorplan</button></li></li>
+					<li>Search Floors
+					<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Floors..">
+						<ul id="myUL">
+							<li><a href="#">HQ: Floor 1</a></li>
+							<li><a href="#">HQ: Floor 2</a></li>
+							<li><a href="#">Treehouse: Floor 1</a></li>
+							<li><a href="#">Treehouse: Floor 2</a></li>
+						</ul>
+						<!--<div class="search-container">
+							<form action="/action_page.php">
+								<input type="text" placeholder="Search.." name="search">
+								<button type="submit"><img src="Search Glass.png" width="20" height="20"></button>
+							</form>
+						</div>-->
+					</li>
+                 </ul>
+			 </li>
         </ul>
     </div>
         
