@@ -114,7 +114,12 @@ function myFunction() {
                        <li id="CreateProj">Create New Project
                           <ul id="CreateProjectList">
                                <li>Create Project </li>
-                               <li>Name  </li>
+                               <li> 
+                                   <form action="/action_page.php">
+                                    Name: <input type="text" name="FirstName" value="Project"><br>
+                                <input type="submit" value="Submit">
+                                  </form> 
+                               </li>
                                 <li>Color 
                                     <form action="/action_page.php">
                                         <input type="color" name="favcolor" value="#ff0000">
