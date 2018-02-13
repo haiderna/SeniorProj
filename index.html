@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html lang="en" >
 <head>
     <title>WillowTree Seating App</title>
     <meta charset="UTF-8">
@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/17.1.7/css/dx.spa.css" />
     <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/17.1.7/css/dx.common.css" />
     <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/17.1.7/css/dx.dark.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href ="css/style.css" />
       <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,13 +18,76 @@
    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
-  $( function() {
-    $( "#draggable" ).draggable();
-  } );
+//  $( function() {
+//    $( "#draggable" ).draggable();
+//  } );
+//  
+//    $(function() { $("#divResize").draggable().resizable(); });
 
-function myFunction() {
-    var btn = document.createElement("#draggable");
-    document.body.appendChild(btn);
+//function deskFunction() {
+//    var btn = document.createElement("#draggable");
+//    document.body.appendChild(btn);
+//}
+
+//$( "#draggable" ).draggable().resizable();
+//
+//$( "#divResize" ).draggable().resizable()
+//
+// var element_pos = 0;    // POSITION OF THE NEWLY CREATED ELEMENTS.
+//    var iCnt = 0;
+//    $(document).ready(function() {
+//
+//       
+//
+//        // CREATE MORE DIV, WITH 'ABSOLUTE' POSITIONING.
+//        $('#btClickMe').click(function() {
+//
+//            var dynamic_div = $(document.createElement('div'));
+////                    .css({
+////                border: '1px dashed', position: 'absolute', left: element_pos,
+////                width: '120', height: '120', padding: '3', margin: '0'
+////            });
+//
+//           
+//
+//            $(dynamic_div).append('You can drag me too');
+//            
+//            // APPEND THE NEWLY CREATED DIV TO "divContainer".
+//            $(dynamic_div).appendTo('#divResize').draggable().resizable();
+////            $(dynamic_div).appendTo('#divResize').resizable();
+//
+//            iCnt = iCnt + 1;
+//        });
+//    });
+
+
+//Create Desk Image and Have it be dragged around floorplan
+function deskImage() {
+    var x = document.createElement("IMG");
+    var w = document.getElementById("deskWidth").value;
+    var h = document.getElementById("deskHeight").value;
+    
+    
+    x.setAttribute("src", "Single Desk.png");
+    
+    if (isNaN(w)) {
+            x.setAttribute("width", w);
+        } else {
+            x.setAttribute("width", "100");
+        }
+        
+    if (isNaN(h)) {
+            x.setAttribute("height", h);
+        } else {
+            x.setAttribute("height", "100");
+        }    
+   
+    x.setAttribute("alt", "singleDesk");
+    document.body.appendChild(x);
+  	$(x).draggable();
+      //  $(x).draggable().resizable(); NOT WORKING
+        
+   
 }
   </script>
 
@@ -46,6 +110,10 @@ function myFunction() {
 			}
 		}
 	}
+//Creating a new Draggable Object
+
+
+
 </script>
 </head>
 
@@ -93,8 +161,8 @@ function myFunction() {
                             </li>
                             <li id="Dimensions">
                                  <form action="/action_page.php">
-                                    W: <input type="text" name="W" value="25"><br>
-                                    L: <input type="text" name="L" value="25"><br>
+                                    W: <input type="text" id="deskWidth" name="W" value="25"><br>
+                                    L: <input type="text" id="deskHeight" name="L" value="25"><br>
                                 <input type="submit" value="Submit">
                                   </form>
                             </li>
@@ -102,7 +170,12 @@ function myFunction() {
                         </ul>
                     </li>
                     <li><a href="#">Projects</a></li>
-                    <li><button id="ExportButton" type="button" onclick="alert('Place Desk in Map')">PLACE DESK </button></li>
+                    <li>
+                        <button id="ExportButton" type="button" onclick="deskImage()">PLACE DESK </button>
+<!--                     <input type="button" style="float:left" id="btClickMe" value="PLACE DESK" />-->
+                       
+                    
+                    </li>
                   </ul>
              
              </li>
@@ -229,16 +302,18 @@ function myFunction() {
 	 user custom scripts -->
    
     <img id="HQsecond" src="HQSecondEdit.png">
-   
+    <p id="draggable"></p>
         
-        
+         <div id="divResize">
+            I am Draggable and Resizable 
+        </div>
         
     <script src="js/data.js"></script>
     <script src="js/index.js"></script>
     
 <!--    <div id="draggable" class="ui-widget-content">
-  <p>Drag me around</p>
-</div>-->
+  <p>Drag me around</p>-->
+<!--</div>-->
  
 </body>
 </html>

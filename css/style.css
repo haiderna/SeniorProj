@@ -178,7 +178,7 @@ nav{
 body{
     background-image: url("http://exchangedownloads.smarttech.com/public/content/23/23632dac-9e95-4bfd-95be-fda964b17ae8/previews/medium/0001.png");
 }
-  #draggable { 
+  #draggable, #divResize { 
       width: 88px; 
       height: 67px; 
       padding: 0.5em; 
