@@ -11,54 +11,12 @@
     <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/17.1.7/css/dx.dark.css" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href ="css/style.css" />
-      <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css"/>
   <link rel="stylesheet" href="/resources/demos/style.css">
-   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
   <script>
-//  $( function() {
-//    $( "#draggable" ).draggable();
-//  } );
-//  
-//    $(function() { $("#divResize").draggable().resizable(); });
-
-//function deskFunction() {
-//    var btn = document.createElement("#draggable");
-//    document.body.appendChild(btn);
-//}
-
-//$( "#draggable" ).draggable().resizable();
-//
-//$( "#divResize" ).draggable().resizable()
-//
-// var element_pos = 0;    // POSITION OF THE NEWLY CREATED ELEMENTS.
-//    var iCnt = 0;
-//    $(document).ready(function() {
-//
-//       
-//
-//        // CREATE MORE DIV, WITH 'ABSOLUTE' POSITIONING.
-//        $('#btClickMe').click(function() {
-//
-//            var dynamic_div = $(document.createElement('div'));
-////                    .css({
-////                border: '1px dashed', position: 'absolute', left: element_pos,
-////                width: '120', height: '120', padding: '3', margin: '0'
-////            });
-//
-//           
-//
-//            $(dynamic_div).append('You can drag me too');
-//            
-//            // APPEND THE NEWLY CREATED DIV TO "divContainer".
-//            $(dynamic_div).appendTo('#divResize').draggable().resizable();
-////            $(dynamic_div).appendTo('#divResize').resizable();
-//
-//            iCnt = iCnt + 1;
-//        });
-//    });
 
 
 //Create Desk Image and Have it be dragged around floorplan
@@ -84,12 +42,17 @@ function deskImage() {
    
     x.setAttribute("alt", "singleDesk");
     document.body.appendChild(x);
-  	$(x).draggable();
-      //  $(x).draggable().resizable(); NOT WORKING
-        
-   
+    
+    $(x).resizable().parent().draggable(); // creates a wrapper div and makes the parent div draggable and the object inside resizable
 }
+
   </script>
+
+  <script>
+
+
+  </script>
+
 
   <script>//dynamic search
 	function myFunction() {
@@ -287,19 +250,7 @@ function deskImage() {
              <li><a href="#">People</a></li>
         </ul>
     </div>
-<!--    <div class="dx-viewport demo-container">
-        <div id="vector-map-demo">
-			 dxVectorMap is the interface to base it off of; naming it vectorMapOptions for reference
-            <div id="vector-map" data-bind="dxVectorMap: vectorMapOptions"></div>
-        </div>
-    </div>
-	
-	 source scripts 
-    <script src='https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/js/jquery-3.1.0.min.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
-	<script src="https://cdn3.devexpress.com/jslib/17.1.7/js/dx.all.js"></script>
-	
-	 user custom scripts -->
+<!--user custom scripts -->
    
     <img id="HQsecond" src="HQSecondEdit.png">
     <p id="draggable"></p>
@@ -308,9 +259,9 @@ function deskImage() {
             I am Draggable and Resizable 
         </div>
         
-    <script src="js/data.js"></script>
-    <script src="js/index.js"></script>
-    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <!--    <div id="draggable" class="ui-widget-content">
   <p>Drag me around</p>-->
 <!--</div>-->
