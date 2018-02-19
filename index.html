@@ -17,7 +17,7 @@
 
 
   <script>
-
+var imageSource = "";
 
 //Create Desk Image and Have it be dragged around floorplan
 function deskImage() {
@@ -25,25 +25,36 @@ function deskImage() {
     var w = document.getElementById("deskWidth").value;
     var h = document.getElementById("deskHeight").value;
     
-    
-    x.setAttribute("src", "Single Desk.png");
+   // var img = document.getElementById("singleDesk").src;
+    x.setAttribute("src", imageSource);
     
     if (isNaN(w)) {
-            x.setAttribute("width", w);
-        } else {
             x.setAttribute("width", "100");
+        } else {
+            x.setAttribute("width", w);
         }
         
     if (isNaN(h)) {
-            x.setAttribute("height", h);
-        } else {
             x.setAttribute("height", "100");
+        } else {
+            x.setAttribute("height", h);
         }    
    
-    x.setAttribute("alt", "singleDesk");
+    x.setAttribute("alt", "single");
     document.body.appendChild(x);
     
     $(x).resizable().parent().draggable(); // creates a wrapper div and makes the parent div draggable and the object inside resizable
+}
+
+//For Choosing which type of desk in Menu 
+function singleDesk() {
+   imageSource = "Single Desk.png";
+}
+function largeConferenceDesk(){
+    imageSource = "Large Conf.png";
+}
+function smallConferenceDesk(){
+    imageSource = "Small conf.png";
 }
 
   </script>
@@ -118,9 +129,9 @@ function deskImage() {
                             </li>
                             <li id="Type">
                                 <p>Type</p>
-                                <button id="singleDesk" onclick="myFunction()"><img src="Single Desk.png" width="40" height="40"></button>
-                                <button id="LargeConf"><img src="Large Conf.png" width="40" height="40"></button>
-                                <button id="SmallConf"><img src="Small conf.png" width="40" height="40"></button>
+                                <button id="singleDesk" onclick="singleDesk()"><img src="Single Desk.png" width="40" height="40"></button>
+                                <button id="LargeConf" onclick="largeConferenceDesk()"><img src="Large Conf.png" width="40" height="40"></button>
+                                <button id="SmallConf" onclick="smallConferenceDesk()"><img src="Small conf.png" width="40" height="40"></button>
                             </li>
                             <li id="Dimensions">
                                  <form action="/action_page.php">
