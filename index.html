@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css"/>
   <link rel="stylesheet" href="/resources/demos/style.css">
+<!--  added in after svg -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
   <script>
@@ -21,29 +24,75 @@ var imageSource = "";
 
 //Create Desk Image and Have it be dragged around floorplan
 function deskImage() {
-    var x = document.createElement("IMG");
-    var w = document.getElementById("deskWidth").value;
-    var h = document.getElementById("deskHeight").value;
+    //Div container to include rotate and remove buttons 
+//    var divImage = document.createElement("Div");
+//    
+// 
+//    divImage.id = "divID";
+//    divImage.class = "container";
+//    var paragraph = document.createElement("P");
+//    var text = document.createTextNode("Clyde Miller");
+//    
+//    var x = document.createElement("IMG");
+//    var w = document.getElementById("deskWidth").value;
+//    var h = document.getElementById("deskHeight").value;
+//    
+//   // var img = document.getElementById("singleDesk").src;
+//    x.setAttribute("src", imageSource);
+//    
+//    if (isNaN(w)) {
+//            x.setAttribute("width", "100");
+//        } else {
+//            x.setAttribute("width", w);
+//        }
+//        
+//    if (isNaN(h)) {
+//            x.setAttribute("height", "100");
+//        } else {
+//            x.setAttribute("height", h);
+//        }    
+//   
+//    x.setAttribute("alt", "single");
+//    //document.body.appendChild(x);
+//   // divImage.appendChild(x);
+//    //divImage.appendChild(text);
+//    document.body.appendChild(x);
+//    
+//    $(x).resizable().parent().draggable(); // creates a wrapper div and makes the parent div draggable and the object inside resizable
+    ////                            ////////
+    //                              /////////
+    //TRYING IMAGE DESK WITH SVGS  /////////////////
+    ////                            /////
+   ////                             /////
     
-   // var img = document.getElementById("singleDesk").src;
-    x.setAttribute("src", imageSource);
+    //svg that's draggable 
+    var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttributeNS('http://www.w3.org/2000/svg','xlink','http://www.w3.org/1999/xlink');
+    svg.setAttributeNS('http://www.w3.org/2000/svg','height','500');
+    svg.setAttributeNS('http://www.w3.org/2000/svg','width','500');
+    svg.setAttributeNS('http://www.w3.org/2000/svg','id','test2');
+
+    $(svg).draggable().parent().resizable();
+
+    var svgimg = document.createElementNS('http://www.w3.org/2000/svg','image');
+    svgimg.setAttributeNS('http://www.w3.org/2000/svg','height','500');
+    svgimg.setAttributeNS('http://www.w3.org/2000/svg','width','500');
+    svgimg.setAttributeNS('http://www.w3.org/2000/svg','id','testimg2');
+    svgimg.setAttributeNS('http://www.w3.org/1999/xlink','href','https://78.media.tumblr.com/4371d6289b514982cefd904908c5af4e/tumblr_p0efc7WWKA1wstv1oo1_75sq.png');
+    svgimg.setAttributeNS('http://www.w3.org/2000/svg','x','0');
+    svgimg.setAttributeNS('http://www.w3.org/2000/svg','y','0');
+
+
+
+svg.appendChild(svgimg);
+     //tried adding to document
+    //document.body.appendChild(svg);
     
-    if (isNaN(w)) {
-            x.setAttribute("width", "100");
-        } else {
-            x.setAttribute("width", w);
-        }
-        
-    if (isNaN(h)) {
-            x.setAttribute("height", "100");
-        } else {
-            x.setAttribute("height", h);
-        }    
-   
-    x.setAttribute("alt", "single");
-    document.body.appendChild(x);
+    //tried adding to floorplan SVG
+    var svgMain = document.getElementById("mainSVG");
+    svgMain.appendChild(svg);
     
-    $(x).resizable().parent().draggable(); // creates a wrapper div and makes the parent div draggable and the object inside resizable
+    //
 }
 
 //For Choosing which type of desk in Menu 
@@ -56,6 +105,8 @@ function largeConferenceDesk(){
 function smallConferenceDesk(){
     imageSource = "Small conf.png";
 }
+
+
 
   </script>
 
@@ -250,7 +301,7 @@ function smallConferenceDesk(){
     <div id="main">
 
       <!-- vectormap -->
-		<svg width="1207" height="767" version="1.1" viewBox="0 0 1207.8 767.7" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:osb="http://www.openswatchbook.org/uri/2009/osb" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<svg id="mainSVG" width="1207" height="767" version="1.1" viewBox="0 0 1207.8 767.7" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:osb="http://www.openswatchbook.org/uri/2009/osb" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
 		 <metadata>
 		  <rdf:RDF>
 		   <cc:Work rdf:about="">
