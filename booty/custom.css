@@ -24,8 +24,8 @@ a, a:hover, a:focus {
 }
 
 #sidebar {
-    min-width: 225px;
-    max-width: 225px;
+    min-width: 250px;
+    max-width: 250px;
     /*height: calc(~"100vh - 45px"); -- done in Less */
     background: #223547;
     color: #fff;
@@ -100,7 +100,7 @@ a, a:hover, a:focus {
 }
 #sidebar ul ul a {
     font-size: 0.9em !important;
-    padding-left: 30px !important;
+    padding-left: 30px;
     color: #fff;
     background: #223547;
 }
@@ -409,18 +409,4 @@ a, a:hover, a:focus {
         right: 50%;
         transform: translateX(50%);
     }
-}
-#deskMenu{
-    list-style: none
-    display:inline-block;
-    position: absolute;
-    padding: 75px 10px;
-    margin-left: 100px;
-    margin-top: 0px;
-     background-color: #223547;
-     text-decoration: none
-     
-}
-#DeskInfoMenu {
-    list-style: none
 }
