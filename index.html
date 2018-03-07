@@ -20,6 +20,22 @@
 
 
   <script>
+var personArray = [];
+var projectArray = [];      
+      
+function DeskClass(name, project, image)
+{   this.name = name; 
+    this.project = project; 
+    this.image = image; } 
+function PersonClass(name, project){
+    this.name = name;
+    this.project = project;
+}
+function ProjectClass(name){
+    this.name = name;
+}
+
+
 var imageSource = "";
 
 //Create Desk Image and Have it be dragged around floorplan
@@ -27,15 +43,21 @@ function deskImage() {
     //Div container to include rotate and remove buttons 
 //    var divImage = document.createElement("Div");
 //    
-// 
+        var deskTest = new DeskClass();
+        //deskTest.name = document.getElementById("personAtDesk").value;
+        var personAdded = new PersonClass();
+        personAdded.name = document.getElementById("personAtDesk").value;
+        deskTest.name = personAdded.name;
+        
+        personArray.push(personAdded);
 //    divImage.id = "divID";
 //    divImage.class = "container";
 //    var paragraph = document.createElement("P");
 //    var text = document.createTextNode("Clyde Miller");
 //    
 //    var x = document.createElement("IMG");
-//    var w = document.getElementById("deskWidth").value;
-//    var h = document.getElementById("deskHeight").value;
+    var w = document.getElementById("deskWidth").value;
+    var h = document.getElementById("deskHeight").value;
 //    
 //   // var img = document.getElementById("singleDesk").src;
 //    x.setAttribute("src", imageSource);
@@ -75,16 +97,18 @@ function deskImage() {
     $(svg).draggable().parent().resizable();
 
     var svgimg = document.createElementNS('http://www.w3.org/2000/svg','image');
-    svgimg.setAttributeNS('http://www.w3.org/2000/svg','height','500');
-    svgimg.setAttributeNS('http://www.w3.org/2000/svg','width','500');
+    svgimg.setAttributeNS('http://www.w3.org/2000/svg','height',h);
+    svgimg.setAttributeNS('http://www.w3.org/2000/svg','width',w);
     svgimg.setAttributeNS('http://www.w3.org/2000/svg','id','testimg2');
-    svgimg.setAttributeNS('http://www.w3.org/1999/xlink','href','https://78.media.tumblr.com/4371d6289b514982cefd904908c5af4e/tumblr_p0efc7WWKA1wstv1oo1_75sq.png');
+    svgimg.setAttributeNS('http://www.w3.org/1999/xlink','href',imageSource);
     svgimg.setAttributeNS('http://www.w3.org/2000/svg','x','0');
     svgimg.setAttributeNS('http://www.w3.org/2000/svg','y','0');
 
 
 
 svg.appendChild(svgimg);
+    deskTest.image = svg;
+     alert(deskTest.name+ " "+deskTest.image+ " "+personArray.length);
      //tried adding to document
     document.body.appendChild(svg);
     
@@ -174,7 +198,7 @@ function smallConferenceDesk(){
                         <ul id="DeskInfoMenu">
                             <li> 
                                 <form action="/action_page.php">
-                                    Name: <input type="text" name="FirstName" value="Clyde Miller"><br>
+                                    Name: <input id="personAtDesk" type="text" name="FirstName" value="Clyde Miller"><br>
                                 <input type="submit" value="Submit">
                                   </form>
                             </li>

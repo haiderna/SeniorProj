@@ -1,7 +1,18 @@
 var imageSource = "";
 
+function DeskClass(name, project, image)
+{   this.name = name; 
+    this.project = project; 
+    this.image = image; 
+}
+
+
+
 //Create Desk Image and Have it be dragged around floorplan
 function deskImage() {
+
+    //var desk = new DeskClass(); // 
+    //desk.name = document.getElementById("personAtDesk").value; 
     //Div container to include rotate and remove buttons 
 //    var divImage = document.createElement("Div");
 //    
@@ -12,8 +23,8 @@ function deskImage() {
 //    var text = document.createTextNode("Clyde Miller");
 //    
 //    var x = document.createElement("IMG");
-//    var w = document.getElementById("deskWidth").value;
-//    var h = document.getElementById("deskHeight").value;
+   var w = document.getElementById("deskWidth").value;
+   var h = document.getElementById("deskHeight").value;
 //    
 //   // var img = document.getElementById("singleDesk").src;
 //    x.setAttribute("src", imageSource);
@@ -46,17 +57,17 @@ function deskImage() {
     //svg that's draggable 
     var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
     svg.setAttributeNS('http://www.w3.org/2000/svg','xlink','http://www.w3.org/1999/xlink');
-    svg.setAttributeNS('http://www.w3.org/2000/svg','height','500');
-    svg.setAttributeNS('http://www.w3.org/2000/svg','width','500');
+    svg.setAttributeNS('http://www.w3.org/2000/svg','height',h);
+    svg.setAttributeNS('http://www.w3.org/2000/svg','width',w);
     svg.setAttributeNS('http://www.w3.org/2000/svg','id','test2');
 
     $(svg).draggable().parent().resizable();
 
     var svgimg = document.createElementNS('http://www.w3.org/2000/svg','image');
-    svgimg.setAttributeNS('http://www.w3.org/2000/svg','height','500');
-    svgimg.setAttributeNS('http://www.w3.org/2000/svg','width','500');
+    svgimg.setAttributeNS('http://www.w3.org/2000/svg','height',h);
+    svgimg.setAttributeNS('http://www.w3.org/2000/svg','width',w);
     svgimg.setAttributeNS('http://www.w3.org/2000/svg','id','testimg2');
-    svgimg.setAttributeNS('http://www.w3.org/1999/xlink','href','https://78.media.tumblr.com/4371d6289b514982cefd904908c5af4e/tumblr_p0efc7WWKA1wstv1oo1_75sq.png');
+    svgimg.setAttributeNS('http://www.w3.org/1999/xlink','href',imageSource);
     svgimg.setAttributeNS('http://www.w3.org/2000/svg','x','0');
     svgimg.setAttributeNS('http://www.w3.org/2000/svg','y','0');
 
@@ -65,7 +76,10 @@ function deskImage() {
 svg.appendChild(svgimg);
      //tried adding to document
     document.body.appendChild(svg);
-    
+    //desk.image = svg; // 
+    //alert(desk.name+ " "+desk.image); 
+
+
     //tried adding to floorplan SVG
     // var svgMain = document.getElementById("mainSVG");
     // svgMain.appendChild(svg);
