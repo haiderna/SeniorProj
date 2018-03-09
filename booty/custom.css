@@ -123,12 +123,8 @@ a, a:hover, a:focus {
 }
 
 #main{
-}
-
-
-#vector-map {
-    /*width: 100%;*/
-    margin-top: 30px;
+    margin-top: 20px;
+    display: block;
 }
 
 #sidebarCollapse{
@@ -138,7 +134,7 @@ a, a:hover, a:focus {
 
 #right-main{
     position: absolute;
-    right: 100px;
+    right: 125px;
     transition: 0.3s;
 }
 
@@ -169,6 +165,12 @@ a, a:hover, a:focus {
 .navbar ul li a[aria-expanded="true"] {
     color: #FFF;
     background: #223547;
+}
+
+/* right side of top navbar */
+ul.nav.navbar-nav.navbar-right{
+/*    color: #FFF;
+    background: #223547;*/
 }
 
 .nav .open > a, .nav .open > a:focus, .nav .open >
@@ -202,8 +204,8 @@ a, a:hover, a:focus {
 
 /* Shrinking the sidebar from 250px to 80px and center aligining its content*/
 #right-sidebar.active {
-    min-width: 100px;
-    max-width: 100px;
+    min-width: 125px;
+    max-width: 125px;
     text-align: center;
 }
 /*thins out the collapsed sidebar*/
@@ -267,7 +269,7 @@ a, a:hover, a:focus {
 }
 #right-sidebar ul ul a {
     font-size: 0.9em !important;
-    padding-left: 30px !important;
+    padding-left: 20px !important;
     color: #fff;
     background: #223547;
 }
@@ -290,10 +292,10 @@ a, a:hover, a:focus {
 }
 
 .shrink{
-    -webkit-transform:scale(0.75);
-    -moz-transform:scale(0.75);
-    -ms-transform:scale(0.75);
-    transform:scale(0.75);
+    -webkit-transform:scale(0.90);
+    -moz-transform:scale(0.90);
+    -ms-transform:scale(0.90);
+    transform:scale(0.90);
 }
 
 @media (max-width: 768px) {

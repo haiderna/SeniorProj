@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
 
     $('#sidebarCollapse').on('click', function () {
@@ -9,10 +10,5 @@ $(document).ready(function () {
         $('#right-main').toggleClass('active');
     });
 
-    /*
-    $('#main').on('click', function() { // or any other event
-  		$('#vector-map').addClass('shrink');
-	});
-	*/
 });
 

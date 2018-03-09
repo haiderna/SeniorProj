@@ -3,10 +3,11 @@
 }
 /*used to be 100vh - 52px*/
 #right-sidebar {
-  position: absolute;
-  top: 52;
-  right: 0;
-  height: calc(100vh);
+    position: absolute;
+/*    top: 52;*/
+    float: right;
+    right: 0;
+    height: calc(100vh);
 }
 
 rect:hover{

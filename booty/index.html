@@ -37,6 +37,18 @@
           </ul>
         </li>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+<!--       	<li>
+      		<a href="#"><button id="testbutton" type="button" class="btn btn-default" onclick="boob()"> 
+      			<span class="glyphicon glyphicon-export"></span> Export</button>
+      		</a></li>
+      	<li>
+      		<a href="#"><button id="testbutton" type="button" class="btn btn-default" onclick="boob()"> 
+      			<span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+      		</a></li> -->
+      		<li><a href="#"><span class="glyphicon glyphicon-export"></span> Export</a></li>
+      		<li><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></li>
+    </ul>
     </div>
   </nav>
 
@@ -133,39 +145,7 @@
     <!-- Main Page Content -->
     <div id="main">
 
-
-
-      <!-- vectormap -->
-		<svg width="1207" height="767" version="1.1" viewBox="0 0 1207.8 767.7" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:osb="http://www.openswatchbook.org/uri/2009/osb" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
-		 <metadata>
-		  <rdf:RDF>
-		   <cc:Work rdf:about="">
-		    <dc:format>image/svg+xml</dc:format>
-		    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-		    <dc:title/>
-		   </cc:Work>
-		  </rdf:RDF>
-		 </metadata>
-		 <image xlink:href="HQ-2nd-Floor.png" src="HQ-2nd-Floor.png" width="1207" height="766" />
-			 <g class="rooms" fill-opacity="0" stroke="#2b0000">
-			  <rect id="westsidekitchen" x="34.726" y="73.844" width="146.29" height="128.11" stroke-width=".79168"/>
-			  <rect id="cedar" x="34.128" y="212.7" width="148.22" height="150.86" stroke-width=".92691"/>
-			  <path id="ux" d="m688.86 333.41-497.61-2.3926-1.0496-259.19 504.92-14.266z" opacity=".98" stroke-width="1.5807"/>
-			  <rect x="36.33" y="377.82" width="139.71" height="133.7" opacity=".98" stroke-width=".90326"/>
-			  <rect x="34.021" y="525.45" width="141.8" height="169.11" opacity=".98" stroke-width=".92355"/>
-			  <rect x="185.53" y="567.93" width="143.41" height="125.17" opacity=".98" stroke-width=".89071"/>
-			  <rect x="340.56" y="565.95" width="146.31" height="127.97" opacity=".98" stroke-width=".93906"/>
-			  <rect x="498.3" y="567.95" width="253.14" height="126.08" opacity=".98" stroke-width=".93111"/>
-			  <rect x="762.46" y="567.02" width="144.39" height="126.78" opacity=".98" stroke-width=".96472"/>
-			  <path d="m1060.3 686.29-142.99-0.0865-1.898-123.93 62.488-82.78 83.346 2.5125z" opacity=".98"/>
-			  <rect x="1067.1" y="344.62" width="110.37" height="120.81" opacity=".98" stroke-width=".92291"/>
-			  <rect x="826.1" y="30.781" width="108.84" height="126.24" opacity=".98" stroke-width=".86946"/>
-			  <rect x="705.59" y="34.803" width="109.97" height="117.67" opacity=".98" stroke-width=".89981"/>
-			  <rect x="722.61" y="257.72" width="203.32" height="104.35" opacity=".98" stroke-width=".77284"/>
-			  <rect x="215.49" y="404.49" width="414.91" height="74.437" opacity=".98" stroke-width=".78742"/>
-			  <path d="m899.56 556.6-145.33-0.6946-1.5366-177.53 167.57-1.363 0.26651 155.74z" opacity=".98" stroke-width=".89821"/>
-			 </g>
-		</svg>
+    	<image xlink:href="HQ-2nd-Floor.png" src="HQ-2nd-Floor.png" width="1040" height="630" />
 
     </div><!-- main -->
 
@@ -180,25 +160,20 @@
     <nav id="right-sidebar" class="active">
 
       <ul class="list-unstyled components">
-        <p>Floorplan X</p>
-        <li><a href="#">
-	            	 	<i class="glyphicon glyphicon-object-align-vertical"></i> Information
-	    </a></li>
-
-        <li><a href="#">
-	            		<i class="glyphicon glyphicon-folder-open"></i> Projects
-	    </a></li>
+        <p>Current Floorplan</p>
 
         <li>
           <!-- Link with dropdown items -->
-          <a href="#rightPeopleSubmenu" data-toggle="collapse" aria-expanded="false">
-	                	<i class="glyphicon glyphicon-user"></i> People
+          <a href="#editSubmenu" data-toggle="collapse" aria-expanded="false">
+	                	<i class="glyphicon glyphicon-pencil"></i> Edit
 	                </a>
-          <ul class="collapse list-unstyled" id="rightPeopleSubmenu">
-            <li><a href="#">Hey</a></li>
-            <li><a href="#">This is</a></li>
-            <li><a href="#">Where</a></li>
-            <li><a href="#">People Go</a></li>
+          <ul class="collapse list-unstyled" id="editSubmenu">
+            <li>
+            	<a href="#"><button id="insertRoomButton" type="button" class="btn btn-primary" onclick="addRoom()" style="width:100%;" >Insert Room</button></a></li>
+            <li>
+            	<a href="#"><button id="deleteRoomButton" type="button" class="btn btn-danger" onclick="removeRoom()" style="width:100%;">Delete Room</button></a></li>
+            <li>
+            	<a href="#"><button id="saveStateButton" type="button" class="btn btn-success" onclick="saveState()" style="width:100%;">Save State</button></a></li>
           </ul>
 
       </ul>
