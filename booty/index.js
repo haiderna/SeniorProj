@@ -1,6 +1,7 @@
 var personArray = ["Cow Lady", "Dog Man", "Shaggy Mutt"];
 
-var projectArray = ["Barclays", "Regal", "WillowTree"];      
+var projectArray = ["Barclays", "Regal", "WillowTree"]; 
+var projectColors = ["#000080", "#FF0000", "#1BD9C4"];     
       
 function DeskClass(name, project, image)
 {   this.name = name; 
@@ -132,16 +133,21 @@ function addToProjectList(array) {
         var item = document.createElement('li');
         var inneritem = document.createElement('a');
         item.className = "listedProject";
+        // inneritem.appendChild(document.createTextNode(array[i])); //add after color 
+
+        var sq = document.createElement('div');
+        sq.className = "color-square";
+        // sq.style.backgroundColor = projectColors[i].value;
+        sq.style.backgroundColor = projectColors[i];
+        inneritem.appendChild(sq); 
         inneritem.appendChild(document.createTextNode(array[i]));
+
+        //create the list
         item.appendChild(inneritem);
         list.appendChild(item);
     }
     // return list;
 }
-
-//automatically renders once on page load
-document.getElementById("projectSubMenu").appendChild(addToProjectList(projectArray));
-document.getElementById("peopleSubMenu").appendChild(addToPersonList(personArray));
 
 function toTitleCase(str)
 {
