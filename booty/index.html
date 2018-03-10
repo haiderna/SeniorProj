@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="custom.css">
   <!-- compiled styles.less into css -->
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/>
 </head>
 
 <body>
@@ -164,16 +165,19 @@
 
         <li>
           <!-- Link with dropdown items -->
-          <a href="#editSubmenu" data-toggle="collapse" aria-expanded="false">
+          <a href="#editSubmenu" data-toggle="collapse" aria-expanded="false" onclick="continueEdit()">
 	                	<i class="glyphicon glyphicon-pencil"></i> Edit
 	                </a>
           <ul class="collapse list-unstyled" id="editSubmenu">
             <li>
-            	<a href="#"><button id="insertRoomButton" type="button" class="btn btn-primary" onclick="addRoom()" style="width:100%;" >Insert Room</button></a></li>
+            	<a><button id="insertRoomButton" type="button" class="btn btn-primary" onclick="insertRoom()" style="width:100%;" >Insert Room</button></a></li>
             <li>
-            	<a href="#"><button id="deleteRoomButton" type="button" class="btn btn-danger" onclick="removeRoom()" style="width:100%;">Delete Room</button></a></li>
+            	<a><button id="deleteRoomButton" type="button" class="btn btn-danger" onclick="deleteRoom()" style="width:100%;">Delete Room</button></a></li>
             <li>
-            	<a href="#"><button id="saveStateButton" type="button" class="btn btn-success" onclick="saveState()" style="width:100%;">Save State</button></a></li>
+            	<a id=stopAnchor style="margin:-10px 0px; visibility: hidden;">
+            		<button id="stopDeletingButton" type="button" class="btn btn-default" onclick="stopDeleting()" style="width:100%; display:none;"> Quit </button></a></li>
+            <li>
+            	<a><button id="saveStateButton" type="button" class="btn btn-success" onclick="saveState()" style="width:100%;" data-toggle="collapse" href="#editSubmenu"> Save State </button></a></li>
           </ul>
 
       </ul>

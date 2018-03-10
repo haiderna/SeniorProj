@@ -79,3 +79,37 @@ input[type=submit]:hover {
     padding: 0px;
     margin: 0px;
 }
+
+.room{
+    position:absolute;
+    margin:0px;
+    min-width:40px;
+    min-height:40px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border:2px dashed grey;
+    z-index:100000000000000000;
+    }
+    
+.cancel{
+    display:relative;
+    cursor:pointer;
+    margin:0;
+    float:right;
+    height:12px;
+    width:12px;
+    padding: 0 0 5px 0;
+    text-align:center;
+    font-size:10px;
+    color:white;
+    background-color:darkblue;
+    z-index:100000000000000000;
+    visibility: hidden;
+    }
+
+.cancel:hover{
+    background-color:red;
+    color: white;
+    font-weight: bold;
+    }
