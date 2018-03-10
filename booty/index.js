@@ -100,7 +100,7 @@ function searchPeople() {
 function addPerson() {
     var input, filter;
     input = document.getElementById('peopleInput');
-    filter = input.value.toUpperCase();
+    filter = toTitleCase(input.value.toUpperCase());
     //check for duplicates
     if (personArray.includes(filter)){
         alert(filter + " already exists in the database.")
@@ -129,4 +129,14 @@ function addToList(array) {
     // return list;
 }
 
+//automatically renders once on page load
 document.getElementById("peopleSubMenu").appendChild(addToList(personArray));
+
+
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+}
+
