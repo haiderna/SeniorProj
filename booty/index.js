@@ -1,12 +1,21 @@
-var imageSource = "";
+var personArray = ["Cow Lady", "Dog Man", "Shaggy Mutt"];
 
+var projectArray = [];      
+      
 function DeskClass(name, project, image)
 {   this.name = name; 
     this.project = project; 
-    this.image = image; 
+    this.image = image; } 
+function PersonClass(name, project){
+    this.name = name;
+    this.project = project;
+}
+function ProjectClass(name){
+    this.name = name;
 }
 
 
+var imageSource = "";
 
 //Create Desk Image and Have it be dragged around floorplan
 function deskImage() {
@@ -54,37 +63,6 @@ function deskImage() {
     ////                            /////
    ////                             /////
     
-    //svg that's draggable 
-    var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
-    svg.setAttributeNS('http://www.w3.org/2000/svg','xlink','http://www.w3.org/1999/xlink');
-    svg.setAttributeNS('http://www.w3.org/2000/svg','height',h);
-    svg.setAttributeNS('http://www.w3.org/2000/svg','width',w);
-    svg.setAttributeNS('http://www.w3.org/2000/svg','id','test2');
-
-    $(svg).draggable().parent().resizable();
-
-    var svgimg = document.createElementNS('http://www.w3.org/2000/svg','image');
-    svgimg.setAttributeNS('http://www.w3.org/2000/svg','height',h);
-    svgimg.setAttributeNS('http://www.w3.org/2000/svg','width',w);
-    svgimg.setAttributeNS('http://www.w3.org/2000/svg','id','testimg2');
-    svgimg.setAttributeNS('http://www.w3.org/1999/xlink','href',imageSource);
-    svgimg.setAttributeNS('http://www.w3.org/2000/svg','x','0');
-    svgimg.setAttributeNS('http://www.w3.org/2000/svg','y','0');
-
-
-
-svg.appendChild(svgimg);
-     //tried adding to document
-    document.body.appendChild(svg);
-    //desk.image = svg; // 
-    //alert(desk.name+ " "+desk.image); 
-
-
-    //tried adding to floorplan SVG
-    // var svgMain = document.getElementById("mainSVG");
-    // svgMain.appendChild(svg);
-    
-    //
 }
 
 //For Choosing which type of desk in Menu 
@@ -98,22 +76,57 @@ function smallConferenceDesk(){
     imageSource = "Small conf.png";
 }
 
-//dynamic search
-    function myFunction() {
-        // Declare variables
-        var input, filter, ul, li, a, i;
-        input = document.getElementById('myInput');
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("myUL");
-        li = ul.getElementsByTagName('li');
+//dynamic search for people
+function searchPeople() {
+    // Declare variables
+    var input, filter, ul, li, a, i;
+    input = document.getElementById('peopleInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("peopleSubMenu");
+    li = ul.getElementsByTagName('li');
 
-        // Loop through all list items, and hide those who don't match the search query
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-            } else {
-                li[i].style.display = "none";
-            }
+    // Loop through all list items, and hide those who don't match the search query
+    //start search at 1 because 0th element will always be button and search bar
+    for (i = 1; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
         }
     }
+}
+
+function addPerson() {
+    var input, filter;
+    input = document.getElementById('peopleInput');
+    filter = input.value.toUpperCase();
+    //check for duplicates
+    if (personArray.includes(filter)){
+        alert(filter + " already exists in the database.")
+        return;
+    }
+    personArray.push(filter);
+    addToList(personArray);
+}
+
+//creates list of people to display
+function addToList(array) {
+    // Create the list element:
+    var list = document.getElementById('peopleSubMenu');
+
+    //clears list before populating it again
+    $("li").remove(".listedPerson");
+
+    for(var i = 0; i < array.length; i++) {
+        var item = document.createElement('li');
+        var inneritem = document.createElement('a');
+        item.className = "listedPerson";
+        inneritem.appendChild(document.createTextNode(array[i]));
+        item.appendChild(inneritem);
+        list.appendChild(item);
+    }
+    // return list;
+}
+
+document.getElementById("peopleSubMenu").appendChild(addToList(personArray));

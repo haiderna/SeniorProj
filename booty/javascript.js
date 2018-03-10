@@ -70,11 +70,31 @@ function saveState() {
 	stopDeleting();
 	$('.room').draggable("disable");
 	$('.room').resizable("disable");
+	$('.room').droppable();
+	
+	//making desks selectable over rooms
+	$('.desk').css('z-index', '101'); 
 }
 
 function continueEdit() {
 	if ($('#editSubmenu').attr('aria-expanded') == "false") {
+		$('.room').droppable("destroy");
 		$('.room').draggable("enable");
 		$('.room').resizable("enable");
+
+		//moving desks behind rooms
+		$('.desk').css('z-index', '90'); 
 	}
+}
+
+function insertDesk() {
+	var newdesk = document.createElement('div');
+	newdesk.className = "desk";
+	//styling handled in css 
+	// newdesk.style.background-color = "red";
+	// newdesk.style.width = "50px";
+	// newdesk.style.height = "50px";
+
+	$('#main').append(newdesk);
+	$('.desk').draggable({ containment: 'parent' });
 }

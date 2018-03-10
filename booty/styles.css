@@ -10,14 +10,6 @@
     height: calc(100vh);
 }
 
-rect:hover{
-	fill-opacity: 0.10;
-}
-
-path:hover{
-	fill-opacity: 0.10;
-}
-
 /* styling for input fields */
 input[type=text], select {
     width: 200px;
@@ -89,8 +81,13 @@ input[type=submit]:hover {
     height: 50px;
     background-color: transparent;
     border:2px dashed grey;
-    z-index:100000000000000000;
-    }
+    z-index:100;
+}
+
+.room:hover{
+    /*background-color: rgba(27, 217, 176, 0.3);*/
+    background-color: rgba(43, 53, 71, 0.2);
+}
     
 .cancel{
     display:relative;
@@ -104,12 +101,19 @@ input[type=submit]:hover {
     font-size:10px;
     color:white;
     background-color:darkblue;
-    z-index:100000000000000000;
+    z-index:100;
     visibility: hidden;
-    }
+}
 
 .cancel:hover{
     background-color:red;
     color: white;
     font-weight: bold;
-    }
+}
+
+.desk{
+    background-color: lightcoral;
+    width: 50px;
+    height: 30px;
+    border: 2px solid dodgerblue;
+}
