@@ -35,6 +35,35 @@ function ProjectClass(name){
     this.name = name;
 }
 
+var i = 1; 
+function insertSection() {
+    var x = document.createElement("SECTION");
+    var mySection = "mySection"+i;
+    x.setAttribute("id", mySection);
+    x.setAttribute("style", "width: 150px;"); 
+    x.setAttribute("style", "height: 150px;");
+     x.setAttribute("style", "border: 2px solid blue;");  
+      //document.getElementById(mySection).style.border = "thick solid #0000FF";
+      x.style.height= "500px";
+      x.style.width= "500px";
+     $(x).resizable().draggable();
+    document.body.appendChild(x);
+
+
+    var heading = document.createElement("H1");
+    var txt1 = document.createTextNode("Section Heading");
+    heading.appendChild(txt1);
+    document.getElementById(mySection).appendChild(heading);
+
+    i++;
+    
+    
+}
+
+///////
+
+
+
 
 var imageSource = "";
 
@@ -55,32 +84,34 @@ function deskImage() {
 //    var paragraph = document.createElement("P");
 //    var text = document.createTextNode("Clyde Miller");
 //    
-//    var x = document.createElement("IMG");
+    var x = document.createElement("IMG");
     var w = document.getElementById("deskWidth").value;
     var h = document.getElementById("deskHeight").value;
 //    
 //   // var img = document.getElementById("singleDesk").src;
-//    x.setAttribute("src", imageSource);
+    x.setAttribute("src", imageSource);
 //    
-//    if (isNaN(w)) {
-//            x.setAttribute("width", "100");
-//        } else {
-//            x.setAttribute("width", w);
-//        }
-//        
-//    if (isNaN(h)) {
-//            x.setAttribute("height", "100");
-//        } else {
-//            x.setAttribute("height", h);
-//        }    
+    if (isNaN(w)) {
+            x.setAttribute("width", "100");
+        } else {
+            x.setAttribute("width", w);
+        }
+        
+    if (isNaN(h)) {
+            x.setAttribute("height", "100");
+        } else {
+            x.setAttribute("height", h);
+        }    
 //   
-//    x.setAttribute("alt", "single");
-//    //document.body.appendChild(x);
+    x.setAttribute("alt", "single");
+    document.body.appendChild(x);
 //   // divImage.appendChild(x);
 //    //divImage.appendChild(text);
-//    document.body.appendChild(x);
 //    
-//    $(x).resizable().parent().draggable(); // creates a wrapper div and makes the parent div draggable and the object inside resizable
+//    
+    $(x).resizable().parent().draggable(); // creates a wrapper div and makes the parent div draggable and the object inside resizable
+  //  desk.image = x;
+   // document.body.appendChild(x);
     ////                            ////////
     //                              /////////
     //TRYING IMAGE DESK WITH SVGS  /////////////////
@@ -88,29 +119,29 @@ function deskImage() {
    ////                             /////
     
     //svg that's draggable 
-    var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
-    svg.setAttributeNS('http://www.w3.org/2000/svg','xlink','http://www.w3.org/1999/xlink');
-    svg.setAttributeNS('http://www.w3.org/2000/svg','height','500');
-    svg.setAttributeNS('http://www.w3.org/2000/svg','width','500');
-    svg.setAttributeNS('http://www.w3.org/2000/svg','id','test2');
-
-    $(svg).draggable().parent().resizable();
-
-    var svgimg = document.createElementNS('http://www.w3.org/2000/svg','image');
-    svgimg.setAttributeNS('http://www.w3.org/2000/svg','height',h);
-    svgimg.setAttributeNS('http://www.w3.org/2000/svg','width',w);
-    svgimg.setAttributeNS('http://www.w3.org/2000/svg','id','testimg2');
-    svgimg.setAttributeNS('http://www.w3.org/1999/xlink','href',imageSource);
-    svgimg.setAttributeNS('http://www.w3.org/2000/svg','x','0');
-    svgimg.setAttributeNS('http://www.w3.org/2000/svg','y','0');
-
-
-
-svg.appendChild(svgimg);
-    deskTest.image = svg;
-     alert(deskTest.name+ " "+deskTest.image+ " "+personArray.length);
-     //tried adding to document
-    document.body.appendChild(svg);
+//    var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+//    svg.setAttributeNS('http://www.w3.org/2000/svg','xlink','http://www.w3.org/1999/xlink');
+//    svg.setAttributeNS('http://www.w3.org/2000/svg','height',h);
+//    svg.setAttributeNS('http://www.w3.org/2000/svg','width',w);
+//       svg.setAttributeNS('http://www.w3.org/2000/svg','id','test2');
+//
+//    $(svg).draggable().parent().resizable();
+//
+//    var svgimg = document.createElementNS('http://www.w3.org/2000/svg','image');
+//    svgimg.setAttributeNS('http://www.w3.org/2000/svg','height',h);
+//    svgimg.setAttributeNS('http://www.w3.org/2000/svg','width',w);
+//    svgimg.setAttributeNS('http://www.w3.org/2000/svg','id','testimg2');
+//    svgimg.setAttributeNS('http://www.w3.org/1999/xlink','href',imageSource);
+//    svgimg.setAttributeNS('http://www.w3.org/2000/svg','x','0');
+//    svgimg.setAttributeNS('http://www.w3.org/2000/svg','y','0');
+//
+//
+//
+//svg.appendChild(svgimg);
+//    deskTest.image = svg;
+//     alert(deskTest.name+ " "+deskTest.image+ " "+personArray.length);
+//     //tried adding to document
+//    document.body.appendChild(svg);
     
     //tried adding to floorplan SVG
     // var svgMain = document.getElementById("mainSVG");
@@ -196,6 +227,9 @@ function smallConferenceDesk(){
                  <ul id="deskMenu">
                     <li><a href="#">Information</a>
                         <ul id="DeskInfoMenu">
+                            <li> 
+                             <button id="sectionButton" onclick="insertSection()"> PLACE SECTION</button>
+                            </li>
                             <li> 
                                 <form action="/action_page.php">
                                     Name: <input id="personAtDesk" type="text" name="FirstName" value="Clyde Miller"><br>
