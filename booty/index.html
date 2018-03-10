@@ -106,17 +106,24 @@
           <li><button id="ExportButton" type="button" class="btn btn-primary" onclick="insertDesk()">PLACE DESK </button></li>
         </ul>
 
-      </ul>
+      	</ul>
+ 	</li>
 
-        <li><a href="#">
-	            		<i class="glyphicon glyphicon-folder-open"></i> Projects
-	    </a></li>
+        <li>
+        	<a href="#projectSubMenu" data-toggle="collapse" aria-expanded="false">
+        		<i class="glyphicon glyphicon-folder-open"></i> Project </a>
+        	<ul class="collapse list-unstyled"  id="projectSubMenu">
+        		<li><a>
+	          		Search Projects <input type="text" id="projectInput" onkeyup="searchProjects()" placeholder="Search for project..">
+	          		<button id="addProjectButton" type="button" class="btn btn-warning" onclick="addProject()" style="margin-top: 10px;">Add Project </button>
+	          	</a></li>
+        	</ul>
+		</li>
 
         <li>
           <!-- Link with dropdown items -->
           <a href="#peopleSubMenu" data-toggle="collapse" aria-expanded="false">
-	                	<i class="glyphicon glyphicon-user"></i> People
-	                </a>
+          	<i class="glyphicon glyphicon-user"></i> People </a>
           <ul class="collapse list-unstyled" id="peopleSubMenu">
           	<li><a>
           		Search People <input type="text" id="peopleInput" onkeyup="searchPeople()" placeholder="Search for names..">
@@ -124,13 +131,13 @@
           	</a></li>
             <!-- <li><a href="#">Hey this is where people go</a></li> -->
           </ul>
-
-          <li><a href="#">
+      </li> 
+        <li><a href="#">
 	            	<i class="glyphicon glyphicon-wrench"></i>
 	            	Settings
 	            </a></li>
 
-          <li><a href="#">
+        <li><a href="#">
 	            	<i class="glyphicon glyphicon-link"></i>
 	            	About
 	            </a></li>
@@ -193,7 +200,6 @@
   <!-- custom script -->
   <script src="javascript.js"></script>
   <script src="index.js"></script>
-  <script src="data.js"></script>
   <script src="less.js"></script>
 
   <!-- essential scripts -->

@@ -10,6 +10,9 @@ $(document).ready(function () {
         $('#right-main').toggleClass('active');
     });
 
+	addToPersonList(personArray);
+	addToProjectList(projectArray);
+
 });
 
 
@@ -89,37 +92,39 @@ function continueEdit() {
 
 
 function insertDesk() {
-//	var newdesk = document.createElement('div');
-//	newdesk.className = "desk";
-//	//styling handled in css 
-//	// newdesk.style.background-color = "red";
-//	// newdesk.style.width = "50px";
-//	// newdesk.style.height = "50px";
-//
-//	$('#main').append(newdesk);
-//	$('.desk').draggable({ containment: 'parent' });
-        var deskTest = new DeskClass();
-        var personAdded = new PersonClass();
-        personAdded.name = document.getElementById("name").value;
-        deskTest.name = personAdded.name;
-        personArray.push(personAdded);
-        var w = document.getElementById("deskWidth").value;
-        var h = document.getElementById("deskHeight").value;
-        
-        var x = document.createElement("IMG");
-        x.setAttribute("src", imageSource);
-        if (isNaN(w)) {
-            x.setAttribute("width", "100");
-        } else {
-            x.setAttribute("width", w);
-        }
-        
-    if (isNaN(h)) {
-            x.setAttribute("height", "100");
-        } else {
-            x.setAttribute("height", h);
-        }    
+	var newdesk = document.createElement('div');
+	newdesk.className = "desk";
+	//styling handled in css 
+	// newdesk.style.background-color = "red";
+	// newdesk.style.width = "50px";
+	// newdesk.style.height = "50px";
 
-        document.body.appendChild(x);
-        $(x).resizable().parent().draggable();
+	$('#main').append(newdesk);
+	$('.desk').draggable({ containment: 'parent' });
+
+	// ===================== BELOW =========== other version
+    //     var deskTest = new DeskClass();
+    //     var personAdded = new PersonClass();
+    //     personAdded.name = document.getElementById("name").value;
+    //     deskTest.name = personAdded.name;
+    //     personArray.push(personAdded);
+    //     var w = document.getElementById("deskWidth").value;
+    //     var h = document.getElementById("deskHeight").value;
+        
+    //     var x = document.createElement("IMG");
+    //     x.setAttribute("src", imageSource);
+    //     if (isNaN(w)) {
+    //         x.setAttribute("width", "100");
+    //     } else {
+    //         x.setAttribute("width", w);
+    //     }
+        
+    // if (isNaN(h)) {
+    //         x.setAttribute("height", "100");
+    //     } else {
+    //         x.setAttribute("height", h);
+    //     }    
+
+    //     document.body.appendChild(x);
+    //     $(x).resizable().parent().draggable();
 }
