@@ -117,35 +117,22 @@ function addProject() {
         alert(filter + " already exists in the database.")
         return;
     }
+
     projectArray.push(filter);
+    projectColors.push(""); //has to grow every time project array grows
     addToProjectList(projectArray);
-
 }
-
-function addColor() {
-    $(".color-square").spectrum({
-        color: "white",
-        showPalette: true,
-        showSelectionPalette: true,
-        palette: [ ],
-        localStorageKey: "home", // Any Spectrum with the same string will share selection
-    });
-         
-}
-
 
 //SHOWS PROJECTS AND COLORS NEXT TO IT
-function addToProjectList(array) {
+function initializeProjectList(array) {
     // Create the list element:
     var list = document.getElementById('projectSubMenu');
-
-    //clears list before populating it again
-    $("li").remove(".listedProject");
 
     for(var i = 0; i < array.length; i++) {
         var item = document.createElement('li');
         var inneritem = document.createElement('a');
-        item.className = "listedProject";
+        item.className = "colorPickerAdded";
+        inneritem.className = array[i];
         // inneritem.appendChild(document.createTextNode(array[i])); //add after color 
 
         var sq = document.createElement('input');
@@ -153,17 +140,131 @@ function addToProjectList(array) {
         sq.className = "color-square";
         // sq.style.backgroundColor = projectColors[i];
 
+        //create button to save color for project
+        var but = document.createElement('button');
+        but.className = "set-color-button";
+        but.innerHTML = "SET";
+        but.onclick = setColor; //onclick function
+
         inneritem.appendChild(sq); 
         inneritem.appendChild(document.createTextNode(array[i]));
+        inneritem.appendChild(but);
 
         //create the list
         item.appendChild(inneritem)
         list.appendChild(item);
 
-        addColor();
+        // addColorPicker();
     }
     // return list;
 }
+
+//MODIFIED TO ADD A SINGLE ITEM
+function addToProjectList(array) {
+    var list = document.getElementById('projectSubMenu');
+
+    var item = document.createElement('li');
+    var inneritem = document.createElement('a');
+    inneritem.className = array[array.length-1];
+    item.className = "listedProject";
+
+    disableColorPicker(); //disable previous colorpickers before addding
+
+    //create color picker to add next to element
+    var sq = document.createElement('input');
+    sq.setAttribute("type", "text");
+    sq.className = "color-square";
+
+    //create button to save color for project
+    var but = document.createElement('button');
+    but.className = "set-color-button";
+    but.innerHTML = "SET";
+    but.onclick = setColor; //onclick function
+    // but.setAttribute('onclick', 'setColor()');
+
+    inneritem.appendChild(sq); 
+    inneritem.appendChild(document.createTextNode(array[array.length-1]));
+    inneritem.appendChild(but);
+
+    //create the list
+    item.appendChild(inneritem)
+    list.appendChild(item);
+
+    addColorPicker();
+}
+
+// ============================================================================================
+// =============================== COLOR ======================================================
+// ============================================================================================
+
+function addColorPicker() {
+    $(".color-square").spectrum({
+        showPalette: true,
+        showSelectionPalette: true,
+        showInput: true,
+        showAlpha: true,
+        showInitial: true,
+        allowEmpty: true,
+        preferredFormat: "hex",
+        palette: [ ],
+        localStorageKey: "home", // Any Spectrum with the same string will share selection
+    });
+
+    $(".disabled-color").spectrum({
+        allowEmpty: true,
+        disable: true,
+        showPalette: true,
+        showSelectionPalette: true,
+        showInput: true,
+        showAlpha: true,
+        showInitial: true,
+        preferredFormat: "hex",
+        palette: [ ],
+        localStorageKey: "home", // Any Spectrum with the same string will share selection
+    })
+}
+
+function disableColorPicker() {
+    if($(".color-square").hasClass("disabled-color")){
+        $(".disabled-color").removeClass("color-square");
+    } else if (!($(".color-square").hasClass("disabled-color"))){
+        $(".color-square").toggleClass("disabled-color");
+        $(".disabled-color").toggleClass("color-square");
+    }
+
+    $(".disabled-color").spectrum({ disable: true });
+}
+
+//fixes color to given project and stores it in color array
+function setColor(){
+    //get color from colorpicker
+    var color;
+    var color1 = $(this).siblings(".color-square").spectrum("get");
+    var color2 = $(this).siblings(".disabled-color").spectrum("get");
+
+    // alert("colorsquare val: " + color1 + " type: " + typeof(color1) + "Strings: " + String(color1) + "len: " + String(color1).length + "\n" + "disabled-color val: " + color2 + " type: " + typeof(color2) + "Stringed: " + String(color2));
+
+    if (String(color1).length == 7){
+        color = color1;
+    } else if (String(color2).length == 7){
+        color = color2;
+    } else {
+        alert("Please make sure to select a color.");
+        return;
+    }
+
+    var correspondingProjectName = $(this).parent().prop('className'); // gets corresponding project name
+    alert("Project name: %" + correspondingProjectName + "%");
+
+    //setting project color
+    var idx = projectArray.indexOf(correspondingProjectName);
+    projectColors[idx] = String(color);
+    
+    // alert(JSON.stringify(projectArray));
+    // alert(JSON.stringify(projectColors));
+}
+
+
 
 // ============================================================================================
 // =============================== MISC =======================================================

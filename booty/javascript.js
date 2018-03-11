@@ -11,8 +11,9 @@ $(document).ready(function () {
     });
 
 	addToPersonList(personArray);
-	addToProjectList(projectArray);
+	initializeProjectList(projectArray);
 	
+	addColorPicker();
 });
 
 
