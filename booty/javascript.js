@@ -12,7 +12,7 @@ $(document).ready(function () {
 
 	addToPersonList(personArray);
 	addToProjectList(projectArray);
-
+	
 });
 
 

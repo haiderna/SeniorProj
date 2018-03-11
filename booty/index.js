@@ -86,7 +86,7 @@ function addToPersonList(array) {
 }
 
 // ============================================================================================
-// =============================== people ===================================================
+// =============================== PROJECTS ===================================================
 // ============================================================================================
 
 function searchProjects() {
@@ -119,9 +119,22 @@ function addProject() {
     }
     projectArray.push(filter);
     addToProjectList(projectArray);
+
 }
 
-//creates list of people to display
+function addColor() {
+    $(".color-square").spectrum({
+        color: "white",
+        showPalette: true,
+        showSelectionPalette: true,
+        palette: [ ],
+        localStorageKey: "home", // Any Spectrum with the same string will share selection
+    });
+         
+}
+
+
+//SHOWS PROJECTS AND COLORS NEXT TO IT
 function addToProjectList(array) {
     // Create the list element:
     var list = document.getElementById('projectSubMenu');
@@ -135,19 +148,26 @@ function addToProjectList(array) {
         item.className = "listedProject";
         // inneritem.appendChild(document.createTextNode(array[i])); //add after color 
 
-        var sq = document.createElement('div');
+        var sq = document.createElement('input');
+        sq.setAttribute("type", "text");
         sq.className = "color-square";
-        // sq.style.backgroundColor = projectColors[i].value;
-        sq.style.backgroundColor = projectColors[i];
+        // sq.style.backgroundColor = projectColors[i];
+
         inneritem.appendChild(sq); 
         inneritem.appendChild(document.createTextNode(array[i]));
 
         //create the list
-        item.appendChild(inneritem);
+        item.appendChild(inneritem)
         list.appendChild(item);
+
+        addColor();
     }
     // return list;
 }
+
+// ============================================================================================
+// =============================== MISC =======================================================
+// ============================================================================================
 
 function toTitleCase(str)
 {
