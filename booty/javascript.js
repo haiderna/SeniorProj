@@ -15,6 +15,25 @@ $(document).ready(function () {
 	
 	addColorPicker();
 });
+$(document).ready(function() {
+        var params = {
+            start: function(event, ui) {
+                console.log("Rotating started")
+            },
+            rotate: function(event, ui) {
+                if (Math.abs(ui.angle.current > 6)) {
+                  console.log("Rotating " + ui.angle.current)
+                }
+            },
+            stop: function(event, ui) {
+                console.log("Rotating stopped")
+            },
+        };
+       
+        
+        
+       
+        });
 
 
  function insertRoom() {
@@ -129,3 +148,61 @@ function insertDesk() {
     //     document.body.appendChild(x);
     //     $(x).resizable().parent().draggable();
 }
+
+function insertDivDesk() {
+    var y = document.createElement("IMG");
+            y.setAttribute("src", imageSource);
+            y.setAttribute("id","desk");
+            
+            
+            var w = document.getElementById("deskWidth").value;
+            var h = document.getElementById("deskHeight").value;
+            var name = document.getElementById("name").value;
+            
+                if (isNaN(w)) {
+                    y.setAttribute("width", "100");
+                    } else {
+                         y.setAttribute("width", w);
+                         }
+        
+                if (isNaN(h)) {
+                    y.setAttribute("height", "100");
+                    } else {
+                    y.setAttribute("height", h);
+                    }
+            
+            y.setAttribute("alt", "desk");
+      
+            
+            var para = document.createElement("p");
+            var node = document.createTextNode(name);
+            para.appendChild(node);
+            
+            
+            var testDiv = document.createElement("div");
+            testDiv.setAttribute("id", "testDiv");
+        
+        
+            var btn = document.createElement("BUTTON");
+            var t = document.createTextNode("X");
+            btn.setAttribute( "onClick", "remEl(testDiv)" );
+            btn.appendChild(t);
+            
+            testDiv.style.width = '100px';
+            testDiv.style.height = '100px';
+           // $(upperDiv).draggable();
+        $(testDiv).rotatable().draggable();
+        
+            
+            testDiv.appendChild(y);
+            testDiv.appendChild(para);
+            testDiv.appendChild(btn);
+            document.body.appendChild(testDiv);
+    
+    
+}
+  function remEl(elId) {
+        // Gets rid of element
+        var element = document.getElementById(elementId);
+        element.parentNode.removeChild(element);
+    }
