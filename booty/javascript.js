@@ -153,7 +153,8 @@ function insertDivDesk() {
     var y = document.createElement("IMG");
             y.setAttribute("src", imageSource);
             y.setAttribute("id","desk");
-            
+           // y.style.background = "blue";
+           
             
             var w = document.getElementById("deskWidth").value;
             var h = document.getElementById("deskHeight").value;
@@ -203,6 +204,6 @@ function insertDivDesk() {
 }
   function remEl(elId) {
         // Gets rid of element
-        var element = document.getElementById(elementId);
-        element.parentNode.removeChild(element);
+        var element = document.getElementById("testDiv");
+        document.getElementById("testDiv").remove();
     }

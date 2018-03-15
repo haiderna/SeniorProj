@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="70px" height="55px" viewBox="0 0 70 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>single desk fill</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="04--Add-Desk---Search" transform="translate(-559.000000, -425.000000)" fill="#D1D1D1">
+            <g id="place-desk" transform="translate(504.000000, 391.000000)">
+                <g id="single-desk-fill" transform="translate(55.000000, 34.000000)">
+                    <path d="M66.3860319,29.6861182 L70,29.6861182 L70,0 L0,0 L0,29.6861182 L3.73276011,29.6861182 L4.98636331,33.5211268 L7.74853716,33.5211268 L7.74853716,31.9838042 L62.4786396,31.9838042 L62.4786396,33.5211268 L65.1248608,33.5211268 L66.3860319,29.6861182 Z" id="desk"></path>
+                    <path d="M21.7303704,37.4647887 C21.7037132,37.859909 21.6901408,38.2591532 21.6901408,38.6619718 C21.6901408,47.2573894 27.8698725,54.2253521 35.4929577,54.2253521 C43.116043,54.2253521 49.2957746,47.2573894 49.2957746,38.6619718 C49.2957746,38.2591532 49.2822023,37.859909 49.2555451,37.4647887 L21.7303704,37.4647887 Z" id="chair"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
