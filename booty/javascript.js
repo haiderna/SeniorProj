@@ -149,13 +149,15 @@ function insertDesk() {
     //     $(x).resizable().parent().draggable();
 }
 
+var deskIndex = 0;
 function insertDivDesk() {
     var y = document.createElement("IMG");
             y.setAttribute("src", imageSource);
-            y.setAttribute("id","desk");
-           // y.style.background = "blue";
+           // y.setAttribute("id","desk");
+            y.style.background = "blue";
            
-            
+            var deskId = "desk"+deskIndex;
+            y.setAttribute("id", deskId);
             var w = document.getElementById("deskWidth").value;
             var h = document.getElementById("deskHeight").value;
             var name = document.getElementById("name").value;
@@ -181,17 +183,19 @@ function insertDivDesk() {
             
             
             var testDiv = document.createElement("div");
-            testDiv.setAttribute("id", "testDiv");
+            var divId = "testDiv"+deskIndex;
+            testDiv.setAttribute("id", divId);
         
         
             var btn = document.createElement("BUTTON");
             var t = document.createTextNode("X");
-            btn.setAttribute( "onClick", "remEl(testDiv)" );
+            btn.onclick = function() {alert('Clicked!'+divId);
+                document.getElementById(divId).remove();
+             };
             btn.appendChild(t);
             
             testDiv.style.width = '100px';
             testDiv.style.height = '100px';
-           // $(upperDiv).draggable();
         $(testDiv).rotatable().draggable();
         
             
@@ -200,10 +204,7 @@ function insertDivDesk() {
             testDiv.appendChild(btn);
             document.body.appendChild(testDiv);
     
+    alert(divId);
+    deskIndex++;
     
 }
-  function remEl(elId) {
-        // Gets rid of element
-        var element = document.getElementById("testDiv");
-        document.getElementById("testDiv").remove();
-    }

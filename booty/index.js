@@ -20,7 +20,7 @@ var imageSource = "";
 
 //For Choosing which type of desk in Menu 
 function singleDesk() {
-   imageSource = "single desk fill.svg";
+   imageSource = "Single Desk@2x.svg";
 }
 function largeConferenceDesk(){
     imageSource = "Large Conf.svg";
