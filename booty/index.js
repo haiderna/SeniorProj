@@ -121,6 +121,7 @@ function addProject() {
     projectArray.push(filter);
     projectColors.push(""); //has to grow every time project array grows
     addToProjectList(projectArray);
+    addToDeskProjectDropDown(projectArray);
 }
 
 //SHOWS PROJECTS AND COLORS NEXT TO IT
@@ -193,6 +194,52 @@ function addToProjectList(array) {
     addColorPicker();
 }
 
+//SHOWS PROJECTS AND COLORS INSIDE ADD DESK SUBMENU
+function initDeskProjectDropdown(array) {
+
+    // var $dropdown = $("#deskProjectDropdown");
+    // $.each(projectArray, function() {
+    //     $dropdown.append($("<a class='dropdown-item' />").text(this));
+    // });
+    var list = document.getElementById('deskProjectDropdown');
+
+     for(var i = 0; i < array.length; i++) {
+        var inneritem = document.createElement('a');
+        inneritem.className = "dropdown-item";
+        inneritem.className += " " + array[i];
+
+        var sq = document.createElement('div');
+        sq.className = "desk-proj-color";
+        sq.style.backgroundColor = projectColors[i];
+
+        inneritem.appendChild(document.createTextNode(array[i]));
+        inneritem.appendChild(sq);
+
+        //create the list
+        list.appendChild(inneritem);
+    }
+}
+
+function addToDeskProjectDropDown(array) {
+
+    var list = document.getElementById('deskProjectDropdown');
+
+    var inneritem = document.createElement('a');
+    inneritem.className = "dropdown-item";
+    inneritem.className += " " + array[array.length-1];
+
+    var sq = document.createElement('div');
+    sq.className = "desk-proj-color";
+    sq.style.backgroundColor = projectColors[projectColors.length-1];
+
+    inneritem.appendChild(document.createTextNode(array[array.length-1]));
+    inneritem.appendChild(sq);
+
+    //create the list
+    list.appendChild(inneritem);
+
+}
+
 // ============================================================================================
 // =============================== COLOR ======================================================
 // ============================================================================================
@@ -262,6 +309,24 @@ function setColor(){
     
     // alert(JSON.stringify(projectArray));
     // alert(JSON.stringify(projectColors));
+
+    //change on desk select too
+    $('#deskProjectDropdown').find('.' + correspondingProjectName + '').each(
+        function() {
+            $(this).find('.desk-proj-color').css("background-color", projectColors[idx]);
+        });
+
+}
+
+//loads initial colors into color pickers
+function loadColorsIntoColorPickers() {
+    var x = 0;
+    $('#projectSubMenu').find('.color-square').each(
+        function () {
+            $(this).spectrum("set", projectColors[x]);
+            x = x + 1;
+        }
+    );
 }
 
 

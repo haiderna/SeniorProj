@@ -106,8 +106,14 @@
                             
                         </ul>
                     </li>
-          <li><a href="#">Projects</a></li>
-          <li><button id="ExportButton" type="button" class="btn btn-primary" onclick="insertDivDesk()">PLACE DESK </button></li>
+          <li>
+          	<button id="deskProjectButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Select Project  <span class="caret"></span></button>
+          	<div id="deskProjectDropdown" class="dropdown-menu">
+
+			</div>
+          </li>
+
+          <li><button id="ExportButton" type="button" class="btn btn-primary" onclick="insertDivDesk()">Place Desk </button></li>
         </ul>
 
       	</ul>
@@ -159,8 +165,6 @@
     <div id="main">
 
     	<image xlink:href="HQ-2nd-Floor.png" src="HQ-2nd-Floor.png" width="1040" height="630" />
-
-    	<input id="xxx" />
 
     </div><!-- main -->
 

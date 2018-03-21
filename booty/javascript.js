@@ -12,9 +12,13 @@ $(document).ready(function () {
 
 	addToPersonList(personArray);
 	initializeProjectList(projectArray);
+	initDeskProjectDropdown(projectArray);
 	
 	addColorPicker();
+	loadColorsIntoColorPickers();
 });
+
+//readying rotatable
 $(document).ready(function() {
         var params = {
             start: function(event, ui) {
@@ -30,10 +34,7 @@ $(document).ready(function() {
             },
         };
        
-        
-        
-       
-        });
+});
 
 
  function insertRoom() {
