@@ -81,32 +81,32 @@
       <ul class="collapse list-unstyled" id="deskSubMenu">
         <ul id="deskMenu">
           <li><a href="#">Assign Desk to Insert</a>
-                        <ul id="DeskInfoMenu">
-                            <li> 
-                                <form action="/action_page.php">
-                                    <label for="name">Name:</label>
-                                    <input type="text" id="name" name="FirstName" placeholder="ex. Clyde Miller"><br>
-                                <input type="submit" value="Submit">
-                                  </form>
-                            </li>
-                            <li id="Type" title="Type" style="margin-bottom: 10px;">
-                              <label for="Type" style="display: block; margin-bottom: 5px;">Type</label>
-                                <button id="singleDesk" onclick="singleDesk()"><img src="Single Desk.png" width="40" height="40"></button>
-                                <button id="LargeConf" onclick="largeConferenceDesk()"><img src="Large Conf.png" width="40" height="40"></button>
-                                <button id="SmallConf" onclick="smallConferenceDesk()"><img src="Small conf.png" width="40" height="40"></button>
-                            </li>
-                            <li id="Dimensions">
-                                 <form action="/action_page.php">
-                                    <label for="deskWidth">Width:</label>
-                                    <input type="text" id="deskWidth" name="W" value="25"><br>
-                                    <label for="deskHeight">Length:</label>
-                                    <input type="text" id="deskHeight" name="L" value="25"><br>
-                                <input type="submit" value="Submit">
-                                  </form>
-                            </li>
-                            
-                        </ul>
+                <ul id="DeskInfoMenu">
+                    <li> 
+                        <form action="javascript:addPersonFromDeskMenu()">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="FirstName" placeholder="ex. Leroy Jenkins" class="typeahead" data-provide="typeahead" autocomplete="off"><br>
+                        <input type="submit" value="Add Person">
+                          </form>
                     </li>
+                    <li id="Type" title="Type" style="margin-bottom: 10px;">
+                      <label for="Type" style="display: block; margin-bottom: 5px;">Type</label>
+                        <button id="singleDesk" onclick="singleDesk()"><img src="Single Desk.png" width="40" height="40"></button>
+                        <button id="LargeConf" onclick="largeConferenceDesk()"><img src="Large Conf.png" width="40" height="40"></button>
+                        <button id="SmallConf" onclick="smallConferenceDesk()"><img src="Small conf.png" width="40" height="40"></button>
+                    </li>
+                    <li id="Dimensions">
+                         <form action="#">
+                            <label for="deskWidth">Width:</label>
+                            <input type="text" id="deskWidth" name="W" value="25"><br>
+                            <label for="deskHeight">Length:</label>
+                            <input type="text" id="deskHeight" name="L" value="25"><br>
+                        <input type="submit" value="Submit">
+                          </form>
+                    </li>
+                    
+                </ul>
+            </li>
           <li>
           	<!--  old implementation    	
           	<button id="deskProjectButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Select Project  <span class="caret"></span></button>
@@ -219,6 +219,7 @@
   <!-- boostrap js -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+  <script src = "bootstrap3-typeahead.min.js"></script>
   <!-- custom script -->
   <script src="javascript.js"></script>
   <script src="index.js"></script>

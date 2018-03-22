@@ -66,6 +66,19 @@ function addPerson() {
     addToPersonList(personArray);
 }
 
+function addPersonFromDeskMenu(){
+    var input, filter;
+    input = document.getElementById('name');
+    filter = toTitleCase(input.value.toUpperCase());
+    //check for duplicates
+    if (personArray.includes(filter)){
+        alert(filter + " already exists in the database.")
+        return;
+    }
+    personArray.push(filter);
+    addToPersonList(personArray);
+}
+
 //creates list of people to display
 function addToPersonList(array) {
     // Create the list element:

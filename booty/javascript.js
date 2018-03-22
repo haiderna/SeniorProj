@@ -10,6 +10,8 @@ $(document).ready(function () {
         $('#right-main').toggleClass('active');
     });
 
+    $("#name").typeahead().data('typeahead').source = personArray;
+
 	addToPersonList(personArray);
 	initializeProjectList(projectArray);
 
