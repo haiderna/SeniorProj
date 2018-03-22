@@ -12,6 +12,7 @@ $(document).ready(function () {
 
 	addToPersonList(personArray);
 	initializeProjectList(projectArray);
+
 	initDeskProjectDropdown(projectArray);
 	
 	addColorPicker();
@@ -153,57 +154,62 @@ function insertDesk() {
 var deskIndex = 0;
 function insertDivDesk() {
     var y = document.createElement("IMG");
-            y.setAttribute("src", imageSource);
-           // y.setAttribute("id","desk");
-            y.style.background = "blue";
-           
-            var deskId = "desk"+deskIndex;
-            y.setAttribute("id", deskId);
-            var w = document.getElementById("deskWidth").value;
-            var h = document.getElementById("deskHeight").value;
-            var name = document.getElementById("name").value;
-            
-                if (isNaN(w)) {
-                    y.setAttribute("width", "100");
-                    } else {
-                         y.setAttribute("width", w);
-                         }
-        
-                if (isNaN(h)) {
-                    y.setAttribute("height", "100");
-                    } else {
-                    y.setAttribute("height", h);
-                    }
-            
-            y.setAttribute("alt", "desk");
-      
-            
-            var para = document.createElement("p");
-            var node = document.createTextNode(name);
-            para.appendChild(node);
-            
-            
-            var testDiv = document.createElement("div");
-            var divId = "testDiv"+deskIndex;
-            testDiv.setAttribute("id", divId);
-        
-        
-            var btn = document.createElement("BUTTON");
-            var t = document.createTextNode("X");
-            btn.onclick = function() {alert('Clicked!'+divId);
-                document.getElementById(divId).remove();
-             };
-            btn.appendChild(t);
-            
-            testDiv.style.width = '100px';
-            testDiv.style.height = '100px';
-        $(testDiv).rotatable().draggable();
-        
-            
-            testDiv.appendChild(y);
-            testDiv.appendChild(para);
-            testDiv.appendChild(btn);
-            document.body.appendChild(testDiv);
+    y.setAttribute("src", imageSource);
+   // y.setAttribute("id","desk");
+    y.style.background = "blue";
+   
+    var deskId = "desk"+deskIndex;
+    y.setAttribute("id", deskId);
+    var w = document.getElementById("deskWidth").value;
+    var h = document.getElementById("deskHeight").value;
+    var name = document.getElementById("name").value;
+
+    /*Getting project and color*/
+    var proj = $('#projectDropdown option:selected').text();
+    var color = $('#projectDropdown option:selected').val();
+    alert("Project name is: " + proj + "- Project colour is: " + color); //comment out when done
+    
+        if (isNaN(w)) {
+            y.setAttribute("width", "100");
+            } else {
+                 y.setAttribute("width", w);
+                 }
+
+        if (isNaN(h)) {
+            y.setAttribute("height", "100");
+            } else {
+            y.setAttribute("height", h);
+            }
+    
+    y.setAttribute("alt", "desk");
+
+    
+    var para = document.createElement("p");
+    var node = document.createTextNode(name);
+    para.appendChild(node);
+    
+    
+    var testDiv = document.createElement("div");
+    var divId = "testDiv"+deskIndex;
+    testDiv.setAttribute("id", divId);
+
+
+    var btn = document.createElement("BUTTON");
+    var t = document.createTextNode("X");
+    btn.onclick = function() {alert('Clicked!'+divId);
+        document.getElementById(divId).remove();
+     };
+    btn.appendChild(t);
+    
+    testDiv.style.width = '100px';
+    testDiv.style.height = '100px';
+	$(testDiv).rotatable().draggable();
+
+    
+    testDiv.appendChild(y);
+    testDiv.appendChild(para);
+    testDiv.appendChild(btn);
+    document.body.appendChild(testDiv);
     
     alert(divId);
     deskIndex++;

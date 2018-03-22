@@ -9,6 +9,7 @@
   <!-- compiled styles.less into css -->
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/>
   <!-- for rotation -->
   <link rel="stylesheet" href="jquery.ui.rotatable.css">
@@ -107,10 +108,16 @@
                         </ul>
                     </li>
           <li>
+          	<!--  old implementation    	
           	<button id="deskProjectButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Select Project  <span class="caret"></span></button>
-          	<div id="deskProjectDropdown" class="dropdown-menu">
+			          	<div id="deskProjectDropdown" class="dropdown-menu">
+			          		this is where the projects themselves go
+						</div> -->
 
-			</div>
+			<select id="projectDropdown" class="selectpicker" data-live-search="true" title="Select Project..." data-width='75%' data-size="5" style="position:relative;">
+			  <!-- <option> Projects go in here ...</option> -->
+			</select>
+
           </li>
 
           <li><button id="ExportButton" type="button" class="btn btn-primary" onclick="insertDivDesk()">Place Desk </button></li>
@@ -211,6 +218,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
   <!-- boostrap js -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
   <!-- custom script -->
   <script src="javascript.js"></script>
   <script src="index.js"></script>

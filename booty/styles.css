@@ -5,7 +5,6 @@
 /*used to be 100vh - 52px*/
 #right-sidebar {
     position: absolute;
-/*    top: 52;*/
     float: right;
     right: 0;
     min-height: calc(100vh);
@@ -154,10 +153,14 @@ div.sp-replacer{
     background-color: #f0ad4e;
 }
 
+#ExportButton{
+    width:  75%
+}
+
+/* DEPRECATED WITH PROJECT SELECT MENU
 #deskProjectButton{
     margin: 10px 20px 10px 0px;
     width: 75%;
-    /*background-color: rgb(55,81,114);*/
 }
 
 #deskProjectDropdown{
@@ -182,16 +185,18 @@ div.sp-replacer{
 
 #deskProjectDropdown.dropdown-menu > a.dropdown-item:hover{
     background-color: lightgrey;
-}
+}*/
 
-#ExportButton{
-    width:  75%
-}
 
-.desk-proj-color{
+/*.desk-proj-color{
     margin-top: 5px;
     width: 12px;
     height: 12px;
     float: right;
     border: 1px solid white;
+}*/
+
+.desk-proj-color{
+    margin: 2px;
+    border-bottom: 2px solid lightgrey;
 }

@@ -120,6 +120,7 @@ function addProject() {
 
     projectArray.push(filter);
     projectColors.push(""); //has to grow every time project array grows
+
     addToProjectList(projectArray);
     addToDeskProjectDropDown(projectArray);
 }
@@ -197,46 +198,35 @@ function addToProjectList(array) {
 //SHOWS PROJECTS AND COLORS INSIDE ADD DESK SUBMENU
 function initDeskProjectDropdown(array) {
 
-    // var $dropdown = $("#deskProjectDropdown");
-    // $.each(projectArray, function() {
-    //     $dropdown.append($("<a class='dropdown-item' />").text(this));
-    // });
-    var list = document.getElementById('deskProjectDropdown');
+    //Populate select menu
+    var drop = document.getElementById('projectDropdown');
 
-     for(var i = 0; i < array.length; i++) {
-        var inneritem = document.createElement('a');
-        inneritem.className = "dropdown-item";
-        inneritem.className += " " + array[i];
-
-        var sq = document.createElement('div');
-        sq.className = "desk-proj-color";
-        sq.style.backgroundColor = projectColors[i];
-
-        inneritem.appendChild(document.createTextNode(array[i]));
-        inneritem.appendChild(sq);
+    for(var i = 0; i < array.length; i++) {
+        var option = document.createElement('option');
+        option.className = "desk-proj-color" + " " + array[i];
+        option.value = projectColors[i];
+        option.text = array[i];
+        option.style.backgroundColor = projectColors[i];
 
         //create the list
-        list.appendChild(inneritem);
+        drop.appendChild(option);
     }
+
 }
 
 function addToDeskProjectDropDown(array) {
 
-    var list = document.getElementById('deskProjectDropdown');
-
-    var inneritem = document.createElement('a');
-    inneritem.className = "dropdown-item";
-    inneritem.className += " " + array[array.length-1];
-
-    var sq = document.createElement('div');
-    sq.className = "desk-proj-color";
-    sq.style.backgroundColor = projectColors[projectColors.length-1];
-
-    inneritem.appendChild(document.createTextNode(array[array.length-1]));
-    inneritem.appendChild(sq);
+    var drop = document.getElementById('projectDropdown');
+    var option = document.createElement('option');
+    option.className = "desk-proj-color" + " " + array[array.length-1];
+    option.value = projectColors[projectColors.length-1];
+    option.text = array[array.length-1];
+    option.style.backgroundColor = projectColors[projectColors.length-1];
 
     //create the list
-    list.appendChild(inneritem);
+    drop.appendChild(option);
+
+    $('#projectDropdown').selectpicker('refresh');
 
 }
 
@@ -310,10 +300,11 @@ function setColor(){
     // alert(JSON.stringify(projectArray));
     // alert(JSON.stringify(projectColors));
 
-    //change on desk select too
-    $('#deskProjectDropdown').find('.' + correspondingProjectName + '').each(
+    $('#projectDropdown').find('.' + correspondingProjectName + '').each(
         function() {
-            $(this).find('.desk-proj-color').css("background-color", projectColors[idx]);
+            $(this).css("background-color", projectColors[idx]);
+            $(this).val(projectColors[idx]);
+            $('#projectDropdown').selectpicker('refresh');
         });
 
 }
@@ -342,3 +333,58 @@ function toTitleCase(str)
     });
 }
 
+
+
+// ============================================================================================
+// =============================== DEPRECATED FUNCTIONS =======================================
+// ============================================================================================
+
+// //SHOWS PROJECTS AND COLORS INSIDE ADD DESK SUBMENU
+// function initDeskProjectDropdown(array) {
+
+//     // == DEPRECATED WITH SELECT MENU
+//     // var list = document.getElementById('deskProjectDropdown');
+
+//     //  for(var i = 0; i < array.length; i++) {
+//     //     var inneritem = document.createElement('a');
+//     //     inneritem.className = "dropdown-item";
+//     //     inneritem.className += " " + array[i];
+
+//     //     var sq = document.createElement('div');
+//     //     sq.className = "desk-proj-color";
+//     //     sq.style.backgroundColor = projectColors[i];
+
+//     //     inneritem.appendChild(document.createTextNode(array[i]));
+//     //     inneritem.appendChild(sq);
+
+//     //     //create the list
+//     //     list.appendChild(inneritem);
+//     // }
+
+// }
+
+// function addToDeskProjectDropDown(array) {
+//     //DEPRECATED WITH SELECT MENU
+//     // var list = document.getElementById('deskProjectDropdown');
+
+//     // var inneritem = document.createElement('a');
+//     // inneritem.className = "dropdown-item";
+//     // inneritem.className += " " + array[array.length-1];
+
+//     // var sq = document.createElement('div');
+//     // sq.className = "desk-proj-color";
+//     // sq.style.backgroundColor = projectColors[projectColors.length-1];
+
+//     // inneritem.appendChild(document.createTextNode(array[array.length-1]));
+//     // inneritem.appendChild(sq);
+
+//     // //create the list
+//     // list.appendChild(inneritem);
+
+// }
+
+//DEPRECATED BY DESK SELECT ...
+// $('#deskProjectDropdown').find('.' + correspondingProjectName + '').each(
+//     function() {
+//         $(this).find('.desk-proj-color').css("background-color", projectColors[idx]);
+//     });
