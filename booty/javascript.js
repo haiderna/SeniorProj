@@ -153,21 +153,27 @@ function insertDesk() {
 
 var deskIndex = 0;
 function insertDivDesk() {
+    var Desk = new DeskClass();
     var y = document.createElement("IMG");
     y.setAttribute("src", imageSource);
+    Desk.image = imageSource;
    // y.setAttribute("id","desk");
-    y.style.background = "blue";
+   // y.style.background = "blue";
    
     var deskId = "desk"+deskIndex;
     y.setAttribute("id", deskId);
     var w = document.getElementById("deskWidth").value;
     var h = document.getElementById("deskHeight").value;
     var name = document.getElementById("name").value;
+    Desk.name = name;
 
     /*Getting project and color*/
     var proj = $('#projectDropdown option:selected').text();
     var color = $('#projectDropdown option:selected').val();
     alert("Project name is: " + proj + "- Project colour is: " + color); //comment out when done
+    
+    y.style.background = color;
+    Desk.project = proj;
     
         if (isNaN(w)) {
             y.setAttribute("width", "100");
@@ -201,8 +207,11 @@ function insertDivDesk() {
      };
     btn.appendChild(t);
     
-    testDiv.style.width = '100px';
-    testDiv.style.height = '100px';
+   
+   
+    testDiv.style.width = w;
+    testDiv.style.height = h;
+    
 	$(testDiv).rotatable().draggable();
 
     
@@ -211,7 +220,9 @@ function insertDivDesk() {
     testDiv.appendChild(btn);
     document.body.appendChild(testDiv);
     
+    
+    
     alert(divId);
     deskIndex++;
-    
+    alert(testDiv.style.width);
 }
