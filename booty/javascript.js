@@ -224,12 +224,13 @@ function insertDivDesk() {
     document.body.appendChild(testDiv);
     
     var convertedR = convertHex(color,50);
+    alert(convertedR);
     getNewColor(convertedR, y);
     
     
-    alert(divId);
+   // alert(divId);
     deskIndex++;
-    alert(testDiv.style.width);
+    //alert(testDiv.style.width);
 }
 //////////////
 /////////////
@@ -370,7 +371,7 @@ function getNewColor(color, newImg) {
 	    'sepia('+Math.floor(filters.sepia*100)+'%) ' +
 	    'saturate('+Math.floor(filters.saturate*100)+'%) ' +
 	    'hue-rotate('+Math.floor(filters.hueRotate)+'deg);';
-        alert(newImg);
+        alert(filtersCSS);
         newImg.style = filtersCSS;
 }
 function convertHex(hex,opacity){
