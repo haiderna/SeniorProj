@@ -204,6 +204,8 @@ function insertDivDesk() {
 
 
     var btn = document.createElement("BUTTON");
+    btn.style.height = "20px";
+    btn.style.width = "20px";
     var t = document.createTextNode("X");
     btn.onclick = function() {alert('Clicked!'+divId);
         document.getElementById(divId).remove();
@@ -220,6 +222,10 @@ function insertDivDesk() {
     testDiv.appendChild(y);
     
     testDiv.appendChild(para);
+    //set Label over Desk
+     para.style.color = "black";
+     para.style.position = "absolute";
+	para.style.top = '10px';
     testDiv.appendChild(btn);
     document.body.appendChild(testDiv);
     
