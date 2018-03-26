@@ -204,9 +204,17 @@ function insertDivDesk() {
 
 
     var btn = document.createElement("BUTTON");
+    btn.setAttribute("id", "delButt");
     btn.style.height = "20px";
     btn.style.width = "20px";
     var t = document.createTextNode("X");
+    btn.style.opacity = 0;
+    btn.onmouseout = function() {
+        btn.style.opacity = 0;
+    };
+    btn.onmouseover = function() {
+      btn.style.opacity = 1;  
+    };
     btn.onclick = function() {alert('Clicked!'+divId);
         document.getElementById(divId).remove();
      };
