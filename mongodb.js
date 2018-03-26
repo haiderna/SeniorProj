@@ -1,3 +1,6 @@
+// To start mongodb locally: mongod --dbpath=/data
+//		on windows machines you must setup db environmental variable path
+
 //**************VARIABLES AND FUNCTIONS***************
 //	this section includes vars and functions to query, add, update etc. the DB
 
