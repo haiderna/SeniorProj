@@ -155,6 +155,8 @@ function insertDesk() {
 
 var deskIndex = 0;
 function insertDivDesk() {
+    var mainDiv = document.getElementById("main");
+    
     var Desk = new DeskClass();
     var y = document.createElement("IMG");
     y.setAttribute("src", imageSource);
@@ -235,14 +237,13 @@ function insertDivDesk() {
      para.style.position = "absolute";
 	para.style.top = '10px';
     testDiv.appendChild(btn);
-    document.body.appendChild(testDiv);
-    
+    //document.body.appendChild(testDiv);
+    mainDiv.appendChild(testDiv);
     var convertedR = convertHex(color,50);
     alert(convertedR);
     getNewColor(convertedR, y);
-    
-    
-   // alert(divId);
+    $(testDiv).css('z-index', '102');
+     // alert(divId);
     deskIndex++;
     //alert(testDiv.style.width);
 }
