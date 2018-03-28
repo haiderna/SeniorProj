@@ -247,6 +247,19 @@ function insertDivDesk() {
     deskIndex++;
     //alert(testDiv.style.width);
 }
+/////FUNCTION FOR PRINTING 
+function exportPDF(printpage)
+{
+    var hdStr = "<html><head><title></title></head><body>";
+    var ftStr = "</body>";
+    var result = document.all.item(printpage).innerHTML;
+    var prevStr = document.body.innerHTML;
+    document.body.innerHTML = hdStr+result+ftStr;
+    window.print();
+    document.body.innerHTML = prevStr;
+    return false;
+}
+
 //////////////
 /////////////
 /////// FUNCTIONS FOR COLORS ///////////
