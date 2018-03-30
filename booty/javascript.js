@@ -174,7 +174,7 @@ function insertDivDesk() {
     /*Getting project and color*/
     var proj = $('#projectDropdown option:selected').text();
     var color = $('#projectDropdown option:selected').val();
-    alert("Project name is: " + proj + "- Project colour is: " + color); //comment out when done
+   // alert("Project name is: " + proj + "- Project colour is: " + color); //comment out when done
     
     //y.style.background = color;
    
@@ -240,25 +240,37 @@ function insertDivDesk() {
     //document.body.appendChild(testDiv);
     mainDiv.appendChild(testDiv);
     var convertedR = convertHex(color,50);
-    alert(convertedR);
+   // alert(convertedR);
     getNewColor(convertedR, y);
     $(testDiv).css('z-index', '102');
      // alert(divId);
     deskIndex++;
     //alert(testDiv.style.width);
 }
+////////////////////////////////
 /////FUNCTION FOR PRINTING 
-function exportPDF(printpage)
-{
-    var hdStr = "<html><head><title></title></head><body>";
-    var ftStr = "</body>";
-    var result = document.all.item(printpage).innerHTML;
-    var prevStr = document.body.innerHTML;
-    document.body.innerHTML = hdStr+result+ftStr;
-    window.print();
-    document.body.innerHTML = prevStr;
-    return false;
-}
+////////////////////////////
+
+function exportPDF(divId) {
+
+        var contentToPrint= document.getElementById(divId).innerHTML;
+	var newWin = window.open("", "", "width=800,height=500");
+       newWin.document.write('<html><head><title>PRINT WINDOW</title>');
+            /* ss if needed */ //newWin.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+       newWin.document.write('</head><body >');
+	newWin.document.write(contentToPrint);
+         newWin.document.write('</body></html>');
+            newWin.document.close(); 
+
+          newWin.onload=function(){ 
+
+                newWin.focus(); 
+                newWin.print();
+                newWin.close();
+            };
+
+         
+   }
 
 //////////////
 /////////////
@@ -399,7 +411,7 @@ function getNewColor(color, newImg) {
 	    'sepia('+Math.floor(filters.sepia*100)+'%) ' +
 	    'saturate('+Math.floor(filters.saturate*100)+'%) ' +
 	    'hue-rotate('+Math.floor(filters.hueRotate)+'deg);';
-        alert(filtersCSS);
+       // alert(filtersCSS);
         newImg.style = filtersCSS;
 }
 function convertHex(hex,opacity){
