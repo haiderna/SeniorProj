@@ -28,12 +28,31 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Floorplan
 	        <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">HQ</a></li>
-            <li><a href="#">Treehouse</a></li>
+            <li ><a href="#">HQ</a>
+                <ul>
+                    <li  ><button  onclick="HQFloor1()">Floor 1 </button>></li>
+                    <li onclick="HQFloor2()"><a href="#">Floor 2</a></li>
+                
+                
+                </ul>
+            
+            
+            </li>
+            <li><a href="#">Treehouse</a>
+                 <ul id="THsubFloor">
+                <li><a href="#">Floor 1</a></li>
+                <li><a href="#">Floor 2</a></li>
+                <li><a href="#">Floor 3</a></li>
+                <li><a href="#">Floor 4</a></li>
+                
+                </ul>
+            
+            
+            </li>
             <li><a href="#">Watchtower</a></li>
           </ul>
         </li>
-        <li class="dropdown">
+<!--        <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Floor
 	        <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -41,11 +60,11 @@
             <li><a href="#">2</a></li>
             <li><a href="#">3</a></li>
           </ul>
-        </li>
+        </li>-->
       </ul>
       <ul class="nav navbar-nav navbar-right">
        	<li>
-      		<a href="#"><button id="testbutton" type="button" class="btn btn-default" onclick="exportPDF('main');"> 
+      		<a href="#"><button id="testbutton" type="button" class="btn btn-default" onclick="exportPDF();"> 
       			<span class="glyphicon glyphicon-export"></span> Export</button>
       		</a></li><!--
       	<li>
@@ -173,7 +192,11 @@
 
     	<image xlink:href="HQ-2nd-Floor.png" src="HQ-2nd-Floor.png" width="1040" height="630" />
 
-    </div><!-- main -->
+    </div>
+    
+    
+    
+    <!-- main -->
 
 	  <!-- Toggle right-sidebar Button -->
 	  <div id="right-main">

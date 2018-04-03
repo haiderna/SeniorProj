@@ -41,6 +41,8 @@ $(document).ready(function() {
 
 
  function insertRoom() {
+      var mainDiv = document.getElementById(floorPlan);
+     
  	//create the div to be draggable
  	var room = document.createElement('div');
  	room.className = 'room';
@@ -53,11 +55,12 @@ $(document).ready(function() {
  	cancel.onclick = function (e) { room.parentNode.removeChild(room) };
  	room.appendChild(cancel);
 
- 	$('#main').append(room);
+ 	mainDiv.append(room);
  	$( '.room' ).draggable({ containment: 'parent' }).resizable();
 }
 
 function deleteRoom() {
+    
 	//get all rooms
 	var rooms = document.getElementsByClassName('room');
 
@@ -115,47 +118,47 @@ function continueEdit() {
 }
 
 
-function insertDesk() {
-	var newdesk = document.createElement('div');
-	newdesk.className = "desk";
-	//styling handled in css 
-	// newdesk.style.background-color = "red";
-	// newdesk.style.width = "50px";
-	// newdesk.style.height = "50px";
-
-	$('#main').append(newdesk);
-	$('.desk').draggable({ containment: 'parent' });
-
-	// ===================== BELOW =========== other version
-    //     var deskTest = new DeskClass();
-    //     var personAdded = new PersonClass();
-    //     personAdded.name = document.getElementById("name").value;
-    //     deskTest.name = personAdded.name;
-    //     personArray.push(personAdded);
-    //     var w = document.getElementById("deskWidth").value;
-    //     var h = document.getElementById("deskHeight").value;
-        
-    //     var x = document.createElement("IMG");
-    //     x.setAttribute("src", imageSource);
-    //     if (isNaN(w)) {
-    //         x.setAttribute("width", "100");
-    //     } else {
-    //         x.setAttribute("width", w);
-    //     }
-        
-    // if (isNaN(h)) {
-    //         x.setAttribute("height", "100");
-    //     } else {
-    //         x.setAttribute("height", h);
-    //     }    
-
-    //     document.body.appendChild(x);
-    //     $(x).resizable().parent().draggable();
-}
+//function insertDesk() {
+//	var newdesk = document.createElement('div');
+//	newdesk.className = "desk";
+//	//styling handled in css 
+//	// newdesk.style.background-color = "red";
+//	// newdesk.style.width = "50px";
+//	// newdesk.style.height = "50px";
+//
+//	$('#main').append(newdesk);
+//	$('.desk').draggable({ containment: 'parent' });
+//
+//	// ===================== BELOW =========== other version
+//    //     var deskTest = new DeskClass();
+//    //     var personAdded = new PersonClass();
+//    //     personAdded.name = document.getElementById("name").value;
+//    //     deskTest.name = personAdded.name;
+//    //     personArray.push(personAdded);
+//    //     var w = document.getElementById("deskWidth").value;
+//    //     var h = document.getElementById("deskHeight").value;
+//        
+//    //     var x = document.createElement("IMG");
+//    //     x.setAttribute("src", imageSource);
+//    //     if (isNaN(w)) {
+//    //         x.setAttribute("width", "100");
+//    //     } else {
+//    //         x.setAttribute("width", w);
+//    //     }
+//        
+//    // if (isNaN(h)) {
+//    //         x.setAttribute("height", "100");
+//    //     } else {
+//    //         x.setAttribute("height", h);
+//    //     }    
+//
+//    //     document.body.appendChild(x);
+//    //     $(x).resizable().parent().draggable();
+//}
 
 var deskIndex = 0;
 function insertDivDesk() {
-    var mainDiv = document.getElementById("main");
+    var mainDiv = document.getElementById(floorPlan);
     
     var Desk = new DeskClass();
     var y = document.createElement("IMG");
@@ -251,9 +254,9 @@ function insertDivDesk() {
 /////FUNCTION FOR PRINTING 
 ////////////////////////////
 
-function exportPDF(divId) {
+function exportPDF() {
 
-        var contentToPrint= document.getElementById(divId).innerHTML;
+        var contentToPrint= document.getElementById(floorPlan).innerHTML;
 	var newWin = window.open("", "", "width=800,height=500");
        newWin.document.write('<html><head><title>PRINT WINDOW</title>');
             /* ss if needed */ //newWin.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');

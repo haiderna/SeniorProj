@@ -16,6 +16,39 @@ function ProjectClass(name){
 }
 
 
+var floorPlan = "main";
+
+function HQfloor1() {
+    floorPlan = "HQFloor1";
+    alert(floorPlan);
+}
+
+function HQfloor2(){
+    floorPlan = "HQFloor2";
+}
+
+function TreeHouseFloor1(){
+    floorPlan = "THfloor1";
+    
+}
+function TreeHouseFloor2(){
+    floorPlan = "THfloor2";
+    
+}
+function TreeHouseFloor3(){
+    floorPlan = "THfloor3";
+    
+}
+function TreeHouseFloor4(){
+    floorPlan = "THfloor4";
+    
+}
+
+function WatchTower() {
+    floorPlan = "WTfloor1";
+}
+
+
 var imageSource = "";
 
 //For Choosing which type of desk in Menu 
