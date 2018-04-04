@@ -53,13 +53,13 @@ var imageSource = "";
 
 //For Choosing which type of desk in Menu 
 function singleDesk() {
-   imageSource = "SingleDeskBlackFill.png";
+   imageSource = "desk - filled.svg";
 }
 function largeConferenceDesk(){
-    imageSource = "LargeConfFillBlack.png";
+    imageSource = "large table - filled.svg";
 }
 function smallConferenceDesk(){
-    imageSource = "SmallConfBlack.png.png";
+    imageSource = "small table - filled.svg";
 }
 
 // ============================================================================================
