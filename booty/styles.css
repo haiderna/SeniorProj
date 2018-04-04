@@ -157,6 +157,38 @@ div.sp-replacer{
     width:  75%
 }
 
+.desk-proj-color{
+    margin: 2px;
+    border-bottom: 2px solid lightgrey;
+}
+
+#floorplanSubMenu{
+    background-color: #223547;
+    border: 3px solid #223547;
+}
+
+#floorplanSubMenu ul{
+    padding-left: 0px;
+}
+
+#floorplanSubMenu > li > a{
+    background-color: #375172;
+}
+
+#floorplanSubMenu li ul li{
+    color: #fff;
+    background-color: #223547;
+    padding: 10px;
+    list-style: none;
+}
+
+#floorplanSubMenu li ul li:hover{
+    color: #223547;
+    background-color: #fff;
+    padding: 10px;
+    list-style: none;
+}
+
 /* DEPRECATED WITH PROJECT SELECT MENU
 #deskProjectButton{
     margin: 10px 20px 10px 0px;
@@ -196,7 +228,3 @@ div.sp-replacer{
     border: 1px solid white;
 }*/
 
-.desk-proj-color{
-    margin: 2px;
-    border-bottom: 2px solid lightgrey;
-}

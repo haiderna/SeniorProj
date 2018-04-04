@@ -27,29 +27,26 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Floorplan
 	        <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li ><a href="#">HQ</a>
-                <ul>
-                    <li  ><button  onclick="HQFloor1()">Floor 1 </button>></li>
-                    <li onclick="HQFloor2()"><a href="#">Floor 2</a></li>
-                
-                
+          <ul class="dropdown-menu" id="floorplanSubMenu">
+            <li> <a> HQ </a>
+                <ul id="HQsubFloor">
+                    <li> <a href="#" onclick="HQFloor1()"> Floor 1 </a></li>
+                    <li> <a href="#" onclick="HQFloor2()"> Floor 2 </a></li>
                 </ul>
-            
-            
             </li>
-            <li><a href="#">Treehouse</a>
+            <li> <a> Treehouse </a>
                  <ul id="THsubFloor">
-                <li><a href="#">Floor 1</a></li>
-                <li><a href="#">Floor 2</a></li>
-                <li><a href="#">Floor 3</a></li>
-                <li><a href="#">Floor 4</a></li>
-                
+	                <li><a href="#">Floor 1</a></li>
+	                <li><a href="#">Floor 2</a></li>
+	                <li><a href="#">Floor 3</a></li>
+	                <li><a href="#">Floor 4</a></li>
                 </ul>
-            
-            
             </li>
-            <li><a href="#">Watchtower</a></li>
+            <li> <a > Watchtower </a>
+            	<ul id="WatchtowerSubFloor">
+            		<li><a href="#">Floor 5</a></li>
+            	</ul>
+            </li>
           </ul>
         </li>
 <!--        <li class="dropdown">
@@ -64,15 +61,11 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
        	<li>
-      		<a href="#"><button id="testbutton" type="button" class="btn btn-default" onclick="exportPDF();"> 
+      		<a href="#" onclick="exportPDF();">
       			<span class="glyphicon glyphicon-export"></span> Export</button>
-      		</a></li><!--
-      	<li>
-      		<a href="#"><button id="testbutton" type="button" class="btn btn-default" onclick="boob()"> 
-      			<span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
-      		</a></li> -->
-      		<li><a href="#"><span class="glyphicon glyphicon-export"></span> Export</a></li>
-      		<li><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></li>
+      		</a>
+      	</li>
+      	<li><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></li>
     </ul>
     </div>
   </nav>
