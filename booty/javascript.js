@@ -256,24 +256,23 @@ function insertDivDesk() {
 
 function exportPDF() {
 
-        var contentToPrint= document.getElementById(floorPlan).innerHTML;
-	var newWin = window.open("", "", "width=800,height=500");
-       newWin.document.write('<html><head><title>PRINT WINDOW</title>');
+    var contentToPrint= document.getElementById(floorPlan).innerHTML;
+	var newWin = window.open("", "", "width=1056,height=714");
+    newWin.document.write('<html><head><title>PRINT WINDOW</title>');
             /* ss if needed */ //newWin.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
-       newWin.document.write('</head><body >');
+    newWin.document.write('</head><body>');
 	newWin.document.write(contentToPrint);
-         newWin.document.write('</body></html>');
-            newWin.document.close(); 
+    newWin.document.write('</body></html>');
+    newWin.document.close(); 
 
-          newWin.onload=function(){ 
-
-                newWin.focus(); 
-                newWin.print();
-                newWin.close();
-            };
+  newWin.onload=function(){ 
+        newWin.focus(); 
+        newWin.print();
+        newWin.close();
+    };
 
          
-   }
+}
 
 //////////////
 /////////////

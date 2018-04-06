@@ -124,7 +124,7 @@ a, a:hover, a:focus {
 
 #main{
     margin-top: 20px;
-    /*display: block;*/
+    display: block;
     min-width: 900px;
     min-height: 600px;
     width: calc(100vw - 480px);
