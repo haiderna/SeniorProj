@@ -2,6 +2,8 @@ var personArray = ["Cow Lady", "Dog Man", "Shaggy Mutt"];
 
 var projectArray = ["Barclays", "Regal", "WillowTree"]; 
 var projectColors = ["#000080", "#FF0000", "#1BD9C4"];     
+
+var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"]
       
 function DeskClass(name, project, image)
 {   this.name = name; 
@@ -16,36 +18,84 @@ function ProjectClass(name){
 }
 
 
-var floorPlan = "main";
+var floorPlan = "HQFloor1";
 
-function HQfloor1() {
+function HQFloor1() {
     floorPlan = "HQFloor1";
+    for (var i = 0; i < floorplans.length; i++){
+        var elem = document.getElementById(floorplans[i]);
+        $(elem).hide()
+    }
+    var showFloorplan = document.getElementById(floorPlan);
+    $(showFloorplan).show();
     alert(floorPlan);
 }
 
-function HQfloor2(){
+function HQFloor2(){
     floorPlan = "HQFloor2";
+    for (var i = 0; i < floorplans.length; i++){
+        var elem = document.getElementById(floorplans[i]);
+        $(elem).hide()
+    }
+    var showFloorplan = document.getElementById(floorPlan);
+    $(showFloorplan).show();
+    alert(floorPlan);
 }
 
-function TreeHouseFloor1(){
-    floorPlan = "THfloor1";
+function THFloor1(){
+    floorPlan = "THFloor1";
+    for (var i = 0; i < floorplans.length; i++){
+        var elem = document.getElementById(floorplans[i]);
+        $(elem).hide()
+    }
+    var showFloorplan = document.getElementById(floorPlan);
+    $(showFloorplan).show();
+    alert(floorPlan);
     
 }
-function TreeHouseFloor2(){
-    floorPlan = "THfloor2";
+function THFloor2(){
+    floorPlan = "THFloor2";
+    for (var i = 0; i < floorplans.length; i++){
+        var elem = document.getElementById(floorplans[i]);
+        $(elem).hide()
+    }
+    var showFloorplan = document.getElementById(floorPlan);
+    $(showFloorplan).show();
+    alert(floorPlan);
     
 }
-function TreeHouseFloor3(){
-    floorPlan = "THfloor3";
+function THFloor3(){
+    floorPlan = "THFloor3";
+    for (var i = 0; i < floorplans.length; i++){
+        var elem = document.getElementById(floorplans[i]);
+        $(elem).hide()
+    }
+    var showFloorplan = document.getElementById(floorPlan);
+    $(showFloorplan).show();
+    alert(floorPlan);
     
 }
-function TreeHouseFloor4(){
-    floorPlan = "THfloor4";
+function THFloor4(){
+    floorPlan = "THFloor4";
+    for (var i = 0; i < floorplans.length; i++){
+        var elem = document.getElementById(floorplans[i]);
+        $(elem).hide()
+    }
+    var showFloorplan = document.getElementById(floorPlan);
+    $(showFloorplan).show();
+    alert(floorPlan);
     
 }
 
-function WatchTower() {
-    floorPlan = "WTfloor1";
+function WTFloor() {
+    floorPlan = "WTFloor1";
+    for (var i = 0; i < floorplans.length; i++){
+        var elem = document.getElementById(floorplans[i]);
+        $(elem).hide()
+    }
+    var showFloorplan = document.getElementById(floorPlan);
+    $(showFloorplan).show();
+    alert(floorPlan);
 }
 
 
