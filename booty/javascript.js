@@ -256,12 +256,20 @@ function insertDivDesk() {
 
 function exportPDF() {
 
-    var contentToPrint= document.getElementById(floorPlan).innerHTML;
+    
+    
 	var newWin = window.open("", "", "width=1056,height=714");
-    newWin.document.write('<html><head><title>PRINT WINDOW</title>');
+    newWin.document.write('<html><head><title>Seating Chart</title>');
     newWin.document.write('<link rel="stylesheet" href="styles.css" type="text/css" />');
     newWin.document.write('</head><body>');
-	newWin.document.write(contentToPrint);
+//	newWin.document.write(contentToPrint);
+//        newWin.document.write('<br />');
+//        newWin.document.write(secondFloor);
+        for (var i = 0; i < floorplans.length; i++){
+            var elem = document.getElementById(floorplans[i]).innerHTML;
+            newWin.document.write(elem);
+            newWin.document.write('<br />');
+            }
     newWin.document.write('</body></html>');
     newWin.document.close(); 
 
