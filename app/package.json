@@ -12,8 +12,5 @@
     "jQuery UI",
     "rotatable"
   ],
-  "license": "MIT",
-  "dependencies": {
-    "express": "^4.16.3"
-  }
+  "license": "MIT"
 }

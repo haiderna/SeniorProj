@@ -1,6 +1,3 @@
-var MongoClient = require('mongodb'.MongoClient);
-var url = "mongodb://localhost:27017";
-
 var personArray = ["Cow Lady", "Dog Man", "Shaggy Mutt"];
 
 var projectArray = ["Barclays", "Regal", "WillowTree"]; 
