@@ -1,0 +1,287 @@
+<html !DOCTYPE>
+
+<head>
+  <title>WillowTree Apps Seating Chart</title>
+  <!-- boostrap css-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- custom css -->
+  <link rel="stylesheet" href="custom.css">
+  <!-- compiled styles.less into css -->
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/>
+  <!-- for rotation -->
+  <link rel="stylesheet" href="jquery.ui.rotatable.css">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+</head>
+
+<body onload="HQFloor1()">
+
+  <nav class="navbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-left" href="#"><img src = "WT_logo_white.png" style="width: 175px; height: 40px; margin-top: 5px"></a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Floorplan
+	        <span class="caret"></span></a>
+          <ul class="dropdown-menu" id="floorplanSubMenu">
+            <li> <a> HQ </a>
+                <ul id="HQsubFloor">
+                    <li> <a href="#" onclick="HQFloor1()"> Floor 1 </a></li>
+                    <li> <a href="#" onclick="HQFloor2()"> Floor 2 </a></li>
+                </ul>
+            </li>
+            <li> <a> Treehouse </a>
+                 <ul id="THsubFloor">
+	                <li><a href="#" onclick="THFloor1()">Floor 1</a></li>
+	                <li><a href="#" onclick="THFloor2()">Floor 2</a></li>
+	                <li><a href="#" onclick="THFloor3()">Floor 3</a></li>
+	                <li><a href="#" onclick="THFloor4()">Floor 4</a></li>
+                </ul>
+            </li>
+            <li> <a > Watchtower </a>
+            	<ul id="WatchtowerSubFloor">
+            		<li><a href="#" onclick="WTFloor()">Floor 5</a></li>
+            	</ul>
+            </li>
+          </ul>
+        </li>
+<!--        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Floor
+	        <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+          </ul>
+        </li>-->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+       	<li>
+      		<a href="#" onclick="exportPDF();">
+      			<span class="glyphicon glyphicon-export"></span> Export</button>
+      		</a>
+      	</li>
+      	<li><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></li>
+    </ul>
+    </div>
+  </nav>
+
+  <div class="wrapper">
+    <!-- Left Sidebar -->
+
+    <nav id="sidebar"> <!-- change to class="active" to start off collapsed -->
+<!--       <div class="sidebar-header">
+        <h3> WillowTree
+          <h3>
+      </div> -->
+
+      <ul class="list-unstyled components">
+        <!-- <p>Seating Chart</p> -->
+        <!-- <li><a href="#">
+	            	 	<i class="glyphicon glyphicon-object-align-vertical"></i> Add Desk 
+      </a>
+    </li> -->
+    <li>
+      <!-- Link with dropdown items -->
+      <a href="#deskSubMenu" data-toggle="collapse" aria-expanded="false">
+                <i class="glyphicon glyphicon-object-align-vertical"></i> Add Desk
+              </a>
+      <ul class="collapse list-unstyled" id="deskSubMenu">
+        <ul id="deskMenu">
+          <li><a href="#">Assign Desk to Insert</a>
+                <ul id="DeskInfoMenu">
+                    <li> 
+                        <form action="javascript:addPersonFromDeskMenu()">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="FirstName" placeholder="ex. Leroy Jenkins" class="typeahead" data-provide="typeahead" autocomplete="off"><br>
+                        <input type="submit" value="Add Person">
+                          </form>
+                    </li>
+                    <li id="Type" title="Type" style="margin-bottom: 10px;">
+                      <label for="Type" style="display: block; margin-bottom: 5px;">Type</label>
+                        <button id="singleDesk" onclick="singleDesk()"><img src="Single Desk.png" width="40" height="40"></button>
+                        <button id="LargeConf" onclick="largeConferenceDesk()"><img src="Large Conf.png" width="40" height="40"></button>
+                        <button id="SmallConf" onclick="smallConferenceDesk()"><img src="Small conf.png" width="40" height="40"></button>
+                    </li>
+                    <li id="Dimensions">
+                         <form action="#">
+                            <label for="deskWidth">Width:</label>
+                            <input type="text" id="deskWidth" name="W" value="25"><br>
+                            <label for="deskHeight">Length:</label>
+                            <input type="text" id="deskHeight" name="L" value="25"><br>
+<!--                        <input type="submit" value="Submit">-->
+                          </form>
+                    </li>
+                    
+                </ul>
+            </li>
+          <li>
+          	<!--  old implementation    	
+          	<button id="deskProjectButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Select Project  <span class="caret"></span></button>
+			          	<div id="deskProjectDropdown" class="dropdown-menu">
+			          		this is where the projects themselves go
+						</div> -->
+
+			<select id="projectDropdown" class="selectpicker" data-live-search="true" title="Select Project..." data-width='75%' data-size="5" style="position:relative;">
+			  <!-- <option> Projects go in here ...</option> -->
+			</select>
+
+          </li>
+
+          <li><button id="ExportButton" type="button" class="btn btn-primary" onclick="insertDivDesk()">Place Desk </button></li>
+        </ul>
+
+      	</ul>
+ 	</li>
+
+        <li>
+        	<a href="#projectSubMenu" data-toggle="collapse" aria-expanded="false">
+        		<i class="glyphicon glyphicon-folder-open"></i> Project </a>
+        	<ul class="collapse list-unstyled"  id="projectSubMenu">
+        		<li><a>
+	          		Search Projects <input type="text" id="projectInput" onkeyup="searchProjects()" placeholder="Search for project..">
+	          		<button id="addProjectButton" type="button" class="btn btn-warning" onclick="addProject()" style="margin-top: 10px;">Add Project </button>
+	          	</a></li>
+        	</ul>
+		</li>
+
+        <li>
+          <!-- Link with dropdown items -->
+          <a href="#peopleSubMenu" data-toggle="collapse" aria-expanded="false">
+          	<i class="glyphicon glyphicon-user"></i> People </a>
+          <ul class="collapse list-unstyled" id="peopleSubMenu">
+          	<li><a>
+          		Search People <input type="text" id="peopleInput" onkeyup="searchPeople()" placeholder="Search for names..">
+          		<button id="addPersonButton" type="button" class="btn btn-primary" onclick="addPerson()" style="margin-top: 10px;">Add Person </button>
+          	</a></li>
+            <!-- <li><a href="#">Hey this is where people go</a></li> -->
+          </ul>
+      </li> 
+        <li><a href="#">
+	            	<i class="glyphicon glyphicon-wrench"></i>
+	            	Settings
+	            </a></li>
+
+        <li><a href="#">
+	            	<i class="glyphicon glyphicon-link"></i>
+	            	About
+	            </a></li>
+      </ul>
+    </nav>
+
+      <!-- Toggle (left) Sidebar Button -->
+      <div id="left-main">
+	      <button type="button" id="sidebarCollapse" class="btn">
+	        <i class="glyphicon glyphicon-align-left"></i> <!-- text here -->
+	      </button>
+	  </div>
+
+    <!-- Main -->
+
+    <div id="HQFloor1">
+
+    	<image xlink:href="HQ-1st-Floor.png" src="HQ1.png" width="1040px" height="630px"/>
+
+    </div>
+
+    <div id="HQFloor2">
+
+    	<image xlink:href="HQ-2nd-Floor.png" src="HQ-2nd-Floor.png" width="1040px" height="630px"/>
+
+    </div>
+
+    <div id="THFloor1">
+
+    	<image xlink:href="TH1.png" src="TH1.png" width="1040px" height="630px"/>
+
+    </div>
+
+    <div id="THFloor2">
+
+    	<image xlink:href="TH2.png" src="TH2.png" width="1040px" height="630px"/>
+
+    </div>
+
+    <div id="THFloor3">
+
+    	<image xlink:href="TH3.png" src="TH3.png" width="1040px" height="630px"/>
+
+    </div>
+
+    <div id="THFloor4">
+
+    	<image xlink:href="TH4.png" src="TH4.png" width="1040px" height="630px"/>
+
+    </div>
+
+    <div id="WTFloor1">
+
+    	<image xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px"/>
+
+    </div>
+    
+    
+    
+    <!-- main -->
+
+	  <!-- Toggle right-sidebar Button -->
+	  <div id="right-main">
+	      <button type="button" id="rightSidebarCollapse" class="btn">
+	        <i class="glyphicon glyphicon-align-right"></i> <!-- text here -->
+	      </button>
+	  </div>
+
+    <!-- Right Sidebar -->
+    <nav id="right-sidebar" class="active">
+
+      <ul class="list-unstyled components">
+        <p>Current Floorplan</p>
+
+        <li>
+          <!-- Link with dropdown items -->
+          <a href="#editSubmenu" data-toggle="collapse" aria-expanded="false" onclick="continueEdit()">
+	                	<i class="glyphicon glyphicon-pencil"></i> Edit
+	                </a>
+          <ul class="collapse list-unstyled" id="editSubmenu">
+            <li>
+            	<a><button id="insertRoomButton" type="button" class="btn btn-primary" onclick="insertRoom()" style="width:100%;" >Insert Room</button></a></li>
+            <li>
+            	<a><button id="deleteRoomButton" type="button" class="btn btn-danger" onclick="deleteRoom()" style="width:100%;">Delete Room</button></a></li>
+            <li>
+            	<a id=stopAnchor style="margin:-10px 0px; visibility: hidden;">
+            		<button id="stopDeletingButton" type="button" class="btn btn-default" onclick="stopDeleting()" style="width:100%; display:none;"> Quit </button></a></li>
+            <li>
+            	<a><button id="saveStateButton" type="button" class="btn btn-success" onclick="saveState()" style="width:100%;" data-toggle="collapse" href="#editSubmenu"> Lock Rooms </button></a></li>
+          </ul>
+
+      </ul>
+    </nav>
+
+  </div> <!-- wrapper -->
+
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
+  <!-- boostrap js -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+  <script src = "bootstrap3-typeahead.min.js"></script>
+  <!-- custom script -->
+  <script src="javascript.js"></script>
+  <script src="index.js"></script>
+  <script src="https://cdnjs.com/libraries/less.js/"></script>
+
+  <!-- essential scripts -->
+  <script src="jquery.ui.rotatable.js"></script>
+
+
+</body>
+
+</html>
