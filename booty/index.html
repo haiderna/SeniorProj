@@ -21,7 +21,7 @@
   <nav class="navbar">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-left" href="#"><img src = "WT_logo_white.png" style="width: 175px; height: 40px; margin-top: 5px"></a>
+        <a class="navbar-left" href="#"><img id="log" src = "WT_logo_white.png" style="width: 175px; height: 40px; margin-top: 5px"></a>
       </div>
       <ul class="nav navbar-nav">
         <li class="dropdown">
@@ -47,6 +47,14 @@
             		<li><a href="#" onclick="WTFloor()">Floor 5</a></li>
             	</ul>
             </li>
+            
+            
+             <li> <a > New Floors </a>
+            	<ul id="newFloorsSub">
+            		<li><a href="#" onclick="newFloorMenu()">Floor 6</a></li>
+            	</ul>
+            </li>
+            
           </ul>
         </li>
 <!--        <li class="dropdown">
@@ -60,11 +68,29 @@
         </li>-->
       </ul>
       <ul class="nav navbar-nav navbar-right">
+          
+        <li>
+      		<a href="#" onclick="newFloor();">
+      			<span class="glyphicon glyphicon-plus"></span> Press Me after Choosing File</button>
+      		</a>
+      	</li>
+        
+          <li> 
+            <img id="imgAnalyzer" src="" height="10" alt="Image preview...">
+          </li>
+          
+          
+          
+          <li>
+              <input type="file" onchange="previewFile()"><br>
+<!--              <a href="#" onclick="alert('new');" ><span class="glyphicon glyphicon-plus"></span> Add new Floor</a></li>-->
        	<li>
       		<a href="#" onclick="exportPDF();">
       			<span class="glyphicon glyphicon-export"></span> Export</button>
       		</a>
       	</li>
+        
+        
       	<li><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></li>
     </ul>
     </div>
@@ -224,7 +250,11 @@
 
     </div>
     
-    
+    <div id="new">
+
+<!--    	<image xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px"/>-->
+
+    </div>
     
     <!-- main -->
 

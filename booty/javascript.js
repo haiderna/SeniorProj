@@ -251,6 +251,78 @@ function insertDivDesk() {
     //alert(testDiv.style.width);
 }
 ////////////////////////////////
+/////FUNCTION FOR CREATING NEW FLOOR PLAN 
+////////////////////////////
+var storeImage = " ";
+function newFloor() {
+    var divNew = document.getElementById("new");
+    alert(storeImage);
+    //floorplans.push("newFloor");
+    var newFloor = document.createElement("div");
+    newFloor.setAttribute("id", "newFloor");
+    var newImg = document.createElement("IMG");
+    newImg.setAttribute("src", storeImage);
+    newImg.setAttribute("id", "newImgFloor");
+    newFloor.appendChild(newImg);
+   
+   divNew.appendChild(newFloor);
+    $(newFloor).hide();
+    
+    
+}
+
+function newFloorMenu() {
+    if (storeImage === " ") {
+        alert("no new floor");
+        
+    } else {
+        floorPlan = "newFloor";
+        for (var i = 0; i < floorplans.length; i++){
+            var elem = document.getElementById(floorplans[i]);
+             $(elem).hide();
+        }
+        var newFl = document.getElementById("newFloor");
+        $(newFl).show();
+        
+    }
+    
+    
+    
+}
+
+
+function previewFile(){
+       var preview = document.getElementById('imgAnalyzer'); //selects the query named img
+       var file    = document.querySelector('input[type=file]').files[0];
+       //sames as here
+       
+       var reader  = new FileReader();
+
+       reader.onloadend = function () {
+           preview.src = reader.result;
+           storeImage = preview.src; 
+           
+       }
+
+       if (file) {
+           reader.readAsDataURL(file); //reads the data as a URL
+            //alert(file.name);
+           // storeImage = file; 
+            //alert(storeImage); 
+            
+       } else {
+           preview.src = "";
+       }
+     
+  }
+
+  previewFile();
+
+
+
+
+
+////////////////////////////////
 /////FUNCTION FOR PRINTING 
 ////////////////////////////
 
