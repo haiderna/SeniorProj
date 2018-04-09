@@ -172,6 +172,7 @@ function insertDivDesk() {
     var w = document.getElementById("deskWidth").value;
     var h = document.getElementById("deskHeight").value;
     var name = document.getElementById("name").value;
+    alert(w);
     Desk.name = name;
 
     /*Getting project and color*/
@@ -256,6 +257,8 @@ function insertDivDesk() {
 var storeImage = " ";
 var floorIndex = 0;
 function newFloor() {
+    var building = document.getElementById("building").value;
+    alert(building);
     var floorId = "newFloor"+floorIndex;
     var divNew = document.getElementById("mainClass");
    // alert(storeImage);
@@ -270,9 +273,35 @@ function newFloor() {
    divNew.appendChild(newFloor);
     $(newFloor).hide();
     //ADD TO MENU LIST 
+    
+    if (building=="HQ") {
+         var ul = document.getElementById("HQsubFloor");
+          var li = document.createElement("li");
+           li.appendChild(document.createTextNode(floorId));
+           ul.appendChild(li);
+    }
+    else if (building=="Treehouse") {
+         var ul = document.getElementById("THsubFloor");
+          var li = document.createElement("li");
+           li.appendChild(document.createTextNode(floorId));
+           ul.appendChild(li);
+    }
+    else if (building=="Watchtower") {
+         var ul = document.getElementById("WatchtowerSubFloor");
+          var li = document.createElement("li");
+           li.appendChild(document.createTextNode(floorId));
+           ul.appendChild(li);
+    }
+    else {
     var ul = document.getElementById("floorplanSubMenu");
+    var ul2 = document.createElement("ul");
+    ul2.appendChild(document.createTextNode(building));
     var li = document.createElement("li");
     li.appendChild(document.createTextNode(floorId));
+    ul.appendChild(ul2);
+    ul2.appendChild(li);
+    
+}
     li.onclick = function() {
         floorPlan = floorId;
         for (var i = 0; i < floorplans.length; i++){
@@ -283,7 +312,10 @@ function newFloor() {
         $(showFloorplan).show();
          alert(floorPlan);
      };
-    ul.appendChild(li);
+//    ul2.appendChild(li);
+//    ul.appendChild(ul2);
+     
+  //  ul.appendChild(li);
     
     floorIndex++;
     

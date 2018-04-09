@@ -28,7 +28,7 @@ function HQFloor1() {
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    alert(floorPlan);
+    //alert(floorPlan);
 //    var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
     
@@ -43,7 +43,7 @@ function HQFloor2(){
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    alert(floorPlan);
+   // alert(floorPlan);
 //   var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
 }
@@ -56,7 +56,7 @@ function THFloor1(){
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    alert(floorPlan);
+    //alert(floorPlan);
 //   var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
     
@@ -69,7 +69,7 @@ function THFloor2(){
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    alert(floorPlan);
+    //alert(floorPlan);
 //   var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
 }
@@ -81,7 +81,7 @@ function THFloor3(){
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    alert(floorPlan);
+    //alert(floorPlan);
 //   var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
 //    
@@ -94,7 +94,7 @@ function THFloor4(){
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    alert(floorPlan);
+    //alert(floorPlan);
 //   var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
 }
@@ -107,7 +107,7 @@ function WTFloor() {
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    alert(floorPlan);
+    //alert(floorPlan);
 //   var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
 }
