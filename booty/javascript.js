@@ -254,6 +254,9 @@ function insertDivDesk() {
 ////////////////////////////////
 /////FUNCTION FOR CREATING NEW FLOOR PLAN 
 ////////////////////////////
+var buildings = ["HQ", "Treehouse", "Watchtower"]
+var match = false;
+
 var storeImage = " ";
 var floorIndex = 0;
 function newFloor() {
@@ -272,29 +275,46 @@ function newFloor() {
    
    divNew.appendChild(newFloor);
     $(newFloor).hide();
-    //ADD TO MENU LIST 
+    //ADD TO MENU LIST
     
-    if (building=="HQ") {
-         var ul = document.getElementById("HQsubFloor");
-          var li = document.createElement("li");
-           li.appendChild(document.createTextNode(floorId));
-           ul.appendChild(li);
+    for (var i = 0; i < buildings.length; i++) {
+        if (building === buildings[i]) {
+            match = true;
+            var idUL = building + "subFloor";
+            var ul = document.getElementById(idUL);
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(floorId));
+            ul.appendChild(li);
+            //match = false;
+        }
+        
     }
-    else if (building=="Treehouse") {
-         var ul = document.getElementById("THsubFloor");
-          var li = document.createElement("li");
-           li.appendChild(document.createTextNode(floorId));
-           ul.appendChild(li);
-    }
-    else if (building=="Watchtower") {
-         var ul = document.getElementById("WatchtowerSubFloor");
-          var li = document.createElement("li");
-           li.appendChild(document.createTextNode(floorId));
-           ul.appendChild(li);
-    }
-    else {
+    
+    
+//    if (building=="HQ") {
+//         var ul = document.getElementById("HQsubFloor");
+//          var li = document.createElement("li");
+//           li.appendChild(document.createTextNode(floorId));
+//           ul.appendChild(li);
+//    }
+//    else if (building=="Treehouse") {
+//         var ul = document.getElementById("TreehousesubFloor");
+//          var li = document.createElement("li");
+//           li.appendChild(document.createTextNode(floorId));
+//           ul.appendChild(li);
+//    }
+//    else if (building=="Watchtower") {
+//         var ul = document.getElementById("WatchtowersubFloor");
+//          var li = document.createElement("li");
+//           li.appendChild(document.createTextNode(floorId));
+//           ul.appendChild(li);
+//    }
+    if (match === false) {
+    buildings.push(building);
     var ul = document.getElementById("floorplanSubMenu");
     var ul2 = document.createElement("ul");
+    var idUL = building + "subFloor";
+    ul2.setAttribute("id", idUL);
     ul2.appendChild(document.createTextNode(building));
     var li = document.createElement("li");
     li.appendChild(document.createTextNode(floorId));
@@ -318,7 +338,8 @@ function newFloor() {
   //  ul.appendChild(li);
     
     floorIndex++;
-    
+    match = false; 
+    alert(buildings);
 }
 
 function newFloorMenu2() {
