@@ -316,8 +316,11 @@ function newFloor() {
     var idUL = building + "subFloor";
     ul2.setAttribute("id", idUL);
     ul2.appendChild(document.createTextNode(building));
+    ul2.style.background = "#375172";
+    ul2.style.padding = "10px";
     var li = document.createElement("li");
     li.appendChild(document.createTextNode(floorId));
+    li.style.background = "#223547";
     ul.appendChild(ul2);
     ul2.appendChild(li);
     
