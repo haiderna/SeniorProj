@@ -112,12 +112,12 @@ input[type=submit]:hover {
     font-weight: bold;
 }
 
-.desk{
+/*.desk{
     background-color: lightcoral;
     width: 50px;
     height: 30px;
     border: 2px solid dodgerblue;
-}
+}*/
 
 .color-square{
     width: 8px;
@@ -651,4 +651,10 @@ ul.nav.navbar-nav.navbar-right{
         
     }
     
+}
+
+.deskCount {
+    position:absolute;
+    bottom:0;
+    right:0;
 }

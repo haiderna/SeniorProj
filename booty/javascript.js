@@ -55,6 +55,10 @@ $(document).ready(function() {
  	cancel.onclick = function (e) { room.parentNode.removeChild(room) };
  	room.appendChild(cancel);
 
+ 	var span = document.createElement('span');
+ 	span.className = 'deskCount';
+ 	room.appendChild(span);
+
  	mainDiv.append(room);
  	$( '.room' ).draggable({ containment: 'parent' }).resizable();
 }
@@ -100,7 +104,55 @@ function saveState() {
 	stopDeleting();
 	$('.room').draggable("disable");
 	$('.room').resizable("disable");
-	$('.room').droppable();
+
+	var itm = [];
+
+	// set ondrop events on here
+	// currently prevents one person from sitting in two places
+	$( ".room" ).droppable({
+	    drop: function(event, ui) {
+		    var name = ui.draggable.text()
+		    var xyz = itm.includes(name);
+		    if (xyz === false) {
+		    	//create a li tag and add to room
+		       	$("<li></li>").text(ui.draggable.text())
+		          .addClass('dropClass')
+		          .appendTo(this);
+
+		        //add to array
+		        itm.push(name);
+		        //add style
+		        $('.room').find("li.ui-draggable:contains('" + name + "')").addClass('bred');
+					var count = $(this ).children(".dropClass").length;
+					$(this).children("span:first").text( "Items Dropped: " + count + ".");
+
+		      } else {
+		        alert('Desk already exists in this/other room.');
+		      }
+	    },
+	    out: function(event, ui) {
+		    var name = ui.draggable.text()
+		    var xyz = itm.includes(name);
+		    if (xyz === true) {
+		    	//create a li tag and add to room
+		       	$(this).children("li").remove(":contains('"+ name + "')");
+
+		        //remove from array
+		        itm = jQuery.grep(itm, function(value) {
+				  return value != name;
+				});
+
+		        //add style
+		        $('.room').find("li.ui-draggable:contains('" + name + "')").removeClass('bred');
+					var count = $(this ).children(".dropClass").length;
+					$(this).children("span:first").text( "Items Dropped: " + count + ".");
+
+		      } else {
+		        alert('Desk doesnt exit in this/other room? How did you get here');
+		      }
+	    }
+	    //leaving the room
+    });
 	
 	//making desks selectable over rooms
 	$('.desk').css('z-index', '101'); 
@@ -172,7 +224,7 @@ function insertDivDesk() {
     var w = document.getElementById("deskWidth").value;
     var h = document.getElementById("deskHeight").value;
     var name = document.getElementById("name").value;
-    alert(w);
+    // alert(w);
     Desk.name = name;
 
     /*Getting project and color*/
@@ -207,6 +259,7 @@ function insertDivDesk() {
     var testDiv = document.createElement("div");
     var divId = "testDiv"+deskIndex;
     testDiv.setAttribute("id", divId);
+    testDiv.className += "desk";
 
 
     var btn = document.createElement("BUTTON");
@@ -251,6 +304,7 @@ function insertDivDesk() {
     deskIndex++;
     //alert(testDiv.style.width);
 }
+
 ////////////////////////////////
 /////FUNCTION FOR CREATING NEW FLOOR PLAN 
 ////////////////////////////
@@ -401,7 +455,7 @@ function previewFile(){
      
   }
 
-  previewFile();
+previewFile();
 
 
 
