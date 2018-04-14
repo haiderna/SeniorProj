@@ -19,6 +19,8 @@ $(document).ready(function () {
 	
 	addColorPicker();
 	loadColorsIntoColorPickers();
+
+	document.getElementById("jsonInput").value = "";
 });
 
 //readying rotatable
@@ -497,12 +499,35 @@ function exportPDF() {
 /////FUNCTION FOR LOADING PEOPLE IN FROM JSON FILE
 ////////////////////////////////////////////////
 function readJSON(){
-    alert("JSON STUFF LOADED INTO PEOPLE ARRAYS");
     
-    
+    var selectedFile = document.getElementById("jsonInput").files[0];
+    var filecontent = "";
+
+    if($('#jsonInput').val().length < 1){
+    	alert("SELECT A FILE YA DINGUS");
+    	return;
+    }
+
+    //TODO - narrow allowed file type down to JSON
+	var reader = new FileReader();
+
+	//will load after reader is called in reader.readAsText
+	reader.onload = function(event) {
+		filecontent = event.target.result;
+
+		//create names once reader is loaded
+		var ppl = JSON.parse(filecontent);
+	    for (var i =0; i < ppl.length; i++){
+	    	addPersonFromJSON(ppl[i].name);
+	    }
+	}
+
+	//will invoke onload
+	reader.readAsText(selectedFile);
+	
+	//ADD CONFIRMATION
+
 }
-
-
 
 //////////////
 /////////////

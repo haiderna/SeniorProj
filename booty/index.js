@@ -178,6 +178,16 @@ function addPersonFromDeskMenu(){
     addToPersonList(personArray);
 }
 
+function addPersonFromJSON(name){
+    var filter = toTitleCase(name);
+    if (personArray.includes(filter)){
+        alert(filter + " already exists in the database.")
+        return;
+    }
+    personArray.push(filter);
+    addToPersonList(personArray);
+}
+
 //creates list of people to display
 function addToPersonList(array) {
     // Create the list element:
