@@ -508,6 +508,10 @@ function readJSON(){
     	return;
     }
 
+    if (!confirm("Are you sure you want to upload people and project data from this file?")){
+    	return;
+    }
+
     //TODO - narrow allowed file type down to JSON
 	var reader = new FileReader();
 
@@ -516,9 +520,10 @@ function readJSON(){
 		filecontent = event.target.result;
 
 		//create names once reader is loaded
-		var ppl = JSON.parse(filecontent);
-	    for (var i =0; i < ppl.length; i++){
-	    	addPersonFromJSON(ppl[i].name);
+		var data = JSON.parse(filecontent);
+	    for (var i =0; i < data.length; i++){
+	    	addPersonFromJSON(data[i].name);
+	    	addProjectFromJSON(data[i].project);
 	    }
 	}
 

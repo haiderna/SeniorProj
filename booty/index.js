@@ -181,7 +181,7 @@ function addPersonFromDeskMenu(){
 function addPersonFromJSON(name){
     var filter = toTitleCase(name);
     if (personArray.includes(filter)){
-        alert(filter + " already exists in the database.")
+        // alert(filter + " already exists in the database.")
         return;
     }
     personArray.push(filter);
@@ -233,10 +233,27 @@ function searchProjects() {
 function addProject() {
     var input, filter;
     input = document.getElementById('projectInput');
-    filter = toTitleCase(input.value.toUpperCase());
+    filter = (input.value);
     //check for duplicates
     if (projectArray.includes(filter)){
         alert(filter + " already exists in the database.")
+        return;
+    }
+
+    projectArray.push(filter);
+    projectColors.push(""); //has to grow every time project array grows
+
+    addToProjectList(projectArray);
+    addToDeskProjectDropDown(projectArray);
+}
+
+function addProjectFromJSON(proj) {
+    var filter;
+    filter = proj; // we don't want to TitleCase it 
+
+    //check for duplicates
+    if (projectArray.includes(filter)){
+        // alert(filter + " already exists in the database.")
         return;
     }
 
