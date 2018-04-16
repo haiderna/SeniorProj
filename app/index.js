@@ -29,6 +29,9 @@ function HQFloor1() {
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
     //alert(floorPlan);
+//    var divNew = document.getElementById("newFloor");
+//     $(divNew).hide();
+    
 
 }
 
@@ -41,8 +44,8 @@ function HQFloor2(){
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
    // alert(floorPlan);
-//     var divNew = document.getElementById("new");
-//$(newFloor).hide();
+//   var divNew = document.getElementById("newFloor");
+//     $(divNew).hide();
 }
 
 function THFloor1(){
@@ -54,8 +57,8 @@ function THFloor1(){
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
     //alert(floorPlan);
-//     var divNew = document.getElementById("new");
-//$(newFloor).hide();
+//   var divNew = document.getElementById("newFloor");
+//     $(divNew).hide();
     
 }
 function THFloor2(){
@@ -67,8 +70,8 @@ function THFloor2(){
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
     //alert(floorPlan);
-//     var divNew = document.getElementById("new");
-//$(newFloor).hide();
+//   var divNew = document.getElementById("newFloor");
+//     $(divNew).hide();
 }
 function THFloor3(){
     floorPlan = "THFloor3";
@@ -78,9 +81,9 @@ function THFloor3(){
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    alert(floorPlan);
-//     var divNew = document.getElementById("new");
-//$(newFloor).hide();
+    //alert(floorPlan);
+//   var divNew = document.getElementById("newFloor");
+//     $(divNew).hide();
 //    
 }
 function THFloor4(){
@@ -91,9 +94,9 @@ function THFloor4(){
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    alert(floorPlan);
-//     var divNew = document.getElementById("new");
-//$(newFloor).hide();
+    //alert(floorPlan);
+//   var divNew = document.getElementById("newFloor");
+//     $(divNew).hide();
 }
 
 function WTFloor() {
@@ -105,14 +108,14 @@ function WTFloor() {
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
     //alert(floorPlan);
-//     var divNew = document.getElementById("new");
-//$(newFloor).hide();
+//   var divNew = document.getElementById("newFloor");
+//     $(divNew).hide();
 }
 
 
 
 
-var imageSource = "";
+var imageSource = "desk - filled.svg";
 
 //For Choosing which type of desk in Menu 
 function singleDesk() {
@@ -175,6 +178,16 @@ function addPersonFromDeskMenu(){
     addToPersonList(personArray);
 }
 
+function addPersonFromJSON(name){
+    var filter = toTitleCase(name);
+    if (personArray.includes(filter)){
+        // alert(filter + " already exists in the database.")
+        return;
+    }
+    personArray.push(filter);
+    addToPersonList(personArray);
+}
+
 //creates list of people to display
 function addToPersonList(array) {
     // Create the list element:
@@ -220,10 +233,27 @@ function searchProjects() {
 function addProject() {
     var input, filter;
     input = document.getElementById('projectInput');
-    filter = toTitleCase(input.value.toUpperCase());
+    filter = (input.value);
     //check for duplicates
     if (projectArray.includes(filter)){
         alert(filter + " already exists in the database.")
+        return;
+    }
+
+    projectArray.push(filter);
+    projectColors.push(""); //has to grow every time project array grows
+
+    addToProjectList(projectArray);
+    addToDeskProjectDropDown(projectArray);
+}
+
+function addProjectFromJSON(proj) {
+    var filter;
+    filter = proj; // we don't want to TitleCase it 
+
+    //check for duplicates
+    if (projectArray.includes(filter)){
+        // alert(filter + " already exists in the database.")
         return;
     }
 

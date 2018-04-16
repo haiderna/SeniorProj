@@ -10,3 +10,10 @@ Using the mongodb Node.js driver to interface with the website: http://mongodb.g
 		*on windows machines you must setup db environmental variable path
 
 npm-shrinkwrap.json was created is included if npm modules need to be restored/replicated on a machine manually
+
+mlab.com
+	u: cs306
+	p: WillowTree6
+	willowtree db user
+		u:admin
+		p:cs306

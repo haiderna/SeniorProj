@@ -19,6 +19,8 @@ $(document).ready(function () {
 	
 	addColorPicker();
 	loadColorsIntoColorPickers();
+
+	document.getElementById("jsonInput").value = "";
 });
 
 //readying rotatable
@@ -54,6 +56,10 @@ $(document).ready(function() {
  	cancel.innerHTML = '&#10005';
  	cancel.onclick = function (e) { room.parentNode.removeChild(room) };
  	room.appendChild(cancel);
+
+ 	var span = document.createElement('span');
+ 	span.className = 'deskCount';
+ 	room.appendChild(span);
 
  	mainDiv.append(room);
  	$( '.room' ).draggable({ containment: 'parent' }).resizable();
@@ -100,7 +106,55 @@ function saveState() {
 	stopDeleting();
 	$('.room').draggable("disable");
 	$('.room').resizable("disable");
-	$('.room').droppable();
+
+	var itm = [];
+
+	// set ondrop events on here
+	// currently prevents one person from sitting in two places
+	$( ".room" ).droppable({
+	    drop: function(event, ui) {
+		    var name = ui.draggable.text()
+		    var xyz = itm.includes(name);
+		    if (xyz === false) {
+		    	//create a li tag and add to room
+		       	$("<li></li>").text(ui.draggable.text())
+		          .addClass('dropClass')
+		          .appendTo(this);
+
+		        //add to array
+		        itm.push(name);
+		        //add style
+		        $('.room').find("li.ui-draggable:contains('" + name + "')").addClass('bred');
+					var count = $(this ).children(".dropClass").length;
+					$(this).children("span:first").text( "Items Dropped: " + count + ".");
+
+		      } else {
+		        alert('Desk already exists in this/other room.');
+		      }
+	    },
+	    out: function(event, ui) {
+		    var name = ui.draggable.text()
+		    var xyz = itm.includes(name);
+		    if (xyz === true) {
+		    	//create a li tag and add to room
+		       	$(this).children("li").remove(":contains('"+ name + "')");
+
+		        //remove from array
+		        itm = jQuery.grep(itm, function(value) {
+				  return value != name;
+				});
+
+		        //add style
+		        $('.room').find("li.ui-draggable:contains('" + name + "')").removeClass('bred');
+					var count = $(this ).children(".dropClass").length;
+					$(this).children("span:first").text( "Items Dropped: " + count + ".");
+
+		      } else {
+		        alert('Desk doesnt exit in this/other room? How did you get here');
+		      }
+	    }
+	    //leaving the room
+    });
 	
 	//making desks selectable over rooms
 	$('.desk').css('z-index', '101'); 
@@ -158,6 +212,8 @@ function continueEdit() {
 
 var deskIndex = 0;
 function insertDivDesk() {
+    
+    
     var mainDiv = document.getElementById(floorPlan);
     
     var Desk = new DeskClass();
@@ -172,6 +228,29 @@ function insertDivDesk() {
     var w = document.getElementById("deskWidth").value;
     var h = document.getElementById("deskHeight").value;
     var name = document.getElementById("name").value;
+    
+    
+    if (!name) {
+        alert("Add Value for Name");
+        exit();
+        
+    }
+    //error messages 
+    if (!w) {
+        alert("Add Value for Width");
+        exit();
+    }
+    if (!h) {
+        alert("Add Value for Height");
+        exit();
+        
+    }
+    
+    
+    
+    
+    
+    // alert(w);
     Desk.name = name;
 
     /*Getting project and color*/
@@ -179,18 +258,29 @@ function insertDivDesk() {
     var color = $('#projectDropdown option:selected').val();
    // alert("Project name is: " + proj + "- Project colour is: " + color); //comment out when done
     
+    
+    if (!color) {
+        alert("Add Project");
+            exit();
+    }
+    
+    
     //y.style.background = color;
    
     Desk.project = proj;
     
         if (isNaN(w)) {
-            y.setAttribute("width", "100");
+            //y.setAttribute("width", "100");
+            alert("Add Proper Width");
+            exit();
             } else {
                  y.setAttribute("width", w);
                  }
 
         if (isNaN(h)) {
-            y.setAttribute("height", "100");
+           // y.setAttribute("height", "100");
+            alert("Add Proper Height");
+            exit();
             } else {
             y.setAttribute("height", h);
             }
@@ -206,6 +296,7 @@ function insertDivDesk() {
     var testDiv = document.createElement("div");
     var divId = "testDiv"+deskIndex;
     testDiv.setAttribute("id", divId);
+    testDiv.className += "desk";
 
 
     var btn = document.createElement("BUTTON");
@@ -238,28 +329,42 @@ function insertDivDesk() {
     //set Label over Desk
      para.style.color = "black";
      para.style.position = "absolute";
-	para.style.top = '10px';
+ 	para.style.top = '10px';
     testDiv.appendChild(btn);
+  //    mainDiv.style.position = "relative";
     //document.body.appendChild(testDiv);
     mainDiv.appendChild(testDiv);
+//  testDiv.style.position = "absolute";
+//  testDiv.style.left = "50%";
+//  testDiv.style.top = "50%";
+//   
     var convertedR = convertHex(color,50);
    // alert(convertedR);
     getNewColor(convertedR, y);
     $(testDiv).css('z-index', '102');
+   
      // alert(divId);
     deskIndex++;
     //alert(testDiv.style.width);
 }
+
 ////////////////////////////////
 /////FUNCTION FOR CREATING NEW FLOOR PLAN 
 ////////////////////////////
+var buildings = ["HQ", "Treehouse", "Watchtower"]
+var match = false;
+
 var storeImage = " ";
+var floorIndex = 0;
 function newFloor() {
-    var divNew = document.getElementById("new");
-    //alert(storeImage);
-    //floorplans.push("newFloor");
+    var building = document.getElementById("building").value;
+    alert(building);
+    var floorId = "newFloor"+floorIndex;
+    var divNew = document.getElementById("mainClass");
+   // alert(storeImage);
+    floorplans.push(floorId);
     var newFloor = document.createElement("div");
-    newFloor.setAttribute("id", "newFloor");
+    newFloor.setAttribute("id", floorId);
     var newImg = document.createElement("IMG");
     newImg.setAttribute("src", storeImage);
     newImg.setAttribute("id", "newImgFloor");
@@ -267,28 +372,105 @@ function newFloor() {
    
    divNew.appendChild(newFloor);
     $(newFloor).hide();
+    //ADD TO MENU LIST
     
-    
-}
-
-function newFloorMenu() {
-    if (storeImage === " ") {
-        alert("no new floor");
-        
-    } else {
-        floorPlan = "newFloor";
-        for (var i = 0; i < floorplans.length; i++){
-            var elem = document.getElementById(floorplans[i]);
-             $(elem).hide();
+    for (var i = 0; i < buildings.length; i++) {
+        if (building === buildings[i]) {
+            match = true;
+            var idUL = building + "subFloor";
+            var ul = document.getElementById(idUL);
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(floorId));
+            ul.appendChild(li);
+            //match = false;
         }
-        var newFl = document.getElementById("newFloor");
-        $(newFl).show();
         
     }
     
     
+//    if (building=="HQ") {
+//         var ul = document.getElementById("HQsubFloor");
+//          var li = document.createElement("li");
+//           li.appendChild(document.createTextNode(floorId));
+//           ul.appendChild(li);
+//    }
+//    else if (building=="Treehouse") {
+//         var ul = document.getElementById("TreehousesubFloor");
+//          var li = document.createElement("li");
+//           li.appendChild(document.createTextNode(floorId));
+//           ul.appendChild(li);
+//    }
+//    else if (building=="Watchtower") {
+//         var ul = document.getElementById("WatchtowersubFloor");
+//          var li = document.createElement("li");
+//           li.appendChild(document.createTextNode(floorId));
+//           ul.appendChild(li);
+//    }
+    if (match === false) {
+    buildings.push(building);
+    var ul = document.getElementById("floorplanSubMenu");
+    var ul2 = document.createElement("ul");
+    var idUL = building + "subFloor";
+    ul2.setAttribute("id", idUL);
+    ul2.appendChild(document.createTextNode(building));
+   // ul2.style.background = "#375172";
+    ul2.style.padding = "10px";
+    var li = document.createElement("li");
+    li.style.background = "#223547";
+    li.appendChild(document.createTextNode(floorId));
+    
+    ul.appendChild(ul2);
+    ul2.appendChild(li);
     
 }
+    li.onclick = function() {
+        floorPlan = floorId;
+        for (var i = 0; i < floorplans.length; i++){
+            var elem = document.getElementById(floorplans[i]);
+             $(elem).hide();
+        }
+       var showFloorplan = document.getElementById(floorPlan);
+        $(showFloorplan).show();
+         alert(floorPlan);
+     };
+//    ul2.appendChild(li);
+//    ul.appendChild(ul2);
+     
+  //  ul.appendChild(li);
+    
+    floorIndex++;
+    match = false; 
+    alert(buildings);
+}
+
+function newFloorMenu2() {
+     floorPlan = "newFloor0";
+        for (var i = 0; i < floorplans.length; i++){
+            var elem = document.getElementById(floorplans[i]);
+             $(elem).hide();
+        }
+       var showFloorplan = document.getElementById(floorPlan);
+        $(showFloorplan).show();
+         alert(floorPlan);
+      
+}
+
+
+//function newFloorMenu() {
+//    if (storeImage === " ") {
+//        alert("no new floor");
+//        
+//    } else {
+//        floorPlan = "newFloor";
+//        for (var i = 0; i < floorplans.length; i++){
+//            var elem = document.getElementById(floorplans[i]);
+//             $(elem).hide();
+//        }
+//        var newFl = document.getElementById("newFloor");
+//        $(newFl).show();
+//        
+//    } 
+//}
 
 
 function previewFile(){
@@ -316,7 +498,7 @@ function previewFile(){
      
   }
 
-  previewFile();
+previewFile();
 
 
 
@@ -352,6 +534,45 @@ function exportPDF() {
     };
 
          
+}
+
+/////////////////////////////////////////////////
+/////FUNCTION FOR LOADING PEOPLE IN FROM JSON FILE
+////////////////////////////////////////////////
+function readJSON(){
+    
+    var selectedFile = document.getElementById("jsonInput").files[0];
+    var filecontent = "";
+
+    if($('#jsonInput').val().length < 1){
+    	alert("SELECT A FILE YA DINGUS");
+    	return;
+    }
+
+    if (!confirm("Are you sure you want to upload people and project data from this file?")){
+    	return;
+    }
+
+    //TODO - narrow allowed file type down to JSON
+	var reader = new FileReader();
+
+	//will load after reader is called in reader.readAsText
+	reader.onload = function(event) {
+		filecontent = event.target.result;
+
+		//create names once reader is loaded
+		var data = JSON.parse(filecontent);
+	    for (var i =0; i < data.length; i++){
+	    	addPersonFromJSON(data[i].name);
+	    	addProjectFromJSON(data[i].project);
+	    }
+	}
+
+	//will invoke onload
+	reader.readAsText(selectedFile);
+	
+	//ADD CONFIRMATION
+
 }
 
 //////////////
