@@ -212,6 +212,8 @@ function continueEdit() {
 
 var deskIndex = 0;
 function insertDivDesk() {
+    
+    
     var mainDiv = document.getElementById(floorPlan);
     
     var Desk = new DeskClass();
@@ -226,6 +228,28 @@ function insertDivDesk() {
     var w = document.getElementById("deskWidth").value;
     var h = document.getElementById("deskHeight").value;
     var name = document.getElementById("name").value;
+    
+    
+    if (!name) {
+        alert("Add Value for Name");
+        exit();
+        
+    }
+    //error messages 
+    if (!w) {
+        alert("Add Value for Width");
+        exit();
+    }
+    if (!h) {
+        alert("Add Value for Height");
+        exit();
+        
+    }
+    
+    
+    
+    
+    
     // alert(w);
     Desk.name = name;
 
@@ -234,18 +258,29 @@ function insertDivDesk() {
     var color = $('#projectDropdown option:selected').val();
    // alert("Project name is: " + proj + "- Project colour is: " + color); //comment out when done
     
+    
+    if (!color) {
+        alert("Add Project");
+            exit();
+    }
+    
+    
     //y.style.background = color;
    
     Desk.project = proj;
     
         if (isNaN(w)) {
-            y.setAttribute("width", "100");
+            //y.setAttribute("width", "100");
+            alert("Add Proper Width");
+            exit();
             } else {
                  y.setAttribute("width", w);
                  }
 
         if (isNaN(h)) {
-            y.setAttribute("height", "100");
+           // y.setAttribute("height", "100");
+            alert("Add Proper Height");
+            exit();
             } else {
             y.setAttribute("height", h);
             }
@@ -294,14 +329,20 @@ function insertDivDesk() {
     //set Label over Desk
      para.style.color = "black";
      para.style.position = "absolute";
-	para.style.top = '10px';
+ 	para.style.top = '10px';
     testDiv.appendChild(btn);
+  //    mainDiv.style.position = "relative";
     //document.body.appendChild(testDiv);
     mainDiv.appendChild(testDiv);
+//  testDiv.style.position = "absolute";
+//  testDiv.style.left = "50%";
+//  testDiv.style.top = "50%";
+//   
     var convertedR = convertHex(color,50);
    // alert(convertedR);
     getNewColor(convertedR, y);
     $(testDiv).css('z-index', '102');
+   
      // alert(divId);
     deskIndex++;
     //alert(testDiv.style.width);

@@ -115,7 +115,7 @@ function WTFloor() {
 
 
 
-var imageSource = "";
+var imageSource = "desk - filled.svg";
 
 //For Choosing which type of desk in Menu 
 function singleDesk() {
