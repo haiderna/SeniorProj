@@ -156,11 +156,16 @@ function addPerson() {
     var input, filter;
     input = document.getElementById('peopleInput');
     filter = toTitleCase(input.value.toUpperCase());
-    //check for duplicates
-    if (personArray.includes(filter)){
+    
+    //check for duplicates or empty
+    if (isEmpty(filter)) {
+        alert("Please enter a name.");
+        return;
+    } else if (personArray.includes(filter)){
         alert(filter + " already exists in the database.")
         return;
     }
+
     personArray.push(filter);
     addToPersonList(personArray);
     alert(filter + " was added to the people directory."); 
@@ -171,11 +176,16 @@ function addPersonFromDeskMenu(){
     var input, filter;
     input = document.getElementById('name');
     filter = toTitleCase(input.value.toUpperCase());
+
     //check for duplicates
-    if (personArray.includes(filter)){
+    if (isEmpty(filter)) {
+        alert("Please enter a name.");
+        return;
+    } else if (personArray.includes(filter)){
         alert(filter + " already exists in the database.")
         return;
     }
+
     personArray.push(filter);
     addToPersonList(personArray);
     alert(filter + " was added to the people directory."); 
@@ -476,7 +486,9 @@ function toTitleCase(str)
     });
 }
 
-
+function isEmpty(str){
+    return !str.replace(/^\s+/g, '').length; // boolean (`true` if field is empty)
+}
 
 // ============================================================================================
 // =============================== DEPRECATED FUNCTIONS =======================================
