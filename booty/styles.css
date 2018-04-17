@@ -167,8 +167,10 @@ div.sp-replacer{
     border: 3px solid #223547;
 }
 
+
 #floorplanSubMenu ul{
     padding-left: 0px;
+    cursor: pointer;
 }
 
 #floorplanSubMenu > li > a{
