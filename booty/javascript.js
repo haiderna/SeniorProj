@@ -43,12 +43,11 @@ $(document).ready(function() {
 
 
  function insertRoom() {
-      var mainDiv = document.getElementById(floorPlan);
+    var mainDiv = document.getElementById(floorPlan);
      
  	//create the div to be draggable
  	var room = document.createElement('div');
  	room.className = 'room';
- 	room.style.display = "block";
 
  	//cancel button to quit adding all the rooms
  	var cancel = document.createElement('div');
@@ -60,6 +59,14 @@ $(document).ready(function() {
  	var span = document.createElement('span');
  	span.className = 'deskCount';
  	room.appendChild(span);
+
+ 	room.style.position = "absolute";
+    var left = mainDiv.offsetLeft;	
+    var top = mainDiv.offsetTop;
+    left = left + ($(mainDiv).width() / 2);
+    top = top + ($(mainDiv).height() / 4);
+    room.style.left = left;
+    room.style.top =  top;
 
  	mainDiv.append(room);
  	$( '.room' ).draggable({ containment: 'parent' }).resizable();
