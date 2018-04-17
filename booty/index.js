@@ -156,7 +156,7 @@ function addPerson() {
     var input, filter;
     input = document.getElementById('peopleInput');
     filter = toTitleCase(input.value.toUpperCase());
-    
+
     //check for duplicates or empty
     if (isEmpty(filter)) {
         alert("Please enter a name.");
@@ -249,7 +249,10 @@ function addProject() {
     input = document.getElementById('projectInput');
     filter = (input.value);
     //check for duplicates
-    if (projectArray.includes(filter)){
+    if (isEmpty(filter)) {
+        alert("Please enter a project name.");
+        return;
+    }  else if (projectArray.includes(filter)){
         alert(filter + " already exists in the database.")
         return;
     }
