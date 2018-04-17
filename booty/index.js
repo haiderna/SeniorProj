@@ -163,6 +163,8 @@ function addPerson() {
     }
     personArray.push(filter);
     addToPersonList(personArray);
+    alert(filter + " was added to the people directory."); 
+    input.value = "";
 }
 
 function addPersonFromDeskMenu(){
@@ -176,6 +178,8 @@ function addPersonFromDeskMenu(){
     }
     personArray.push(filter);
     addToPersonList(personArray);
+    alert(filter + " was added to the people directory."); 
+    input.value = "";
 }
 
 function addPersonFromJSON(name){
