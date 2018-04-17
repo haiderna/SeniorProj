@@ -660,3 +660,8 @@ ul.nav.navbar-nav.navbar-right{
     bottom:0;
     right:0;
 }
+
+.desk {
+    position: element(#HQFloor1);
+    transform: translateY(-100%);
+}

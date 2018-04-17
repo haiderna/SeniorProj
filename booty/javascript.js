@@ -229,13 +229,11 @@ function insertDivDesk() {
     var h = document.getElementById("deskHeight").value;
     var name = document.getElementById("name").value;
     
-    
+    //error messages 
     if (!name) {
         alert("Add Value for Name");
         exit();
-        
     }
-    //error messages 
     if (!w) {
         alert("Add Value for Width");
         exit();
@@ -243,12 +241,7 @@ function insertDivDesk() {
     if (!h) {
         alert("Add Value for Height");
         exit();
-        
     }
-    
-    
-    
-    
     
     // alert(w);
     Desk.name = name;
@@ -258,12 +251,10 @@ function insertDivDesk() {
     var color = $('#projectDropdown option:selected').val();
    // alert("Project name is: " + proj + "- Project colour is: " + color); //comment out when done
     
-    
     if (!color) {
         alert("Add Project");
             exit();
     }
-    
     
     //y.style.background = color;
    
@@ -287,17 +278,14 @@ function insertDivDesk() {
     
     y.setAttribute("alt", "desk");
 
-    
     var para = document.createElement("p");
     var node = document.createTextNode(name);
     para.appendChild(node);
-    
     
     var testDiv = document.createElement("div");
     var divId = "testDiv"+deskIndex;
     testDiv.setAttribute("id", divId);
     testDiv.className += "desk";
-
 
     var btn = document.createElement("BUTTON");
     btn.setAttribute("id", "delButt");
@@ -331,13 +319,19 @@ function insertDivDesk() {
      para.style.position = "absolute";
  	para.style.top = '10px';
     testDiv.appendChild(btn);
-  //    mainDiv.style.position = "relative";
-    //document.body.appendChild(testDiv);
+
+    //positioning to a more central position
+    testDiv.style.position = "absolute";
+    var left = mainDiv.offsetLeft;	
+    var top = mainDiv.offsetTop;
+    left = left + ($(mainDiv).width() / 2);
+    top = top + ($(mainDiv).height() / 4);
+    testDiv.style.left = left;
+    testDiv.style.top =  top;
+
     mainDiv.appendChild(testDiv);
-//  testDiv.style.position = "absolute";
-//  testDiv.style.left = "50%";
-//  testDiv.style.top = "50%";
-//   
+    // testDiv.appendTo(mainDiv);
+
     var convertedR = convertHex(color,50);
    // alert(convertedR);
     getNewColor(convertedR, y);
@@ -509,8 +503,6 @@ previewFile();
 ////////////////////////////
 
 function exportPDF() {
-
-    
     
 	var newWin = window.open("", "", "width=1056,height=714");
     newWin.document.write('<html><head><title>Seating Chart</title>');
