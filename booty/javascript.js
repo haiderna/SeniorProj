@@ -220,6 +220,7 @@ function continueEdit() {
 var deskIndex = 0;
 function insertDivDesk() {
     var mainDiv = document.getElementById(floorPlan);
+    mainDiv.style.position = "relative";
     var Desk = new DeskClass();
     var y = document.createElement("IMG");
     y.setAttribute("src", imageSource);
@@ -348,7 +349,7 @@ function insertDivDesk() {
     testDiv.style.position = "absolute";
     var left = mainDiv.offsetLeft;	
     var top = mainDiv.offsetTop;
-    left = left + ($(mainDiv).width() / 2);
+    left = left + ($(mainDiv).width() / 4);
     top = top + ($(mainDiv).height() / 4);
     testDiv.style.left = left;
     testDiv.style.top =  top;
@@ -545,19 +546,19 @@ previewFile();
 ////////////////////////////
 
 function exportPDF() {
-    
+        var contentToPrint = document.getElementById(floorPlan).innerHTML;
 	var newWin = window.open("", "", "width=1056,height=714");
     newWin.document.write('<html><head><title>Seating Chart</title>');
     newWin.document.write('<link rel="stylesheet" href="styles.css" type="text/css" />');
     newWin.document.write('</head><body>');
-//	newWin.document.write(contentToPrint);
+	newWin.document.write(contentToPrint);
 //        newWin.document.write('<br />');
 //        newWin.document.write(secondFloor);
-        for (var i = 0; i < floorplans.length; i++){
-            var elem = document.getElementById(floorplans[i]).innerHTML;
-            newWin.document.write(elem);
-            newWin.document.write('<br />');
-            }
+//        for (var i = 0; i < floorplans.length; i++){
+//            var elem = document.getElementById(floorplans[i]).innerHTML;
+//            newWin.document.write(elem);
+//            newWin.document.write('<br />');
+//            }
     newWin.document.write('</body></html>');
     newWin.document.close(); 
 
