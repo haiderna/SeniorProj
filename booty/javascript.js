@@ -20,7 +20,7 @@ $(document).ready(function () {
 	addColorPicker();
 	loadColorsIntoColorPickers();
 
-	document.getElementById("jsonInput").value = "";
+    document.getElementById("jsonInput").value = "";
 });
 
 //readying rotatable
@@ -219,10 +219,7 @@ function continueEdit() {
 
 var deskIndex = 0;
 function insertDivDesk() {
-    
-    
     var mainDiv = document.getElementById(floorPlan);
-    
     var Desk = new DeskClass();
     var y = document.createElement("IMG");
     y.setAttribute("src", imageSource);
@@ -232,6 +229,7 @@ function insertDivDesk() {
    
     var deskId = "desk"+deskIndex;
     y.setAttribute("id", deskId);
+    y.className += "deskImg";
     var w = document.getElementById("deskWidth").value;
     var h = document.getElementById("deskHeight").value;
     var name = document.getElementById("name").value;
@@ -294,30 +292,49 @@ function insertDivDesk() {
     testDiv.setAttribute("id", divId);
     testDiv.className += "desk";
 
-    var btn = document.createElement("BUTTON");
-    btn.setAttribute("id", "delButt");
-    btn.style.height = "20px";
-    btn.style.width = "20px";
-    var t = document.createTextNode("X");
-    btn.style.opacity = 0;
-    btn.onmouseout = function() {
-        btn.style.opacity = 0;
-    };
-    btn.onmouseover = function() {
-      btn.style.opacity = 1;  
-    };
-    btn.onclick = function() {//alert('Clicked!'+divId);
-        document.getElementById(divId).remove();
-     };
-    btn.appendChild(t);
+    //cancel button to quit adding all the rooms
+    var btn = document.createElement('div');
+    btn.className = 'deleteDeskButton';
+    btn.innerHTML = '&#10005';
+    btn.onclick = function (e) { document.getElementById(divId).remove(); };
     
-   
-   
     testDiv.style.width = w;
     testDiv.style.height = h;
     
-	$(testDiv).rotatable().draggable();
-  
+    // $(testDiv).rotatable().draggable();
+
+    $( mainDiv ).selectable({
+        filter : ".desk"
+     });
+
+    $(testDiv).draggable({
+        start: function(ev, ui) 
+        {        
+            if (!$(this).hasClass("ui-selected")) {
+                //making selectable
+                $(this).addClass("ui-selected").siblings().removeClass("ui-selected");
+                //making rotatable
+                $(this).siblings().children(".ui-rotatable-handle").hide();
+                $(this).rotatable();
+                $(this).children(".ui-rotatable-handle").show();
+                //making deletable once selected
+                $('.cancel').css('visibility', 'visible');
+            } 
+        }
+    });
+
+    $(testDiv).click(function() {
+        if (!$(this).hasClass("ui-selected")) {
+            $(this).addClass("ui-selected").siblings().removeClass("ui-selected");
+            $(this).siblings().children(".ui-rotatable-handle").hide();
+            $(this).rotatable();
+            $(this).children(".ui-rotatable-handle").show();
+        } else if ($(this).hasClass("ui-selected")){
+            $(this).removeClass("ui-selected");
+            $(this).children(".ui-rotatable-handle").hide();
+        }
+    });
+
     testDiv.appendChild(y);
     
     testDiv.appendChild(para);
@@ -348,6 +365,24 @@ function insertDivDesk() {
     deskIndex++;
     //alert(testDiv.style.width);
 }
+
+// $(".desk").selectable();
+    
+// $(".desk.selectable").draggable({
+//     start: function(ev, ui) 
+//     {        
+//         if( !$(this).hasClass("ui-selected")) 
+//         {
+//             $(this).addClass("ui-selected").siblings().removeClass("ui-selected");
+//         }
+//     }
+// });
+
+// $(".desk.selectable").click(function() {
+//     if (!$(this).hasClass("ui-selected")) {
+//         $(this).addClass("ui-selected").siblings().removeClass("ui-selected");
+//     }
+// })
 
 ////////////////////////////////
 /////FUNCTION FOR CREATING NEW FLOOR PLAN 

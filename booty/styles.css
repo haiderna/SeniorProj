@@ -46,7 +46,7 @@ input[type=submit]:hover {
     margin-top: 10px;
     margin-bottom: 10px;
      background-color: #223547;
-     text-decoration: none
+     text-decoration: none;
      
 }
 
@@ -110,6 +110,32 @@ input[type=submit]:hover {
     background-color:red;
     color: white;
     font-weight: bold;
+}
+
+.deleteDeskButton{
+    display:relative;
+    cursor:pointer;
+    margin:0;
+    float:right;
+    height:12px;
+    width:12px;
+    padding: 0 0 5px 0;
+    text-align:center;
+    font-size:10px;
+    color:white;
+    background-color:darkblue;
+    z-index:100;
+    visibility: hidden;
+}
+
+.deleteDeskButton:hover{
+    background-color:red;
+    color: white;
+    font-weight: bold;
+}
+
+.ui-selected > .deleteDeskButton{
+    visibility: visible;
 }
 
 /*.desk{
@@ -444,6 +470,7 @@ ul.nav.navbar-nav.navbar-right{
     max-width: 125px;
     text-align: center;
 }
+
 /*thins out the collapsed sidebar*/
 #right-sidebar.active ul li a {
     padding: 20px 10px;
@@ -661,7 +688,12 @@ ul.nav.navbar-nav.navbar-right{
     right:0;
 }
 
-.desk {
+/* .desk {
     position: element(#HQFloor1);
     transform: translateY(-100%);
-}
+} */
+
+    
+.ui-selected {
+    box-shadow:0 0 10px 5px #f0ad4e;
+ }   

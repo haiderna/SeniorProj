@@ -112,9 +112,6 @@ function WTFloor() {
 //     $(divNew).hide();
 }
 
-
-
-
 var imageSource = "desk - filled.svg";
 
 //For Choosing which type of desk in Menu 
@@ -127,7 +124,6 @@ function largeConferenceDesk(){
 function smallConferenceDesk(){
     imageSource = "small table - filled.svg";
 }
-
 // ============================================================================================
 // =============================== people =====================================================
 // ============================================================================================
