@@ -341,8 +341,8 @@ function insertDivDesk() {
     testDiv.appendChild(para);
     //set Label over Desk
      para.style.color = "black";
-     para.style.position = "absolute";
- 	para.style.top = '10px';
+    // para.style.position = "absolute";
+ 	//para.style.top = '10px';
     testDiv.appendChild(btn);
 
     //positioning to a more central position
