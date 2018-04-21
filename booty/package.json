@@ -12,5 +12,12 @@
     "jQuery UI",
     "rotatable"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3",
+    "nodemon": "^1.17.3"
+  },
+  "scripts":{
+    "dev":"nodemon server.js"
+  }
 }
