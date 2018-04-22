@@ -395,7 +395,7 @@ var storeImage = " ";
 var floorIndex = 0;
 function newFloor() {
     var building = document.getElementById("building").value;
-    alert(building);
+    var floorName = document.getElementById("floorName").value;
     var floorId = "newFloor"+floorIndex;
     var divNew = document.getElementById("mainClass");
    // alert(storeImage);
@@ -417,7 +417,7 @@ function newFloor() {
             var idUL = building + "subFloor";
             var ul = document.getElementById(idUL);
             var li = document.createElement("li");
-            li.appendChild(document.createTextNode(floorId));
+            li.appendChild(document.createTextNode(floorName));
             ul.appendChild(li);
             //match = false;
         }
@@ -454,7 +454,7 @@ function newFloor() {
     ul2.style.padding = "10px";
     var li = document.createElement("li");
     li.style.background = "#223547";
-    li.appendChild(document.createTextNode(floorId));
+    li.appendChild(document.createTextNode(floorName));
     
     ul.appendChild(ul2);
     ul2.appendChild(li);
@@ -468,7 +468,7 @@ function newFloor() {
         }
        var showFloorplan = document.getElementById(floorPlan);
         $(showFloorplan).show();
-         alert(floorPlan);
+        // alert(floorPlan);
      };
 //    ul2.appendChild(li);
 //    ul.appendChild(ul2);
@@ -477,7 +477,7 @@ function newFloor() {
     
     floorIndex++;
     match = false; 
-    alert(buildings);
+    alert("New FloorPlan Added");
 }
 
 function newFloorMenu2() {
@@ -580,7 +580,7 @@ function readJSON(){
     var filecontent = "";
 
     if($('#jsonInput').val().length < 1){
-    	alert("SELECT A FILE YA DINGUS");
+    	alert("SELECT A FILE");
     	return;
     }
 

@@ -12,6 +12,7 @@ function DeskClass(name, project, image)
 function PersonClass(name, project){
     this.name = name;
     this.project = project;
+    this.floorplan = floorplan;
 }
 function ProjectClass(name){
     this.name = name;
