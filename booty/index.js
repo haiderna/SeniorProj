@@ -1,4 +1,5 @@
 var personArray = ["Cow Lady", "Dog Man", "Shaggy Mutt"];
+var personObjectArray = [];
 
 var projectArray = ["Barclays", "Regal", "WillowTree"]; 
 var projectColors = ["#000080", "#FF0000", "#1BD9C4"];     
@@ -9,7 +10,7 @@ function DeskClass(name, project, image)
 {   this.name = name; 
     this.project = project; 
     this.image = image; } 
-function PersonClass(name, project){
+function PersonClass(name, project, floorplan){
     this.name = name;
     this.project = project;
     this.floorplan = floorplan;
@@ -211,9 +212,27 @@ function addToPersonList(array) {
         var item = document.createElement('li');
         var inneritem = document.createElement('a');
         item.className = "listedPerson";
+        var nxt = array[i];
+        item.setAttribute("id", nxt);
         inneritem.appendChild(document.createTextNode(array[i]));
         item.appendChild(inneritem);
         list.appendChild(item);
+       
+        item.onclick = function() { 
+            var label = this.id;
+            alert(label);
+                     for (var j = 0; j < personObjectArray.length; j++){
+                        if (label === personObjectArray[j].name) {
+                        floorPlan = personObjectArray[j].floorplan;
+                            for (var k = 0; k < floorplans.length; k++){
+                                var elem = document.getElementById(floorplans[k]);
+                                $(elem).hide();
+                                 }
+                                var showFloorplan = document.getElementById(floorPlan);
+                                $(showFloorplan).show();
+                    }
+             }
+        };
     }
     // return list;
 }

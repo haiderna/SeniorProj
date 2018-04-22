@@ -261,6 +261,12 @@ function insertDivDesk() {
         alert("Add Project");
             exit();
     }
+     for (var i = 0; i < personObjectArray.length; i++){
+         if (name === personObjectArray[i].name) {
+             personObjectArray[i].project = proj;
+             personObjectArray[i].floorplan = floorPlan;
+         }
+     }
     
     //y.style.background = color;
    
@@ -599,7 +605,13 @@ function readJSON(){
 		var data = JSON.parse(filecontent);
 	    for (var i =0; i < data.length; i++){
 	    	addPersonFromJSON(data[i].name);
+                var person = new PersonClass();
+                person.name = data[i].name;
+                person.project = "Regal";
+                person.floorplan = "HQFloor1";
+                personObjectArray.push(person);
 	    	addProjectFromJSON(data[i].project);
+                
 	    }
 	}
 
@@ -607,7 +619,7 @@ function readJSON(){
 	reader.readAsText(selectedFile);
 	
 	//ADD CONFIRMATION
-
+       // alert(personObjectArray.length);
 }
 
 //////////////
