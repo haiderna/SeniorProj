@@ -1,6 +1,5 @@
 var personArray = ["Cow Lady", "Dog Man", "Shaggy Mutt"];
 var personObjectArray = [];
-
 var projectArray = ["Barclays", "Regal", "WillowTree"]; 
 var projectColors = ["#000080", "#FF0000", "#1BD9C4"];     
 
@@ -19,6 +18,23 @@ function ProjectClass(name){
     this.name = name;
 }
 
+var person1 = new PersonClass();
+person1.name = "Cow Lady";
+person1.project = "Regal";
+person1.floorplan = "HQFloor1";
+personObjectArray.push(person1);
+
+var person2 = new PersonClass();
+person2.name = "Dog Man";
+person2.project = "Regal";
+person2.floorplan = "HQFloor1";
+personObjectArray.push(person2);
+
+var person3 = new PersonClass();
+person3.name = "Shaggy Mutt";
+person3.project = "Regal";
+person3.floorplan = "HQFloor1";
+personObjectArray.push(person3);
 
 var floorPlan = "HQFloor1";
 
@@ -165,6 +181,11 @@ function addPerson() {
     }
 
     personArray.push(filter);
+    var person = new PersonClass();
+    person.name = filter;
+    person.project = "Regal";
+    person.floorplan = "HQFloor1";
+    personObjectArray.push(person);
     addToPersonList(personArray);
     alert(filter + " was added to the people directory."); 
     input.value = "";
@@ -185,6 +206,13 @@ function addPersonFromDeskMenu(){
     }
 
     personArray.push(filter);
+    //adding to object array 
+    var person = new PersonClass();
+    person.name = filter;
+    person.project = "Regal";
+    person.floorplan = "HQFloor1";
+    personObjectArray.push(person);
+    
     addToPersonList(personArray);
     alert(filter + " was added to the people directory."); 
     input.value = "";
