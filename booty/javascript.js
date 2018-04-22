@@ -249,6 +249,11 @@ function insertDivDesk() {
         exit();
     }
     
+    if (w > 200 || h > 200) {
+        alert("Enter a width and height less than or equal to 200");
+        exit();
+    }
+    
     // alert(w);
     Desk.name = name;
 

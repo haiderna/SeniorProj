@@ -237,13 +237,22 @@ function addToPersonList(array) {
     $("li").remove(".listedPerson");
 
     for(var i = 0; i < array.length; i++) {
+         var innerButton = document.createElement("button");
+        innerButton.appendChild(document.createTextNode("X"));
+        innerButton.style.marginRight = "10px";
+        innerButton.style.color = "red";
         var item = document.createElement('li');
         var inneritem = document.createElement('a');
+       
         item.className = "listedPerson";
         var nxt = array[i];
         item.setAttribute("id", nxt);
+        innerButton.setAttribute("id", nxt);
+        inneritem.appendChild(innerButton);
         inneritem.appendChild(document.createTextNode(array[i]));
+        
         item.appendChild(inneritem);
+        
         list.appendChild(item);
        
         item.onclick = function() { 
@@ -260,6 +269,29 @@ function addToPersonList(array) {
                                 $(showFloorplan).show();
                     }
              }
+        };
+        
+        innerButton.onclick = function(){
+            alert(personObjectArray.length);
+            var label = this.id;
+           // alert(this.id);
+            //finding element in arrays and deleting them 
+                for (var j = 0; j < personObjectArray.length; j++){
+                    if (label === personObjectArray[j].name) {
+                        personObjectArray.splice(j, 1);
+                        alert(personObjectArray.length);
+                    }         
+                }
+                alert("out");
+                for (var k = 0; k < personArray.length; k++){
+                    if (label === personArray[k]) {
+                        personArray.splice(k, 1);
+                        alert(personArray.length);
+                    }         
+                }
+            addToPersonList(personArray);
+            event.stopPropagation();
+            
         };
     }
     // return list;
