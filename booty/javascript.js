@@ -18,7 +18,9 @@ $(document).ready(function () {
 	initDeskProjectDropdown(projectArray);
 	
 	addColorPicker();
-	loadColorsIntoColorPickers();
+    loadColorsIntoColorPickers();
+    
+    singleDesk();
 
     document.getElementById("jsonInput").value = "";
 });

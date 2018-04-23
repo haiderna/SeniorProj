@@ -733,3 +733,8 @@ ul.nav.navbar-nav.navbar-right{
 /* ul#projectSubMenu > li.colorPickerAdded > a {
     padding-left: 10px;
 } */
+
+.selectedDeskType {
+    border: 4px solid gold;
+    border-radius: 3px;
+}

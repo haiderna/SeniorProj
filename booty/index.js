@@ -135,12 +135,21 @@ var imageSource = "desk - filled.svg";
 //For Choosing which type of desk in Menu 
 function singleDesk() {
    imageSource = "desk - filled.svg";
+   $('#singleDesk').addClass('selectedDeskType');
+   $('#LargeConf').removeClass('selectedDeskType');
+   $('#SmallConf').removeClass('selectedDeskType');
 }
 function largeConferenceDesk(){
     imageSource = "large table - filled.svg";
+    $('#singleDesk').removeClass('selectedDeskType');
+    $('#LargeConf').addClass('selectedDeskType');
+    $('#SmallConf').removeClass('selectedDeskType');
 }
 function smallConferenceDesk(){
     imageSource = "small table - filled.svg";
+    $('#singleDesk').removeClass('selectedDeskType');
+    $('#LargeConf').removeClass('selectedDeskType');
+    $('#SmallConf').addClass('selectedDeskType');
 }
 // ============================================================================================
 // =============================== people =====================================================
