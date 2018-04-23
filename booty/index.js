@@ -338,6 +338,7 @@ function addProject() {
 
     addToProjectList(projectArray);
     addToDeskProjectDropDown(projectArray);
+    alert("New Project added");
 }
 
 function addProjectFromJSON(proj) {
