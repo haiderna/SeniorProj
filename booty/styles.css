@@ -715,7 +715,8 @@ ul.nav.navbar-nav.navbar-right{
 }
 
 .projectDeleteButton{
-    margin-right: 4px;
+    float: right;
+    margin-left: 5px;
     color: #375172;
     background: #223547;
     font-size: 8pt;
@@ -725,10 +726,10 @@ ul.nav.navbar-nav.navbar-right{
 }
 
 .projectDeleteButton:hover{
-   color: #223547;
-   background: #f0ad4e;
+    color: #223547;
+    background: #f0ad4e;
 }
 
-ul#projectSubMenu > li.colorPickerAdded > a {
+/* ul#projectSubMenu > li.colorPickerAdded > a {
     padding-left: 10px;
-}
+} */

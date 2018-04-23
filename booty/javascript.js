@@ -220,7 +220,6 @@ function continueEdit() {
 var deskIndex = 0;
 function insertDivDesk() {
     var mainDiv = document.getElementById(floorPlan);
-    mainDiv.style.position = "relative";
     var Desk = new DeskClass();
     var y = document.createElement("IMG");
     y.setAttribute("src", imageSource);
@@ -249,11 +248,6 @@ function insertDivDesk() {
         exit();
     }
     
-    if (w > 200 || h > 200) {
-        alert("Enter a width and height less than or equal to 200");
-        exit();
-    }
-    
     // alert(w);
     Desk.name = name;
 
@@ -266,12 +260,6 @@ function insertDivDesk() {
         alert("Add Project");
             exit();
     }
-     for (var i = 0; i < personObjectArray.length; i++){
-         if (name === personObjectArray[i].name) {
-             personObjectArray[i].project = proj;
-             personObjectArray[i].floorplan = floorPlan;
-         }
-     }
     
     //y.style.background = color;
    
@@ -329,8 +317,6 @@ function insertDivDesk() {
                 $(this).siblings().children(".ui-rotatable-handle").hide();
                 $(this).rotatable();
                 $(this).children(".ui-rotatable-handle").show();
-                //making deletable once selected
-                $('.cancel').css('visibility', 'visible');
             } 
         }
     });
@@ -352,15 +338,15 @@ function insertDivDesk() {
     testDiv.appendChild(para);
     //set Label over Desk
      para.style.color = "black";
-    // para.style.position = "absolute";
- 	//para.style.top = '10px';
+     para.style.position = "absolute";
+ 	para.style.top = '10px';
     testDiv.appendChild(btn);
 
     //positioning to a more central position
     testDiv.style.position = "absolute";
     var left = mainDiv.offsetLeft;	
     var top = mainDiv.offsetTop;
-    left = left + ($(mainDiv).width() / 4);
+    left = left + ($(mainDiv).width() / 2);
     top = top + ($(mainDiv).height() / 4);
     testDiv.style.left = left;
     testDiv.style.top =  top;
@@ -406,7 +392,7 @@ var storeImage = " ";
 var floorIndex = 0;
 function newFloor() {
     var building = document.getElementById("building").value;
-    var floorName = document.getElementById("floorName").value;
+    alert(building);
     var floorId = "newFloor"+floorIndex;
     var divNew = document.getElementById("mainClass");
    // alert(storeImage);
@@ -428,7 +414,7 @@ function newFloor() {
             var idUL = building + "subFloor";
             var ul = document.getElementById(idUL);
             var li = document.createElement("li");
-            li.appendChild(document.createTextNode(floorName));
+            li.appendChild(document.createTextNode(floorId));
             ul.appendChild(li);
             //match = false;
         }
@@ -465,7 +451,7 @@ function newFloor() {
     ul2.style.padding = "10px";
     var li = document.createElement("li");
     li.style.background = "#223547";
-    li.appendChild(document.createTextNode(floorName));
+    li.appendChild(document.createTextNode(floorId));
     
     ul.appendChild(ul2);
     ul2.appendChild(li);
@@ -479,7 +465,7 @@ function newFloor() {
         }
        var showFloorplan = document.getElementById(floorPlan);
         $(showFloorplan).show();
-        // alert(floorPlan);
+         alert(floorPlan);
      };
 //    ul2.appendChild(li);
 //    ul.appendChild(ul2);
@@ -488,7 +474,7 @@ function newFloor() {
     
     floorIndex++;
     match = false; 
-    alert("New FloorPlan Added");
+    alert(buildings);
 }
 
 function newFloorMenu2() {
@@ -557,19 +543,19 @@ previewFile();
 ////////////////////////////
 
 function exportPDF() {
-        var contentToPrint = document.getElementById(floorPlan).innerHTML;
+    
 	var newWin = window.open("", "", "width=1056,height=714");
     newWin.document.write('<html><head><title>Seating Chart</title>');
     newWin.document.write('<link rel="stylesheet" href="styles.css" type="text/css" />');
     newWin.document.write('</head><body>');
-	newWin.document.write(contentToPrint);
+//	newWin.document.write(contentToPrint);
 //        newWin.document.write('<br />');
 //        newWin.document.write(secondFloor);
-//        for (var i = 0; i < floorplans.length; i++){
-//            var elem = document.getElementById(floorplans[i]).innerHTML;
-//            newWin.document.write(elem);
-//            newWin.document.write('<br />');
-//            }
+        for (var i = 0; i < floorplans.length; i++){
+            var elem = document.getElementById(floorplans[i]).innerHTML;
+            newWin.document.write(elem);
+            newWin.document.write('<br />');
+            }
     newWin.document.write('</body></html>');
     newWin.document.close(); 
 
@@ -591,7 +577,7 @@ function readJSON(){
     var filecontent = "";
 
     if($('#jsonInput').val().length < 1){
-    	alert("SELECT A FILE");
+    	alert("SELECT A FILE YA DINGUS");
     	return;
     }
 
@@ -610,13 +596,7 @@ function readJSON(){
 		var data = JSON.parse(filecontent);
 	    for (var i =0; i < data.length; i++){
 	    	addPersonFromJSON(data[i].name);
-                var person = new PersonClass();
-                person.name = data[i].name;
-                person.project = "Regal";
-                person.floorplan = "HQFloor1";
-                personObjectArray.push(person);
 	    	addProjectFromJSON(data[i].project);
-                
 	    }
 	}
 
@@ -624,7 +604,7 @@ function readJSON(){
 	reader.readAsText(selectedFile);
 	
 	//ADD CONFIRMATION
-       // alert(personObjectArray.length);
+
 }
 
 //////////////

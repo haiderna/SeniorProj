@@ -337,6 +337,8 @@ function addProject() {
 
     addToProjectList(projectArray);
     addToDeskProjectDropDown(projectArray);
+    input.value = "";
+    searchProjects();
     alert("New Project added");
 }
 
@@ -370,7 +372,7 @@ function initializeProjectList(array) {
         var inneritem = document.createElement('a');
         var innerButton = document.createElement("button");
         innerButton.className = "projectDeleteButton";
-        innerButton.innerHTML = "DEL";
+        innerButton.innerHTML = "REMOVE";
         item.className = "colorPickerAdded";
         inneritem.className = array[i];
         innerButton.setAttribute("id", array[i]);
