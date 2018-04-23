@@ -362,11 +362,19 @@ function initializeProjectList(array) {
     // Create the list element:
     var list = document.getElementById('projectSubMenu');
 
+
+    $("li").remove(".listedProject");
+    $("li").remove(".colorPickerAdded");
     for(var i = 0; i < array.length; i++) {
         var item = document.createElement('li');
         var inneritem = document.createElement('a');
+         var innerButton = document.createElement("button");
+            innerButton.appendChild(document.createTextNode("X"));
+            innerButton.style.marginRight = "10px";
+            innerButton.style.color = "red";
         item.className = "colorPickerAdded";
         inneritem.className = array[i];
+        innerButton.setAttribute("id", array[i]);
         // inneritem.appendChild(document.createTextNode(array[i])); //add after color 
 
         var sq = document.createElement('input');
@@ -380,6 +388,7 @@ function initializeProjectList(array) {
         but.innerHTML = "SET";
         but.onclick = setColor; //onclick function
 
+        inneritem.appendChild(innerButton);
         inneritem.appendChild(sq); 
         inneritem.appendChild(document.createTextNode(array[i]));
         inneritem.appendChild(but);
@@ -387,7 +396,25 @@ function initializeProjectList(array) {
         //create the list
         item.appendChild(inneritem)
         list.appendChild(item);
-
+        
+        innerButton.onclick = function() {
+        alert(projectArray.length);
+        var label = this.id;
+        
+        for (var k = 0; k < projectArray.length; k++){
+                    if (label === projectArray[k]) {
+                        projectArray.splice(k, 1);
+                        projectColors.splice(k,1);
+                        alert(projectArray.length);
+                    }         
+                }
+                
+       initializeProjectList(projectArray);
+       initDeskProjectDropdown(projectArray);
+	
+	addColorPicker();
+	loadColorsIntoColorPickers();
+    };
         // addColorPicker();
     }
     // return list;
@@ -396,7 +423,10 @@ function initializeProjectList(array) {
 //MODIFIED TO ADD A SINGLE ITEM
 function addToProjectList(array) {
     var list = document.getElementById('projectSubMenu');
-
+    var innerButton = document.createElement("button");
+        innerButton.appendChild(document.createTextNode("X"));
+        innerButton.style.marginRight = "10px";
+        innerButton.style.color = "red";
     var item = document.createElement('li');
     var inneritem = document.createElement('a');
     inneritem.className = array[array.length-1];
@@ -415,16 +445,38 @@ function addToProjectList(array) {
     but.innerHTML = "SET";
     but.onclick = setColor; //onclick function
     // but.setAttribute('onclick', 'setColor()');
-
+    inneritem.appendChild(innerButton);
     inneritem.appendChild(sq); 
     inneritem.appendChild(document.createTextNode(array[array.length-1]));
+    innerButton.setAttribute("id", array[array.length-1]);
+   
     inneritem.appendChild(but);
 
     //create the list
-    item.appendChild(inneritem)
+    item.appendChild(inneritem);
+    
     list.appendChild(item);
-
+ 
     addColorPicker();
+    
+    innerButton.onclick = function() {
+        alert(projectArray.length);
+        var label = this.id;
+        
+        for (var k = 0; k < projectArray.length; k++){
+                    if (label === projectArray[k]) {
+                        projectArray.splice(k, 1);
+                        projectColors.splice(k,1);
+                        alert(projectArray.length);
+                    }         
+                }
+                
+       initializeProjectList(projectArray);
+       initDeskProjectDropdown(projectArray);
+	
+	addColorPicker();
+	loadColorsIntoColorPickers();
+    };
 }
 
 //SHOWS PROJECTS AND COLORS INSIDE ADD DESK SUBMENU
@@ -432,7 +484,9 @@ function initDeskProjectDropdown(array) {
 
     //Populate select menu
     var drop = document.getElementById('projectDropdown');
-
+    
+    $("#projectDropdown").find("option").remove();
+    
     for(var i = 0; i < array.length; i++) {
         var option = document.createElement('option');
         option.className = "desk-proj-color" + " " + array[i];
@@ -443,6 +497,7 @@ function initDeskProjectDropdown(array) {
         //create the list
         drop.appendChild(option);
     }
+  $('#projectDropdown').selectpicker('refresh');
 
 }
 
