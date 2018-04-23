@@ -31,9 +31,26 @@ function getConnection(cb){
 
 		app.listen(process.env.PORT || 3000, () => {
 			console.log('listening on 3000')
+			
+			findDocuments(myDB, function(){
+			})
+			// var myCursor = myDB.collection('people').find({},{})
+			// while(myCursor.hasNext()){
+			// 	console.log(tojson(myCursor.next()))
+			// }
 		})
 
 		cb(null,people)
+	})
+}
+
+//returns all documents
+var findDocuments = function(db,cb){
+	db.collection('people').find({},{}).toArray(function(err,docs){
+		//assert.equal(err,null)
+		console.log("Found following records")
+		console.log(docs)
+		callback(docs)
 	})
 }
 
@@ -87,19 +104,21 @@ function get_People(cb){
 //***************************************************
 
 //calling connection function
-// getConnection(function(err) {  
-//      if (err) {
-//          console.log("error connecting!", err);
-//          process.exit(1);
-//      }
-// });
+getConnection(function(err) {  
+     if (err) {
+         console.log("error connecting!", err);
+         process.exit(1);
+     }
+});
 
-get_People(function(err){
-	if(err) {
-		console.log("error when getting people",err)
-		process.exit(1)
-	}
-})
+
+
+// get_People(function(err){
+// 	if(err) {
+// 		console.log("error when getting people",err)
+// 		process.exit(1)
+// 	}
+// })
 
 //displaying website
 app.get('/', (req,res) => {
