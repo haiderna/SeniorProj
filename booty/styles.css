@@ -166,10 +166,10 @@ div.sp-replacer{
     width: 40px;
     font-size: 8pt;
     text-align: center;
-    color: black;
+    color: whitesmoke;
+    background: transparent;
     border-radius: 3px;
-    border-color: transparent;
-    display: inline;
+    border: 2px solid #375172;
     /*background-color: #f0ad4e;*/
     /*background-color: rgba(240,173,78,1.0);*/
 }
@@ -697,3 +697,38 @@ ul.nav.navbar-nav.navbar-right{
 .ui-selected {
     box-shadow:0 0 10px 5px #f0ad4e;
  }   
+
+ .personDeleteButton{
+     float: right;
+     margin-left: 5px;
+     color: #375172;
+     background: #223547;
+     font-size: 8pt;
+     padding: 2px;
+     border: 0pt solid;
+     border-radius: 3px;
+ }
+
+ .personDeleteButton:hover{
+    color: #223547;
+    background: #f0ad4e;
+}
+
+.projectDeleteButton{
+    margin-right: 4px;
+    color: #375172;
+    background: #223547;
+    font-size: 8pt;
+    padding: 2px;
+    border: 0pt solid;
+    border-radius: 3px;
+}
+
+.projectDeleteButton:hover{
+   color: #223547;
+   background: #f0ad4e;
+}
+
+ul#projectSubMenu > li.colorPickerAdded > a {
+    padding-left: 10px;
+}

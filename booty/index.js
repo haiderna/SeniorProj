@@ -237,10 +237,9 @@ function addToPersonList(array) {
     $("li").remove(".listedPerson");
 
     for(var i = 0; i < array.length; i++) {
-         var innerButton = document.createElement("button");
-        innerButton.appendChild(document.createTextNode("X"));
-        innerButton.style.marginRight = "10px";
-        innerButton.style.color = "red";
+        var innerButton = document.createElement("button");
+        innerButton.className = "personDeleteButton"; 
+        innerButton.innerHTML = 'REMOVE';
         var item = document.createElement('li');
         var inneritem = document.createElement('a');
        
@@ -369,10 +368,9 @@ function initializeProjectList(array) {
     for(var i = 0; i < array.length; i++) {
         var item = document.createElement('li');
         var inneritem = document.createElement('a');
-         var innerButton = document.createElement("button");
-            innerButton.appendChild(document.createTextNode("X"));
-            innerButton.style.marginRight = "10px";
-            innerButton.style.color = "red";
+        var innerButton = document.createElement("button");
+        innerButton.className = "projectDeleteButton";
+        innerButton.innerHTML = "DEL";
         item.className = "colorPickerAdded";
         inneritem.className = array[i];
         innerButton.setAttribute("id", array[i]);
@@ -383,16 +381,9 @@ function initializeProjectList(array) {
         sq.className = "color-square";
         // sq.style.backgroundColor = projectColors[i];
 
-        //create button to save color for project
-        var but = document.createElement('button');
-        but.className = "set-color-button";
-        but.innerHTML = "SET";
-        but.onclick = setColor; //onclick function
-
         inneritem.appendChild(innerButton);
         inneritem.appendChild(sq); 
         inneritem.appendChild(document.createTextNode(array[i]));
-        inneritem.appendChild(but);
 
         //create the list
         item.appendChild(inneritem)
@@ -425,9 +416,8 @@ function initializeProjectList(array) {
 function addToProjectList(array) {
     var list = document.getElementById('projectSubMenu');
     var innerButton = document.createElement("button");
-        innerButton.appendChild(document.createTextNode("X"));
-        innerButton.style.marginRight = "10px";
-        innerButton.style.color = "red";
+    innerButton.className = "projectDeleteButton";
+    innerButton.innerHTML = "DEL";
     var item = document.createElement('li');
     var inneritem = document.createElement('a');
     inneritem.className = array[array.length-1];
@@ -440,18 +430,12 @@ function addToProjectList(array) {
     sq.setAttribute("type", "text");
     sq.className = "color-square";
 
-    //create button to save color for project
-    var but = document.createElement('button');
-    but.className = "set-color-button";
-    but.innerHTML = "SET";
-    but.onclick = setColor; //onclick function
-    // but.setAttribute('onclick', 'setColor()');
+    //save color using colorpicker itself
+
     inneritem.appendChild(innerButton);
     inneritem.appendChild(sq); 
     inneritem.appendChild(document.createTextNode(array[array.length-1]));
     innerButton.setAttribute("id", array[array.length-1]);
-   
-    inneritem.appendChild(but);
 
     //create the list
     item.appendChild(inneritem);
@@ -533,6 +517,9 @@ function addColorPicker() {
         preferredFormat: "hex",
         palette: [ ],
         localStorageKey: "home", // Any Spectrum with the same string will share selection
+        change: function(color, domElement) {
+            setColor(color.toHexString(), this);
+        }
     });
 
     $(".disabled-color").spectrum({
@@ -561,32 +548,20 @@ function disableColorPicker() {
 }
 
 //fixes color to given project and stores it in color array
-function setColor(){
+function setColor(color, domElement){
     //get color from colorpicker
-    var color;
-    var color1 = $(this).siblings(".color-square").spectrum("get");
-    var color2 = $(this).siblings(".disabled-color").spectrum("get");
 
-    // alert("colorsquare val: " + color1 + " type: " + typeof(color1) + "Strings: " + String(color1) + "len: " + String(color1).length + "\n" + "disabled-color val: " + color2 + " type: " + typeof(color2) + "Stringed: " + String(color2));
-
-    if (String(color1).length == 7){
-        color = color1;
-    } else if (String(color2).length == 7){
-        color = color2;
-    } else {
+    if (String(color).length != 7){
         alert("Please make sure to select a color.");
         return;
     }
 
-    var correspondingProjectName = $(this).parent().prop('className'); // gets corresponding project name
+    var correspondingProjectName = $(domElement).parent().prop('className'); // gets corresponding project name
     alert("Project name: %" + correspondingProjectName + "%");
 
     //setting project color
     var idx = projectArray.indexOf(correspondingProjectName);
     projectColors[idx] = String(color);
-    
-    // alert(JSON.stringify(projectArray));
-    // alert(JSON.stringify(projectColors));
 
     $('#projectDropdown').find('.' + correspondingProjectName + '').each(
         function() {
