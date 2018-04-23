@@ -178,45 +178,6 @@ function continueEdit() {
 	}
 }
 
-
-//function insertDesk() {
-//	var newdesk = document.createElement('div');
-//	newdesk.className = "desk";
-//	//styling handled in css 
-//	// newdesk.style.background-color = "red";
-//	// newdesk.style.width = "50px";
-//	// newdesk.style.height = "50px";
-//
-//	$('#main').append(newdesk);
-//	$('.desk').draggable({ containment: 'parent' });
-//
-//	// ===================== BELOW =========== other version
-//    //     var deskTest = new DeskClass();
-//    //     var personAdded = new PersonClass();
-//    //     personAdded.name = document.getElementById("name").value;
-//    //     deskTest.name = personAdded.name;
-//    //     personArray.push(personAdded);
-//    //     var w = document.getElementById("deskWidth").value;
-//    //     var h = document.getElementById("deskHeight").value;
-//        
-//    //     var x = document.createElement("IMG");
-//    //     x.setAttribute("src", imageSource);
-//    //     if (isNaN(w)) {
-//    //         x.setAttribute("width", "100");
-//    //     } else {
-//    //         x.setAttribute("width", w);
-//    //     }
-//        
-//    // if (isNaN(h)) {
-//    //         x.setAttribute("height", "100");
-//    //     } else {
-//    //         x.setAttribute("height", h);
-//    //     }    
-//
-//    //     document.body.appendChild(x);
-//    //     $(x).resizable().parent().draggable();
-//}
-
 var deskIndex = 0;
 function insertDivDesk() {
     var mainDiv = document.getElementById(floorPlan);
@@ -364,23 +325,29 @@ function insertDivDesk() {
     //alert(testDiv.style.width);
 }
 
-// $(".desk").selectable();
-    
-// $(".desk.selectable").draggable({
-//     start: function(ev, ui) 
-//     {        
-//         if( !$(this).hasClass("ui-selected")) 
-//         {
-//             $(this).addClass("ui-selected").siblings().removeClass("ui-selected");
-//         }
-//     }
-// });
+//add desk button is called exportbutton for some reason
+function updateAddDeskButton() {
+    if (isDeskReady()) {
+        $('#ExportButton').attr('disabled', false);
+    } else {
+        $('#ExportButton').attr('disabled', true);
+    }
+}
 
-// $(".desk.selectable").click(function() {
-//     if (!$(this).hasClass("ui-selected")) {
-//         $(this).addClass("ui-selected").siblings().removeClass("ui-selected");
-//     }
-// })
+function isDeskReady(){
+    if ($('#name').val() != '' && $('#projectDropdown').val() != '' && 
+        $('#deskWidth').val() != '' & $('#deskHeight').val() != '') {
+        return true;
+    } else {
+        return false
+    }
+}
+
+$('#name').change(updateAddDeskButton);
+$('#projectDropdown').change(updateAddDeskButton);
+$('#deskWidth').change(updateAddDeskButton);
+$('#deskHeight').change(updateAddDeskButton);
+
 
 ////////////////////////////////
 /////FUNCTION FOR CREATING NEW FLOOR PLAN 
