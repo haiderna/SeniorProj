@@ -12,14 +12,20 @@ $(document).ready(function () {
 
     $("#name").typeahead().data('typeahead').source = personArray;
 
+    //initializes lists of people to display
 	addToPersonList(personArray);
 	initializeProjectList(projectArray);
 
+    //initializes project menu from desk dropdown
 	initDeskProjectDropdown(projectArray);
-	
+    //adds color picking ability for projects
 	addColorPicker();
     loadColorsIntoColorPickers();
+
+    //loads in names for active desk directory
+    initializeActiveDeskMenu();
     
+    //selects 1st desk as default
     singleDesk();
 
     document.getElementById("jsonInput").value = "";
@@ -180,6 +186,11 @@ function continueEdit() {
 	}
 }
 
+function continueActiveDesk(){
+    // $('#activeDeskSubmenu').toggle();
+    $('#currentDesk').toggle();
+}
+
 var deskIndex = 0;
 function insertDivDesk() {
     var mainDiv = document.getElementById(floorPlan);
@@ -264,8 +275,7 @@ function insertDivDesk() {
     testDiv.style.width = w;
     testDiv.style.height = h;
     
-    // $(testDiv).rotatable().draggable();
-
+    //SETTING DESKS TO ACTIVE AND NON ACTIVE
     $( mainDiv ).selectable({
         filter : ".desk"
      });
@@ -276,10 +286,16 @@ function insertDivDesk() {
             if (!$(this).hasClass("ui-selected")) {
                 //making selectable
                 $(this).addClass("ui-selected").siblings().removeClass("ui-selected");
+
                 //making rotatable
                 $(this).siblings().children(".ui-rotatable-handle").hide();
                 $(this).rotatable();
                 $(this).children(".ui-rotatable-handle").show();
+
+                //setting desk menu options
+                // continueActiveDesk();
+                populateNameSelect(Desk.name);
+                populateProjectSelect(Desk.project);
             } 
         }
     });
@@ -290,6 +306,12 @@ function insertDivDesk() {
             $(this).siblings().children(".ui-rotatable-handle").hide();
             $(this).rotatable();
             $(this).children(".ui-rotatable-handle").show();
+            
+            //setting desk menu options
+            // continueActiveDesk();
+            populateNameSelect(Desk.name);
+            populateProjectSelect(Desk.project);
+
         } else if ($(this).hasClass("ui-selected")){
             $(this).removeClass("ui-selected");
             $(this).children(".ui-rotatable-handle").hide();

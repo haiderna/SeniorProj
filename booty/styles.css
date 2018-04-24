@@ -359,7 +359,7 @@ a, a:hover, a:focus {
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #FFF;
-    background: #f0ad4e;
+    background: #375172;
 }
 #sidebar ul ul a {
     font-size: 0.9em !important;
@@ -749,3 +749,8 @@ ul.typeahead.dropdown-menu > li > a:hover {
     cursor: pointer;
 }
 
+ul#activeDeskSubmenu > li > a > div > div > ul > li > a{
+    background: #375172;
+    color: white;
+    border:2px solid #223547;
+}

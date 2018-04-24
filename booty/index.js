@@ -191,12 +191,17 @@ function addPerson() {
     }
 
     personArray.push(filter);
+
+    //person object array
     var person = new PersonClass();
     person.name = filter;
     person.project = "Regal";
-    person.floorplan = "HQFloor1";
+    person.floorplan = floorPlan;
     personObjectArray.push(person);
+
     addToPersonList(personArray);
+    addToActiveDeskPersonSelection(personArray);
+    
     alert(filter + " was added to the people directory."); 
     input.value = "";
 }
@@ -216,14 +221,16 @@ function addPersonFromDeskMenu(){
     }
 
     personArray.push(filter);
+
     //adding to object array 
     var person = new PersonClass();
     person.name = filter;
     person.project = "Regal";
-    person.floorplan = "HQFloor1";
+    person.floorplan = floorPlan;
     personObjectArray.push(person);
     
     addToPersonList(personArray);
+    addToActiveDeskPersonSelection(personArray);
     alert(filter + " was added to the people directory."); 
     input.value = "";
 }
@@ -304,6 +311,35 @@ function addToPersonList(array) {
         };
     }
     // return list;
+}
+
+function initializeActiveDeskMenu(){
+
+    var activeName = document.getElementById('activeDeskName');
+
+    for(var i=0; i < personArray.length; i++){
+        var option = document.createElement('option');
+        option.value = personArray[i];
+        option.text = personArray[i];
+        option.addClass = "active-name-select-item";
+        option.style
+    
+        //create the list
+        activeName.appendChild(option);
+    }
+    $('#activeDeskName').selectpicker('refresh');
+}
+
+function addToActiveDeskPersonSelection(array) {
+
+    var activeName = document.getElementById('activeDeskName');
+    var option = document.createElement('option');
+    option.value = array[array.length-1];
+    option.text = array[array.length-1];
+
+    //create the list
+    activeName.appendChild(option);
+    $('#activeDeskName').selectpicker('refresh');
 }
 
 // ============================================================================================
@@ -481,6 +517,7 @@ function initDeskProjectDropdown(array) {
 
     //Populate select menu
     var drop = document.getElementById('projectDropdown');
+    var activeDrop = document.getElementById('activeDeskProjectDropdown');
     
     $("#projectDropdown").find("option").remove();
     
@@ -493,14 +530,17 @@ function initDeskProjectDropdown(array) {
 
         //create the list
         drop.appendChild(option);
+        activeDrop.appendChild(option);
     }
   $('#projectDropdown').selectpicker('refresh');
+  $('#activeDeskProjectDropdown').selectpicker('refresh');
 
 }
 
 function addToDeskProjectDropDown(array) {
 
     var drop = document.getElementById('projectDropdown');
+    var activeDrop = document.getElementById('activeDeskProjectDropdown');
     var option = document.createElement('option');
     option.className = "desk-proj-color" + " " + array[array.length-1];
     option.value = projectColors[projectColors.length-1];
@@ -509,8 +549,10 @@ function addToDeskProjectDropDown(array) {
 
     //create the list
     drop.appendChild(option);
+    activeDrop.appendChild(option);
 
     $('#projectDropdown').selectpicker('refresh');
+    $('#activeDeskProjectDropdown').selectpicker('refresh');
 
 }
 
@@ -595,7 +637,23 @@ function loadColorsIntoColorPickers() {
     );
 }
 
+// ============================================================================================
+// =============================== Active Desk ================================================
+// ============================================================================================
 
+function populateNameSelect(name) {
+    var x = name; 
+    $('#activeDeskName').selectpicker('val', x);
+}
+
+function populateProjectSelect(proj) {
+    var ps = $('#activeDeskProjectDropdown');
+    ps.value = proj;
+}
+
+function populateFloorSelect(desk) {
+    var fs = $('#activeDeskFloorDropdown');
+}
 
 // ============================================================================================
 // =============================== MISC =======================================================
@@ -611,57 +669,3 @@ function toTitleCase(str)
 function isEmpty(str){
     return !str.replace(/^\s+/g, '').length; // boolean (`true` if field is empty)
 }
-
-// ============================================================================================
-// =============================== DEPRECATED FUNCTIONS =======================================
-// ============================================================================================
-
-// //SHOWS PROJECTS AND COLORS INSIDE ADD DESK SUBMENU
-// function initDeskProjectDropdown(array) {
-
-//     // == DEPRECATED WITH SELECT MENU
-//     // var list = document.getElementById('deskProjectDropdown');
-
-//     //  for(var i = 0; i < array.length; i++) {
-//     //     var inneritem = document.createElement('a');
-//     //     inneritem.className = "dropdown-item";
-//     //     inneritem.className += " " + array[i];
-
-//     //     var sq = document.createElement('div');
-//     //     sq.className = "desk-proj-color";
-//     //     sq.style.backgroundColor = projectColors[i];
-
-//     //     inneritem.appendChild(document.createTextNode(array[i]));
-//     //     inneritem.appendChild(sq);
-
-//     //     //create the list
-//     //     list.appendChild(inneritem);
-//     // }
-
-// }
-
-// function addToDeskProjectDropDown(array) {
-//     //DEPRECATED WITH SELECT MENU
-//     // var list = document.getElementById('deskProjectDropdown');
-
-//     // var inneritem = document.createElement('a');
-//     // inneritem.className = "dropdown-item";
-//     // inneritem.className += " " + array[array.length-1];
-
-//     // var sq = document.createElement('div');
-//     // sq.className = "desk-proj-color";
-//     // sq.style.backgroundColor = projectColors[projectColors.length-1];
-
-//     // inneritem.appendChild(document.createTextNode(array[array.length-1]));
-//     // inneritem.appendChild(sq);
-
-//     // //create the list
-//     // list.appendChild(inneritem);
-
-// }
-
-//DEPRECATED BY DESK SELECT ...
-// $('#deskProjectDropdown').find('.' + correspondingProjectName + '').each(
-//     function() {
-//         $(this).find('.desk-proj-color').css("background-color", projectColors[idx]);
-//     });
