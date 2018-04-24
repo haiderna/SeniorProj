@@ -354,16 +354,22 @@ $('#deskHeight').change(updateAddDeskButton);
 ////////////////////////////////
 /////FUNCTION FOR CREATING NEW FLOOR PLAN 
 ////////////////////////////
-var buildings = ["HQ", "Treehouse", "Watchtower"]
 var match = false;
 
 var storeImage = " ";
 var floorIndex = 0;
 
 function newFloor() {
+
+    if(!confirm('Are you sure you want to upload this floorplan?')){
+        return;
+    }
+
     var building = document.getElementById("building").value;
     var floorId = "newFloor"+floorIndex;
     var divNew = document.getElementById("mainClass");
+
+    floorLabel = document.getElementById("floorName").value;
 
     floorplans.push(floorId);
 
@@ -383,34 +389,49 @@ function newFloor() {
     for (var i = 0; i < buildings.length; i++) {
         if (building === buildings[i]) {
             match = true;
-            var idUL = building + "subFloor";
-            var ul = document.getElementById(idUL);
-            var li = document.createElement("li");
-            li.appendChild(document.createTextNode(floorId));
-            ul.appendChild(li);
-            //match = false;
         }
         
     }
-    
-    if (match === false) {
-    buildings.push(building);
-    var ul = document.getElementById("floorplanSubMenu");
-    var ul2 = document.createElement("ul");
-    var idUL = building + "subFloor";
-    ul2.setAttribute("id", idUL);
-    ul2.appendChild(document.createTextNode(building));
-   // ul2.style.background = "#375172";
-    ul2.style.padding = "10px";
-    var li = document.createElement("li");
-    li.style.background = "#223547";
-    li.appendChild(document.createTextNode(floorId));
-    
-    ul.appendChild(ul2);
-    ul2.appendChild(li);
-    
-}
-    li.onclick = function() {
+
+    var elemToFoo; 
+
+    if (match === true) {
+        var idUL = building + "subFloor";
+        var ul = document.getElementById(idUL);
+        var li = document.createElement("li");
+        li.innerHTML = floorLabel;
+        ul.appendChild(li);
+        //match = false;
+        elemToFoo = li;
+
+    } else if  (match === false) {
+
+        buildings.push(building);
+        var submenu = document.getElementById("floorplanSubMenu");
+        var li = document.createElement("li");
+        var idThing = building + "subFloor";
+
+        var anc = document.createElement("a");
+        anc.innerHTML = building;
+
+        var ul = document.createElement("ul");
+        ul.setAttribute("id", idThing);
+
+        var li2 = document.createElement("li");
+        li2.setAttribute("href", "#");
+        elemToFoo = li2;
+
+        var anc2 = document.createElement("a");
+        anc2.innerHTML = floorLabel;
+
+        li2.appendChild(anc2);
+        ul.appendChild(li2);
+        li.appendChild(anc);
+        li.appendChild(ul);
+        submenu.appendChild(li);
+    }   
+
+    elemToFoo.onclick = function() {
         floorPlan = floorId;
         for (var i = 0; i < floorplans.length; i++){
             var elem = document.getElementById(floorplans[i]);
@@ -419,7 +440,7 @@ function newFloor() {
        var showFloorplan = document.getElementById(floorPlan);
         $(showFloorplan).show();
         //  alert(floorPlan);
-     };
+    };
     
     floorIndex++;
     match = false; 

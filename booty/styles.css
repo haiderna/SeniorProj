@@ -288,6 +288,7 @@ a, a:hover, a:focus {
     background: #223547;
     color: #fff;
     transition: all 0.3s;
+    cursor: default;
 }
 
 /* Shrinking the sidebar from 250px to 80px and center aligining its content*/
@@ -356,6 +357,7 @@ a, a:hover, a:focus {
 #sidebar ul li ul li a:hover {
     color: #fff;
     background: #223547;
+    cursor: default;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
@@ -736,11 +738,12 @@ ul.nav.navbar-nav.navbar-right{
     background: #f0ad4e;
 }
 
-/* ul#projectSubMenu > li.colorPickerAdded > a {
-    padding-left: 10px;
-} */
+ul#floorplanSubMenu > li > a {
+    padding: 10px;
+}
 
 .selectedDeskType {
     border: 4px solid gold;
     border-radius: 3px;
 }
+

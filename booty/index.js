@@ -1,8 +1,9 @@
 var personArray = ["Cow Lady", "Dog Man", "Shaggy Mutt"];
 var personObjectArray = [];
 var projectArray = ["Barclays", "Regal", "WillowTree"]; 
-var projectColors = ["#000080", "#FF0000", "#1BD9C4"];     
-
+var projectColors = ["#000080", "#FF0000", "#1BD9C4"];
+     
+var buildings = ["HQ", "Treehouse", "Watchtower"]
 var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"]
       
 function DeskClass(name, project, image)
