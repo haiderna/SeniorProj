@@ -175,10 +175,10 @@
       </li>    
         <li>
           <!-- Link with dropdown items -->
-          <a href="#addFloorSubMen" data-toggle="collapse" aria-expanded="false">
-          	<i class="glyphicon glyphicon-paperclip"></i> Add New Floorplan </a>
-          <ul class="collapse list-unstyled" id="addFloorSubMen">
-          	<li><a>
+          <a href="#addFloorSubMenu" data-toggle="collapse" aria-expanded="false">
+            <i class="glyphicon glyphicon-paperclip"></i> Add New Floorplan </a>
+            <ul class="collapse list-unstyled" id="addFloorSubMenu">
+              <li><a>
                        <form action="#">
                             
                             <label for="building">Building:</label>
@@ -194,8 +194,8 @@
 <!--          		Search People <input type="text" id="peopleInput" onkeyup="searchPeople()" placeholder="Search for names..">-->
                           <input type="file" onchange="previewFile()"><br>
           		<img id="imgAnalyzer" src="" height="100" width="200" alt="Image preview...">
-                        <a href="#" onclick="newFloor();">
-      			<span class="glyphicon glyphicon-plus"></span> Add File into Directory</a>
+                        <a><button id="newFloorButton" class="btn btn-primary" onclick="newFloor()"> 
+                          Add File into Directory </button></a>
           	</a></li>
             <!-- <li><a href="#">Hey this is where people go</a></li> -->
           </ul>

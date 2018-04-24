@@ -359,21 +359,24 @@ var match = false;
 
 var storeImage = " ";
 var floorIndex = 0;
+
 function newFloor() {
     var building = document.getElementById("building").value;
-    alert(building);
     var floorId = "newFloor"+floorIndex;
     var divNew = document.getElementById("mainClass");
-   // alert(storeImage);
+
     floorplans.push(floorId);
+
     var newFloor = document.createElement("div");
     newFloor.setAttribute("id", floorId);
+
     var newImg = document.createElement("IMG");
     newImg.setAttribute("src", storeImage);
     newImg.setAttribute("id", "newImgFloor");
+
     newFloor.appendChild(newImg);
    
-   divNew.appendChild(newFloor);
+    divNew.appendChild(newFloor);
     $(newFloor).hide();
     //ADD TO MENU LIST
     
@@ -390,25 +393,6 @@ function newFloor() {
         
     }
     
-    
-//    if (building=="HQ") {
-//         var ul = document.getElementById("HQsubFloor");
-//          var li = document.createElement("li");
-//           li.appendChild(document.createTextNode(floorId));
-//           ul.appendChild(li);
-//    }
-//    else if (building=="Treehouse") {
-//         var ul = document.getElementById("TreehousesubFloor");
-//          var li = document.createElement("li");
-//           li.appendChild(document.createTextNode(floorId));
-//           ul.appendChild(li);
-//    }
-//    else if (building=="Watchtower") {
-//         var ul = document.getElementById("WatchtowersubFloor");
-//          var li = document.createElement("li");
-//           li.appendChild(document.createTextNode(floorId));
-//           ul.appendChild(li);
-//    }
     if (match === false) {
     buildings.push(building);
     var ul = document.getElementById("floorplanSubMenu");
@@ -434,17 +418,20 @@ function newFloor() {
         }
        var showFloorplan = document.getElementById(floorPlan);
         $(showFloorplan).show();
-         alert(floorPlan);
+        //  alert(floorPlan);
      };
-//    ul2.appendChild(li);
-//    ul.appendChild(ul2);
-     
-  //  ul.appendChild(li);
     
     floorIndex++;
     match = false; 
     alert(buildings);
 }
+
+//unfocuses button after being pressed
+$("#newFloorButton").click(function(event) {
+    // Removes focus of the button.
+    $(this).blur();
+});
+
 
 function newFloorMenu2() {
      floorPlan = "newFloor0";
