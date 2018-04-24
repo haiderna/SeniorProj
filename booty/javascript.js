@@ -295,8 +295,8 @@ function insertDivDesk() {
 
                 //setting desk menu options
                 // continueActiveDesk();
-                populateNameSelect(Desk.name);
-                populateProjectSelect(Desk.project);
+                activateDeskName(Desk.name);
+                activateDeskProject(Desk.project);
             } 
         }
     });

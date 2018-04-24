@@ -530,8 +530,19 @@ function initDeskProjectDropdown(array) {
 
         //create the list
         drop.appendChild(option);
+    }
+
+    for(var i = 0; i < array.length; i++) {
+        var option = document.createElement('option');
+        option.className = "desk-proj-color" + " " + array[i];
+        option.value = projectColors[i];
+        option.text = array[i];
+        option.style.backgroundColor = projectColors[i];
+
+        //create the list
         activeDrop.appendChild(option);
     }
+
   $('#projectDropdown').selectpicker('refresh');
   $('#activeDeskProjectDropdown').selectpicker('refresh');
 
@@ -541,15 +552,22 @@ function addToDeskProjectDropDown(array) {
 
     var drop = document.getElementById('projectDropdown');
     var activeDrop = document.getElementById('activeDeskProjectDropdown');
+
     var option = document.createElement('option');
     option.className = "desk-proj-color" + " " + array[array.length-1];
     option.value = projectColors[projectColors.length-1];
     option.text = array[array.length-1];
     option.style.backgroundColor = projectColors[projectColors.length-1];
 
+    var option2 = document.createElement('option');
+    option2.className = "desk-proj-color" + " " + array[array.length-1];
+    option2.value = projectColors[projectColors.length-1];
+    option2.text = array[array.length-1];
+    option2.style.backgroundColor = projectColors[projectColors.length-1];
+
     //create the list
     drop.appendChild(option);
-    activeDrop.appendChild(option);
+    activeDrop.appendChild(option2);
 
     $('#projectDropdown').selectpicker('refresh');
     $('#activeDeskProjectDropdown').selectpicker('refresh');
@@ -641,19 +659,16 @@ function loadColorsIntoColorPickers() {
 // =============================== Active Desk ================================================
 // ============================================================================================
 
-function populateNameSelect(name) {
+function activateDeskName(name) {
     var x = name; 
     $('#activeDeskName').selectpicker('val', x);
 }
 
-function populateProjectSelect(proj) {
+function activateDeskProject(proj) {
     var ps = $('#activeDeskProjectDropdown');
     ps.value = proj;
 }
 
-function populateFloorSelect(desk) {
-    var fs = $('#activeDeskFloorDropdown');
-}
 
 // ============================================================================================
 // =============================== MISC =======================================================
