@@ -183,6 +183,7 @@ function continueEdit() {
 var deskIndex = 0;
 function insertDivDesk() {
     var mainDiv = document.getElementById(floorPlan);
+    mainDiv.style.position = "relative";
     var Desk = new DeskClass();
     var y = document.createElement("IMG");
     y.setAttribute("src", imageSource);
@@ -359,6 +360,14 @@ var match = false;
 var storeImage = " ";
 var floorIndex = 0;
 
+function deleteFloor() {
+    alert(this.id);
+    event.stopPropagation();
+    
+    
+}
+
+
 function newFloor() {
 
     if(!confirm('Are you sure you want to upload this floorplan?')){
@@ -399,7 +408,13 @@ function newFloor() {
         var idUL = building + "subFloor";
         var ul = document.getElementById(idUL);
         var li = document.createElement("li");
+        var butn = document.createElement("BUTTON");
+        butn.appendChild(document.createTextNode("X"));
+         butn.style.color = "red";
+        butn.onclick = function() {deleteFloor();}
+        butn.style.marginLeft = "55px";
         li.innerHTML = floorLabel;
+        li.appendChild(butn);
         ul.appendChild(li);
         //match = false;
         elemToFoo = li;
@@ -420,10 +435,16 @@ function newFloor() {
         var li2 = document.createElement("li");
         li2.setAttribute("href", "#");
         elemToFoo = li2;
-
+        
+        var butn = document.createElement("BUTTON");
+        butn.appendChild(document.createTextNode("X"));
+        butn.style.color = "red";
+        butn.onclick = deleteFloor();
+        butn.style.marginLeft = "55px";
+        butn.onclick = function() {deleteFloor();}
         var anc2 = document.createElement("a");
         anc2.innerHTML = floorLabel;
-
+        anc2.appendChild(butn);
         li2.appendChild(anc2);
         ul.appendChild(li2);
         li.appendChild(anc);
@@ -439,12 +460,12 @@ function newFloor() {
         }
        var showFloorplan = document.getElementById(floorPlan);
         $(showFloorplan).show();
-        //  alert(floorPlan);
+          alert(floorPlan);
     };
     
     floorIndex++;
     match = false; 
-    alert(buildings);
+    alert(floorplans);
 }
 
 //unfocuses button after being pressed
@@ -554,7 +575,7 @@ function readJSON(){
     var filecontent = "";
 
     if($('#jsonInput').val().length < 1){
-    	alert("SELECT A FILE YA DINGUS");
+    	alert("SELECT A FILE");
     	return;
     }
 
