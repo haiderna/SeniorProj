@@ -360,8 +360,17 @@ var match = false;
 var storeImage = " ";
 var floorIndex = 0;
 
-function deleteFloor() {
-    alert(this.id);
+function deleteFloor(ident) {
+    alert(ident);
+    var id = ident;
+    for (var j= 0; j < floorplans.length;j++){
+        if (id === floorplans[j]){
+            floorplans.splice(j,1);
+            document.getElementById(id).remove();
+        }
+        
+    }
+    
     event.stopPropagation();
     
     
@@ -410,8 +419,12 @@ function newFloor() {
         var li = document.createElement("li");
         var butn = document.createElement("BUTTON");
         butn.appendChild(document.createTextNode("X"));
+        
          butn.style.color = "red";
-        butn.onclick = function() {deleteFloor();}
+        butn.onclick = function() {
+            
+            deleteFloor(floorId);
+        }
         butn.style.marginLeft = "55px";
         li.innerHTML = floorLabel;
         li.appendChild(butn);
@@ -441,7 +454,7 @@ function newFloor() {
         butn.style.color = "red";
         butn.onclick = deleteFloor();
         butn.style.marginLeft = "55px";
-        butn.onclick = function() {deleteFloor();}
+        butn.onclick = function() {deleteFloor(floorId);}
         var anc2 = document.createElement("a");
         anc2.innerHTML = floorLabel;
         anc2.appendChild(butn);
