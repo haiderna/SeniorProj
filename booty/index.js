@@ -50,7 +50,16 @@ function HQFloor1() {
     //alert(floorPlan);
 //    var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
-    
+
+    //THIS IS HOW TO DETECT WHEN YOU CLICK OUTSIDE OF A DESK
+    // NEEDS TO BE DYNAMICALLY REFACTORED
+    // ALONG WITH FLOOR GENERATION
+    $("#HQFloor1").on("click", (function(event) { 
+        if(!$(event.target).closest('.desk').length) {
+            stopActiveDesk();
+        }        
+        })
+    );
 
 }
 
@@ -517,7 +526,7 @@ function initDeskProjectDropdown(array) {
 
     //Populate select menu
     var drop = document.getElementById('projectDropdown');
-    var activeDrop = document.getElementById('activeDeskProjectDropdown');
+    var activeDrop = document.getElementById('activeDeskProject');
     
     $("#projectDropdown").find("option").remove();
     
@@ -532,6 +541,7 @@ function initDeskProjectDropdown(array) {
         drop.appendChild(option);
     }
 
+    //also add to activeDeskProject Dropdown
     for(var i = 0; i < array.length; i++) {
         var option = document.createElement('option');
         option.className = "desk-proj-color" + " " + array[i];
@@ -544,14 +554,14 @@ function initDeskProjectDropdown(array) {
     }
 
   $('#projectDropdown').selectpicker('refresh');
-  $('#activeDeskProjectDropdown').selectpicker('refresh');
+  $('#activeDeskProject').selectpicker('refresh');
 
 }
 
 function addToDeskProjectDropDown(array) {
 
     var drop = document.getElementById('projectDropdown');
-    var activeDrop = document.getElementById('activeDeskProjectDropdown');
+    var activeDrop = document.getElementById('activeDeskProject');
 
     var option = document.createElement('option');
     option.className = "desk-proj-color" + " " + array[array.length-1];
@@ -559,6 +569,7 @@ function addToDeskProjectDropDown(array) {
     option.text = array[array.length-1];
     option.style.backgroundColor = projectColors[projectColors.length-1];
 
+    //also add identical to activeDeskProject Dropdown
     var option2 = document.createElement('option');
     option2.className = "desk-proj-color" + " " + array[array.length-1];
     option2.value = projectColors[projectColors.length-1];
@@ -570,7 +581,7 @@ function addToDeskProjectDropDown(array) {
     activeDrop.appendChild(option2);
 
     $('#projectDropdown').selectpicker('refresh');
-    $('#activeDeskProjectDropdown').selectpicker('refresh');
+    $('#activeDeskProject').selectpicker('refresh');
 
 }
 
@@ -660,13 +671,12 @@ function loadColorsIntoColorPickers() {
 // ============================================================================================
 
 function activateDeskName(name) {
-    var x = name; 
-    $('#activeDeskName').selectpicker('val', x);
+    $('#activeDeskName').selectpicker('val', name);
 }
 
+//CURRENTLY DOESN'T WORK??
 function activateDeskProject(proj) {
-    var ps = $('#activeDeskProjectDropdown');
-    ps.value = proj;
+    $('#activeDeskProject').selectpicker('val', proj);
 }
 
 

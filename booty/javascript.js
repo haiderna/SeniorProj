@@ -187,8 +187,13 @@ function continueEdit() {
 }
 
 function continueActiveDesk(){
-    // $('#activeDeskSubmenu').toggle();
-    $('#currentDesk').toggle();
+    $('#currentDesk').toggle(true);
+    $('#inactiveDeskMessage').toggle(false);
+}
+
+function stopActiveDesk(){
+    $('#currentDesk').toggle(false);
+    $('#inactiveDeskMessage').toggle(true);
 }
 
 var deskIndex = 0;
@@ -294,7 +299,7 @@ function insertDivDesk() {
                 $(this).children(".ui-rotatable-handle").show();
 
                 //setting desk menu options
-                // continueActiveDesk();
+                continueActiveDesk();
                 activateDeskName(Desk.name);
                 activateDeskProject(Desk.project);
             } 
@@ -309,13 +314,14 @@ function insertDivDesk() {
             $(this).children(".ui-rotatable-handle").show();
             
             //setting desk menu options
-            // continueActiveDesk();
-            populateNameSelect(Desk.name);
-            populateProjectSelect(Desk.project);
+            continueActiveDesk();
+            activateDeskName(Desk.name);
+            activateDeskProject(Desk.project);
 
         } else if ($(this).hasClass("ui-selected")){
             $(this).removeClass("ui-selected");
             $(this).children(".ui-rotatable-handle").hide();
+            stopActiveDesk();
         }
     });
 
@@ -349,6 +355,13 @@ function insertDivDesk() {
     deskIndex++;
     //alert(testDiv.style.width);
 }
+
+$(document).on("click", (function(event) { 
+    if(!$(event.target).closest('.desk').length) {
+        stopActiveDesk();
+    }        
+    })
+);
 
 //add desk button is called exportbutton for some reason
 function updateAddDeskButton() {
