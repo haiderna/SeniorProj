@@ -380,6 +380,10 @@ function confirmDeskEdit(){
 
     desk = desks[0];
     desk.getElementsByTagName("p")[0].innerHTML = new_name;
+    var img = desk.getElementsByTagName("IMG")[0];
+    var convertedR = convertHex(new_proj,50);
+    getNewColor(convertedR,img);
+    //getNewColor(new_proj, img);
 
 }
 
