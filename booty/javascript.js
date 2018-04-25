@@ -356,12 +356,39 @@ function insertDivDesk() {
     //alert(testDiv.style.width);
 }
 
-$(document).on("click", (function(event) { 
-    if(!$(event.target).closest('.desk').length) {
-        stopActiveDesk();
-    }        
-    })
-);
+function confirmDeskEdit(){
+    if(!confirm('Are you sure you want to edit this desk as shown?')){
+        return;
+    }
+    var new_name = $("#activeDeskName").val();
+    var new_proj = $("#activeDeskProject").val();
+
+    if(!new_name || !new_proj){
+        alert("Please ensure both input fields are selected.");
+        return;
+    }
+
+    alert(new_name + " " + new_proj);
+    var desks = document.getElementsByClassName("desk ui-selected");
+    if(desks.length > 1){
+        alert("uh.. somehow you selected more than one desk. email us how please."); 
+        return;
+    } else if ( desks.length < 1) { 
+        alert("uh.. somehow you managed to get here without selecting a desk. pls file a bug report.");
+        return;
+    }
+
+    desk = desks[0];
+    desk.getElementsByTagName("p")[0].innerHTML = new_name;
+
+}
+
+// $(document).on("click", (function(event) { 
+//     if(!$(event.target).closest('.desk').length) {
+//         stopActiveDesk();
+//     }        
+//     })
+// );
 
 //add desk button is called exportbutton for some reason
 function updateAddDeskButton() {

@@ -47,9 +47,6 @@ function HQFloor1() {
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    //alert(floorPlan);
-//    var divNew = document.getElementById("newFloor");
-//     $(divNew).hide();
 
     //THIS IS HOW TO DETECT WHEN YOU CLICK OUTSIDE OF A DESK
     // NEEDS TO BE DYNAMICALLY REFACTORED

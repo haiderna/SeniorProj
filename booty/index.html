@@ -345,12 +345,14 @@
               </a>
               <a>
                 Project:<br>
-                <select id="activeDeskProject" class="selectpicker" data-live-search="true" title="Select Project..." data-width='85%' data-size="5" style="position:relative;">
+                <select id="activeDeskProject" disabled="true" class="selectpicker" data-live-search="true" title="Select Project..." data-width='85%' data-size="5" style="position:relative;">
                     <!-- <option> Projects go in here ...</option> -->
               </select>
+              </a>
+              <a>
+                <button id="confirmDeskEdit" type="button" class="btn btn-warning" onclick="confirmDeskEdit()">Edit</button>
               </a></li>
           </ul>
-          <li><button id="tempoo" type="button" class="btn btn-success" onclick="continueActiveDesk()"></button></li>
         </li><!-- end of active desk-->
 
       </ul>
