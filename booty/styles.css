@@ -736,6 +736,22 @@ ul.nav.navbar-nav.navbar-right{
     background: #f0ad4e;
 }
 
+.floorDeleteButton{
+    float: right;
+    margin-left: 5px;
+    color: #375172;
+    background: #223547;
+    font-size: 8pt;
+    padding: 2px;
+    border: 0pt solid;
+    border-radius: 3px;
+}
+
+.floorDeleteButton:hover{
+    color: #223547;
+    background: #f0ad4e;
+}
+
 ul#floorplanSubMenu > li > a {
     padding: 10px;
 }

@@ -504,15 +504,14 @@ function newFloor() {
         var li = document.createElement("li");
         li.setAttribute("id", listItemId);
         var butn = document.createElement("BUTTON");
-        butn.appendChild(document.createTextNode("X"));
+        butn.innerHTML = "REMOVE";
         butn.setAttribute("id", listItemId);
-         butn.style.color = "red";
+        butn.className = "floorDeleteButton";
+
         butn.onclick = function() {
             //alert("is accessing");
             deleteFloor(floorId, listItemId);
-            
         }
-        butn.style.marginLeft = "55px";
         li.innerHTML = floorLabel;
         li.appendChild(butn);
         ul.appendChild(li);
@@ -539,10 +538,10 @@ function newFloor() {
         li2.setAttribute("id", listItemId);
         
         var butn = document.createElement("BUTTON");
-        butn.appendChild(document.createTextNode("X"));
-        butn.style.color = "red";
-        butn.onclick = deleteFloor();
-        butn.style.marginLeft = "55px";
+        butn.innerHTML = "REMOVE";
+        butn.className = "floorDeleteButton";
+        /** BREAKS ADDING NEW FLOORS */
+        // butn.onclick = deleteFloor();
        
         
        // butn.setAttribute("id", listItemId);
@@ -550,6 +549,8 @@ function newFloor() {
         anc2.innerHTML = floorLabel;
         //ac2.setAttribute("id", listItemId);
         anc2.appendChild(butn);
+
+        /** BREAKS ADDING NEW FLOORS */
          butn.onclick = function() {
              // alert(listItemId);
             deleteFloor(floorId, listItemId);
@@ -557,6 +558,7 @@ function newFloor() {
             //take it out of array 
             
         };
+
         li2.appendChild(anc2);
         
         ul.appendChild(li2);
