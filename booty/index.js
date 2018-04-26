@@ -3,8 +3,9 @@ var personObjectArray = [];
 var projectArray = ["Barclays", "Regal", "WillowTree"]; 
 var projectColors = ["#000080", "#FF0000", "#1BD9C4"];
      
-var buildings = ["HQ", "Treehouse", "Watchtower"]
-var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"]
+var buildings = ["HQ", "Treehouse", "Watchtower"];
+var listIds = ["HQ1", "HQ2", "TH1","TH2", "TH3","TH4","WT1" ];
+var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"];
       
 function DeskClass(name, project, image)
 {   this.name = name; 
@@ -57,7 +58,7 @@ function HQFloor1() {
         }        
         })
     );
-
+ 
 }
 
 function HQFloor2(){
@@ -94,6 +95,7 @@ function THFloor2(){
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
+   
     //alert(floorPlan);
 //   var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
