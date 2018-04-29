@@ -281,7 +281,7 @@ function addToPersonList(array) {
        
         item.onclick = function() { 
             var label = this.id;
-            alert(label);
+            //alert(label);
                      for (var j = 0; j < personObjectArray.length; j++){
                         if (label === personObjectArray[j].name) {
                         floorPlan = personObjectArray[j].floorplan;
@@ -296,21 +296,21 @@ function addToPersonList(array) {
         };
         
         innerButton.onclick = function(){
-            alert(personObjectArray.length);
+            //alert(personObjectArray.length);
             var label = this.id;
            // alert(this.id);
             //finding element in arrays and deleting them 
                 for (var j = 0; j < personObjectArray.length; j++){
                     if (label === personObjectArray[j].name) {
                         personObjectArray.splice(j, 1);
-                        alert(personObjectArray.length);
+                        //alert(personObjectArray.length);
                     }         
                 }
-                alert("out");
+              //  alert("out");
                 for (var k = 0; k < personArray.length; k++){
                     if (label === personArray[k]) {
                         personArray.splice(k, 1);
-                        alert(personArray.length);
+                        //alert(personArray.length);
                     }         
                 }
             addToPersonList(personArray);
@@ -446,14 +446,14 @@ function initializeProjectList(array) {
         list.appendChild(item);
         
         innerButton.onclick = function() {
-        alert(projectArray.length);
+        //alert(projectArray.length);
         var label = this.id;
         
         for (var k = 0; k < projectArray.length; k++){
                     if (label === projectArray[k]) {
                         projectArray.splice(k, 1);
                         projectColors.splice(k,1);
-                        alert(projectArray.length);
+                       // alert(projectArray.length);
                     }         
                 }
                 
@@ -501,14 +501,14 @@ function addToProjectList(array) {
     addColorPicker();
     
     innerButton.onclick = function() {
-        alert(projectArray.length);
+       // alert(projectArray.length);
         var label = this.id;
         
         for (var k = 0; k < projectArray.length; k++){
                     if (label === projectArray[k]) {
                         projectArray.splice(k, 1);
                         projectColors.splice(k,1);
-                        alert(projectArray.length);
+                        //alert(projectArray.length);
                     }         
                 }
                 

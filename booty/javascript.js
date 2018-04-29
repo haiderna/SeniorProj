@@ -213,6 +213,7 @@ function insertDivDesk() {
     var w = document.getElementById("deskWidth").value;
     var h = document.getElementById("deskHeight").value;
     var name = document.getElementById("name").value;
+   
     
     //error messages 
     if (!name) {
@@ -262,6 +263,21 @@ function insertDivDesk() {
             }
     
     y.setAttribute("alt", "desk");
+    
+    //////
+    //////
+    //Setting Floorplan to new Floorplan 
+    ////////
+    ////////
+    for (var j = 0; j < personObjectArray.length;j++){
+        if (name === personObjectArray[j].name){
+            personObjectArray[j].project = proj;
+            personObjectArray[j].floorplan = floorPlan;
+        }
+        
+    }
+    
+    
 
     var para = document.createElement("p");
     var node = document.createTextNode(name);
@@ -368,7 +384,7 @@ function confirmDeskEdit(){
         return;
     }
 
-    alert(new_name + " " + new_proj);
+   // alert(new_name + " " + new_proj);
     var desks = document.getElementsByClassName("desk ui-selected");
     if(desks.length > 1){
         alert("uh.. somehow you selected more than one desk. email us how please."); 
@@ -427,15 +443,15 @@ var storeImage = " ";
 var floorIndex = 0;
 
 function deleteFloor(ident, listIdentifier) {
-    alert(floorplans);
-    alert(listIds);
+    //alert(floorplans);
+    //alert(listIds);
     var id = ident;
     var listItem = listIdentifier;
     //delete floor plan from array 
     for (var j= 0; j < floorplans.length;j++){
         if (id === floorplans[j]){
             floorplans.splice(j,1);
-            alert(floorplans);
+            //alert(floorplans);
             document.getElementById(id).remove();
            
         }
@@ -445,7 +461,7 @@ function deleteFloor(ident, listIdentifier) {
     for (var k=0;k<listIds.length;k++){
         if (listItem === listIds[k]){
              listIds.splice(k,1);
-             alert(listIds);
+           //  alert(listIds);
             document.getElementById(listIdentifier).remove();
         }
         
@@ -575,7 +591,7 @@ function newFloor() {
         }
        var showFloorplan = document.getElementById(floorPlan);
         $(showFloorplan).show();
-          alert(floorPlan);
+         // alert(floorPlan);
           
     };
     
@@ -657,19 +673,19 @@ previewFile();
 ////////////////////////////
 
 function exportPDF() {
-    
+      var contentToPrint = document.getElementById(floorPlan).innerHTML;
 	var newWin = window.open("", "", "width=1056,height=714");
     newWin.document.write('<html><head><title>Seating Chart</title>');
     newWin.document.write('<link rel="stylesheet" href="styles.css" type="text/css" />');
     newWin.document.write('</head><body>');
-//	newWin.document.write(contentToPrint);
+	newWin.document.write(contentToPrint);
 //        newWin.document.write('<br />');
 //        newWin.document.write(secondFloor);
-        for (var i = 0; i < floorplans.length; i++){
-            var elem = document.getElementById(floorplans[i]).innerHTML;
-            newWin.document.write(elem);
-            newWin.document.write('<br />');
-            }
+//        for (var i = 0; i < floorplans.length; i++){
+//            var elem = document.getElementById(floorplans[i]).innerHTML;
+//            newWin.document.write(elem);
+//            newWin.document.write('<br />');
+//            }
     newWin.document.write('</body></html>');
     newWin.document.close(); 
 
@@ -710,6 +726,11 @@ function readJSON(){
 		var data = JSON.parse(filecontent);
 	    for (var i =0; i < data.length; i++){
 	    	addPersonFromJSON(data[i].name);
+                 var person = new PersonClass();
+                 person.name = data[i].name;
+                 person.project = "Regal";
+                 person.floorplan = "HQFloor1";
+                 personObjectArray.push(person);
 	    	addProjectFromJSON(data[i].project);
 	    }
 	}
