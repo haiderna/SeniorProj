@@ -38,16 +38,13 @@ input[type=submit]:hover {
 }
 
 #deskMenu{
-    list-style: none
-    /*display:inline-block;*/
-   /* position: absolute;*/
+    list-style: none;
     padding: 10px;
-/*    margin-left: inherit;*/
     margin-top: 10px;
     margin-bottom: 10px;
-     background-color: #223547;
-     text-decoration: none
-     
+    margin-left: 20px;
+    background-color: #223547;
+    text-decoration: none;
 }
 
 #deskMenu li{
@@ -112,6 +109,32 @@ input[type=submit]:hover {
     font-weight: bold;
 }
 
+.deleteDeskButton{
+    display:relative;
+    cursor:pointer;
+    margin:0;
+    float:right;
+    height:12px;
+    width:12px;
+    padding: 0 0 5px 0;
+    text-align:center;
+    font-size:10px;
+    color:white;
+    background-color:darkblue;
+    z-index:100;
+    visibility: hidden;
+}
+
+.deleteDeskButton:hover{
+    background-color:red;
+    color: white;
+    font-weight: bold;
+}
+
+.ui-selected > .deleteDeskButton{
+    visibility: visible;
+}
+
 /*.desk{
     background-color: lightcoral;
     width: 50px;
@@ -140,10 +163,10 @@ div.sp-replacer{
     width: 40px;
     font-size: 8pt;
     text-align: center;
-    color: black;
+    color: whitesmoke;
+    background: transparent;
     border-radius: 3px;
-    border-color: transparent;
-    display: inline;
+    border: 2px solid #375172;
     /*background-color: #f0ad4e;*/
     /*background-color: rgba(240,173,78,1.0);*/
 }
@@ -167,8 +190,10 @@ div.sp-replacer{
     border: 3px solid #223547;
 }
 
+
 #floorplanSubMenu ul{
     padding-left: 0px;
+    cursor: pointer;
 }
 
 #floorplanSubMenu > li > a{
@@ -260,6 +285,7 @@ a, a:hover, a:focus {
     background: #223547;
     color: #fff;
     transition: all 0.3s;
+    cursor: default;
 }
 
 /* Shrinking the sidebar from 250px to 80px and center aligining its content*/
@@ -322,6 +348,13 @@ a, a:hover, a:focus {
 #sidebar ul li a:hover {
     color: #223547;
     background: #FFF;
+}
+
+/*inner SUBMENU items are not highlighted */
+#sidebar > ul > li > ul > li > a:hover {
+    color: #fff;
+    background: #223547;
+    cursor: default;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
@@ -433,7 +466,7 @@ ul.nav.navbar-nav.navbar-right{
     /*height: calc(~"100vh - 45px"); -- done in Less */
     background: #223547;
     color: #fff;
-    transition: all 0.3s;s
+    transition: all 0.3s;
 }
 
 /* Shrinking the sidebar from 250px to 80px and center aligining its content*/
@@ -442,6 +475,7 @@ ul.nav.navbar-nav.navbar-right{
     max-width: 125px;
     text-align: center;
 }
+
 /*thins out the collapsed sidebar*/
 #right-sidebar.active ul li a {
     padding: 20px 10px;
@@ -500,6 +534,7 @@ ul.nav.navbar-nav.navbar-right{
 #right-sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #FFF;
     background: #375172;
+    cursor: pointer;
 }
 #right-sidebar ul ul a {
     font-size: 0.9em !important;
@@ -657,4 +692,81 @@ ul.nav.navbar-nav.navbar-right{
     position:absolute;
     bottom:0;
     right:0;
+}
+
+/* .desk {
+    position: element(#HQFloor1);
+    transform: translateY(-100%);
+} */
+
+    
+.ui-selected {
+    box-shadow:0 0 10px 5px #f0ad4e;
+ }   
+
+ .personDeleteButton{
+     float: right;
+     margin-left: 5px;
+     color: #375172;
+     background: #223547;
+     font-size: 8pt;
+     padding: 2px;
+     border: 0pt solid;
+     border-radius: 3px;
+ }
+
+ .personDeleteButton:hover{
+    color: #223547;
+    background: #f0ad4e;
+}
+
+.projectDeleteButton{
+    float: right;
+    margin-left: 5px;
+    color: #375172;
+    background: #223547;
+    font-size: 8pt;
+    padding: 2px;
+    border: 0pt solid;
+    border-radius: 3px;
+}
+
+.projectDeleteButton:hover{
+    color: #223547;
+    background: #f0ad4e;
+}
+
+.floorDeleteButton{
+    float: right;
+    margin-left: 5px;
+    color: #375172;
+    background: #223547;
+    font-size: 8pt;
+    padding: 2px;
+    border: 0pt solid;
+    border-radius: 3px;
+}
+
+.floorDeleteButton:hover{
+    color: #223547;
+    background: #f0ad4e;
+}
+
+ul#floorplanSubMenu > li > a {
+    padding: 10px;
+}
+
+.selectedDeskType {
+    border: 4px solid gold;
+    border-radius: 3px;
+}
+
+ul.typeahead.dropdown-menu > li > a:hover {
+    cursor: pointer;
+}
+
+ul#activeDeskSubmenu > li > a > div > div > ul > li > a{
+    background: #375172;
+    color: white;
+    border:2px solid #223547;
 }

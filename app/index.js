@@ -1,22 +1,42 @@
 var personArray = ["Cow Lady", "Dog Man", "Shaggy Mutt"];
-
+var personObjectArray = [];
 var projectArray = ["Barclays", "Regal", "WillowTree"]; 
-var projectColors = ["#000080", "#FF0000", "#1BD9C4"];     
-
-var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"]
+var projectColors = ["#000080", "#FF0000", "#1BD9C4"];
+     
+var buildings = ["HQ", "Treehouse", "Watchtower"];
+var listIds = ["HQ1", "HQ2", "TH1","TH2", "TH3","TH4","WT1" ];
+var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"];
       
 function DeskClass(name, project, image)
 {   this.name = name; 
     this.project = project; 
     this.image = image; } 
-function PersonClass(name, project){
+function PersonClass(name, project, floorplan){
     this.name = name;
     this.project = project;
+    this.floorplan = floorplan;
 }
 function ProjectClass(name){
     this.name = name;
 }
 
+var person1 = new PersonClass();
+person1.name = "Cow Lady";
+person1.project = "Regal";
+person1.floorplan = "HQFloor1";
+personObjectArray.push(person1);
+
+var person2 = new PersonClass();
+person2.name = "Dog Man";
+person2.project = "Regal";
+person2.floorplan = "HQFloor1";
+personObjectArray.push(person2);
+
+var person3 = new PersonClass();
+person3.name = "Shaggy Mutt";
+person3.project = "Regal";
+person3.floorplan = "HQFloor1";
+personObjectArray.push(person3);
 
 var floorPlan = "HQFloor1";
 
@@ -28,11 +48,17 @@ function HQFloor1() {
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    //alert(floorPlan);
-//    var divNew = document.getElementById("newFloor");
-//     $(divNew).hide();
-    
 
+    //THIS IS HOW TO DETECT WHEN YOU CLICK OUTSIDE OF A DESK
+    // NEEDS TO BE DYNAMICALLY REFACTORED
+    // ALONG WITH FLOOR GENERATION
+    $("#HQFloor1").on("click", (function(event) { 
+        if(!$(event.target).closest('.desk').length) {
+            stopActiveDesk();
+        }        
+        })
+    );
+ 
 }
 
 function HQFloor2(){
@@ -69,6 +95,7 @@ function THFloor2(){
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
+   
     //alert(floorPlan);
 //   var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
@@ -112,22 +139,27 @@ function WTFloor() {
 //     $(divNew).hide();
 }
 
-
-
-
 var imageSource = "desk - filled.svg";
 
 //For Choosing which type of desk in Menu 
 function singleDesk() {
    imageSource = "desk - filled.svg";
+   $('#singleDesk').addClass('selectedDeskType');
+   $('#LargeConf').removeClass('selectedDeskType');
+   $('#SmallConf').removeClass('selectedDeskType');
 }
 function largeConferenceDesk(){
     imageSource = "large table - filled.svg";
+    $('#singleDesk').removeClass('selectedDeskType');
+    $('#LargeConf').addClass('selectedDeskType');
+    $('#SmallConf').removeClass('selectedDeskType');
 }
 function smallConferenceDesk(){
     imageSource = "small table - filled.svg";
+    $('#singleDesk').removeClass('selectedDeskType');
+    $('#LargeConf').removeClass('selectedDeskType');
+    $('#SmallConf').addClass('selectedDeskType');
 }
-
 // ============================================================================================
 // =============================== people =====================================================
 // ============================================================================================
@@ -156,26 +188,59 @@ function addPerson() {
     var input, filter;
     input = document.getElementById('peopleInput');
     filter = toTitleCase(input.value.toUpperCase());
-    //check for duplicates
-    if (personArray.includes(filter)){
+
+    //check for duplicates or empty
+    if (isEmpty(filter)) {
+        alert("Please enter a name.");
+        return;
+    } else if (personArray.includes(filter)){
         alert(filter + " already exists in the database.")
         return;
     }
+
     personArray.push(filter);
+
+    //person object array
+    var person = new PersonClass();
+    person.name = filter;
+    person.project = "Regal";
+    person.floorplan = floorPlan;
+    personObjectArray.push(person);
+
     addToPersonList(personArray);
+    addToActiveDeskPersonSelection(personArray);
+    
+    alert(filter + " was added to the people directory."); 
+    input.value = "";
 }
 
 function addPersonFromDeskMenu(){
     var input, filter;
     input = document.getElementById('name');
     filter = toTitleCase(input.value.toUpperCase());
+
     //check for duplicates
-    if (personArray.includes(filter)){
+    if (isEmpty(filter)) {
+        alert("Please enter a name.");
+        return;
+    } else if (personArray.includes(filter)){
         alert(filter + " already exists in the database.")
         return;
     }
+
     personArray.push(filter);
+
+    //adding to object array 
+    var person = new PersonClass();
+    person.name = filter;
+    person.project = "Regal";
+    person.floorplan = floorPlan;
+    personObjectArray.push(person);
+    
     addToPersonList(personArray);
+    addToActiveDeskPersonSelection(personArray);
+    alert(filter + " was added to the people directory."); 
+    input.value = "";
 }
 
 function addPersonFromJSON(name){
@@ -197,14 +262,92 @@ function addToPersonList(array) {
     $("li").remove(".listedPerson");
 
     for(var i = 0; i < array.length; i++) {
+        var innerButton = document.createElement("button");
+        innerButton.className = "personDeleteButton"; 
+        innerButton.innerHTML = 'REMOVE';
         var item = document.createElement('li');
         var inneritem = document.createElement('a');
+       
         item.className = "listedPerson";
+        var nxt = array[i];
+        item.setAttribute("id", nxt);
+        innerButton.setAttribute("id", nxt);
+        inneritem.appendChild(innerButton);
         inneritem.appendChild(document.createTextNode(array[i]));
+        
         item.appendChild(inneritem);
+        
         list.appendChild(item);
+       
+        item.onclick = function() { 
+            var label = this.id;
+            //alert(label);
+                     for (var j = 0; j < personObjectArray.length; j++){
+                        if (label === personObjectArray[j].name) {
+                        floorPlan = personObjectArray[j].floorplan;
+                            for (var k = 0; k < floorplans.length; k++){
+                                var elem = document.getElementById(floorplans[k]);
+                                $(elem).hide();
+                                 }
+                                var showFloorplan = document.getElementById(floorPlan);
+                                $(showFloorplan).show();
+                    }
+             }
+        };
+        
+        innerButton.onclick = function(){
+            //alert(personObjectArray.length);
+            var label = this.id;
+           // alert(this.id);
+            //finding element in arrays and deleting them 
+                for (var j = 0; j < personObjectArray.length; j++){
+                    if (label === personObjectArray[j].name) {
+                        personObjectArray.splice(j, 1);
+                        //alert(personObjectArray.length);
+                    }         
+                }
+              //  alert("out");
+                for (var k = 0; k < personArray.length; k++){
+                    if (label === personArray[k]) {
+                        personArray.splice(k, 1);
+                        //alert(personArray.length);
+                    }         
+                }
+            addToPersonList(personArray);
+            event.stopPropagation();
+            
+        };
     }
     // return list;
+}
+
+function initializeActiveDeskMenu(){
+
+    var activeName = document.getElementById('activeDeskName');
+
+    for(var i=0; i < personArray.length; i++){
+        var option = document.createElement('option');
+        option.value = personArray[i];
+        option.text = personArray[i];
+        option.addClass = "active-name-select-item";
+        option.style
+    
+        //create the list
+        activeName.appendChild(option);
+    }
+    $('#activeDeskName').selectpicker('refresh');
+}
+
+function addToActiveDeskPersonSelection(array) {
+
+    var activeName = document.getElementById('activeDeskName');
+    var option = document.createElement('option');
+    option.value = array[array.length-1];
+    option.text = array[array.length-1];
+
+    //create the list
+    activeName.appendChild(option);
+    $('#activeDeskName').selectpicker('refresh');
 }
 
 // ============================================================================================
@@ -235,7 +378,10 @@ function addProject() {
     input = document.getElementById('projectInput');
     filter = (input.value);
     //check for duplicates
-    if (projectArray.includes(filter)){
+    if (isEmpty(filter)) {
+        alert("Please enter a project name.");
+        return;
+    }  else if (projectArray.includes(filter)){
         alert(filter + " already exists in the database.")
         return;
     }
@@ -245,6 +391,9 @@ function addProject() {
 
     addToProjectList(projectArray);
     addToDeskProjectDropDown(projectArray);
+    input.value = "";
+    searchProjects();
+    alert("New Project added");
 }
 
 function addProjectFromJSON(proj) {
@@ -269,11 +418,18 @@ function initializeProjectList(array) {
     // Create the list element:
     var list = document.getElementById('projectSubMenu');
 
+
+    $("li").remove(".listedProject");
+    $("li").remove(".colorPickerAdded");
     for(var i = 0; i < array.length; i++) {
         var item = document.createElement('li');
         var inneritem = document.createElement('a');
+        var innerButton = document.createElement("button");
+        innerButton.className = "projectDeleteButton";
+        innerButton.innerHTML = "REMOVE";
         item.className = "colorPickerAdded";
         inneritem.className = array[i];
+        innerButton.setAttribute("id", array[i]);
         // inneritem.appendChild(document.createTextNode(array[i])); //add after color 
 
         var sq = document.createElement('input');
@@ -281,20 +437,32 @@ function initializeProjectList(array) {
         sq.className = "color-square";
         // sq.style.backgroundColor = projectColors[i];
 
-        //create button to save color for project
-        var but = document.createElement('button');
-        but.className = "set-color-button";
-        but.innerHTML = "SET";
-        but.onclick = setColor; //onclick function
-
+        inneritem.appendChild(innerButton);
         inneritem.appendChild(sq); 
         inneritem.appendChild(document.createTextNode(array[i]));
-        inneritem.appendChild(but);
 
         //create the list
         item.appendChild(inneritem)
         list.appendChild(item);
-
+        
+        innerButton.onclick = function() {
+        //alert(projectArray.length);
+        var label = this.id;
+        
+        for (var k = 0; k < projectArray.length; k++){
+                    if (label === projectArray[k]) {
+                        projectArray.splice(k, 1);
+                        projectColors.splice(k,1);
+                       // alert(projectArray.length);
+                    }         
+                }
+                
+       initializeProjectList(projectArray);
+       initDeskProjectDropdown(projectArray);
+	
+	addColorPicker();
+	loadColorsIntoColorPickers();
+    };
         // addColorPicker();
     }
     // return list;
@@ -303,7 +471,9 @@ function initializeProjectList(array) {
 //MODIFIED TO ADD A SINGLE ITEM
 function addToProjectList(array) {
     var list = document.getElementById('projectSubMenu');
-
+    var innerButton = document.createElement("button");
+    innerButton.className = "projectDeleteButton";
+    innerButton.innerHTML = "DEL";
     var item = document.createElement('li');
     var inneritem = document.createElement('a');
     inneritem.className = array[array.length-1];
@@ -316,22 +486,38 @@ function addToProjectList(array) {
     sq.setAttribute("type", "text");
     sq.className = "color-square";
 
-    //create button to save color for project
-    var but = document.createElement('button');
-    but.className = "set-color-button";
-    but.innerHTML = "SET";
-    but.onclick = setColor; //onclick function
-    // but.setAttribute('onclick', 'setColor()');
+    //save color using colorpicker itself
 
+    inneritem.appendChild(innerButton);
     inneritem.appendChild(sq); 
     inneritem.appendChild(document.createTextNode(array[array.length-1]));
-    inneritem.appendChild(but);
+    innerButton.setAttribute("id", array[array.length-1]);
 
     //create the list
-    item.appendChild(inneritem)
+    item.appendChild(inneritem);
+    
     list.appendChild(item);
-
+ 
     addColorPicker();
+    
+    innerButton.onclick = function() {
+       // alert(projectArray.length);
+        var label = this.id;
+        
+        for (var k = 0; k < projectArray.length; k++){
+                    if (label === projectArray[k]) {
+                        projectArray.splice(k, 1);
+                        projectColors.splice(k,1);
+                        //alert(projectArray.length);
+                    }         
+                }
+                
+       initializeProjectList(projectArray);
+       initDeskProjectDropdown(projectArray);
+	
+	addColorPicker();
+	loadColorsIntoColorPickers();
+    };
 }
 
 //SHOWS PROJECTS AND COLORS INSIDE ADD DESK SUBMENU
@@ -339,7 +525,10 @@ function initDeskProjectDropdown(array) {
 
     //Populate select menu
     var drop = document.getElementById('projectDropdown');
-
+    var activeDrop = document.getElementById('activeDeskProject');
+    
+    $("#projectDropdown").find("option").remove();
+    
     for(var i = 0; i < array.length; i++) {
         var option = document.createElement('option');
         option.className = "desk-proj-color" + " " + array[i];
@@ -351,21 +540,47 @@ function initDeskProjectDropdown(array) {
         drop.appendChild(option);
     }
 
+    //also add to activeDeskProject Dropdown
+    for(var i = 0; i < array.length; i++) {
+        var option = document.createElement('option');
+        option.className = "desk-proj-color" + " " + array[i];
+        option.value = projectColors[i];
+        option.text = array[i];
+        option.style.backgroundColor = projectColors[i];
+
+        //create the list
+        activeDrop.appendChild(option);
+    }
+
+  $('#projectDropdown').selectpicker('refresh');
+  $('#activeDeskProject').selectpicker('refresh');
+
 }
 
 function addToDeskProjectDropDown(array) {
 
     var drop = document.getElementById('projectDropdown');
+    var activeDrop = document.getElementById('activeDeskProject');
+
     var option = document.createElement('option');
     option.className = "desk-proj-color" + " " + array[array.length-1];
     option.value = projectColors[projectColors.length-1];
     option.text = array[array.length-1];
     option.style.backgroundColor = projectColors[projectColors.length-1];
 
+    //also add identical to activeDeskProject Dropdown
+    var option2 = document.createElement('option');
+    option2.className = "desk-proj-color" + " " + array[array.length-1];
+    option2.value = projectColors[projectColors.length-1];
+    option2.text = array[array.length-1];
+    option2.style.backgroundColor = projectColors[projectColors.length-1];
+
     //create the list
     drop.appendChild(option);
+    activeDrop.appendChild(option2);
 
     $('#projectDropdown').selectpicker('refresh');
+    $('#activeDeskProject').selectpicker('refresh');
 
 }
 
@@ -384,6 +599,9 @@ function addColorPicker() {
         preferredFormat: "hex",
         palette: [ ],
         localStorageKey: "home", // Any Spectrum with the same string will share selection
+        change: function(color, domElement) {
+            setColor(color.toHexString(), this);
+        }
     });
 
     $(".disabled-color").spectrum({
@@ -412,32 +630,20 @@ function disableColorPicker() {
 }
 
 //fixes color to given project and stores it in color array
-function setColor(){
+function setColor(color, domElement){
     //get color from colorpicker
-    var color;
-    var color1 = $(this).siblings(".color-square").spectrum("get");
-    var color2 = $(this).siblings(".disabled-color").spectrum("get");
 
-    // alert("colorsquare val: " + color1 + " type: " + typeof(color1) + "Strings: " + String(color1) + "len: " + String(color1).length + "\n" + "disabled-color val: " + color2 + " type: " + typeof(color2) + "Stringed: " + String(color2));
-
-    if (String(color1).length == 7){
-        color = color1;
-    } else if (String(color2).length == 7){
-        color = color2;
-    } else {
+    if (String(color).length != 7){
         alert("Please make sure to select a color.");
         return;
     }
 
-    var correspondingProjectName = $(this).parent().prop('className'); // gets corresponding project name
+    var correspondingProjectName = $(domElement).parent().prop('className'); // gets corresponding project name
     alert("Project name: %" + correspondingProjectName + "%");
 
     //setting project color
     var idx = projectArray.indexOf(correspondingProjectName);
     projectColors[idx] = String(color);
-    
-    // alert(JSON.stringify(projectArray));
-    // alert(JSON.stringify(projectColors));
 
     $('#projectDropdown').find('.' + correspondingProjectName + '').each(
         function() {
@@ -459,6 +665,18 @@ function loadColorsIntoColorPickers() {
     );
 }
 
+// ============================================================================================
+// =============================== Active Desk ================================================
+// ============================================================================================
+
+function activateDeskName(name) {
+    $('#activeDeskName').selectpicker('val', name);
+}
+
+//CURRENTLY DOESN'T WORK??
+function activateDeskProject(proj) {
+    $('#activeDeskProject').selectpicker('val', proj);
+}
 
 
 // ============================================================================================
@@ -472,58 +690,6 @@ function toTitleCase(str)
     });
 }
 
-
-
-// ============================================================================================
-// =============================== DEPRECATED FUNCTIONS =======================================
-// ============================================================================================
-
-// //SHOWS PROJECTS AND COLORS INSIDE ADD DESK SUBMENU
-// function initDeskProjectDropdown(array) {
-
-//     // == DEPRECATED WITH SELECT MENU
-//     // var list = document.getElementById('deskProjectDropdown');
-
-//     //  for(var i = 0; i < array.length; i++) {
-//     //     var inneritem = document.createElement('a');
-//     //     inneritem.className = "dropdown-item";
-//     //     inneritem.className += " " + array[i];
-
-//     //     var sq = document.createElement('div');
-//     //     sq.className = "desk-proj-color";
-//     //     sq.style.backgroundColor = projectColors[i];
-
-//     //     inneritem.appendChild(document.createTextNode(array[i]));
-//     //     inneritem.appendChild(sq);
-
-//     //     //create the list
-//     //     list.appendChild(inneritem);
-//     // }
-
-// }
-
-// function addToDeskProjectDropDown(array) {
-//     //DEPRECATED WITH SELECT MENU
-//     // var list = document.getElementById('deskProjectDropdown');
-
-//     // var inneritem = document.createElement('a');
-//     // inneritem.className = "dropdown-item";
-//     // inneritem.className += " " + array[array.length-1];
-
-//     // var sq = document.createElement('div');
-//     // sq.className = "desk-proj-color";
-//     // sq.style.backgroundColor = projectColors[projectColors.length-1];
-
-//     // inneritem.appendChild(document.createTextNode(array[array.length-1]));
-//     // inneritem.appendChild(sq);
-
-//     // //create the list
-//     // list.appendChild(inneritem);
-
-// }
-
-//DEPRECATED BY DESK SELECT ...
-// $('#deskProjectDropdown').find('.' + correspondingProjectName + '').each(
-//     function() {
-//         $(this).find('.desk-proj-color').css("background-color", projectColors[idx]);
-//     });
+function isEmpty(str){
+    return !str.replace(/^\s+/g, '').length; // boolean (`true` if field is empty)
+}

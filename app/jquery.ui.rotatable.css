@@ -1,9 +1,9 @@
 .ui-rotatable-handle {
-    height: 16px;
-    width: 16px;
-    cursor: pointer;
-    background-image: url(rotate.png);
-    background-size: 100%;
-    left: 2px;
-    bottom: 2px;
+    background: #bf4;
+    margin-left: auto;
+    margin-right: auto;
+    width: 14px;
+    height: 14px;
+    border-radius: 8px;
+    border: 2px solid #fff;
 }
