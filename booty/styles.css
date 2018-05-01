@@ -121,7 +121,7 @@ input[type=submit]:hover {
     font-size:10px;
     color:white;
     background-color:darkblue;
-    z-index:100;
+    z-index:1000;
     visibility: hidden;
 }
 
@@ -133,6 +133,10 @@ input[type=submit]:hover {
 
 .ui-selected > .deleteDeskButton{
     visibility: visible;
+}
+
+.ui-rotatable-handle{
+    z-index: 1000;
 }
 
 /*.desk{

@@ -281,6 +281,7 @@ function insertDivDesk() {
 
     var para = document.createElement("p");
     var node = document.createTextNode(name);
+    para.style.zIndex = -1;
     para.appendChild(node);
     
     var testDiv = document.createElement("div");
