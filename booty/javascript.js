@@ -378,7 +378,9 @@ function confirmDeskEdit(){
     }
     var new_name = $("#activeDeskName").val();
     var new_proj = $("#activeDeskProject").val();
-
+    var w = document.getElementById("deskWidthEdit").value;
+    var h = document.getElementById("deskHeightEdit").value;
+    
     if(!new_name || !new_proj){
         alert("Please ensure both input fields are selected.");
         return;
@@ -397,8 +399,17 @@ function confirmDeskEdit(){
     desk = desks[0];
     desk.getElementsByTagName("p")[0].innerHTML = new_name;
     var img = desk.getElementsByTagName("IMG")[0];
+    //var divEd = desk.getElementsByTagName("div")[0];
     var convertedR = convertHex(new_proj,50);
     getNewColor(convertedR,img);
+    img.setAttribute("width", w);
+    img.setAttribute("height", h);
+    
+    w = parseInt(w)+0;
+    h = parseInt(h)+0;
+    alert(w);
+    desk.style.width = w;
+    desk.style.height = h;
     //getNewColor(new_proj, img);
 
 }
