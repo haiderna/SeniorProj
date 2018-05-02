@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    document.body.style.backgroundImage = "url('https://78.media.tumblr.com/b96c494a053a6f20a7cb7af1ca9b6f98/tumblr_inline_nn85tpbQkq1rewzq7_1280.png')";
 	//prepares the sidebar collapse buttons
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
