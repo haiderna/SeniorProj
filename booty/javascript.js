@@ -210,6 +210,7 @@ function insertDivDesk() {
     var deskId = "desk"+deskIndex;
     y.setAttribute("id", deskId);
     y.className += "deskImg";
+    y.style.zIndex = 97;
     var w = document.getElementById("deskWidth").value;
     var h = document.getElementById("deskHeight").value;
     var name = document.getElementById("name").value;
@@ -281,7 +282,7 @@ function insertDivDesk() {
 
     var para = document.createElement("p");
     var node = document.createTextNode(name);
-    para.style.zIndex = -1;
+    para.style.zIndex = 98;
     para.appendChild(node);
     
     var testDiv = document.createElement("div");
