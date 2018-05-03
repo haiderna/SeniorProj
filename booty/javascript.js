@@ -247,17 +247,17 @@ function insertDivDesk() {
    
     Desk.project = proj;
     
-        if (isNaN(w)) {
+        if (isNaN(w) || w > 200) {
             //y.setAttribute("width", "100");
-            alert("Add Proper Width");
+            alert("Add proper width with a max size of 200");
             exit();
             } else {
                  y.setAttribute("width", w);
                  }
 
-        if (isNaN(h)) {
+        if (isNaN(h) || h > 200) {
            // y.setAttribute("height", "100");
-            alert("Add Proper Height");
+            alert("Add proper height with a max size of 200");
             exit();
             } else {
             y.setAttribute("height", h);
