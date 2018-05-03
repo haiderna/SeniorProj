@@ -1,5 +1,6 @@
 $(document).ready(function () {
     document.body.style.backgroundImage = "url('https://78.media.tumblr.com/b96c494a053a6f20a7cb7af1ca9b6f98/tumblr_inline_nn85tpbQkq1rewzq7_1280.png')";
+    document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 	//prepares the sidebar collapse buttons
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
@@ -371,6 +372,7 @@ function insertDivDesk() {
    
      // alert(divId);
     deskIndex++;
+    addPersonFromDeskMenu();
     //alert(testDiv.style.width);
 }
 
@@ -607,7 +609,7 @@ function newFloor() {
        var showFloorplan = document.getElementById(floorPlan);
         $(showFloorplan).show();
          // alert(floorPlan);
-          
+        document.getElementById("labelFloorPlan").innerHTML = building + floorLabel;  
     };
     
     floorIndex++;

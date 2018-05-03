@@ -58,7 +58,7 @@ function HQFloor1() {
         }        
         })
     );
- 
+ document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
 
 function HQFloor2(){
@@ -72,6 +72,7 @@ function HQFloor2(){
    // alert(floorPlan);
 //   var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
+document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
 
 function THFloor1(){
@@ -85,6 +86,7 @@ function THFloor1(){
     //alert(floorPlan);
 //   var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
+document.getElementById("labelFloorPlan").innerHTML = floorPlan;
     
 }
 function THFloor2(){
@@ -99,6 +101,7 @@ function THFloor2(){
     //alert(floorPlan);
 //   var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
+document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
 function THFloor3(){
     floorPlan = "THFloor3";
@@ -111,7 +114,7 @@ function THFloor3(){
     //alert(floorPlan);
 //   var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
-//    
+document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
 function THFloor4(){
     floorPlan = "THFloor4";
@@ -124,6 +127,7 @@ function THFloor4(){
     //alert(floorPlan);
 //   var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
+document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
 
 function WTFloor() {
@@ -137,6 +141,7 @@ function WTFloor() {
     //alert(floorPlan);
 //   var divNew = document.getElementById("newFloor");
 //     $(divNew).hide();
+document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
 
 var imageSource = "desk - filled.svg";
