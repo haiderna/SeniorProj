@@ -485,7 +485,7 @@ function deleteFloor(ident, listIdentifier) {
    // document.getElementById(listItem).remove();
     event.stopPropagation();
   }else {
-        alet("not deleted");
+        event.stopPropagation();
     }
     
 }
