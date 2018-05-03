@@ -457,34 +457,36 @@ var floorIndex = 0;
 
 function deleteFloor(ident, listIdentifier) {
     //alert(floorplans);
-    //alert(listIds);
-    var id = ident;
-    var listItem = listIdentifier;
+  if (confirm("You sure you want to delete?")) {
+        var id = ident;
+        var listItem = listIdentifier;
     //delete floor plan from array 
-    for (var j= 0; j < floorplans.length;j++){
-        if (id === floorplans[j]){
-            floorplans.splice(j,1);
-            //alert(floorplans);
-            document.getElementById(id).remove();
+        for (var j= 0; j < floorplans.length;j++){
+            if (id === floorplans[j]){
+                floorplans.splice(j,1);
+                //alert(floorplans);
+                document.getElementById(id).remove();
            
-        }
+            }
         
-    }
+        }
     //delete id from array
-    for (var k=0;k<listIds.length;k++){
-        if (listItem === listIds[k]){
-             listIds.splice(k,1);
+        for (var k=0;k<listIds.length;k++){
+            if (listItem === listIds[k]){
+                listIds.splice(k,1);
            //  alert(listIds);
-            document.getElementById(listIdentifier).remove();
-        }
+                document.getElementById(listIdentifier).remove();
+            }
         
-    }
+        }
     
     
     //.alert(listItem);
    // document.getElementById(listItem).remove();
     event.stopPropagation();
-    
+  }else {
+        alet("not deleted");
+    }
     
 }
 

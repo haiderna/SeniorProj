@@ -473,7 +473,7 @@ function addToProjectList(array) {
     var list = document.getElementById('projectSubMenu');
     var innerButton = document.createElement("button");
     innerButton.className = "projectDeleteButton";
-    innerButton.innerHTML = "DEL";
+    innerButton.innerHTML = "REMOVE";
     var item = document.createElement('li');
     var inneritem = document.createElement('a');
     inneritem.className = array[array.length-1];
