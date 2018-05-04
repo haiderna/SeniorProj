@@ -791,3 +791,16 @@ ul#activeDeskSubmenu > li > a > div > div > ul > li > a{
     -ms-user-select: none; 
     user-select: none;
 }
+
+#peopleSubMenu{
+    max-height: 300px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+#projectSubMenu{
+    max-height: 300px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
