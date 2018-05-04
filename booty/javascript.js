@@ -29,6 +29,8 @@ $(document).ready(function () {
     //selects 1st desk as default
     singleDesk();
 
+    updateAddDeskButton();
+
     document.getElementById("jsonInput").value = "";
 });
 
