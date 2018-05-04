@@ -379,7 +379,14 @@ function insertDivDesk() {
    
      // alert(divId);
     deskIndex++;
-    addPersonFromDeskMenu();
+
+    //should only trigger if person is not already in the database
+    var input, filter;
+    input = document.getElementById('name');
+    filter = toTitleCase(input.value.toUpperCase());
+    if (!isEmpty(filter) && !personArray.includes(filter)){
+        addPersonFromDeskMenu();
+    }
     //alert(testDiv.style.width);
 }
 

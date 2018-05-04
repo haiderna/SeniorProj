@@ -774,3 +774,7 @@ ul#activeDeskSubmenu > li > a > div > div > ul > li > a{
     color: white;
     border:2px solid #223547;
 }
+
+#labelFloorPlan{
+    display: inline;
+}
