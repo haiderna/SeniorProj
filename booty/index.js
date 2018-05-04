@@ -10,7 +10,10 @@ var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "T
 function DeskClass(name, project, image)
 {   this.name = name; 
     this.project = project; 
-    this.image = image; } 
+    this.image = image; 
+    this.left = left; 
+    this.top = top;
+} 
 function PersonClass(name, project, floorplan){
     this.name = name;
     this.project = project;
@@ -697,4 +700,35 @@ function toTitleCase(str)
 
 function isEmpty(str){
     return !str.replace(/^\s+/g, '').length; // boolean (`true` if field is empty)
+}
+
+
+// ============================================================================================
+// =============================== SAVING =======================================================
+// ============================================================================================
+
+function saveAll(){
+    alert("savinggg")
+    saveDeskLocation()
+}
+
+// <div id="testDiv0" class="desk ui-draggable ui-draggable-handle ui-selected" style="width: 50px; height: 50px; position: absolute; left: 831px; top: 273px; z-index: 102; transform: rotate(-0.296706rad);">
+// <img src="desk - filled.svg" id="desk0" class="deskImg" width="50" height="50" alt="desk" style="filter: invert(10%) sepia(20%) saturate(9500%) hue-rotate(235deg);">
+// <p style="z-index: 98; color: black; position: absolute; top: 10px;">Dog Man</p><div class="deleteDeskButton">✕</div><div class="ui-rotatable-handle ui-draggable">
+// </div></div>
+function saveDeskLocation(){
+    // desks = document.getElementsByClassName("demo");  //array of Desk class elements
+    
+    // //going through each desk object and getting values to store in JSON
+    // for(var i = 0; i < desks.length; i++){
+    //     var name = desk[i].name;
+    //     var project = desk[i].project;
+    //     var image = desk[i].image;
+    //     var left = desk[i].left;
+    //     var top = desk[i].top;
+
+    //     alert(name + project + left + top)
+    // }
+
+    // getElementById(testD)
 }

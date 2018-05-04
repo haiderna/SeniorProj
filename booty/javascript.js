@@ -312,7 +312,9 @@ function insertDivDesk() {
                 //making selectable
                 $(this).addClass("ui-selected").siblings().removeClass("ui-selected");
 
-                alert(testDiv.style.left)
+                //updating
+                // alert(testDiv.style.left)
+                // alert("Desk class top = " $(this).)
 
                 //making rotatable
                 $(this).siblings().children(".ui-rotatable-handle").hide();
