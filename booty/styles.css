@@ -778,3 +778,15 @@ ul#activeDeskSubmenu > li > a > div > div > ul > li > a{
 #labelFloorPlan{
     display: inline;
 }
+#peopleSubMenu{
+    max-height: 300px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+#projectSubMenu{
+    max-height: 300px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
