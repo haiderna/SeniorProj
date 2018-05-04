@@ -24,7 +24,7 @@ $(document).ready(function () {
     loadColorsIntoColorPickers();
 
     //loads in names for active desk directory
-    initializeActiveDeskMenu();
+    addToActiveDeskPersonSelection(personArray);
     
     //selects 1st desk as default
     singleDesk();
