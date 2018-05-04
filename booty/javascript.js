@@ -319,10 +319,13 @@ function insertDivDesk() {
                 //updating
                 // alert(testDiv.style.left)
                 // alert("Desk class top = " $(this).)
-
+                //Stop from rotating on Scrolling mouse 
+                var stopRotMouse = {
+                    wheelRotate: false
+                    };
                 //making rotatable
                 $(this).siblings().children(".ui-rotatable-handle").hide();
-                $(this).rotatable();
+                $(this).rotatable(stopRotMouse);
                 $(this).children(".ui-rotatable-handle").show();
 
                 //setting desk menu options
@@ -337,10 +340,13 @@ function insertDivDesk() {
     });
 
     $(testDiv).click(function() {
+        var stopRotMouse = {
+                    wheelRotate: false
+                    };
         if (!$(this).hasClass("ui-selected")) {
             $(this).addClass("ui-selected").siblings().removeClass("ui-selected");
             $(this).siblings().children(".ui-rotatable-handle").hide();
-            $(this).rotatable();
+            $(this).rotatable(stopRotMouse);
             $(this).children(".ui-rotatable-handle").show();
             
             //setting desk menu options
