@@ -312,6 +312,8 @@ function insertDivDesk() {
                 //making selectable
                 $(this).addClass("ui-selected").siblings().removeClass("ui-selected");
 
+                alert(testDiv.style.left)
+
                 //making rotatable
                 $(this).siblings().children(".ui-rotatable-handle").hide();
                 $(this).rotatable();
@@ -321,6 +323,9 @@ function insertDivDesk() {
                 continueActiveDesk();
                 activateDeskName(Desk.name);
                 activateDeskProject(Desk.project);
+
+                //updating class coordinates
+                
             } 
         }
     });
@@ -361,6 +366,8 @@ function insertDivDesk() {
     top = top + ($(mainDiv).height() / 4);
     testDiv.style.left = left;
     testDiv.style.top =  top;
+    Desk.left = left; //updating class as well
+    Desk.top = top;
 
     mainDiv.appendChild(testDiv);
     // testDiv.appendTo(mainDiv);
