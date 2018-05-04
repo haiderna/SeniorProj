@@ -121,7 +121,7 @@ input[type=submit]:hover {
     font-size:10px;
     color:white;
     background-color:darkblue;
-    z-index:1000;
+    z-index:1001;
     visibility: hidden;
 }
 
@@ -571,6 +571,7 @@ ul.nav.navbar-nav.navbar-right{
     transform:scale(0.90);
 }
 
+/** adjust later for smaller devices*/
 @media (max-width: 768px) {
     /* 80px and its content aligned to centre. Pushing it off the screen with the
        negative left margin
@@ -777,4 +778,16 @@ ul#activeDeskSubmenu > li > a > div > div > ul > li > a{
 
 #labelFloorPlan{
     display: inline;
+}
+
+.deskText {
+    font: 10pt;
+    color: black;
+    z-index: -1;
+    position: absolute;
+
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
 }

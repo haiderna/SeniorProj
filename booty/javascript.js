@@ -195,6 +195,9 @@ function continueActiveDesk(){
 function stopActiveDesk(){
     $('#currentDesk').toggle(false);
     $('#inactiveDeskMessage').toggle(true);
+
+    $(".ui-selected").removeClass("ui-selected");
+    $(".ui-rotatable-handle").hide();
 }
 
 var deskIndex = 0;
@@ -282,9 +285,8 @@ function insertDivDesk() {
     
 
     var para = document.createElement("p");
-    var node = document.createTextNode(name);
-    para.style.zIndex = 98;
-    para.appendChild(node);
+    para.innerHTML = name;
+    para.className = "deskText";
     
     var testDiv = document.createElement("div");
     var divId = "testDiv"+deskIndex;
@@ -347,10 +349,8 @@ function insertDivDesk() {
     testDiv.appendChild(y);
     
     testDiv.appendChild(para);
-    //set Label over Desk
-     para.style.color = "black";
-     para.style.position = "absolute";
- 	para.style.top = '10px';
+    //set Label over Desk -- STYLING DONE IN CSS
+    // para.style.top = '10px';
     testDiv.appendChild(btn);
 
     //positioning to a more central position
@@ -524,6 +524,13 @@ function newFloor() {
     newImg.setAttribute("id", "newImgFloor");
 
     newFloor.appendChild(newImg);
+
+    $( newFloor ).on("click", (function(event) { 
+        if(!$(event.target).closest('.desk').length) {
+            stopActiveDesk();
+        }        
+        })
+    );
    
     divNew.appendChild(newFloor);
     $(newFloor).hide();
@@ -532,8 +539,8 @@ function newFloor() {
     for (var i = 0; i < buildings.length; i++) {
         if (building === buildings[i]) {
             match = true;
+            break;
         }
-        
     }
 
     var elemToFoo; 
