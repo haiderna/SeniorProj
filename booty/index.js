@@ -731,8 +731,11 @@ function isEmpty(str){
 
 function saveAll(){
     alert("saveAll")
+    saveFloorDiv()
+}
 
-    var floorSaves = "[" //JSON string containing floor divs
+function saveFloorDiv(){
+     var floorSaves = "[" //JSON string containing floor divs
 
     for(var i=0; i<floorplans.length; i++){
         //alert("floor plan " + i)
@@ -758,7 +761,7 @@ function saveAll(){
         }
     }
 
-    floorSaves = "]" //putting in correct format
+    floorSaves = floorSaves + "]" //putting in correct format
 
     alert(floorSaves)
 }
