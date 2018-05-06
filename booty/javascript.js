@@ -303,7 +303,17 @@ function insertDivDesk() {
     
     //SETTING DESKS TO ACTIVE AND NON ACTIVE
     $( mainDiv ).selectable({
-        filter : ".desk"
+        filter : ".desk",
+        //only one selectable at a time
+        selecting: function(event, ui){
+            if( $(".ui-selecting").length > 1){
+                  $(".ui-selecting").removeClass("ui-selecting");
+            }
+        },
+        //just make it so you can only select using clicks
+        //makes the selectable a redundant application
+        //with the implemented draggable and onclick functions
+        disabled: true
      });
 
     $(outerDiv).draggable({
@@ -427,7 +437,6 @@ function confirmDeskEdit(){
     
     w = parseInt(w)+0;
     h = parseInt(h)+0;
-    alert(w);
     desk.style.width = w;
     desk.style.height = h;
     //getNewColor(new_proj, img);
@@ -713,10 +722,10 @@ previewFile();
 ////////////////////////////
 
 function exportPDF() {
-      var contentToPrint = document.getElementById(floorPlan).innerHTML;
-	var newWin = window.open("", "", "width=1056,height=714");
+    var contentToPrint = document.getElementById(floorPlan).innerHTML;
+	var newWin = window.open("", "", "width=1040,height=630");
     newWin.document.write('<html><head><title>Seating Chart</title>');
-    newWin.document.write('<link rel="stylesheet" href="styles.css" type="text/css" />');
+    newWin.document.write('<link rel="stylesheet" href="styles.css" type="text/css"/>');
     newWin.document.write('</head><body>');
 	newWin.document.write(contentToPrint);
 //        newWin.document.write('<br />');
@@ -735,7 +744,6 @@ function exportPDF() {
         newWin.close();
     };
 
-         
 }
 
 /////////////////////////////////////////////////
