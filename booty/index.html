@@ -24,7 +24,7 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Floorplan: <p id="labelFloorPlan">HQFloor1</p>
-	        <span class="caret"></span></a>
+          <span class="caret"></span></a>
           <ul class="dropdown-menu" id="floorplanSubMenu">
             <li> <a> HQ </a>
                 <ul id="HQsubFloor">
@@ -34,16 +34,16 @@
             </li>
             <li> <a> Treehouse </a>
                  <ul id="TreehousesubFloor">
-	                <li href="#" onclick="THFloor1()" id="TH1"><a>Floor 1</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor1', 'TH1')"> REMOVE </button></li>
-	                <li href="#" onclick="THFloor2()" id="TH2"><a>Floor 2</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor2', 'TH2')"> REMOVE </button></li>
-	                <li href="#" onclick="THFloor3()" id="TH3"><a>Floor 3</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor3', 'TH3')"> REMOVE </button></li>
-	                <li href="#" onclick="THFloor4()" id="TH4"><a>Floor 4</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor4', 'TH4')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor1()" id="TH1"><a>Floor 1</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor1', 'TH1')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor2()" id="TH2"><a>Floor 2</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor2', 'TH2')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor3()" id="TH3"><a>Floor 3</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor3', 'TH3')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor4()" id="TH4"><a>Floor 4</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor4', 'TH4')"> REMOVE </button></li>
                 </ul>
             </li>
             <li> <a> Watchtower </a>
-            	<ul id="WatchtowersubFloor">
-            		<li href="#" onclick="WTFloor()" id="WT1"><a>Floor 5</a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('WTFloor', 'WT1')"> REMOVE </button></li>
-            	</ul>
+              <ul id="WatchtowersubFloor">
+                <li href="#" onclick="WTFloor()" id="WT1"><a>Floor 5</a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('WTFloor', 'WT1')"> REMOVE </button></li>
+              </ul>
             </li>
             
           </ul>
@@ -52,10 +52,10 @@
       <ul class="nav navbar-nav navbar-right">
           
 <!--        <li>
-      		<a href="#" onclick="newFloor();">
-      			<span class="glyphicon glyphicon-plus"></span> Press Me after Choosing File</button>
-      		</a>
-      	</li>
+          <a href="#" onclick="newFloor();">
+            <span class="glyphicon glyphicon-plus"></span> Press Me after Choosing File</button>
+          </a>
+        </li>
         
           <li> 
             <img id="imgAnalyzer" src="" height="10" alt="Image preview...">
@@ -66,14 +66,14 @@
           <li>
               <input type="file" onchange="previewFile()"><br>
               <a href="#" onclick="alert('new');" ><span class="glyphicon glyphicon-plus"></span> Add new Floor</a></li>-->
-       	<li>
-      		<a href="#" onclick="exportPDF();">
-      			<span class="glyphicon glyphicon-export"></span> Export
-      		</a>
-      	</li>
+        <li>
+          <a href="#" onclick="exportPDF();">
+            <span class="glyphicon glyphicon-export"></span> Export
+          </a>
+        </li>
         
         
-      	<li><a href="#" onclick="save();"><span id="saveButton" class="glyphicon glyphicon-floppy-disk"></span> Save</a></li>
+        <li><a href="#" onclick="save();"><span id="saveButton" class="glyphicon glyphicon-floppy-disk"></span> Save</a></li>
     </ul>
     </div>
   </nav>
@@ -90,7 +90,7 @@
       <ul class="list-unstyled components">
         <!-- <p>Seating Chart</p> -->
         <!-- <li><a href="#">
-	            	 	<i class="glyphicon glyphicon-object-align-vertical"></i> Add Desk 
+                  <i class="glyphicon glyphicon-object-align-vertical"></i> Add Desk 
       </a>
     </li> -->
     <li>
@@ -128,46 +128,46 @@
                 </ul>
             </li>
           <li>
-          	<!--  old implementation    	
-          	<button id="deskProjectButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Select Project  <span class="caret"></span></button>
-			          	<div id="deskProjectDropdown" class="dropdown-menu">
-			          		this is where the projects themselves go
-						</div> -->
+            <!--  old implementation      
+            <button id="deskProjectButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Select Project  <span class="caret"></span></button>
+                  <div id="deskProjectDropdown" class="dropdown-menu">
+                    this is where the projects themselves go
+            </div> -->
 
-			<div class="btn-group bootstrap-select" style="width: 75%;"><button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" data-id="projectDropdown" title="Select Project..."><span class="filter-option pull-left">Select Project...</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search"></div><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="1"><a tabindex="0" class="desk-proj-color Barclays" style="background-color: rgb(0, 0, 128);" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Barclays</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="desk-proj-color Regal" style="background-color: rgb(255, 0, 0);" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Regal</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="desk-proj-color WillowTree" style="background-color: rgb(27, 217, 196);" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">WillowTree</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select id="projectDropdown" class="selectpicker" data-live-search="true" title="Select Project..." data-width="75%" data-size="5" style="position:relative;" tabindex="-98"><option class="bs-title-option" value="">Select Project...</option>
-			  <!-- <option> Projects go in here ...</option> -->
-			<option class="desk-proj-color Barclays" value="#000080" style="background-color: rgb(0, 0, 128);">Barclays</option><option class="desk-proj-color Regal" value="#FF0000" style="background-color: rgb(255, 0, 0);">Regal</option><option class="desk-proj-color WillowTree" value="#1BD9C4" style="background-color: rgb(27, 217, 196);">WillowTree</option></select></div>
+      <div class="btn-group bootstrap-select" style="width: 75%;"><button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" data-id="projectDropdown" title="Select Project..."><span class="filter-option pull-left">Select Project...</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search"></div><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="1"><a tabindex="0" class="desk-proj-color Barclays" style="background-color: rgb(0, 0, 128);" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Barclays</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="desk-proj-color Regal" style="background-color: rgb(255, 0, 0);" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Regal</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="desk-proj-color WillowTree" style="background-color: rgb(27, 217, 196);" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">WillowTree</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select id="projectDropdown" class="selectpicker" data-live-search="true" title="Select Project..." data-width="75%" data-size="5" style="position:relative;" tabindex="-98"><option class="bs-title-option" value="">Select Project...</option>
+        <!-- <option> Projects go in here ...</option> -->
+      <option class="desk-proj-color Barclays" value="#000080" style="background-color: rgb(0, 0, 128);">Barclays</option><option class="desk-proj-color Regal" value="#FF0000" style="background-color: rgb(255, 0, 0);">Regal</option><option class="desk-proj-color WillowTree" value="#1BD9C4" style="background-color: rgb(27, 217, 196);">WillowTree</option></select></div>
 
           </li>
 
           <li><button id="ExportButton" type="button" class="btn btn-primary" onclick="insertDivDesk()" style="margin-top: 15px" disabled="disabled">Place Desk </button></li>
         </ul>
 
-      	</ul>
- 	</li>
+        </ul>
+  </li>
 
         <li>
-        	<a href="#projectSubMenu" data-toggle="collapse" aria-expanded="false">
-        		<i class="glyphicon glyphicon-folder-open"></i> Project </a>
-        	<ul class="collapse list-unstyled" id="projectSubMenu">
-        		<li><a>
-	          		Search Projects
+          <a href="#projectSubMenu" data-toggle="collapse" aria-expanded="false">
+            <i class="glyphicon glyphicon-folder-open"></i> Project </a>
+          <ul class="collapse list-unstyled" id="projectSubMenu">
+            <li><a>
+                Search Projects
                                 <br>
                                 <input type="text" id="projectInput" onkeyup="searchProjects()" placeholder="Search for project.." style="margin-top: 10px">
-	          		<button id="addProjectButton" type="button" class="btn btn-warning" onclick="addProject()" style="margin-top: 10px; background-color: #337ab7; border-color: #2e6da4">Add Project </button>
-	          	</a></li>
-        	<li class="colorPickerAdded"><a class="Barclays"><button class="projectDeleteButton" id="Barclays">REMOVE</button><input type="text" class="color-square" style="display: none;"><div class="sp-replacer sp-light"><div class="sp-preview"><div class="sp-preview-inner" style="background-color: rgb(0, 0, 128);"></div></div><div class="sp-dd">▼</div></div>Barclays</a></li><li class="colorPickerAdded"><a class="Regal"><button class="projectDeleteButton" id="Regal">REMOVE</button><input type="text" class="color-square" style="display: none;"><div class="sp-replacer sp-light"><div class="sp-preview"><div class="sp-preview-inner" style="background-color: rgb(255, 0, 0);"></div></div><div class="sp-dd">▼</div></div>Regal</a></li><li class="colorPickerAdded"><a class="WillowTree"><button class="projectDeleteButton" id="WillowTree">REMOVE</button><input type="text" class="color-square" style="display: none;"><div class="sp-replacer sp-light"><div class="sp-preview"><div class="sp-preview-inner" style="background-color: rgb(27, 217, 196);"></div></div><div class="sp-dd">▼</div></div>WillowTree</a></li></ul>
-		</li>
+                <button id="addProjectButton" type="button" class="btn btn-warning" onclick="addProject()" style="margin-top: 10px; background-color: #337ab7; border-color: #2e6da4">Add Project </button>
+              </a></li>
+          <li class="colorPickerAdded"><a class="Barclays"><button class="projectDeleteButton" id="Barclays">REMOVE</button><input type="text" class="color-square" style="display: none;"><div class="sp-replacer sp-light"><div class="sp-preview"><div class="sp-preview-inner" style="background-color: rgb(0, 0, 128);"></div></div><div class="sp-dd">▼</div></div>Barclays</a></li><li class="colorPickerAdded"><a class="Regal"><button class="projectDeleteButton" id="Regal">REMOVE</button><input type="text" class="color-square" style="display: none;"><div class="sp-replacer sp-light"><div class="sp-preview"><div class="sp-preview-inner" style="background-color: rgb(255, 0, 0);"></div></div><div class="sp-dd">▼</div></div>Regal</a></li><li class="colorPickerAdded"><a class="WillowTree"><button class="projectDeleteButton" id="WillowTree">REMOVE</button><input type="text" class="color-square" style="display: none;"><div class="sp-replacer sp-light"><div class="sp-preview"><div class="sp-preview-inner" style="background-color: rgb(27, 217, 196);"></div></div><div class="sp-dd">▼</div></div>WillowTree</a></li></ul>
+    </li>
 
         <li>
           <!-- Link with dropdown items -->
           <a href="#peopleSubMenu" data-toggle="collapse" aria-expanded="false">
-          	<i class="glyphicon glyphicon-user"></i> People </a>
+            <i class="glyphicon glyphicon-user"></i> People </a>
           <ul class="collapse list-unstyled" id="peopleSubMenu">
-          	<li><a>
-          		Search People <input type="text" style="margin-top: 10px" id="peopleInput" onkeyup="searchPeople()" placeholder="Search for names..">
-          		<button id="addPersonButton" type="button" class="btn btn-primary" onclick="addPerson()" style="margin-top: 10px;">Add Person </button>
-          	</a></li>
+            <li><a>
+              Search People <input type="text" style="margin-top: 10px" id="peopleInput" onkeyup="searchPeople()" placeholder="Search for names..">
+              <button id="addPersonButton" type="button" class="btn btn-primary" onclick="addPerson()" style="margin-top: 10px;">Add Person </button>
+            </a></li>
             <!-- <li><a href="#">Hey this is where people go</a></li> -->
           <li class="listedPerson" id="Cow Lady"><a><button class="personDeleteButton" id="Cow Lady">REMOVE</button>Cow Lady</a></li><li class="listedPerson" id="Dog Man"><a><button class="personDeleteButton" id="Dog Man">REMOVE</button>Dog Man</a></li><li class="listedPerson" id="Shaggy Mutt"><a><button class="personDeleteButton" id="Shaggy Mutt">REMOVE</button>Shaggy Mutt</a></li></ul>
       </li>    
@@ -189,42 +189,42 @@
                             <input type="text" id="floorName" name="B" value="Floor 3"><br>
 <!--                        <input type="submit" value="Submit">-->
                           </form>
-<!--          		Search People <input type="text" id="peopleInput" onkeyup="searchPeople()" placeholder="Search for names..">-->
+<!--              Search People <input type="text" id="peopleInput" onkeyup="searchPeople()" placeholder="Search for names..">-->
                           <input type="file" onchange="previewFile()"><br>
-          		<img id="imgAnalyzer" src="" height="100" width="200" alt="Image preview...">
+              <img id="imgAnalyzer" src="" height="100" width="200" alt="Image preview...">
                         </a><a><button id="newFloorButton" class="btn btn-primary" onclick="newFloor()"> 
                           Add File into Directory </button></a>
-          	</li>
+            </li>
             <!-- <li><a href="#">Hey this is where people go</a></li> -->
           </ul>
       </li>  
        <li>
           <!-- Link with dropdown items -->
           <a href="#addFile" data-toggle="collapse" aria-expanded="false">
-          	<i class="glyphicon glyphicon-cloud-upload"></i> Add JSON File </a>
+            <i class="glyphicon glyphicon-cloud-upload"></i> Add JSON File </a>
           <ul class="collapse list-unstyled" id="addFile">
-          	<li>
-          		<a> Load in list of employees
+            <li>
+              <a> Load in list of employees
                     </a><form action="#"><a>
-                    	<input type="file" id="jsonInput">
-                    	</a><a href="#">
-                    		<input type="submit" id="jsonSubmit" value="Submit" onclick="readJSON()"> 
-                    	
-                    	</a></form>
-          		
-          	</li>
+                      <input type="file" id="jsonInput">
+                      </a><a href="#">
+                        <input type="submit" id="jsonSubmit" value="Submit" onclick="readJSON()"> 
+                      
+                      </a></form>
+              
+            </li>
             <!-- <li><a href="#">Hey this is where people go</a></li> -->
           </ul>
       </li> 
        <li><a href="#">
-	            	<i class="glyphicon glyphicon-wrench"></i>
-	            	Settings
-	            </a></li>
+                <i class="glyphicon glyphicon-wrench"></i>
+                Settings
+              </a></li>
 
         <li><a href="#">
-	            	<i class="glyphicon glyphicon-link"></i>
-	            	About
-	            </a></li>
+                <i class="glyphicon glyphicon-link"></i>
+                About
+              </a></li>
                     
          
           
@@ -233,69 +233,69 @@
 
       <!-- Toggle (left) Sidebar Button -->
 <!--       <div id="left-main">
-	      <button type="button" id="sidebarCollapse" class="btn">
-	        <i class="glyphicon glyphicon-align-left"></i>
-	      </button>
-	  </div> -->
+        <button type="button" id="sidebarCollapse" class="btn">
+          <i class="glyphicon glyphicon-align-left"></i>
+        </button>
+    </div> -->
 
     <!-- Main -->
 
     <div id="HQFloor1" style="display: block;">
 
-    	<img xlink:href="HQ-1st-Floor.png" src="HQ1.png" width="1040px" height="630px">
+      <img xlink:href="HQ-1st-Floor.png" src="HQ1.png" width="1040px" height="630px">
 
     </div>
 
     <div id="HQFloor2" style="display: none;">
 
-    	<img xlink:href="HQ-2nd-Floor.png" src="2ndfloor.png" width="1040px" height="630px">
+      <img xlink:href="HQ-2nd-Floor.png" src="2ndfloor.png" width="1040px" height="630px">
 
     </div>
 
     <div id="THFloor1" style="display: none;">
 
-    	<img xlink:href="TH1.png" src="TH1.png" width="1040px" height="630px">
+      <img xlink:href="TH1.png" src="TH1.png" width="1040px" height="630px">
 
     </div>
 
     <div id="THFloor2" style="display: none;">
 
-    	<img xlink:href="TH2.png" src="TH2.png" width="1040px" height="630px">
+      <img xlink:href="TH2.png" src="TH2.png" width="1040px" height="630px">
 
     </div>
 
     <div id="THFloor3" style="display: none;">
 
-    	<img xlink:href="TH3.png" src="TH3.png" width="1040px" height="630px">
+      <img xlink:href="TH3.png" src="TH3.png" width="1040px" height="630px">
 
     </div>
 
     <div id="THFloor4" style="display: none;">
 
-    	<img xlink:href="TH4.png" src="TH4.png" width="1040px" height="630px">
+      <img xlink:href="TH4.png" src="TH4.png" width="1040px" height="630px">
 
     </div>
 
     <div id="WTFloor1" style="display: none;">
 
-    	<img xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px">
+      <img xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px">
 
     </div>
     
     <div id="new">
 
-<!--    	<image xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px"/>-->
+<!--      <image xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px"/>-->
 
     </div>
     
     <!-- main -->
 
-	  <!-- Toggle right-sidebar Button -->
-	  <div id="right-main">
-	      <button type="button" id="rightSidebarCollapse" class="btn">
-	        <i class="glyphicon glyphicon-align-right"></i> <!-- text here -->
-	      </button>
-	  </div>
+    <!-- Toggle right-sidebar Button -->
+    <div id="right-main">
+        <button type="button" id="rightSidebarCollapse" class="btn">
+          <i class="glyphicon glyphicon-align-right"></i> <!-- text here -->
+        </button>
+    </div>
 
     <!-- Right Sidebar -->
     <nav id="right-sidebar" class="active">
