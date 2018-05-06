@@ -139,12 +139,10 @@ input[type=submit]:hover {
     z-index: 1000;
 }
 
-/*.desk{
-    background-color: lightcoral;
-    width: 50px;
-    height: 30px;
-    border: 2px solid dodgerblue;
-}*/
+.desk{
+    flex: auto;
+    flex-direction: column;
+}
 
 .color-square{
     width: 8px;

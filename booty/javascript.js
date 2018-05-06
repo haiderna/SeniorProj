@@ -289,7 +289,7 @@ function insertDivDesk() {
     var divId = "outerDiv"+deskIndex;
     outerDiv.setAttribute("id", divId);
     outerDiv.className += "desk";
-    // outerDiv.style.display = "flex";
+    // outerDiv.style.flex = "auto";
     // outerDiv.style.flexDirection = "column";
 
     //cancel button to quit adding all the rooms
@@ -402,6 +402,7 @@ function insertDivDesk() {
     //alert(testDiv.style.width);
 }
 
+
 function confirmDeskEdit(){
     if(!confirm('Are you sure you want to edit this desk as shown?')){
         return;
@@ -426,29 +427,28 @@ function confirmDeskEdit(){
         return;
     }
 
-    desk = desks[0];
+    var desk = desks[0];
+
     desk.getElementsByTagName("p")[0].innerHTML = new_name;
+
     var img = desk.getElementsByTagName("IMG")[0];
-    //var divEd = desk.getElementsByTagName("div")[0];
     var convertedR = convertHex(new_proj,50);
     getNewColor(convertedR,img);
+
     img.setAttribute("width", w);
     img.setAttribute("height", h);
-    
+
     w = parseInt(w)+0;
     h = parseInt(h)+0;
     desk.style.width = w;
     desk.style.height = h;
+
+    var innerDeskDiv = desk.getElementsByClassName('innerDesk')[0];
+    innerDeskDiv.style.width = w;
+    innerDeskDiv.style.height = h;
+
     //getNewColor(new_proj, img);
-
 }
-
-// $(document).on("click", (function(event) { 
-//     if(!$(event.target).closest('.desk').length) {
-//         stopActiveDesk();
-//     }        
-//     })
-// );
 
 //add desk button is called exportbutton for some reason
 function updateAddDeskButton() {
@@ -736,6 +736,7 @@ function exportPDF() {
 //            newWin.document.write('<br />');
 //            }
     newWin.document.write('</body></html>');
+    
     newWin.document.close(); 
 
   newWin.onload=function(){ 
