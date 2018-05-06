@@ -378,7 +378,8 @@ function insertDivDesk() {
    // alert(convertedR);
     getNewColor(convertedR, d_img);
     $(outerDiv).css('z-index', '102');
-   
+
+    deskArray.push(Desk)
      // alert(divId);
     deskIndex++;
 
@@ -771,6 +772,7 @@ function readJSON(){
                  person.project = "Regal";
                  person.floorplan = "HQFloor1";
                  personObjectArray.push(person);
+                 localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray)) //updating local storage
 	    	addProjectFromJSON(data[i].project);
 	    }
 	}

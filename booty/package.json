@@ -15,6 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.3",
+    "jsonfile": "^4.0.0",
     "mongodb": "^2.2.35",
     "nodemon": "^1.17.3"
   },

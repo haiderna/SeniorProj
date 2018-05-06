@@ -14,12 +14,12 @@ const app = express()
 const bodyParser = require('body-parser')
 
 const MongoClient = require('mongodb').MongoClient
-var db = null
+var db
 var mongoURL = 'mongodb://admin:cs306@ds113835.mlab.com:13835/willowtree' //URL for myLab mongodb instance
 //var collection = 'people' //people collection in mongodb
 var dbCursor //where the mongodb cursor is pointing to (can be multiple documents/fields etc.)
 
-//app.use(express.static(__dirname)) //**loads everything statically (including server stuff)
+app.use(express.static(__dirname)) //**loads everything statically (including server stuff)
 
 //connecting to myLab mongoDB instance
 function getConnection(cb){
@@ -32,12 +32,11 @@ function getConnection(cb){
 		app.listen(process.env.PORT || 3000, () => {
 			console.log('listening on 3000')
 			
-			// var array = findPeople(myDB, function(){
-			// })
-			// console.log(array)
+			findDocuments(myDB, function(){
+			})
 			// var myCursor = myDB.collection('people').find({},{})
 			// while(myCursor.hasNext()){
-			// 	console.log(myCursor)
+			// 	console.log(tojson(myCursor.next()))
 			// }
 		})
 
@@ -46,7 +45,7 @@ function getConnection(cb){
 }
 
 //returns all documents
-var findPeople = function(db,cb){
+var findDocuments = function(db,cb){
 	db.collection('people').find({},{}).toArray(function(err,docs){
 		//assert.equal(err,null)
 		console.log("Found following records")

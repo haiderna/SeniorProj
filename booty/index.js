@@ -7,7 +7,21 @@ var deskArray = [];
 var buildings = ["HQ", "Treehouse", "Watchtower"];
 var listIds = ["HQ1", "HQ2", "TH1","TH2", "TH3","TH4","WT1" ];
 var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"];
-      
+
+
+localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
+localStorage.setItem("buildings",JSON.stringify(buildings))
+localStorage.setItem("listIds",JSON.stringify(listIds))
+localStorage.setItem("floorplans",JSON.stringify(floorplans))
+
+//setting up personArray from local storage
+if(localStorage.getItem("personArray")==null){ //if there is no local storage, initialize storage
+    localStorage.setItem("personArray",JSON.stringify(personArray))
+}else{ //if there is already something stored in local, grab from it and then initialize in javascript
+    personArray = JSON.parse(localStorage.getItem("personArray"))
+}
+//alert(localStorage.getItem("personArray"))
+
 function DeskClass(name, project, image, left, top, rotate)
 {   this.name = name; 
     this.project = project; 
@@ -30,18 +44,28 @@ person1.name = "Cow Lady";
 person1.project = "Regal";
 person1.floorplan = "HQFloor1";
 personObjectArray.push(person1);
+localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 
 var person2 = new PersonClass();
 person2.name = "Dog Man";
 person2.project = "Regal";
 person2.floorplan = "HQFloor1";
 personObjectArray.push(person2);
+localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 
 var person3 = new PersonClass();
 person3.name = "Shaggy Mutt";
 person3.project = "Regal";
 person3.floorplan = "HQFloor1";
 personObjectArray.push(person3);
+localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
+
+//setting up personObjectArray from local storage
+if(localStorage.getItem("personObjectArray")==null){
+    localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
+}else{
+    personObjectArray = JSON.parse(localStorage.getItem("personObjectArray"))
+}
 
 var floorPlan = "HQFloor1";
 
@@ -227,6 +251,7 @@ function addPerson() {
     }
 
     personArray.push(filter);
+    localStorage.setItem("personArray",JSON.stringify(personArray))
 
     //person object array
     var person = new PersonClass();
@@ -234,12 +259,15 @@ function addPerson() {
     person.project = "Regal";
     person.floorplan = floorPlan;
     personObjectArray.push(person);
+    localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray)) //updating local storage
 
     addToPersonList(personArray);
     addToActiveDeskPersonSelection(personArray);
     
     alert(filter + " was added to the people directory."); 
     input.value = "";
+
+    //alert(JSON.parse(localStorage.getItem('personArray')))
 }
 
 function addPersonFromDeskMenu(){
@@ -257,6 +285,7 @@ function addPersonFromDeskMenu(){
     }
 
     personArray.push(filter);
+    localStorage.setItem("personArray",JSON.stringify(personArray)) //updating local storage
 
     //adding to object array 
     var person = new PersonClass();
@@ -264,6 +293,7 @@ function addPersonFromDeskMenu(){
     person.project = "Regal";
     person.floorplan = floorPlan;
     personObjectArray.push(person);
+    localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray)) //updating local storage
     
     addToPersonList(personArray);
     addToActiveDeskPersonSelection(personArray);
@@ -278,6 +308,7 @@ function addPersonFromJSON(name){
         return;
     }
     personArray.push(filter);
+    localStorage.setItem("personArray",JSON.stringify(personArray)) //updating local storage
     addToPersonList(personArray);
     addToActiveDeskPersonSelection(personArray);
 }
@@ -333,6 +364,7 @@ function addToPersonList(array) {
                     if (label === personObjectArray[j].name) {
                         personObjectArray.splice(j, 1);
                         //alert(personObjectArray.length);
+                        localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray)) //updating local storage
                     }         
                 }
               //  alert("out");
@@ -340,6 +372,7 @@ function addToPersonList(array) {
                     if (label === personArray[k]) {
                         personArray.splice(k, 1);
                         //alert(personArray.length);
+                        localStorage.setItem("personArray",JSON.stringify(personArray)) //updating local storage
                     }         
                 }
             addToPersonList(personArray);
@@ -726,15 +759,49 @@ function isEmpty(str){
 
 
 // ============================================================================================
-// =============================== SAVING =======================================================
+// ===============================DEPRECIATED SAVING FUNCTIONS FOR TESTING=======================================================
 // ============================================================================================
+    
+    function save(){
+        saveIndex()
+         //(function () {
+// var textFile = null,
+//   makeTextFile = function (text) {
+//     var data = new Blob([text], {type: 'text/plain'});
 
-function saveAll(){
-    alert("saveAll")
-    saveFloorDiv()
-}
+//     // If we are replacing a previously generated file we need to
+//     // manually revoke the object URL to avoid memory leaks.
+//     if (textFile !== null) {
+//       window.URL.revokeObjectURL(textFile);
+//     }
 
-function saveFloorDiv(){
+//     textFile = window.URL.createObjectURL(data);
+
+//     return textFile;
+//   };
+
+
+//   var create = document.getElementById('saveButton')
+
+//   create.addEventListener('click', function () {
+//     var link = document.createElement('a');
+//     link.setAttribute('download', 'floorplans.json');
+//     floors = floorDivsToString()
+//     link.href = makeTextFile(floors);
+//     document.body.appendChild(link);
+
+//     // wait for the link to be added to the document
+//     window.requestAnimationFrame(function () {
+//       var event = new MouseEvent('click');
+//       link.dispatchEvent(event);
+//       document.body.removeChild(link);
+//         });
+    
+//   }, false);
+//})();
+    }
+
+function floorDivsToString(){
      var floorSaves = "[" //JSON string containing floor divs
 
     for(var i=0; i<floorplans.length; i++){
@@ -764,4 +831,29 @@ function saveFloorDiv(){
     floorSaves = floorSaves + "]" //putting in correct format
 
     alert(floorSaves)
+
+    return floorSaves
+}
+
+
+
+function saveIndex(){
+    // Save the page's HTML to a file that is automatically downloaded.
+
+        // We make a Blob that contains the data to download.
+        var file = new window.Blob([document.documentElement.innerHTML], { type: "text/html" });
+        var URL = window.webkitURL || window.URL;
+
+        // This is the URL that will download the data.
+        var downloadUrl = URL.createObjectURL(file);
+
+        var a = document.createElement("a");
+        // This sets the file name.
+        a.download = "index.html";
+        a.href = downloadUrl;
+
+        // Actually perform the download.
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
 }
