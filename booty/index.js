@@ -763,7 +763,7 @@ function isEmpty(str){
 // ============================================================================================
     
     function save(){
-        saveIndex()
+       // saveIndex()
          //(function () {
 // var textFile = null,
 //   makeTextFile = function (text) {
