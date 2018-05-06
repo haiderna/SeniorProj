@@ -289,7 +289,7 @@ function insertDivDesk() {
     var divId = "outerDiv"+deskIndex;
     outerDiv.setAttribute("id", divId);
     outerDiv.className += "desk";
-    // outerDiv.style.display = "flex";
+    // outerDiv.style.flex = "auto";
     // outerDiv.style.flexDirection = "column";
 
     //cancel button to quit adding all the rooms
@@ -303,7 +303,17 @@ function insertDivDesk() {
     
     //SETTING DESKS TO ACTIVE AND NON ACTIVE
     $( mainDiv ).selectable({
-        filter : ".desk"
+        filter : ".desk",
+        //only one selectable at a time
+        selecting: function(event, ui){
+            if( $(".ui-selecting").length > 1){
+                  $(".ui-selecting").removeClass("ui-selecting");
+            }
+        },
+        //just make it so you can only select using clicks
+        //makes the selectable a redundant application
+        //with the implemented draggable and onclick functions
+        disabled: true
      });
 
     $(outerDiv).draggable({
@@ -393,6 +403,7 @@ function insertDivDesk() {
     //alert(testDiv.style.width);
 }
 
+
 function confirmDeskEdit(){
     if(!confirm('Are you sure you want to edit this desk as shown?')){
         return;
@@ -417,30 +428,28 @@ function confirmDeskEdit(){
         return;
     }
 
-    desk = desks[0];
+    var desk = desks[0];
+
     desk.getElementsByTagName("p")[0].innerHTML = new_name;
+
     var img = desk.getElementsByTagName("IMG")[0];
-    //var divEd = desk.getElementsByTagName("div")[0];
     var convertedR = convertHex(new_proj,50);
     getNewColor(convertedR,img);
+
     img.setAttribute("width", w);
     img.setAttribute("height", h);
-    
+
     w = parseInt(w)+0;
     h = parseInt(h)+0;
-    alert(w);
     desk.style.width = w;
     desk.style.height = h;
+
+    var innerDeskDiv = desk.getElementsByClassName('innerDesk')[0];
+    innerDeskDiv.style.width = w;
+    innerDeskDiv.style.height = h;
+
     //getNewColor(new_proj, img);
-
 }
-
-// $(document).on("click", (function(event) { 
-//     if(!$(event.target).closest('.desk').length) {
-//         stopActiveDesk();
-//     }        
-//     })
-// );
 
 //add desk button is called exportbutton for some reason
 function updateAddDeskButton() {
@@ -529,11 +538,18 @@ function newFloor() {
     var newFloor = document.createElement("div");
     newFloor.setAttribute("id", floorId);
 
+    //declare max width so it doesn't overlap on sidebars
+    var maxW = screen.width - 450;
+    newFloor.setAttribute("style","width:" + maxW + "px");
+
     var newImg = document.createElement("IMG");
     newImg.setAttribute("src", storeImage);
     newImg.setAttribute("id", "newImgFloor");
+    newImg.setAttribute("style","width:" + maxW + "px");
 
+    
     newFloor.appendChild(newImg);
+    
 
     $( newFloor ).on("click", (function(event) { 
         if(!$(event.target).closest('.desk').length) {
@@ -714,10 +730,10 @@ previewFile();
 ////////////////////////////
 
 function exportPDF() {
-      var contentToPrint = document.getElementById(floorPlan).innerHTML;
-	var newWin = window.open("", "", "width=1056,height=714");
+    var contentToPrint = document.getElementById(floorPlan).innerHTML;
+	var newWin = window.open("", "", "width=1040,height=630");
     newWin.document.write('<html><head><title>Seating Chart</title>');
-    newWin.document.write('<link rel="stylesheet" href="styles.css" type="text/css" />');
+    newWin.document.write('<link rel="stylesheet" href="styles.css" type="text/css"/>');
     newWin.document.write('</head><body>');
 	newWin.document.write(contentToPrint);
 //        newWin.document.write('<br />');
@@ -728,6 +744,7 @@ function exportPDF() {
 //            newWin.document.write('<br />');
 //            }
     newWin.document.write('</body></html>');
+    
     newWin.document.close(); 
 
   newWin.onload=function(){ 
@@ -736,7 +753,6 @@ function exportPDF() {
         newWin.close();
     };
 
-         
 }
 
 /////////////////////////////////////////////////
