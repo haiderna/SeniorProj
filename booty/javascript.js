@@ -537,11 +537,18 @@ function newFloor() {
     var newFloor = document.createElement("div");
     newFloor.setAttribute("id", floorId);
 
+    //declare max width so it doesn't overlap on sidebars
+    var maxW = screen.width - 450;
+    newFloor.setAttribute("style","width:" + maxW + "px");
+
     var newImg = document.createElement("IMG");
     newImg.setAttribute("src", storeImage);
     newImg.setAttribute("id", "newImgFloor");
+    newImg.setAttribute("style","width:" + maxW + "px");
 
+    
     newFloor.appendChild(newImg);
+    
 
     $( newFloor ).on("click", (function(event) { 
         if(!$(event.target).closest('.desk').length) {
