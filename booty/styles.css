@@ -131,7 +131,7 @@ input[type=submit]:hover {
     font-weight: bold;
 }
 
-.ui-selected > .deleteDeskButton{
+.ui-selected > .innerDesk > .deleteDeskButton{
     visibility: visible;
 }
 
@@ -785,6 +785,7 @@ ul#activeDeskSubmenu > li > a > div > div > ul > li > a{
     color: black;
     z-index: -1;
     position: absolute;
+    margin-top: 5px;
 
     -webkit-user-select: none; 
     -moz-user-select: none; 
