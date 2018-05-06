@@ -279,6 +279,7 @@ function addPersonFromJSON(name){
     }
     personArray.push(filter);
     addToPersonList(personArray);
+    addToActiveDeskPersonSelection(personArray);
 }
 
 //creates list of people to display
@@ -342,6 +343,7 @@ function addToPersonList(array) {
                     }         
                 }
             addToPersonList(personArray);
+            addToActiveDeskPersonSelection(personArray);
             event.stopPropagation();
             
         };
@@ -349,32 +351,22 @@ function addToPersonList(array) {
     // return list;
 }
 
-function initializeActiveDeskMenu(){
+
+
+function addToActiveDeskPersonSelection(array) {
 
     var activeName = document.getElementById('activeDeskName');
+    $("#activeDeskName").find('option').remove();
 
     for(var i=0; i < personArray.length; i++){
         var option = document.createElement('option');
         option.value = personArray[i];
         option.text = personArray[i];
         option.addClass = "active-name-select-item";
-        option.style
     
         //create the list
         activeName.appendChild(option);
     }
-    $('#activeDeskName').selectpicker('refresh');
-}
-
-function addToActiveDeskPersonSelection(array) {
-
-    var activeName = document.getElementById('activeDeskName');
-    var option = document.createElement('option');
-    option.value = array[array.length-1];
-    option.text = array[array.length-1];
-
-    //create the list
-    activeName.appendChild(option);
     $('#activeDeskName').selectpicker('refresh');
 }
 
@@ -556,6 +548,7 @@ function initDeskProjectDropdown(array) {
     var activeDrop = document.getElementById('activeDeskProject');
     
     $("#projectDropdown").find("option").remove();
+    $("#activeDeskProject").find("option").remove();
     
     for(var i = 0; i < array.length; i++) {
         var option = document.createElement('option');
@@ -667,7 +660,7 @@ function setColor(color, domElement){
     }
 
     var correspondingProjectName = $(domElement).parent().prop('className'); // gets corresponding project name
-    alert("Project name: %" + correspondingProjectName + "%");
+    // alert("Project name: %" + correspondingProjectName + "%");
 
     //setting project color
     var idx = projectArray.indexOf(correspondingProjectName);
@@ -678,7 +671,16 @@ function setColor(color, domElement){
             $(this).css("background-color", projectColors[idx]);
             $(this).val(projectColors[idx]);
             $('#projectDropdown').selectpicker('refresh');
-        });
+        }
+    );
+
+    $('#activeDeskProject').find('.' + correspondingProjectName + '').each(
+        function() {
+            $(this).css("background-color", projectColors[idx]);
+            $(this).val(projectColors[idx]);
+            $('#activeDeskProject').selectpicker('refresh');
+        }
+    );
 
 }
 

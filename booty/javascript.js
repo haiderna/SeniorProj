@@ -24,10 +24,12 @@ $(document).ready(function () {
     loadColorsIntoColorPickers();
 
     //loads in names for active desk directory
-    initializeActiveDeskMenu();
+    addToActiveDeskPersonSelection(personArray);
     
     //selects 1st desk as default
     singleDesk();
+
+    updateAddDeskButton();
 
     document.getElementById("jsonInput").value = "";
 });
@@ -202,24 +204,22 @@ function stopActiveDesk(){
 
 var deskIndex = 0;
 function insertDivDesk() {
+
     var mainDiv = document.getElementById(floorPlan);
     mainDiv.style.position = "relative";
-    var Desk = new DeskClass();
+    var d_img = document.createElement("IMG");
+    d_img.setAttribute("src", imageSource);
 
-    var y = document.createElement("IMG");
-    y.setAttribute("src", imageSource);
+    var Desk = new DeskClass();
     Desk.image = imageSource;
-   // y.setAttribute("id","desk");
-   // y.style.background = "blue";
-   
     var deskId = "desk"+deskIndex;
-    y.setAttribute("id", deskId);
-    y.className += "deskImg";
-    y.style.zIndex = 97;
+
+    d_img.setAttribute("id", deskId);
+    d_img.className += "deskImg";
+    d_img.style.zIndex = 97;
     var w = document.getElementById("deskWidth").value;
     var h = document.getElementById("deskHeight").value;
     var name = document.getElementById("name").value;
-   
     
     //error messages 
     if (!name) {
@@ -235,46 +235,36 @@ function insertDivDesk() {
         exit();
     }
     
-    // alert(w);
     Desk.name = name;
 
     /*Getting project and color*/
     var proj = $('#projectDropdown option:selected').text();
     var color = $('#projectDropdown option:selected').val();
-   // alert("Project name is: " + proj + "- Project colour is: " + color); //comment out when done
     
     if (!color) {
         alert("Add Project");
             exit();
     }
-    
-    //y.style.background = color;
-   
+       
     Desk.project = proj;
     
         if (isNaN(w) || w > 200) {
-            //y.setAttribute("width", "100");
             alert("Add proper width with a max size of 200");
             exit();
             } else {
-                 y.setAttribute("width", w);
+                d_img.setAttribute("width", w);
                  }
 
         if (isNaN(h) || h > 200) {
-           // y.setAttribute("height", "100");
             alert("Add proper height with a max size of 200");
             exit();
             } else {
-            y.setAttribute("height", h);
+                d_img.setAttribute("height", h);
             }
     
-    y.setAttribute("alt", "desk");
+    d_img.setAttribute("alt", "desk");
     
-    //////
-    //////
-    //Setting Floorplan to new Floorplan 
-    ////////
-    ////////
+    ////////Setting Floorplan to new Floorplan ////////
     for (var j = 0; j < personObjectArray.length;j++){
         if (name === personObjectArray[j].name){
             personObjectArray[j].project = proj;
@@ -283,16 +273,24 @@ function insertDivDesk() {
         
     }
     
-    
-
+    //creating desk name
     var para = document.createElement("p");
     para.innerHTML = name;
     para.className = "deskText";
     
-    var testDiv = document.createElement("div");
-    var divId = "testDiv"+deskIndex;
-    testDiv.setAttribute("id", divId);
-    testDiv.className += "desk";
+    //innerdiv containing image for rotatable handle
+    var innerDiv = document.createElement("div");
+    var divId = "innerDiv"+deskIndex;
+    innerDiv.setAttribute("id", divId);
+    innerDiv.className += "innerDesk";
+
+    //outerdiv containing innerdiv + text for draggalbe handle
+    var outerDiv = document.createElement("div");
+    var divId = "outerDiv"+deskIndex;
+    outerDiv.setAttribute("id", divId);
+    outerDiv.className += "desk";
+    // outerDiv.style.display = "flex";
+    // outerDiv.style.flexDirection = "column";
 
     //cancel button to quit adding all the rooms
     var btn = document.createElement('div');
@@ -300,43 +298,50 @@ function insertDivDesk() {
     btn.innerHTML = '&#10005';
     btn.onclick = function (e) { document.getElementById(divId).remove(); };
     
-    testDiv.style.width = w;
-    testDiv.style.height = h;
+    innerDiv.style.width = w;
+    innerDiv.style.height = h;
     
     //SETTING DESKS TO ACTIVE AND NON ACTIVE
     $( mainDiv ).selectable({
         filter : ".desk"
      });
 
-    $(testDiv).draggable({
+    $(outerDiv).draggable({
         start: function(ev, ui) 
         {        
             if (!$(this).hasClass("ui-selected")) {
                 //making selectable
-                $(this).addClass("ui-selected").siblings().removeClass("ui-selected");
+                $(this).addClass("ui-selected");
+                $(this).siblings().removeClass("ui-selected");
 
+                var stopRotMouse = {
+                    wheelRotate: false
+                    };
+                    $(this).children('.innerDesk').first().rotatable(stopRotMouse);
                 //making rotatable
-                $(this).siblings().children(".ui-rotatable-handle").hide();
-                $(this).rotatable();
-                $(this).children(".ui-rotatable-handle").show();
+                $(this).siblings().children().children(".ui-rotatable-handle").hide();
+                $(this).children('.innerDesk').first().children(".ui-rotatable-handle").show();
 
                 //setting desk menu options
                 continueActiveDesk();
                 activateDeskName(Desk.name);
                 activateDeskProject(Desk.project);
-
-                //updating stored object
-                //deskArray[deskIndex] = Desk
+                
             } 
         }
     });
 
-    $(testDiv).click(function() {
+    $(outerDiv).click(function() {
+        var stopRotMouse = {
+                    wheelRotate: false
+                    };
         if (!$(this).hasClass("ui-selected")) {
-            $(this).addClass("ui-selected").siblings().removeClass("ui-selected");
-            $(this).siblings().children(".ui-rotatable-handle").hide();
-            $(this).rotatable();
-            $(this).children(".ui-rotatable-handle").show();
+            $(this).addClass("ui-selected");
+            $(this).siblings().removeClass("ui-selected");
+
+            $(this).siblings().children().children(".ui-rotatable-handle").hide();
+            $(this).children('.innerDesk').first().rotatable(stopRotMouse);
+            $(this).children('.innerDesk').first().children(".ui-rotatable-handle").show();
             
             //setting desk menu options
             continueActiveDesk();
@@ -350,29 +355,29 @@ function insertDivDesk() {
         }
     });
 
-    testDiv.appendChild(y);
-    
-    testDiv.appendChild(para);
-    //set Label over Desk -- STYLING DONE IN CSS
-    // para.style.top = '10px';
-    testDiv.appendChild(btn);
+
+
+    innerDiv.appendChild(d_img);
+    innerDiv.appendChild(btn);
+
+    outerDiv.appendChild(innerDiv);
+    outerDiv.appendChild(para);
 
     //positioning to a more central position
-    testDiv.style.position = "absolute";
+    outerDiv.style.position = "absolute";
     var left = mainDiv.offsetLeft;	
     var top = mainDiv.offsetTop;
     left = left + ($(mainDiv).width() / 2);
     top = top + ($(mainDiv).height() / 4);
-    testDiv.style.left = left;
-    testDiv.style.top =  top;
+    outerDiv.style.left = left;
+    outerDiv.style.top =  top;
 
-    mainDiv.appendChild(testDiv);
-    // testDiv.appendTo(mainDiv);
+    mainDiv.appendChild(outerDiv);
 
     var convertedR = convertHex(color,50);
    // alert(convertedR);
-    getNewColor(convertedR, y);
-    $(testDiv).css('z-index', '102');
+    getNewColor(convertedR, d_img);
+    $(outerDiv).css('z-index', '102');
    
      // alert(divId);
     deskIndex++;
