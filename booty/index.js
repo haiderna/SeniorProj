@@ -762,98 +762,98 @@ function isEmpty(str){
 // ===============================DEPRECIATED SAVING FUNCTIONS FOR TESTING=======================================================
 // ============================================================================================
     
-    function save(){
-       // saveIndex()
-         //(function () {
-// var textFile = null,
-//   makeTextFile = function (text) {
-//     var data = new Blob([text], {type: 'text/plain'});
+// function save(){
+//     saveIndex()
+//     (function () {
+//         var textFile = null,
+//         makeTextFile = function (text) {
+//             var data = new Blob([text], {type: 'text/plain'});
 
-//     // If we are replacing a previously generated file we need to
-//     // manually revoke the object URL to avoid memory leaks.
-//     if (textFile !== null) {
-//       window.URL.revokeObjectURL(textFile);
+//             // If we are replacing a previously generated file we need to
+//             // manually revoke the object URL to avoid memory leaks.
+//             if (textFile !== null) {
+//               window.URL.revokeObjectURL(textFile);
+//             }
+
+//             textFile = window.URL.createObjectURL(data);
+
+//             return textFile;
+//       };
+
+
+//       var create = document.getElementById('saveButton')
+
+//       create.addEventListener('click', function () {
+//         var link = document.createElement('a');
+//         link.setAttribute('download', 'floorplans.json');
+//         floors = floorDivsToString()
+//         link.href = makeTextFile(floors);
+//         document.body.appendChild(link);
+
+//         // wait for the link to be added to the document
+//         window.requestAnimationFrame(function () {
+//           var event = new MouseEvent('click');
+//           link.dispatchEvent(event);
+//           document.body.removeChild(link);
+//             });
+        
+//       }, false);
+//     })();
+// }
+
+// function floorDivsToString(){
+//      var floorSaves = "[" //JSON string containing floor divs
+
+//     for(var i=0; i<floorplans.length; i++){
+//         //alert("floor plan " + i)
+//         var floorplanName = floorplans[i] //current floorplan string name
+//         //  This gives you an HTMLElement object
+//         var element = document.getElementById(floorplans[i]);
+//         //  This gives you a string representing that element and its content
+//         var html = element.outerHTML;       
+//         //  This gives you a JSON object that you can send with jQuery.ajax's `data`
+//         // option, you can rename the property to whatever you want.
+//         var data = {}
+//         data[floorplanName] = html
+//         //var data = { floorplanName: html }; 
+
+//         //  This gives you a string in JSON syntax of the object above that you can 
+//         // send with XMLHttpRequest.
+//         var json = JSON.stringify(data);
+
+//          if(i==(floorplans.length-1)){ //if it's the last floorplan (so no comma after this one in the JSON string)
+//             floorSaves += json; //adding current floorplan to the full floorSaves JSON string
+//         }else{
+//             floorSaves += json + ",";
+//         }
 //     }
 
-//     textFile = window.URL.createObjectURL(data);
+//     floorSaves = floorSaves + "]" //putting in correct format
 
-//     return textFile;
-//   };
+//     alert(floorSaves)
 
-
-//   var create = document.getElementById('saveButton')
-
-//   create.addEventListener('click', function () {
-//     var link = document.createElement('a');
-//     link.setAttribute('download', 'floorplans.json');
-//     floors = floorDivsToString()
-//     link.href = makeTextFile(floors);
-//     document.body.appendChild(link);
-
-//     // wait for the link to be added to the document
-//     window.requestAnimationFrame(function () {
-//       var event = new MouseEvent('click');
-//       link.dispatchEvent(event);
-//       document.body.removeChild(link);
-//         });
-    
-//   }, false);
-//})();
-    }
-
-function floorDivsToString(){
-     var floorSaves = "[" //JSON string containing floor divs
-
-    for(var i=0; i<floorplans.length; i++){
-        //alert("floor plan " + i)
-        var floorplanName = floorplans[i] //current floorplan string name
-        //  This gives you an HTMLElement object
-        var element = document.getElementById(floorplans[i]);
-        //  This gives you a string representing that element and its content
-        var html = element.outerHTML;       
-        //  This gives you a JSON object that you can send with jQuery.ajax's `data`
-        // option, you can rename the property to whatever you want.
-        var data = {}
-        data[floorplanName] = html
-        //var data = { floorplanName: html }; 
-
-        //  This gives you a string in JSON syntax of the object above that you can 
-        // send with XMLHttpRequest.
-        var json = JSON.stringify(data);
-
-         if(i==(floorplans.length-1)){ //if it's the last floorplan (so no comma after this one in the JSON string)
-            floorSaves += json; //adding current floorplan to the full floorSaves JSON string
-        }else{
-            floorSaves += json + ",";
-        }
-    }
-
-    floorSaves = floorSaves + "]" //putting in correct format
-
-    alert(floorSaves)
-
-    return floorSaves
-}
+//     return floorSaves
+// }
 
 
 
-function saveIndex(){
-    // Save the page's HTML to a file that is automatically downloaded.
+// function saveIndex(){
+//     // Save the page's HTML to a file that is automatically downloaded.
 
-        // We make a Blob that contains the data to download.
-        var file = new window.Blob([document.documentElement.innerHTML], { type: "text/html" });
-        var URL = window.webkitURL || window.URL;
+//         // We make a Blob that contains the data to download.
+//         var file = new window.Blob([document.documentElement.innerHTML], { type: "text/html" });
+//         var URL = window.webkitURL || window.URL;
 
-        // This is the URL that will download the data.
-        var downloadUrl = URL.createObjectURL(file);
+//         // This is the URL that will download the data.
+//         var downloadUrl = URL.createObjectURL(file);
 
-        var a = document.createElement("a");
-        // This sets the file name.
-        a.download = "index.html";
-        a.href = downloadUrl;
+//         var a = document.createElement("a");
+//         // This sets the file name.
+//         a.download = "index.html";
+//         a.href = downloadUrl;
 
-        // Actually perform the download.
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-}
+//         // Actually perform the download.
+//         document.body.appendChild(a);
+//         a.click();
+//         document.body.removeChild(a);
+// }
