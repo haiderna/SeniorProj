@@ -205,6 +205,7 @@ function insertDivDesk() {
     var mainDiv = document.getElementById(floorPlan);
     mainDiv.style.position = "relative";
     var Desk = new DeskClass();
+
     var y = document.createElement("IMG");
     y.setAttribute("src", imageSource);
     Desk.image = imageSource;
@@ -314,10 +315,6 @@ function insertDivDesk() {
                 //making selectable
                 $(this).addClass("ui-selected").siblings().removeClass("ui-selected");
 
-                //updating
-                // alert(testDiv.style.left)
-                // alert("Desk class top = " $(this).)
-
                 //making rotatable
                 $(this).siblings().children(".ui-rotatable-handle").hide();
                 $(this).rotatable();
@@ -328,8 +325,8 @@ function insertDivDesk() {
                 activateDeskName(Desk.name);
                 activateDeskProject(Desk.project);
 
-                //updating class coordinates
-                
+                //updating stored object
+                //deskArray[deskIndex] = Desk
             } 
         }
     });
@@ -368,8 +365,6 @@ function insertDivDesk() {
     top = top + ($(mainDiv).height() / 4);
     testDiv.style.left = left;
     testDiv.style.top =  top;
-    Desk.left = left; //updating class as well
-    Desk.top = top;
 
     mainDiv.appendChild(testDiv);
     // testDiv.appendTo(mainDiv);

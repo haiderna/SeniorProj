@@ -8,18 +8,18 @@
 // 		p:cs306
 
 //***VARIABLES AND FUNCTIONS********
-
+//alert('server fiel')
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 
 const MongoClient = require('mongodb').MongoClient
-var db
+var db = null
 var mongoURL = 'mongodb://admin:cs306@ds113835.mlab.com:13835/willowtree' //URL for myLab mongodb instance
 //var collection = 'people' //people collection in mongodb
 var dbCursor //where the mongodb cursor is pointing to (can be multiple documents/fields etc.)
 
-app.use(express.static(__dirname)) //**loads everything statically (including server stuff)
+//app.use(express.static(__dirname)) //**loads everything statically (including server stuff)
 
 //connecting to myLab mongoDB instance
 function getConnection(cb){
@@ -32,11 +32,12 @@ function getConnection(cb){
 		app.listen(process.env.PORT || 3000, () => {
 			console.log('listening on 3000')
 			
-			findDocuments(myDB, function(){
-			})
+			// var array = findPeople(myDB, function(){
+			// })
+			// console.log(array)
 			// var myCursor = myDB.collection('people').find({},{})
 			// while(myCursor.hasNext()){
-			// 	console.log(tojson(myCursor.next()))
+			// 	console.log(myCursor)
 			// }
 		})
 
@@ -45,12 +46,12 @@ function getConnection(cb){
 }
 
 //returns all documents
-var findDocuments = function(db,cb){
+var findPeople = function(db,cb){
 	db.collection('people').find({},{}).toArray(function(err,docs){
 		//assert.equal(err,null)
 		console.log("Found following records")
 		console.log(docs)
-		callback(docs)
+		//callback(docs)
 	})
 }
 
@@ -113,18 +114,18 @@ getConnection(function(err) {
 
 
 
-// get_People(function(err){
-// 	if(err) {
-// 		console.log("error when getting people",err)
-// 		process.exit(1)
-// 	}
-// })
+// // get_People(function(err){
+// // 	if(err) {
+// // 		console.log("error when getting people",err)
+// // 		process.exit(1)
+// // 	}
+// // })
 
-//displaying website
-app.get('/', (req,res) => {
-	console.log(__dirname);
-	res.sendFile(__dirname +'/index.html'); //displaying index
-})
+// //displaying website
+// app.get('/', (req,res) => {
+// 	console.log(__dirname);
+// 	res.sendFile(__dirname +'/index.html'); //displaying index
+// })
 
 // app.get('/',(req,res)=>{
 // 	var cursor = db.collection('people').find().toArray(function(err,results){

@@ -2,17 +2,19 @@ var personArray = ["Cow Lady", "Dog Man", "Shaggy Mutt"];
 var personObjectArray = [];
 var projectArray = ["Barclays", "Regal", "WillowTree"]; 
 var projectColors = ["#000080", "#FF0000", "#1BD9C4"];
+var deskArray = [];
      
 var buildings = ["HQ", "Treehouse", "Watchtower"];
 var listIds = ["HQ1", "HQ2", "TH1","TH2", "TH3","TH4","WT1" ];
 var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"];
       
-function DeskClass(name, project, image)
+function DeskClass(name, project, image, left, top, rotate)
 {   this.name = name; 
     this.project = project; 
     this.image = image; 
-   // this.left = left; 
-    // this.top = top;
+    this.left = left; 
+    this.top = top;
+    this.rotate = rotate;
 } 
 function PersonClass(name, project, floorplan){
     this.name = name;
@@ -725,28 +727,36 @@ function isEmpty(str){
 // =============================== SAVING =======================================================
 // ============================================================================================
 
-// function saveAll(){
-//     alert("savinggg")
-//     saveDeskLocation()
-// }
+function saveAll(){
+    alert("saveAll")
 
-// // <div id="testDiv0" class="desk ui-draggable ui-draggable-handle ui-selected" style="width: 50px; height: 50px; position: absolute; left: 831px; top: 273px; z-index: 102; transform: rotate(-0.296706rad);">
-// // <img src="desk - filled.svg" id="desk0" class="deskImg" width="50" height="50" alt="desk" style="filter: invert(10%) sepia(20%) saturate(9500%) hue-rotate(235deg);">
-// // <p style="z-index: 98; color: black; position: absolute; top: 10px;">Dog Man</p><div class="deleteDeskButton">✕</div><div class="ui-rotatable-handle ui-draggable">
-// // </div></div>
-// function saveDeskLocation(){
-//     // desks = document.getElementsByClassName("demo");  //array of Desk class elements
-    
-//     // //going through each desk object and getting values to store in JSON
-//     // for(var i = 0; i < desks.length; i++){
-//     //     var name = desk[i].name;
-//     //     var project = desk[i].project;
-//     //     var image = desk[i].image;
-//     //     var left = desk[i].left;
-//     //     var top = desk[i].top;
+    var floorSaves = "[" //JSON string containing floor divs
 
-//     //     alert(name + project + left + top)
-//     // }
+    for(var i=0; i<floorplans.length; i++){
+        //alert("floor plan " + i)
+        var floorplanName = floorplans[i] //current floorplan string name
+        //  This gives you an HTMLElement object
+        var element = document.getElementById(floorplans[i]);
+        //  This gives you a string representing that element and its content
+        var html = element.outerHTML;       
+        //  This gives you a JSON object that you can send with jQuery.ajax's `data`
+        // option, you can rename the property to whatever you want.
+        var data = {}
+        data[floorplanName] = html
+        //var data = { floorplanName: html }; 
 
-//     // getElementById(testD)
-// }
+        //  This gives you a string in JSON syntax of the object above that you can 
+        // send with XMLHttpRequest.
+        var json = JSON.stringify(data);
+
+         if(i==(floorplans.length-1)){ //if it's the last floorplan (so no comma after this one in the JSON string)
+            floorSaves += json; //adding current floorplan to the full floorSaves JSON string
+        }else{
+            floorSaves += json + ",";
+        }
+    }
+
+    floorSaves = "]" //putting in correct format
+
+    alert(floorSaves)
+}
