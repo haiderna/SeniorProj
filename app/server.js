@@ -8,7 +8,7 @@
 // 		p:cs306
 
 //***VARIABLES AND FUNCTIONS********
-
+//alert('server fiel')
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
@@ -50,7 +50,7 @@ var findDocuments = function(db,cb){
 		//assert.equal(err,null)
 		console.log("Found following records")
 		console.log(docs)
-		callback(docs)
+		//callback(docs)
 	})
 }
 
@@ -113,18 +113,18 @@ getConnection(function(err) {
 
 
 
-// get_People(function(err){
-// 	if(err) {
-// 		console.log("error when getting people",err)
-// 		process.exit(1)
-// 	}
-// })
+// // get_People(function(err){
+// // 	if(err) {
+// // 		console.log("error when getting people",err)
+// // 		process.exit(1)
+// // 	}
+// // })
 
-//displaying website
-app.get('/', (req,res) => {
-	console.log(__dirname);
-	res.sendFile(__dirname +'/index.html'); //displaying index
-})
+// //displaying website
+// app.get('/', (req,res) => {
+// 	console.log(__dirname);
+// 	res.sendFile(__dirname +'/index.html'); //displaying index
+// })
 
 // app.get('/',(req,res)=>{
 // 	var cursor = db.collection('people').find().toArray(function(err,results){

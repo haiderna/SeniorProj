@@ -2,15 +2,57 @@ var personArray = ["Cow Lady", "Dog Man", "Shaggy Mutt"];
 var personObjectArray = [];
 var projectArray = ["Barclays", "Regal", "WillowTree"]; 
 var projectColors = ["#000080", "#FF0000", "#1BD9C4"];
+
+ //localStorage.removeItem("personObjectArray")
+ //localStorage.removeItem("personArray")
      
 var buildings = ["HQ", "Treehouse", "Watchtower"];
 var listIds = ["HQ1", "HQ2", "TH1","TH2", "TH3","TH4","WT1" ];
 var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"];
-      
-function DeskClass(name, project, image)
+
+
+//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
+localStorage.setItem("buildings",JSON.stringify(buildings))
+localStorage.setItem("listIds",JSON.stringify(listIds))
+localStorage.setItem("floorplans",JSON.stringify(floorplans))
+
+//setting up personArray from local storage
+if(localStorage.getItem("personArray")==null){ //if there is no local storage, initialize storage
+    localStorage.setItem("personArray",JSON.stringify(personArray))
+}else{ //if there is already something stored in local, grab from it and then initialize in javascript
+    personArray = JSON.parse(localStorage.getItem("personArray"))
+}
+//alert(localStorage.getItem("personArray"))
+
+//setting up projectArray from local storage
+if(localStorage.getItem("projectArray")==null){ //if nothing in local
+    localStorage.setItem("projectArray",JSON.stringify(projectArray))
+}else{ //if there is something in local grab from it and then initialize
+    projectArray =  JSON.parse(localStorage.getItem("projectArray"))
+}
+
+//setting up projectColors from local storage
+if(localStorage.getItem("projectColors")==null){ //if nothing in local
+    localStorage.setItem("projectColors",JSON.stringify(projectColors))
+}else{ //if there is something in local grab from it and then initialize
+    projectColors =  JSON.parse(localStorage.getItem("projectColors"))
+}
+
+function DeskClass(name, project, floor, image, height, width, left, top, rotate, deskId, outerDiv, innerDiv, color)
 {   this.name = name; 
-    this.project = project; 
-    this.image = image; } 
+    this.project = project;
+    this.floor = floor; 
+    this.image = image;
+    this.height = height; 
+    this.width = width;    
+    this.left = left; 
+    this.top = top;
+    this.rotate = rotate;
+    this.deskId = deskId;
+    this.outerDiv = outerDiv;
+    this.innerDiv = innerDiv;
+    this.color = color
+} 
 function PersonClass(name, project, floorplan){
     this.name = name;
     this.project = project;
@@ -25,18 +67,27 @@ person1.name = "Cow Lady";
 person1.project = "Regal";
 person1.floorplan = "HQFloor1";
 personObjectArray.push(person1);
+//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 
 var person2 = new PersonClass();
 person2.name = "Dog Man";
 person2.project = "Regal";
 person2.floorplan = "HQFloor1";
 personObjectArray.push(person2);
+//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 
 var person3 = new PersonClass();
 person3.name = "Shaggy Mutt";
 person3.project = "Regal";
 person3.floorplan = "HQFloor1";
 personObjectArray.push(person3);
+//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
+//setting up personObjectArray from local storage
+if(localStorage.getItem("personObjectArray")==null){
+    localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
+}else{
+    personObjectArray = JSON.parse(localStorage.getItem("personObjectArray"))
+}
 
 var floorPlan = "HQFloor1";
 
@@ -58,7 +109,7 @@ function HQFloor1() {
         }        
         })
     );
- 
+ document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
 
 function HQFloor2(){
@@ -69,9 +120,13 @@ function HQFloor2(){
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-   // alert(floorPlan);
-//   var divNew = document.getElementById("newFloor");
-//     $(divNew).hide();
+    $("#HQFloor2").on("click", (function(event) { 
+        if(!$(event.target).closest('.desk').length) {
+            stopActiveDesk();
+        }        
+        })
+    );
+document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
 
 function THFloor1(){
@@ -82,9 +137,13 @@ function THFloor1(){
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    //alert(floorPlan);
-//   var divNew = document.getElementById("newFloor");
-//     $(divNew).hide();
+    $("#THFloor1").on("click", (function(event) { 
+        if(!$(event.target).closest('.desk').length) {
+            stopActiveDesk();
+        }        
+        })
+    );
+document.getElementById("labelFloorPlan").innerHTML = floorPlan;
     
 }
 function THFloor2(){
@@ -96,9 +155,13 @@ function THFloor2(){
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
    
-    //alert(floorPlan);
-//   var divNew = document.getElementById("newFloor");
-//     $(divNew).hide();
+    $("#THFloor2").on("click", (function(event) { 
+        if(!$(event.target).closest('.desk').length) {
+            stopActiveDesk();
+        }        
+        })
+    );
+document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
 function THFloor3(){
     floorPlan = "THFloor3";
@@ -108,10 +171,13 @@ function THFloor3(){
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    //alert(floorPlan);
-//   var divNew = document.getElementById("newFloor");
-//     $(divNew).hide();
-//    
+    $("#THFloor3").on("click", (function(event) { 
+        if(!$(event.target).closest('.desk').length) {
+            stopActiveDesk();
+        }        
+        })
+    );
+document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
 function THFloor4(){
     floorPlan = "THFloor4";
@@ -121,9 +187,13 @@ function THFloor4(){
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    //alert(floorPlan);
-//   var divNew = document.getElementById("newFloor");
-//     $(divNew).hide();
+    $("#THFloor4").on("click", (function(event) { 
+        if(!$(event.target).closest('.desk').length) {
+            stopActiveDesk();
+        }        
+        })
+    );
+document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
 
 function WTFloor() {
@@ -134,9 +204,13 @@ function WTFloor() {
     }
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
-    //alert(floorPlan);
-//   var divNew = document.getElementById("newFloor");
-//     $(divNew).hide();
+    $("#WTFloor").on("click", (function(event) { 
+        if(!$(event.target).closest('.desk').length) {
+            stopActiveDesk();
+        }        
+        })
+    );
+document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
 
 var imageSource = "desk - filled.svg";
@@ -199,6 +273,7 @@ function addPerson() {
     }
 
     personArray.push(filter);
+    localStorage.setItem("personArray",JSON.stringify(personArray))
 
     //person object array
     var person = new PersonClass();
@@ -206,12 +281,15 @@ function addPerson() {
     person.project = "Regal";
     person.floorplan = floorPlan;
     personObjectArray.push(person);
+    localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray)) //updating local storage
 
     addToPersonList(personArray);
     addToActiveDeskPersonSelection(personArray);
     
     alert(filter + " was added to the people directory."); 
     input.value = "";
+
+    //alert(JSON.parse(localStorage.getItem('personArray')))
 }
 
 function addPersonFromDeskMenu(){
@@ -229,6 +307,7 @@ function addPersonFromDeskMenu(){
     }
 
     personArray.push(filter);
+    localStorage.setItem("personArray",JSON.stringify(personArray)) //updating local storage
 
     //adding to object array 
     var person = new PersonClass();
@@ -236,6 +315,7 @@ function addPersonFromDeskMenu(){
     person.project = "Regal";
     person.floorplan = floorPlan;
     personObjectArray.push(person);
+    localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray)) //updating local storage
     
     addToPersonList(personArray);
     addToActiveDeskPersonSelection(personArray);
@@ -250,7 +330,9 @@ function addPersonFromJSON(name){
         return;
     }
     personArray.push(filter);
+    localStorage.setItem("personArray",JSON.stringify(personArray)) //updating local storage
     addToPersonList(personArray);
+    addToActiveDeskPersonSelection(personArray);
 }
 
 //creates list of people to display
@@ -304,6 +386,7 @@ function addToPersonList(array) {
                     if (label === personObjectArray[j].name) {
                         personObjectArray.splice(j, 1);
                         //alert(personObjectArray.length);
+                        localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray)) //updating local storage
                     }         
                 }
               //  alert("out");
@@ -311,9 +394,11 @@ function addToPersonList(array) {
                     if (label === personArray[k]) {
                         personArray.splice(k, 1);
                         //alert(personArray.length);
+                        localStorage.setItem("personArray",JSON.stringify(personArray)) //updating local storage
                     }         
                 }
             addToPersonList(personArray);
+            addToActiveDeskPersonSelection(personArray);
             event.stopPropagation();
             
         };
@@ -321,32 +406,22 @@ function addToPersonList(array) {
     // return list;
 }
 
-function initializeActiveDeskMenu(){
+
+
+function addToActiveDeskPersonSelection(array) {
 
     var activeName = document.getElementById('activeDeskName');
+    $("#activeDeskName").find('option').remove();
 
     for(var i=0; i < personArray.length; i++){
         var option = document.createElement('option');
         option.value = personArray[i];
         option.text = personArray[i];
         option.addClass = "active-name-select-item";
-        option.style
     
         //create the list
         activeName.appendChild(option);
     }
-    $('#activeDeskName').selectpicker('refresh');
-}
-
-function addToActiveDeskPersonSelection(array) {
-
-    var activeName = document.getElementById('activeDeskName');
-    var option = document.createElement('option');
-    option.value = array[array.length-1];
-    option.text = array[array.length-1];
-
-    //create the list
-    activeName.appendChild(option);
     $('#activeDeskName').selectpicker('refresh');
 }
 
@@ -387,7 +462,9 @@ function addProject() {
     }
 
     projectArray.push(filter);
+    localStorage.setItem("projectArray",JSON.stringify(projectArray))//updating local storage
     projectColors.push(""); //has to grow every time project array grows
+    localStorage.setItem("projectColors",JSON.stringify(projectColors)) //updating local storage
 
     addToProjectList(projectArray);
     addToDeskProjectDropDown(projectArray);
@@ -395,6 +472,7 @@ function addProject() {
     searchProjects();
     alert("New Project added");
 }
+
 
 function addProjectFromJSON(proj) {
     var filter;
@@ -407,7 +485,9 @@ function addProjectFromJSON(proj) {
     }
 
     projectArray.push(filter);
+    localStorage.setItem("projectArray",JSON.stringify(projectArray))//updating local storage
     projectColors.push(""); //has to grow every time project array grows
+    localStorage.setItem("projectColors",JSON.stringify(projectColors)) //updating local storage
 
     addToProjectList(projectArray);
     addToDeskProjectDropDown(projectArray);
@@ -453,10 +533,12 @@ function initializeProjectList(array) {
                     if (label === projectArray[k]) {
                         projectArray.splice(k, 1);
                         projectColors.splice(k,1);
+                       // alert(projectColors)
                        // alert(projectArray.length);
+                       localStorage.setItem("projectArray",JSON.stringify(projectArray)) //updating local storage
+                        localStorage.setItem("projectColors",JSON.stringify(projectColors))//updating local stroage
                     }         
-                }
-                
+                }    
        initializeProjectList(projectArray);
        initDeskProjectDropdown(projectArray);
 	
@@ -473,7 +555,7 @@ function addToProjectList(array) {
     var list = document.getElementById('projectSubMenu');
     var innerButton = document.createElement("button");
     innerButton.className = "projectDeleteButton";
-    innerButton.innerHTML = "DEL";
+    innerButton.innerHTML = "REMOVE";
     var item = document.createElement('li');
     var inneritem = document.createElement('a');
     inneritem.className = array[array.length-1];
@@ -528,6 +610,7 @@ function initDeskProjectDropdown(array) {
     var activeDrop = document.getElementById('activeDeskProject');
     
     $("#projectDropdown").find("option").remove();
+    $("#activeDeskProject").find("option").remove();
     
     for(var i = 0; i < array.length; i++) {
         var option = document.createElement('option');
@@ -639,18 +722,28 @@ function setColor(color, domElement){
     }
 
     var correspondingProjectName = $(domElement).parent().prop('className'); // gets corresponding project name
-    alert("Project name: %" + correspondingProjectName + "%");
+    // alert("Project name: %" + correspondingProjectName + "%");
 
     //setting project color
     var idx = projectArray.indexOf(correspondingProjectName);
     projectColors[idx] = String(color);
+    localStorage.setItem("projectColors",JSON.stringify(projectColors)) //updating local storage
 
     $('#projectDropdown').find('.' + correspondingProjectName + '').each(
         function() {
             $(this).css("background-color", projectColors[idx]);
             $(this).val(projectColors[idx]);
             $('#projectDropdown').selectpicker('refresh');
-        });
+        }
+    );
+
+    $('#activeDeskProject').find('.' + correspondingProjectName + '').each(
+        function() {
+            $(this).css("background-color", projectColors[idx]);
+            $(this).val(projectColors[idx]);
+            $('#activeDeskProject').selectpicker('refresh');
+        }
+    );
 
 }
 
@@ -693,3 +786,150 @@ function toTitleCase(str)
 function isEmpty(str){
     return !str.replace(/^\s+/g, '').length; // boolean (`true` if field is empty)
 }
+
+
+// ============================================================================================
+// ===============================SAVING=======================================================
+// ============================================================================================
+
+// function saveButton(){
+//     //going through all desks
+//     for(var i=0; i<deskArray.length; i++){
+//         var desk = deskArray[i]; //current desk being iterated through
+        
+//         //retrieving style info for each desk from outerdiv
+//         //position: absolute; left: 770px; top: 284px; z-index: 102; //example of element retrieved for reference
+//         var element = document.getElementById(desk.outerDiv).getAttribute("style");
+//         //console.log(element)
+//         element = element.split(" ")
+//         //console.log(element)
+//         //assigning to desk attributes
+//         desk.left = element[3].replace('px;','') //cleaning up
+//         desk.top = element[5].replace('px;','')
+
+//         //retrieving style info for each desk from innerdiv
+//         //width: 50px; height: 50px; //example of element retrieved for reference
+//         //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
+//         var element = document.getElementById(desk.innerDiv).getAttribute("style");
+//        // console.log(element)
+//         element = element.split(" ")
+//        // console.log(element)
+//         //assigning 
+//         desk.width = element[1].replace('px;','') //cleaning up
+//         desk.height = element[3].replace('px;','')
+//         if(element.length<6){
+//             desk.rotate = null; //no rotation
+//         }else{
+//             var rotateRad = element[5].replace('rotate(','') //cleaning up
+//             rotateRad = rotateRad.replace('rad);','')
+//             desk.rotate = rotateRad
+//         }
+//     }
+
+//     localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
+// }
+
+
+// ============================================================================================
+// ===============================DEPRECIATED SAVING FUNCTIONS FOR TESTING=======================================================
+// ============================================================================================
+
+//refreshes local Storage to default values
+function deleteLocalStorage(){
+
+}
+// function save(){
+//     saveIndex()
+//     (function () {
+//         var textFile = null,
+//         makeTextFile = function (text) {
+//             var data = new Blob([text], {type: 'text/plain'});
+
+//             // If we are replacing a previously generated file we need to
+//             // manually revoke the object URL to avoid memory leaks.
+//             if (textFile !== null) {
+//               window.URL.revokeObjectURL(textFile);
+//             }
+
+//             textFile = window.URL.createObjectURL(data);
+
+//             return textFile;
+//       };
+
+
+//       var create = document.getElementById('saveButton')
+
+//       create.addEventListener('click', function () {
+//         var link = document.createElement('a');
+//         link.setAttribute('download', 'floorplans.json');
+//         floors = floorDivsToString()
+//         link.href = makeTextFile(floors);
+//         document.body.appendChild(link);
+
+//         // wait for the link to be added to the document
+//         window.requestAnimationFrame(function () {
+//           var event = new MouseEvent('click');
+//           link.dispatchEvent(event);
+//           document.body.removeChild(link);
+//             });
+        
+//       }, false);
+//     })();
+// }
+
+// function floorDivsToString(){
+//      var floorSaves = "[" //JSON string containing floor divs
+
+//     for(var i=0; i<floorplans.length; i++){
+//         //alert("floor plan " + i)
+//         var floorplanName = floorplans[i] //current floorplan string name
+//         //  This gives you an HTMLElement object
+//         var element = document.getElementById(floorplans[i]);
+//         //  This gives you a string representing that element and its content
+//         var html = element.outerHTML;       
+//         //  This gives you a JSON object that you can send with jQuery.ajax's `data`
+//         // option, you can rename the property to whatever you want.
+//         var data = {}
+//         data[floorplanName] = html
+//         //var data = { floorplanName: html }; 
+
+//         //  This gives you a string in JSON syntax of the object above that you can 
+//         // send with XMLHttpRequest.
+//         var json = JSON.stringify(data);
+
+//          if(i==(floorplans.length-1)){ //if it's the last floorplan (so no comma after this one in the JSON string)
+//             floorSaves += json; //adding current floorplan to the full floorSaves JSON string
+//         }else{
+//             floorSaves += json + ",";
+//         }
+//     }
+
+//     floorSaves = floorSaves + "]" //putting in correct format
+
+//     alert(floorSaves)
+
+//     return floorSaves
+// }
+
+
+
+// function saveIndex(){
+//     // Save the page's HTML to a file that is automatically downloaded.
+
+//         // We make a Blob that contains the data to download.
+//         var file = new window.Blob([document.documentElement.innerHTML], { type: "text/html" });
+//         var URL = window.webkitURL || window.URL;
+
+//         // This is the URL that will download the data.
+//         var downloadUrl = URL.createObjectURL(file);
+
+//         var a = document.createElement("a");
+//         // This sets the file name.
+//         a.download = "index.html";
+//         a.href = downloadUrl;
+
+//         // Actually perform the download.
+//         document.body.appendChild(a);
+//         a.click();
+//         document.body.removeChild(a);
+// }

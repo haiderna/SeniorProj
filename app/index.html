@@ -25,8 +25,8 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Floorplan
-	        <span class="caret"></span></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Floorplan: <p id="labelFloorPlan"> None Selected </p>
+          <span class="caret"></span></a>
           <ul class="dropdown-menu" id="floorplanSubMenu">
             <li> <a> HQ </a>
                 <ul id="HQsubFloor">
@@ -36,16 +36,16 @@
             </li>
             <li> <a> Treehouse </a>
                  <ul id="TreehousesubFloor">
-	                <li href="#" onclick="THFloor1()" id="TH1"><a>Floor 1</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor1', 'TH1')"> REMOVE </button></li>
-	                <li href="#" onclick="THFloor2()" id="TH2"><a>Floor 2</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor2', 'TH2')"> REMOVE </button></li>
-	                <li href="#" onclick="THFloor3()" id="TH3"><a>Floor 3</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor3', 'TH3')"> REMOVE </button></li>
-	                <li href="#" onclick="THFloor4()" id="TH4"><a>Floor 4</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor4', 'TH4')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor1()" id="TH1"><a>Floor 1</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor1', 'TH1')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor2()" id="TH2"><a>Floor 2</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor2', 'TH2')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor3()" id="TH3"><a>Floor 3</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor3', 'TH3')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor4()" id="TH4"><a>Floor 4</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor4', 'TH4')"> REMOVE </button></li>
                 </ul>
             </li>
             <li> <a > Watchtower </a>
-            	<ul id="WatchtowersubFloor">
-            		<li href="#" onclick="WTFloor()" id="WT1"><a>Floor 5</a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('WTFloor', 'WT1')"> REMOVE </button></li>
-            	</ul>
+              <ul id="WatchtowersubFloor">
+                <li href="#" onclick="WTFloor()" id="WT1"><a>Floor 5</a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('WTFloor', 'WT1')"> REMOVE </button></li>
+              </ul>
             </li>
             
           </ul>
@@ -54,10 +54,10 @@
       <ul class="nav navbar-nav navbar-right">
           
 <!--        <li>
-      		<a href="#" onclick="newFloor();">
-      			<span class="glyphicon glyphicon-plus"></span> Press Me after Choosing File</button>
-      		</a>
-      	</li>
+          <a href="#" onclick="newFloor();">
+            <span class="glyphicon glyphicon-plus"></span> Press Me after Choosing File</button>
+          </a>
+        </li>
         
           <li> 
             <img id="imgAnalyzer" src="" height="10" alt="Image preview...">
@@ -68,14 +68,14 @@
           <li>
               <input type="file" onchange="previewFile()"><br>
               <a href="#" onclick="alert('new');" ><span class="glyphicon glyphicon-plus"></span> Add new Floor</a></li>-->
-       	<li>
-      		<a href="#" onclick="exportPDF();">
-      			<span class="glyphicon glyphicon-export"></span> Export</button>
-      		</a>
-      	</li>
+        <li>
+          <a href="#" onclick="exportPDF();">
+            <span class="glyphicon glyphicon-export"></span> Export</button>
+          </a>
+        </li>
         
         
-      	<li><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></li>
+        <li><a href="#" onclick="saveButton()"><span id="saveButton" class="glyphicon glyphicon-floppy-disk"></span> Save</a></li>
     </ul>
     </div>
   </nav>
@@ -92,7 +92,7 @@
       <ul class="list-unstyled components">
         <!-- <p>Seating Chart</p> -->
         <!-- <li><a href="#">
-	            	 	<i class="glyphicon glyphicon-object-align-vertical"></i> Add Desk 
+                  <i class="glyphicon glyphicon-object-align-vertical"></i> Add Desk 
       </a>
     </li> -->
     <li>
@@ -105,10 +105,10 @@
           <li><a href="#">Assign Desk to Insert</a>
                 <ul id="DeskInfoMenu">
                     <li> 
-                        <form action="javascript:addPersonFromDeskMenu()">
+                        <form action="#">
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="FirstName" placeholder="ex. Leroy Jenkins" class="typeahead" data-provide="typeahead" autocomplete="off"><br>
-                        <input type="submit" value="Add Person">
+<!--                        <input type="submit" value="Add Person">-->
                           </form>
                     </li>
                     <li id="Type" title="Type" style="margin-bottom: 10px;">
@@ -130,46 +130,46 @@
                 </ul>
             </li>
           <li>
-          	<!--  old implementation    	
-          	<button id="deskProjectButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Select Project  <span class="caret"></span></button>
-			          	<div id="deskProjectDropdown" class="dropdown-menu">
-			          		this is where the projects themselves go
-						</div> -->
+            <!--  old implementation      
+            <button id="deskProjectButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Select Project  <span class="caret"></span></button>
+                  <div id="deskProjectDropdown" class="dropdown-menu">
+                    this is where the projects themselves go
+            </div> -->
 
-			<select id="projectDropdown" class="selectpicker" data-live-search="true" title="Select Project..." data-width='75%' data-size="5" style="position:relative;">
-			  <!-- <option> Projects go in here ...</option> -->
-			</select>
+      <select id="projectDropdown" class="selectpicker" data-live-search="true" title="Select Project..." data-width='75%' data-size="5" style="position:relative;">
+        <!-- <option> Projects go in here ...</option> -->
+      </select>
 
           </li>
 
-          <li><button id="ExportButton" type="button" class="btn btn-primary" disabled="disabled" onclick="insertDivDesk()" style="margin-top: 15px" >Place Desk </button></li>
+          <li><button id="ExportButton" type="button" class="btn btn-primary"  onclick="insertDivDesk()" style="margin-top: 15px" >Place Desk </button></li>
         </ul>
 
-      	</ul>
- 	</li>
+        </ul>
+  </li>
 
         <li>
-        	<a href="#projectSubMenu" data-toggle="collapse" aria-expanded="false">
-        		<i class="glyphicon glyphicon-folder-open"></i> Project </a>
-        	<ul class="collapse list-unstyled"  id="projectSubMenu">
-        		<li><a>
-	          		Search Projects
+          <a href="#projectSubMenu" data-toggle="collapse" aria-expanded="false">
+            <i class="glyphicon glyphicon-folder-open"></i> Project </a>
+          <ul class="collapse list-unstyled"  id="projectSubMenu">
+            <li><a>
+                Search Projects
                                 <br>
                                 <input type="text" id="projectInput" onkeyup="searchProjects()" placeholder="Search for project.." style="margin-top: 10px">
-	          		<button id="addProjectButton" type="button" class="btn btn-warning" onclick="addProject()" style="margin-top: 10px; background-color: #337ab7; border-color: #2e6da4">Add Project </button>
-	          	</a></li>
-        	</ul>
-		</li>
+                <button id="addProjectButton" type="button" class="btn btn-warning" onclick="addProject()" style="margin-top: 10px; background-color: #337ab7; border-color: #2e6da4">Add Project </button>
+              </a></li>
+          </ul>
+    </li>
 
         <li>
           <!-- Link with dropdown items -->
           <a href="#peopleSubMenu" data-toggle="collapse" aria-expanded="false">
-          	<i class="glyphicon glyphicon-user"></i> People </a>
+            <i class="glyphicon glyphicon-user"></i> People </a>
           <ul class="collapse list-unstyled" id="peopleSubMenu">
-          	<li><a>
-          		Search People <input type="text" style="margin-top: 10px" id="peopleInput" onkeyup="searchPeople()" placeholder="Search for names..">
-          		<button id="addPersonButton" type="button" class="btn btn-primary" onclick="addPerson()" style="margin-top: 10px;">Add Person </button>
-          	</a></li>
+            <li><a>
+              Search People <input type="text" style="margin-top: 10px" id="peopleInput" onkeyup="searchPeople()" placeholder="Search for names..">
+              <button id="addPersonButton" type="button" class="btn btn-primary" onclick="addPerson()" style="margin-top: 10px;">Add Person </button>
+            </a></li>
             <!-- <li><a href="#">Hey this is where people go</a></li> -->
           </ul>
       </li>    
@@ -191,42 +191,42 @@
                             <input type="text" id="floorName" name="B" value="Floor 3"><br>
 <!--                        <input type="submit" value="Submit">-->
                           </form>
-<!--          		Search People <input type="text" id="peopleInput" onkeyup="searchPeople()" placeholder="Search for names..">-->
+<!--              Search People <input type="text" id="peopleInput" onkeyup="searchPeople()" placeholder="Search for names..">-->
                           <input type="file" onchange="previewFile()"><br>
-          		<img id="imgAnalyzer" src="" height="100" width="200" alt="Image preview...">
+              <img id="imgAnalyzer" src="" height="100" width="200" alt="Image preview...">
                         <a><button id="newFloorButton" class="btn btn-primary" onclick="newFloor()"> 
                           Add File into Directory </button></a>
-          	</a></li>
+            </a></li>
             <!-- <li><a href="#">Hey this is where people go</a></li> -->
           </ul>
       </li>  
        <li>
           <!-- Link with dropdown items -->
           <a href="#addFile" data-toggle="collapse" aria-expanded="false">
-          	<i class="glyphicon glyphicon-cloud-upload"></i> Add JSON File </a>
+            <i class="glyphicon glyphicon-cloud-upload"></i> Add JSON File </a>
           <ul class="collapse list-unstyled" id="addFile">
-          	<li>
-          		<a> Load in list of employees
+            <li>
+              <a> Load in list of employees
                     <form action="#">
-                    	<input type="file" id="jsonInput">
-                    	<a href="#">
-                    		<input type="submit" id="jsonSubmit" value="Submit" onclick="readJSON()"> 
-                    	</form>
-                    	</a>
-          		</a>
-          	</li>
+                      <input type="file" id="jsonInput">
+                      <a href="#">
+                        <input type="submit" id="jsonSubmit" value="Submit" onclick="readJSON()"> 
+                      </form>
+                      </a>
+              </a>
+            </li>
             <!-- <li><a href="#">Hey this is where people go</a></li> -->
           </ul>
       </li> 
        <li><a href="#">
-	            	<i class="glyphicon glyphicon-wrench"></i>
-	            	Settings
-	            </a></li>
+                <i class="glyphicon glyphicon-wrench"></i>
+                Settings
+              </a></li>
 
         <li><a href="#">
-	            	<i class="glyphicon glyphicon-link"></i>
-	            	About
-	            </a></li>
+                <i class="glyphicon glyphicon-link"></i>
+                About
+              </a></li>
                     
          
           
@@ -235,69 +235,69 @@
 
       <!-- Toggle (left) Sidebar Button -->
 <!--       <div id="left-main">
-	      <button type="button" id="sidebarCollapse" class="btn">
-	        <i class="glyphicon glyphicon-align-left"></i>
-	      </button>
-	  </div> -->
+        <button type="button" id="sidebarCollapse" class="btn">
+          <i class="glyphicon glyphicon-align-left"></i>
+        </button>
+    </div> -->
 
     <!-- Main -->
 
     <div id="HQFloor1">
 
-    	<image xlink:href="HQ-1st-Floor.png" src="HQ1.png" width="1040px" height="630px"/>
+      <image xlink:href="HQ-1st-Floor.png" src="HQ1.png" width="1040px" height="630px"/>
 
     </div>
 
     <div id="HQFloor2">
 
-    	<image xlink:href="HQ-2nd-Floor.png" src="HQ-2nd-Floor.png" width="1040px" height="630px"/>
+      <image xlink:href="HQ-2nd-Floor.png" src="2ndfloor.png" width="1040px" height="630px"/>
 
     </div>
 
     <div id="THFloor1">
 
-    	<image xlink:href="TH1.png" src="TH1.png" width="1040px" height="630px"/>
+      <image xlink:href="TH1.png" src="TH1.png" width="1040px" height="630px"/>
 
     </div>
 
     <div id="THFloor2">
 
-    	<image xlink:href="TH2.png" src="TH2.png" width="1040px" height="630px"/>
+      <image xlink:href="TH2.png" src="TH2.png" width="1040px" height="630px"/>
 
     </div>
 
     <div id="THFloor3">
 
-    	<image xlink:href="TH3.png" src="TH3.png" width="1040px" height="630px"/>
+      <image xlink:href="TH3.png" src="TH3.png" width="1040px" height="630px"/>
 
     </div>
 
     <div id="THFloor4">
 
-    	<image xlink:href="TH4.png" src="TH4.png" width="1040px" height="630px"/>
+      <image xlink:href="TH4.png" src="TH4.png" width="1040px" height="630px"/>
 
     </div>
 
     <div id="WTFloor1">
 
-    	<image xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px"/>
+      <image xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px"/>
 
     </div>
     
     <div id="new">
 
-<!--    	<image xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px"/>-->
+<!--      <image xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px"/>-->
 
     </div>
     
     <!-- main -->
 
-	  <!-- Toggle right-sidebar Button -->
-	  <div id="right-main">
-	      <button type="button" id="rightSidebarCollapse" class="btn">
-	        <i class="glyphicon glyphicon-align-right"></i> <!-- text here -->
-	      </button>
-	  </div>
+    <!-- Toggle right-sidebar Button -->
+    <div id="right-main">
+        <button type="button" id="rightSidebarCollapse" class="btn">
+          <i class="glyphicon glyphicon-align-right"></i> <!-- text here -->
+        </button>
+    </div>
 
     <!-- Right Sidebar -->
     <nav id="right-sidebar" class="active">
@@ -349,9 +349,24 @@
                     <!-- <option> Projects go in here ...</option> -->
               </select>
               </a>
+                <a> 
+                <form action="#">
+                            <label for="deskWidthEdit">Width:</label>
+                            <input type="text" id="deskWidthEdit" name="W" value="50" data-width='85%' style="position:relative; width:115px" ><br>
+                            <label for="deskHeightEdit">Height:</label>
+                            <input type="text" id="deskHeightEdit" name="L" value="50" data-width='85%' style="position:relative; width:115px"><br>
+<!--                        <input type="submit" value="Submit">-->
+                          </form>
+                
+              </a>
               <a>
                 <button id="confirmDeskEdit" type="button" class="btn btn-warning" onclick="confirmDeskEdit()">Edit</button>
-              </a></li>
+              </a>
+            
+            
+            
+            
+            </li>
           </ul>
         </li><!-- end of active desk-->
 
@@ -370,7 +385,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
   <script src = "bootstrap3-typeahead.min.js"></script>
-  <!-- custom script -->
+  <!-- custom script -->  
+ <!--  <script src="server.js"></script> -->
   <script src="javascript.js"></script>
   <script src="index.js"></script>
   <script src="https://cdnjs.com/libraries/less.js/"></script>
