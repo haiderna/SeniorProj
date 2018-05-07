@@ -24,6 +24,20 @@ if(localStorage.getItem("personArray")==null){ //if there is no local storage, i
 }
 //alert(localStorage.getItem("personArray"))
 
+//setting up projectArray from local storage
+if(localStorage.getItem("projectArray")==null){ //if nothing in local
+    localStorage.setItem("projectArray",JSON.stringify(projectArray))
+}else{ //if there is something in local grab from it and then initialize
+    projectArray =  JSON.parse(localStorage.getItem("projectArray"))
+}
+
+//setting up projectColors from local storage
+if(localStorage.getItem("projectColors")==null){ //if nothing in local
+    localStorage.setItem("projectColors",JSON.stringify(projectColors))
+}else{ //if there is something in local grab from it and then initialize
+    projectColors =  JSON.parse(localStorage.getItem("projectColors"))
+}
+
 function DeskClass(name, project, floor, image, height, width, left, top, rotate, deskId, outerDiv, innerDiv, color)
 {   this.name = name; 
     this.project = project;
@@ -448,7 +462,9 @@ function addProject() {
     }
 
     projectArray.push(filter);
+    localStorage.setItem("projectArray",JSON.stringify(projectArray))//updating local storage
     projectColors.push(""); //has to grow every time project array grows
+    localStorage.setItem("projectColors",JSON.stringify(projectColors)) //updating local storage
 
     addToProjectList(projectArray);
     addToDeskProjectDropDown(projectArray);
@@ -468,7 +484,9 @@ function addProjectFromJSON(proj) {
     }
 
     projectArray.push(filter);
+    localStorage.setItem("projectArray",JSON.stringify(projectArray))//updating local storage
     projectColors.push(""); //has to grow every time project array grows
+    localStorage.setItem("projectColors",JSON.stringify(projectColors)) //updating local storage
 
     addToProjectList(projectArray);
     addToDeskProjectDropDown(projectArray);
@@ -706,6 +724,7 @@ function setColor(color, domElement){
     //setting project color
     var idx = projectArray.indexOf(correspondingProjectName);
     projectColors[idx] = String(color);
+    localStorage.setItem("projectColors",JSON.stringify(projectColors)) //updating local storage
 
     $('#projectDropdown').find('.' + correspondingProjectName + '').each(
         function() {
