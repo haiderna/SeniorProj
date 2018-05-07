@@ -473,6 +473,7 @@ function addProject() {
     alert("New Project added");
 }
 
+
 function addProjectFromJSON(proj) {
     var filter;
     filter = proj; // we don't want to TitleCase it 
@@ -532,10 +533,12 @@ function initializeProjectList(array) {
                     if (label === projectArray[k]) {
                         projectArray.splice(k, 1);
                         projectColors.splice(k,1);
+                       // alert(projectColors)
                        // alert(projectArray.length);
+                       localStorage.setItem("projectArray",JSON.stringify(projectArray)) //updating local storage
+                        localStorage.setItem("projectColors",JSON.stringify(projectColors))//updating local stroage
                     }         
-                }
-                
+                }    
        initializeProjectList(projectArray);
        initDeskProjectDropdown(projectArray);
 	
