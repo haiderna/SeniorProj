@@ -1,3 +1,5 @@
+<html !DOCTYPE>
+
 <head>
   <title>WillowTree Apps Seating Chart</title>
   <!-- boostrap css-->
@@ -5,31 +7,31 @@
   <!-- custom css -->
   <link rel="stylesheet" href="custom.css">
   <!-- compiled styles.less into css -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/>
   <!-- for rotation -->
   <link rel="stylesheet" href="jquery.ui.rotatable.css">
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 </head>
 
-<body onload="HQFloor1()" style="background-image: url(&quot;https://78.media.tumblr.com/b96c494a053a6f20a7cb7af1ca9b6f98/tumblr_inline_nn85tpbQkq1rewzq7_1280.png&quot;);">
+<body onload="HQFloor1()">
 
   <nav class="navbar">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-left" href="#"><img id="log" src="WT_logo_white.png" style="margin-right: 15px; width: 175px; height: 40px; margin-top: 5px"></a>
+        <a class="navbar-left" href="#"><img id="log" src = "WT_logo_white.png" style="margin-right: 15px; width: 175px; height: 40px; margin-top: 5px"></a>
       </div>
       <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Floorplan: <p id="labelFloorPlan">HQFloor1</p>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Floorplan: <p id="labelFloorPlan"> None Selected </p>
           <span class="caret"></span></a>
           <ul class="dropdown-menu" id="floorplanSubMenu">
             <li> <a> HQ </a>
                 <ul id="HQsubFloor">
-                    <li href="#" onclick="HQFloor1()" id="HQ1"> <a> Floor 1 </a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('HQFloor1', 'HQ1')"> REMOVE </button> </li>
-                    <li href="#" onclick="HQFloor2()" id="HQ2"> <a> Floor 2 </a><button type="button" class="floorDeleteButton" onclick="deleteFloor('HQFloor2', 'HQ2')"> REMOVE </button></li>
+                    <li href="#" onclick="HQFloor1()" id="HQ1" > <a > Floor 1 </a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('HQFloor1', 'HQ1')"> REMOVE </button> </li>
+                    <li href="#" onclick="HQFloor2()" id="HQ2" > <a > Floor 2 </a><button type="button" class="floorDeleteButton" onclick="deleteFloor('HQFloor2', 'HQ2')"> REMOVE </button></li>
                 </ul>
             </li>
             <li> <a> Treehouse </a>
@@ -40,7 +42,7 @@
                   <li href="#" onclick="THFloor4()" id="TH4"><a>Floor 4</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor4', 'TH4')"> REMOVE </button></li>
                 </ul>
             </li>
-            <li> <a> Watchtower </a>
+            <li> <a > Watchtower </a>
               <ul id="WatchtowersubFloor">
                 <li href="#" onclick="WTFloor()" id="WT1"><a>Floor 5</a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('WTFloor', 'WT1')"> REMOVE </button></li>
               </ul>
@@ -68,12 +70,12 @@
               <a href="#" onclick="alert('new');" ><span class="glyphicon glyphicon-plus"></span> Add new Floor</a></li>-->
         <li>
           <a href="#" onclick="exportPDF();">
-            <span class="glyphicon glyphicon-export"></span> Export
+            <span class="glyphicon glyphicon-export"></span> Export</button>
           </a>
         </li>
         
         
-        <li><a href="#" onclick="save();"><span id="saveButton" class="glyphicon glyphicon-floppy-disk"></span> Save</a></li>
+        <li><a href="#" onclick="saveAll()"><span id="saveButton" class="glyphicon glyphicon-floppy-disk"></span> Save</a></li>
     </ul>
     </div>
   </nav>
@@ -111,7 +113,7 @@
                     </li>
                     <li id="Type" title="Type" style="margin-bottom: 10px;">
                       <label for="Type" style="display: block; margin-bottom: 5px;">Type</label>
-                        <button id="singleDesk" onclick="singleDesk()" class="selectedDeskType"><img src="Single Desk@2x.svg" width="40" height="40"></button>
+                        <button id="singleDesk" onclick="singleDesk()"><img src="Single Desk@2x.svg" width="40" height="40"></button>
                         <button id="LargeConf" onclick="largeConferenceDesk()"><img src="Large Conf.svg" width="40" height="40"></button>
                         <button id="SmallConf" onclick="smallConferenceDesk()"><img src="Small conf.svg" width="40" height="40"></button>
                     </li>
@@ -134,13 +136,13 @@
                     this is where the projects themselves go
             </div> -->
 
-      <div class="btn-group bootstrap-select" style="width: 75%;"><button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" data-id="projectDropdown" title="Select Project..."><span class="filter-option pull-left">Select Project...</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search"></div><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="1"><a tabindex="0" class="desk-proj-color Barclays" style="background-color: rgb(0, 0, 128);" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Barclays</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="desk-proj-color Regal" style="background-color: rgb(255, 0, 0);" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Regal</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="desk-proj-color WillowTree" style="background-color: rgb(27, 217, 196);" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">WillowTree</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select id="projectDropdown" class="selectpicker" data-live-search="true" title="Select Project..." data-width="75%" data-size="5" style="position:relative;" tabindex="-98"><option class="bs-title-option" value="">Select Project...</option>
+      <select id="projectDropdown" class="selectpicker" data-live-search="true" title="Select Project..." data-width='75%' data-size="5" style="position:relative;">
         <!-- <option> Projects go in here ...</option> -->
-      <option class="desk-proj-color Barclays" value="#000080" style="background-color: rgb(0, 0, 128);">Barclays</option><option class="desk-proj-color Regal" value="#FF0000" style="background-color: rgb(255, 0, 0);">Regal</option><option class="desk-proj-color WillowTree" value="#1BD9C4" style="background-color: rgb(27, 217, 196);">WillowTree</option></select></div>
+      </select>
 
           </li>
 
-          <li><button id="ExportButton" type="button" class="btn btn-primary" onclick="insertDivDesk()" style="margin-top: 15px" disabled="disabled">Place Desk </button></li>
+          <li><button id="ExportButton" type="button" class="btn btn-primary"  onclick="insertDivDesk()" style="margin-top: 15px" >Place Desk </button></li>
         </ul>
 
         </ul>
@@ -149,14 +151,14 @@
         <li>
           <a href="#projectSubMenu" data-toggle="collapse" aria-expanded="false">
             <i class="glyphicon glyphicon-folder-open"></i> Project </a>
-          <ul class="collapse list-unstyled" id="projectSubMenu">
+          <ul class="collapse list-unstyled"  id="projectSubMenu">
             <li><a>
                 Search Projects
                                 <br>
                                 <input type="text" id="projectInput" onkeyup="searchProjects()" placeholder="Search for project.." style="margin-top: 10px">
                 <button id="addProjectButton" type="button" class="btn btn-warning" onclick="addProject()" style="margin-top: 10px; background-color: #337ab7; border-color: #2e6da4">Add Project </button>
               </a></li>
-          <li class="colorPickerAdded"><a class="Barclays"><button class="projectDeleteButton" id="Barclays">REMOVE</button><input type="text" class="color-square" style="display: none;"><div class="sp-replacer sp-light"><div class="sp-preview"><div class="sp-preview-inner" style="background-color: rgb(0, 0, 128);"></div></div><div class="sp-dd">▼</div></div>Barclays</a></li><li class="colorPickerAdded"><a class="Regal"><button class="projectDeleteButton" id="Regal">REMOVE</button><input type="text" class="color-square" style="display: none;"><div class="sp-replacer sp-light"><div class="sp-preview"><div class="sp-preview-inner" style="background-color: rgb(255, 0, 0);"></div></div><div class="sp-dd">▼</div></div>Regal</a></li><li class="colorPickerAdded"><a class="WillowTree"><button class="projectDeleteButton" id="WillowTree">REMOVE</button><input type="text" class="color-square" style="display: none;"><div class="sp-replacer sp-light"><div class="sp-preview"><div class="sp-preview-inner" style="background-color: rgb(27, 217, 196);"></div></div><div class="sp-dd">▼</div></div>WillowTree</a></li></ul>
+          </ul>
     </li>
 
         <li>
@@ -169,7 +171,7 @@
               <button id="addPersonButton" type="button" class="btn btn-primary" onclick="addPerson()" style="margin-top: 10px;">Add Person </button>
             </a></li>
             <!-- <li><a href="#">Hey this is where people go</a></li> -->
-          <li class="listedPerson" id="Cow Lady"><a><button class="personDeleteButton" id="Cow Lady">REMOVE</button>Cow Lady</a></li><li class="listedPerson" id="Dog Man"><a><button class="personDeleteButton" id="Dog Man">REMOVE</button>Dog Man</a></li><li class="listedPerson" id="Shaggy Mutt"><a><button class="personDeleteButton" id="Shaggy Mutt">REMOVE</button>Shaggy Mutt</a></li></ul>
+          </ul>
       </li>    
         <li>
           <!-- Link with dropdown items -->
@@ -192,9 +194,9 @@
 <!--              Search People <input type="text" id="peopleInput" onkeyup="searchPeople()" placeholder="Search for names..">-->
                           <input type="file" onchange="previewFile()"><br>
               <img id="imgAnalyzer" src="" height="100" width="200" alt="Image preview...">
-                        </a><a><button id="newFloorButton" class="btn btn-primary" onclick="newFloor()"> 
+                        <a><button id="newFloorButton" class="btn btn-primary" onclick="newFloor()"> 
                           Add File into Directory </button></a>
-            </li>
+            </a></li>
             <!-- <li><a href="#">Hey this is where people go</a></li> -->
           </ul>
       </li>  
@@ -205,13 +207,13 @@
           <ul class="collapse list-unstyled" id="addFile">
             <li>
               <a> Load in list of employees
-                    </a><form action="#"><a>
+                    <form action="#">
                       <input type="file" id="jsonInput">
-                      </a><a href="#">
+                      <a href="#">
                         <input type="submit" id="jsonSubmit" value="Submit" onclick="readJSON()"> 
-                      
-                      </a></form>
-              
+                      </form>
+                      </a>
+              </a>
             </li>
             <!-- <li><a href="#">Hey this is where people go</a></li> -->
           </ul>
@@ -240,45 +242,45 @@
 
     <!-- Main -->
 
-    <div id="HQFloor1" style="display: block;">
+    <div id="HQFloor1">
 
-      <img xlink:href="HQ-1st-Floor.png" src="HQ1.png" width="1040px" height="630px">
-
-    </div>
-
-    <div id="HQFloor2" style="display: none;">
-
-      <img xlink:href="HQ-2nd-Floor.png" src="2ndfloor.png" width="1040px" height="630px">
+      <image xlink:href="HQ-1st-Floor.png" src="HQ1.png" width="1040px" height="630px"/>
 
     </div>
 
-    <div id="THFloor1" style="display: none;">
+    <div id="HQFloor2">
 
-      <img xlink:href="TH1.png" src="TH1.png" width="1040px" height="630px">
-
-    </div>
-
-    <div id="THFloor2" style="display: none;">
-
-      <img xlink:href="TH2.png" src="TH2.png" width="1040px" height="630px">
+      <image xlink:href="HQ-2nd-Floor.png" src="2ndfloor.png" width="1040px" height="630px"/>
 
     </div>
 
-    <div id="THFloor3" style="display: none;">
+    <div id="THFloor1">
 
-      <img xlink:href="TH3.png" src="TH3.png" width="1040px" height="630px">
-
-    </div>
-
-    <div id="THFloor4" style="display: none;">
-
-      <img xlink:href="TH4.png" src="TH4.png" width="1040px" height="630px">
+      <image xlink:href="TH1.png" src="TH1.png" width="1040px" height="630px"/>
 
     </div>
 
-    <div id="WTFloor1" style="display: none;">
+    <div id="THFloor2">
 
-      <img xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px">
+      <image xlink:href="TH2.png" src="TH2.png" width="1040px" height="630px"/>
+
+    </div>
+
+    <div id="THFloor3">
+
+      <image xlink:href="TH3.png" src="TH3.png" width="1040px" height="630px"/>
+
+    </div>
+
+    <div id="THFloor4">
+
+      <image xlink:href="TH4.png" src="TH4.png" width="1040px" height="630px"/>
+
+    </div>
+
+    <div id="WTFloor1">
+
+      <image xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px"/>
 
     </div>
     
@@ -311,12 +313,12 @@
           </a>
           <ul class="collapse list-unstyled" id="editSubmenu">
             <li><a>
-              <button id="insertRoomButton" type="button" class="btn btn-primary" onclick="insertRoom()" style="width:100%;">Insert Room</button>
+              <button id="insertRoomButton" type="button" class="btn btn-primary" onclick="insertRoom()" style="width:100%;" >Insert Room</button>
             </a></li>
             <li><a>
               <button id="deleteRoomButton" type="button" class="btn btn-danger" onclick="deleteRoom()" style="width:100%;">Delete Room</button>
             </a></li>
-            <li><a id="stopAnchor" style="margin:-10px 0px; visibility: hidden;">
+            <li><a id=stopAnchor style="margin:-10px 0px; visibility: hidden;">
               <button id="stopDeletingButton" type="button" class="btn btn-default" onclick="stopDeleting()" style="width:100%; display:none;"> Quit </button>
             </a></li>
             <li><a>
@@ -337,22 +339,22 @@
             <li id="currentDesk" style="display:none;">
               <a> 
                 Name:<br>
-                <div class="btn-group bootstrap-select" style="width: 85%;"><button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" data-id="activeDeskName" title="Search Name..."><span class="filter-option pull-left">Search Name...</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search"></div><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="1"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Cow Lady</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Dog Man</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Shaggy Mutt</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select id="activeDeskName" class="selectpicker" data-live-search="true" title="Search Name..." data-width="85%" data-size="5" style="position:relative;" tabindex="-98"><option class="bs-title-option" value="">Search Name...</option>
+                <select id="activeDeskName" class="selectpicker" data-live-search="true" title="Search Name..." data-width='85%' data-size="5" style="position:relative;">
               
-                <option value="Cow Lady">Cow Lady</option><option value="Dog Man">Dog Man</option><option value="Shaggy Mutt">Shaggy Mutt</option></select></div>
+                </select>
               </a>
               <a>
                 Project:<br>
-                <div class="btn-group bootstrap-select" style="width: 85%;"><button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" data-id="activeDeskProject" title="Select Project..."><span class="filter-option pull-left">Select Project...</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search"></div><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="1"><a tabindex="0" class="desk-proj-color Barclays" style="background-color: rgb(0, 0, 128);" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Barclays</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="desk-proj-color Regal" style="background-color: rgb(255, 0, 0);" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Regal</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="desk-proj-color WillowTree" style="background-color: rgb(27, 217, 196);" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">WillowTree</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select id="activeDeskProject" class="selectpicker" data-live-search="true" title="Select Project..." data-width="85%" data-size="5" style="position:relative;" tabindex="-98"><option class="bs-title-option" value="">Select Project...</option>
+                <select id="activeDeskProject" class="selectpicker" data-live-search="true" title="Select Project..." data-width='85%' data-size="5" style="position:relative;">
                     <!-- <option> Projects go in here ...</option> -->
-              <option class="desk-proj-color Barclays" value="#000080" style="background-color: rgb(0, 0, 128);">Barclays</option><option class="desk-proj-color Regal" value="#FF0000" style="background-color: rgb(255, 0, 0);">Regal</option><option class="desk-proj-color WillowTree" value="#1BD9C4" style="background-color: rgb(27, 217, 196);">WillowTree</option></select></div>
+              </select>
               </a>
                 <a> 
                 <form action="#">
                             <label for="deskWidthEdit">Width:</label>
-                            <input type="text" id="deskWidthEdit" name="W" value="50" data-width="85%" style="position:relative; width:115px"><br>
+                            <input type="text" id="deskWidthEdit" name="W" value="50" data-width='85%' style="position:relative; width:115px" ><br>
                             <label for="deskHeightEdit">Height:</label>
-                            <input type="text" id="deskHeightEdit" name="L" value="50" data-width="85%" style="position:relative; width:115px"><br>
+                            <input type="text" id="deskHeightEdit" name="L" value="50" data-width='85%' style="position:relative; width:115px"><br>
 <!--                        <input type="submit" value="Submit">-->
                           </form>
                 
@@ -382,7 +384,7 @@
   <!-- boostrap js -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-  <script src="bootstrap3-typeahead.min.js"></script>
+  <script src = "bootstrap3-typeahead.min.js"></script>
   <!-- custom script -->  
  <!--  <script src="server.js"></script> -->
   <script src="javascript.js"></script>
@@ -393,6 +395,6 @@
   <script src="jquery.ui.rotatable.js"></script>
 
 
+</body>
 
-
-<div class="sp-container sp-hidden sp-light sp-alpha-enabled sp-clear-enabled sp-palette-buttons-disabled"><div class="sp-palette-container"><div class="sp-palette sp-thumb sp-cf"><div class="sp-cf sp-palette-row sp-palette-row-0"></div><div class="sp-cf sp-palette-row sp-palette-row-selection"><span title="#1bd9c4" data-color="rgb(27, 217, 196)" class="sp-thumb-el sp-thumb-dark"><span class="sp-thumb-inner" style="background-color:rgb(27, 217, 196);"></span></span><span title="#ff0000" data-color="rgb(255, 0, 0)" class="sp-thumb-el sp-thumb-light"><span class="sp-thumb-inner" style="background-color:rgb(255, 0, 0);"></span></span><span title="#000080" data-color="rgb(0, 0, 128)" class="sp-thumb-el sp-thumb-dark sp-thumb-active"><span class="sp-thumb-inner" style="background-color:rgb(0, 0, 128);"></span></span></div></div><div class="sp-palette-button-container sp-cf"><button type="button" class="sp-palette-toggle">less</button></div></div><div class="sp-picker-container"><div class="sp-top sp-cf"><div class="sp-fill"></div><div class="sp-top-inner"><div class="sp-color" style="background-color: rgb(0, 0, 255);"><div class="sp-sat"><div class="sp-val"><div class="sp-dragger" style="display: block; top: 0px; left: 0px;"></div></div></div></div><div class="sp-clear sp-clear-display" title="Clear Color Selection"></div><div class="sp-hue"><div class="sp-slider" style="display: block; top: 0px;"></div></div></div><div class="sp-alpha"><div class="sp-alpha-inner" style="background: linear-gradient(to right, rgba(0, 0, 128, 0), rgb(0, 0, 128));"><div class="sp-alpha-handle" style="display: block; left: 0px;"></div></div></div></div><div class="sp-input-container sp-cf"><input class="sp-input" type="text" spellcheck="false"></div><div class="sp-initial sp-thumb sp-cf"><div class="sp-cf sp-palette-row-initial"><span data-color="" style="background-color:transparent;" class="sp-clear-display" title="No Color Selected"></span><span title="#000080" data-color="rgb(0, 0, 128)" class="sp-thumb-el sp-thumb-dark sp-thumb-active"><span class="sp-thumb-inner" style="background-color:rgb(0, 0, 128);"></span></span></div></div><div class="sp-button-container sp-cf"><a class="sp-cancel" href="#">cancel</a><button type="button" class="sp-choose">choose</button></div></div></div><div class="sp-container sp-hidden sp-light sp-alpha-enabled sp-clear-enabled sp-palette-buttons-disabled"><div class="sp-palette-container"><div class="sp-palette sp-thumb sp-cf"><div class="sp-cf sp-palette-row sp-palette-row-0"></div><div class="sp-cf sp-palette-row sp-palette-row-selection"><span title="#1bd9c4" data-color="rgb(27, 217, 196)" class="sp-thumb-el sp-thumb-dark"><span class="sp-thumb-inner" style="background-color:rgb(27, 217, 196);"></span></span><span title="#ff0000" data-color="rgb(255, 0, 0)" class="sp-thumb-el sp-thumb-light sp-thumb-active"><span class="sp-thumb-inner" style="background-color:rgb(255, 0, 0);"></span></span><span title="#000080" data-color="rgb(0, 0, 128)" class="sp-thumb-el sp-thumb-dark"><span class="sp-thumb-inner" style="background-color:rgb(0, 0, 128);"></span></span></div></div><div class="sp-palette-button-container sp-cf"><button type="button" class="sp-palette-toggle">less</button></div></div><div class="sp-picker-container"><div class="sp-top sp-cf"><div class="sp-fill"></div><div class="sp-top-inner"><div class="sp-color" style="background-color: rgb(255, 0, 0);"><div class="sp-sat"><div class="sp-val"><div class="sp-dragger" style="display: block; top: 0px; left: 0px;"></div></div></div></div><div class="sp-clear sp-clear-display" title="Clear Color Selection"></div><div class="sp-hue"><div class="sp-slider" style="display: block; top: 0px;"></div></div></div><div class="sp-alpha"><div class="sp-alpha-inner" style="background: linear-gradient(to right, rgba(255, 0, 0, 0), rgb(255, 0, 0));"><div class="sp-alpha-handle" style="display: block; left: 0px;"></div></div></div></div><div class="sp-input-container sp-cf"><input class="sp-input" type="text" spellcheck="false"></div><div class="sp-initial sp-thumb sp-cf"><div class="sp-cf sp-palette-row-initial"><span data-color="" style="background-color:transparent;" class="sp-clear-display" title="No Color Selected"></span><span title="#ff0000" data-color="rgb(255, 0, 0)" class="sp-thumb-el sp-thumb-light sp-thumb-active"><span class="sp-thumb-inner" style="background-color:rgb(255, 0, 0);"></span></span></div></div><div class="sp-button-container sp-cf"><a class="sp-cancel" href="#">cancel</a><button type="button" class="sp-choose">choose</button></div></div></div><div class="sp-container sp-hidden sp-light sp-alpha-enabled sp-clear-enabled sp-palette-buttons-disabled"><div class="sp-palette-container"><div class="sp-palette sp-thumb sp-cf"><div class="sp-cf sp-palette-row sp-palette-row-0"></div><div class="sp-cf sp-palette-row sp-palette-row-selection"><span title="#1bd9c4" data-color="rgb(27, 217, 196)" class="sp-thumb-el sp-thumb-dark sp-thumb-active"><span class="sp-thumb-inner" style="background-color:rgb(27, 217, 196);"></span></span><span title="#ff0000" data-color="rgb(255, 0, 0)" class="sp-thumb-el sp-thumb-light"><span class="sp-thumb-inner" style="background-color:rgb(255, 0, 0);"></span></span><span title="#000080" data-color="rgb(0, 0, 128)" class="sp-thumb-el sp-thumb-dark"><span class="sp-thumb-inner" style="background-color:rgb(0, 0, 128);"></span></span></div></div><div class="sp-palette-button-container sp-cf"><button type="button" class="sp-palette-toggle">less</button></div></div><div class="sp-picker-container"><div class="sp-top sp-cf"><div class="sp-fill"></div><div class="sp-top-inner"><div class="sp-color" style="background-color: rgb(0, 255, 227);"><div class="sp-sat"><div class="sp-val"><div class="sp-dragger" style="display: block; top: 0px; left: 0px;"></div></div></div></div><div class="sp-clear sp-clear-display" title="Clear Color Selection"></div><div class="sp-hue"><div class="sp-slider" style="display: block; top: 0px;"></div></div></div><div class="sp-alpha"><div class="sp-alpha-inner" style="background: linear-gradient(to right, rgba(27, 217, 196, 0), rgb(27, 217, 196));"><div class="sp-alpha-handle" style="display: block; left: 0px;"></div></div></div></div><div class="sp-input-container sp-cf"><input class="sp-input" type="text" spellcheck="false"></div><div class="sp-initial sp-thumb sp-cf"><div class="sp-cf sp-palette-row-initial"><span data-color="" style="background-color:transparent;" class="sp-clear-display" title="No Color Selected"></span><span title="#1bd9c4" data-color="rgb(27, 217, 196)" class="sp-thumb-el sp-thumb-dark sp-thumb-active"><span class="sp-thumb-inner" style="background-color:rgb(27, 217, 196);"></span></span></div></div><div class="sp-button-container sp-cf"><a class="sp-cancel" href="#">cancel</a><button type="button" class="sp-choose">choose</button></div></div></div></body>
+</html>
