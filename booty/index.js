@@ -2,14 +2,16 @@ var personArray = ["Cow Lady", "Dog Man", "Shaggy Mutt"];
 var personObjectArray = [];
 var projectArray = ["Barclays", "Regal", "WillowTree"]; 
 var projectColors = ["#000080", "#FF0000", "#1BD9C4"];
-var deskArray = [];
+
+ //localStorage.removeItem("personObjectArray")
+ //localStorage.removeItem("personArray")
      
 var buildings = ["HQ", "Treehouse", "Watchtower"];
 var listIds = ["HQ1", "HQ2", "TH1","TH2", "TH3","TH4","WT1" ];
 var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"];
 
 
-localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
+//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 localStorage.setItem("buildings",JSON.stringify(buildings))
 localStorage.setItem("listIds",JSON.stringify(listIds))
 localStorage.setItem("floorplans",JSON.stringify(floorplans))
@@ -22,13 +24,20 @@ if(localStorage.getItem("personArray")==null){ //if there is no local storage, i
 }
 //alert(localStorage.getItem("personArray"))
 
-function DeskClass(name, project, image, left, top, rotate)
+function DeskClass(name, project, floor, image, height, width, left, top, rotate, deskId, outerDiv, innerDiv, color)
 {   this.name = name; 
-    this.project = project; 
-    this.image = image; 
+    this.project = project;
+    this.floor = floor; 
+    this.image = image;
+    this.height = height; 
+    this.width = width;    
     this.left = left; 
     this.top = top;
     this.rotate = rotate;
+    this.deskId = deskId;
+    this.outerDiv = outerDiv;
+    this.innerDiv = innerDiv;
+    this.color = color
 } 
 function PersonClass(name, project, floorplan){
     this.name = name;
@@ -44,22 +53,21 @@ person1.name = "Cow Lady";
 person1.project = "Regal";
 person1.floorplan = "HQFloor1";
 personObjectArray.push(person1);
-localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
+//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 
 var person2 = new PersonClass();
 person2.name = "Dog Man";
 person2.project = "Regal";
 person2.floorplan = "HQFloor1";
 personObjectArray.push(person2);
-localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
+//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 
 var person3 = new PersonClass();
 person3.name = "Shaggy Mutt";
 person3.project = "Regal";
 person3.floorplan = "HQFloor1";
 personObjectArray.push(person3);
-localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
-
+//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 //setting up personObjectArray from local storage
 if(localStorage.getItem("personObjectArray")==null){
     localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
@@ -759,9 +767,55 @@ function isEmpty(str){
 
 
 // ============================================================================================
+// ===============================SAVING=======================================================
+// ============================================================================================
+
+// function saveButton(){
+//     //going through all desks
+//     for(var i=0; i<deskArray.length; i++){
+//         var desk = deskArray[i]; //current desk being iterated through
+        
+//         //retrieving style info for each desk from outerdiv
+//         //position: absolute; left: 770px; top: 284px; z-index: 102; //example of element retrieved for reference
+//         var element = document.getElementById(desk.outerDiv).getAttribute("style");
+//         //console.log(element)
+//         element = element.split(" ")
+//         //console.log(element)
+//         //assigning to desk attributes
+//         desk.left = element[3].replace('px;','') //cleaning up
+//         desk.top = element[5].replace('px;','')
+
+//         //retrieving style info for each desk from innerdiv
+//         //width: 50px; height: 50px; //example of element retrieved for reference
+//         //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
+//         var element = document.getElementById(desk.innerDiv).getAttribute("style");
+//        // console.log(element)
+//         element = element.split(" ")
+//        // console.log(element)
+//         //assigning 
+//         desk.width = element[1].replace('px;','') //cleaning up
+//         desk.height = element[3].replace('px;','')
+//         if(element.length<6){
+//             desk.rotate = null; //no rotation
+//         }else{
+//             var rotateRad = element[5].replace('rotate(','') //cleaning up
+//             rotateRad = rotateRad.replace('rad);','')
+//             desk.rotate = rotateRad
+//         }
+//     }
+
+//     localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
+// }
+
+
+// ============================================================================================
 // ===============================DEPRECIATED SAVING FUNCTIONS FOR TESTING=======================================================
 // ============================================================================================
-    
+
+//refreshes local Storage to default values
+function deleteLocalStorage(){
+
+}
 // function save(){
 //     saveIndex()
 //     (function () {

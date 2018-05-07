@@ -1,3 +1,29 @@
+var deskArray = [];
+var deskIndex = 0;
+//localStorage.setItem("deskArray",)
+//console.log(localStorage.getItem("deskArray"))
+//localStorage.removeItem("deskArray")
+//setting up deskArray from local storage
+//alert(deskArray)
+if(localStorage.getItem("deskArray")==null){ //if there is no local storage, initialize storage
+    console.log("deskArray null")
+    localStorage.setItem("deskArray",JSON.stringify(deskArray))
+    localStorage.setItem("deskIndex",0)
+}else if(localStorage.getItem("deskArray"=="[]")){
+    console.log("deskArray empty")
+    localStorage.setItem("deskIndex",0)
+}
+else{ //if there is already something stored in local, grab from it and then initialize in javascript
+    deskArray = JSON.parse(localStorage.getItem("deskArray"))
+    deskIndex = localStorage.getItem("deskIndex")
+    // var lastDeskId = dseskArray[deskArray.length-1].deskId
+    // deskIndex = lastDeskId.replace('desk','')
+    // console.log('deskindex = '+ deskIndex)
+    for (var i = 0; i<deskArray.length; i++) {
+        loadDivDesk(deskArray[i])
+    }
+}
+
 $(document).ready(function () {
     document.body.style.backgroundImage = "url('https://78.media.tumblr.com/b96c494a053a6f20a7cb7af1ca9b6f98/tumblr_inline_nn85tpbQkq1rewzq7_1280.png')";
     document.getElementById("labelFloorPlan").innerHTML = floorPlan;
@@ -202,7 +228,7 @@ function stopActiveDesk(){
     $(".ui-rotatable-handle").hide();
 }
 
-var deskIndex = 0;
+//var deskIndex = 0;
 function insertDivDesk() {
 
     var mainDiv = document.getElementById(floorPlan);
@@ -213,6 +239,9 @@ function insertDivDesk() {
     var Desk = new DeskClass();
     Desk.image = imageSource;
     var deskId = "desk"+deskIndex;
+    Desk.deskId = deskId;
+    Desk.floor = floorPlan;
+    //alert(deskId)
 
     d_img.setAttribute("id", deskId);
     d_img.className += "deskImg";
@@ -235,6 +264,8 @@ function insertDivDesk() {
         exit();
     }
     
+    Desk.width = w;
+    Desk.height = h;
     Desk.name = name;
 
     /*Getting project and color*/
@@ -247,6 +278,7 @@ function insertDivDesk() {
     }
        
     Desk.project = proj;
+   // Desk.color = color;
     
         if (isNaN(w) || w > 200) {
             alert("Add proper width with a max size of 200");
@@ -283,12 +315,14 @@ function insertDivDesk() {
     var divId = "innerDiv"+deskIndex;
     innerDiv.setAttribute("id", divId);
     innerDiv.className += "innerDesk";
+    Desk.innerDiv = divId;
 
     //outerdiv containing innerdiv + text for draggalbe handle
     var outerDiv = document.createElement("div");
     var divId = "outerDiv"+deskIndex;
     outerDiv.setAttribute("id", divId);
     outerDiv.className += "desk";
+    Desk.outerDiv = divId;
     // outerDiv.style.flex = "auto";
     // outerDiv.style.flexDirection = "column";
 
@@ -336,8 +370,8 @@ function insertDivDesk() {
                 continueActiveDesk();
                 activateDeskName(Desk.name);
                 activateDeskProject(Desk.project);
-                
             } 
+           
         }
     });
 
@@ -357,11 +391,24 @@ function insertDivDesk() {
             continueActiveDesk();
             activateDeskName(Desk.name);
             activateDeskProject(Desk.project);
+            var style = document.getElementById(divId).getAttribute("style");
+            var stylearray = JSON.parse(style)
+            var rotate = stylearray.transform
+            alert("transform = " + rotate)
 
         } else if ($(this).hasClass("ui-selected")){
             $(this).removeClass("ui-selected");
             $(this).children(".ui-rotatable-handle").hide();
             stopActiveDesk();
+
+            var style = document.getElementById(divId).getAttribute("style");
+            var stylearray = JSON.parse(style)
+            var rotate = stylearray.transform
+            alert("transform = " + rotate)
+            // Desk.top = mainDiv.offsetTop; 
+            // Desk.left = mainDiv.offsetLeft; 
+            // deskArray[deskIndex] = Desk;
+            // localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
         }
     });
 
@@ -381,17 +428,24 @@ function insertDivDesk() {
     top = top + ($(mainDiv).height() / 4);
     outerDiv.style.left = left;
     outerDiv.style.top =  top;
+    Desk.left = left;
+    Desk.top = top;
 
     mainDiv.appendChild(outerDiv);
 
     var convertedR = convertHex(color,50);
+   // Desk.color = convertedR
    // alert(convertedR);
     getNewColor(convertedR, d_img);
     $(outerDiv).css('z-index', '102');
+    //Desk.color = d_img.style
 
     deskArray.push(Desk)
+   // localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
+
      // alert(divId);
     deskIndex++;
+    localStorage.setItem("deskIndex",deskIndex) //updating local storage
 
     //should only trigger if person is not already in the database
     var input, filter;
@@ -950,4 +1004,254 @@ function convertHex(hex,opacity){
 
     result = ''+r+','+g+','+b+'';
     return result;
+}
+
+function loadDivDesk(storedDesk) {
+    floorplan = storedDesk.floor
+    var mainDiv = document.getElementById(floorplan);
+    mainDiv.style.position = "relative";
+    var d_img = document.createElement("IMG");
+    imageSource = storedDesk.image
+    d_img.setAttribute("src", imageSource);
+
+    var deskId = storedDesk.deskId
+    var storedDeskIndex = deskId.replace("desk","")//extracting desk index
+
+    d_img.setAttribute("id", deskId);
+    d_img.className += "deskImg";
+    d_img.style.zIndex = 97;
+    
+    var w = storedDesk.width
+    var h = storedDesk.height
+    var name = storedDesk.name
+    
+    //error messages 
+    if (!name) {
+        alert("Add Value for Name");
+        exit();
+    }
+    if (!w) {
+        alert("Add Value for Width");
+        exit();
+    }
+    if (!h) {
+        alert("Add Value for Height");
+        exit();
+    }
+    
+    
+    /*Getting project and color*/
+    var proj = storedDesk.project
+    var color = storedDesk.color
+   
+    d_img.setAttribute("width", w);
+
+    d_img.setAttribute("height", h);
+
+    d_img.setAttribute("alt", "desk");
+    
+    ////////Setting Floorplan to new Floorplan ////////
+    for (var j = 0; j < personObjectArray.length;j++){
+        if (name === personObjectArray[j].name){
+            personObjectArray[j].project = proj;
+            personObjectArray[j].floorplan = floorPlan;
+        }
+        
+    }
+    
+    //creating desk name
+    var para = document.createElement("p");
+    para.innerHTML = name;
+    para.className = "deskText";
+    
+    //innerdiv containing image for rotatable handle
+    var innerDiv = document.createElement("div");
+    var divId = storedDesk.innerDiv
+    innerDiv.setAttribute("id", divId);
+    innerDiv.className += "innerDesk";
+
+    //setting style
+    if(storedDesk.rotate!=null){ //if there actually was rotation
+        rotate = "rotate("+ storedDesk.rotate + "rad)"
+        innerDiv.style.transform = rotate
+    }
+
+    //outerdiv containing innerdiv + text for draggalbe handle
+    var outerDiv = document.createElement("div");
+    var divId = storedDesk.outerDiv
+    outerDiv.setAttribute("id", divId);
+    outerDiv.className += "desk";
+    // outerDiv.style.flex = "auto";
+    // outerDiv.style.flexDirection = "column";
+
+    //cancel button to quit adding all the rooms
+    var btn = document.createElement('div');
+    btn.className = 'deleteDeskButton';
+    btn.innerHTML = '&#10005';
+    btn.onclick = function (e) { document.getElementById(divId).remove(); };
+    
+    innerDiv.style.width = w;
+    innerDiv.style.height = h;
+    
+    //SETTING DESKS TO ACTIVE AND NON ACTIVE
+    $( mainDiv ).selectable({
+        filter : ".desk",
+        //only one selectable at a time
+        selecting: function(event, ui){
+            if( $(".ui-selecting").length > 1){
+                  $(".ui-selecting").removeClass("ui-selecting");
+            }
+        },
+        //just make it so you can only select using clicks
+        //makes the selectable a redundant application
+        //with the implemented draggable and onclick functions
+        disabled: true
+     });
+
+    $(outerDiv).draggable({
+        start: function(ev, ui) 
+        {        
+            if (!$(this).hasClass("ui-selected")) {
+                //making selectable
+                $(this).addClass("ui-selected");
+                $(this).siblings().removeClass("ui-selected");
+
+                var stopRotMouse = {
+                    wheelRotate: false
+                    };
+                    $(this).children('.innerDesk').first().rotatable(stopRotMouse);
+                //making rotatable
+                $(this).siblings().children().children(".ui-rotatable-handle").hide();
+                $(this).children('.innerDesk').first().children(".ui-rotatable-handle").show();
+
+                //setting desk menu options
+                continueActiveDesk();
+                activateDeskName(storedDesk.name);
+                activateDeskProject(storedDesk.project);
+            } 
+           
+        }
+    });
+
+    $(outerDiv).click(function() {
+        var stopRotMouse = {
+                    wheelRotate: false
+                    };
+        if (!$(this).hasClass("ui-selected")) {
+            $(this).addClass("ui-selected");
+            $(this).siblings().removeClass("ui-selected");
+
+            $(this).siblings().children().children(".ui-rotatable-handle").hide();
+            $(this).children('.innerDesk').first().rotatable(stopRotMouse);
+            $(this).children('.innerDesk').first().children(".ui-rotatable-handle").show();
+            
+            //setting desk menu options
+            continueActiveDesk();
+            activateDeskName(storedDesk.name);
+            activateDeskProject(storedDesk.project);
+            // var style = document.getElementById(divId).getAttribute("style");
+            // var stylearray = JSON.parse(style)
+            // var rotate = stylearray.transform
+            // alert("transform = " + rotate)
+
+        } else if ($(this).hasClass("ui-selected")){
+            $(this).removeClass("ui-selected");
+            $(this).children(".ui-rotatable-handle").hide();
+            stopActiveDesk();
+
+            // var style = document.getElementById(divId).getAttribute("style");
+            // var stylearray = JSON.parse(style)
+            // var rotate = stylearray.transform
+            // alert("transform = " + rotate)
+            // Desk.top = mainDiv.offsetTop; 
+            // Desk.left = mainDiv.offsetLeft; 
+            // deskArray[deskIndex] = Desk;
+            // localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
+        }
+    });
+
+
+
+    innerDiv.appendChild(d_img);
+    innerDiv.appendChild(btn);
+
+    outerDiv.appendChild(innerDiv);
+    outerDiv.appendChild(para);
+
+    //positioning to a more central position
+    outerDiv.style.position = "absolute";
+    // var left = mainDiv.offsetLeft;   
+    // var top = mainDiv.offsetTop;
+    var left = storedDesk.left
+    var top = storedDesk.top
+    outerDiv.style.left = left;
+    outerDiv.style.top =  top;
+    // Desk.left = left;
+    // Desk.top = top;
+
+    mainDiv.appendChild(outerDiv);
+
+    $(outerDiv).css('z-index', '102');
+    d_img.style = color
+}
+
+function saveButton(){
+    //going through all desks
+    for(var i=0; i<deskArray.length; i++){
+        var desk = deskArray[i]; //current desk being iterated through
+        var outer = document.getElementById(desk.deskId)
+        if(outer==null){//if desk is not present/has been deleted
+            deskArray.splice(i,1)
+            localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
+        }else{ //if desk is present
+            //retrieving style info for each desk from outerdiv
+            //position: absolute; left: 770px; top: 284px; z-index: 102; //example of element retrieved for reference
+            var element = document.getElementById(desk.outerDiv).getAttribute("style");
+            //console.log(element)
+            element = element.split(" ")
+            //console.log(element)
+            //assigning to desk attributes
+            desk.left = element[3].replace('px;','') //cleaning up
+            desk.top = element[5].replace('px;','')
+
+            //retrieving style info for each desk from innerdiv
+            //width: 50px; height: 50px; //example of element retrieved for reference
+            //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
+            element = document.getElementById(desk.innerDiv).getAttribute("style");
+           // console.log(element)
+           console.log(element)
+            element = element.split(" ")
+           // console.log(element)
+            //assigning 
+            desk.width = element[1].replace('px;','') //cleaning up
+            desk.height = element[3].replace('px;','')
+            if(element.length<6){
+                desk.rotate = null; //no rotation
+            }else{
+                var rotateRad = element[5]
+                rotateRad = rotateRad.replace('rotate(','') //cleaning up
+                rotateRad = rotateRad.replace('rad);','')
+                desk.rotate = rotateRad
+            }
+
+            //retrieving style info for each desk from deskdiv
+            //width: 50px; height: 50px; //example of element retrieved for reference
+            //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
+            element = document.getElementById(desk.deskId).getAttribute("style");
+           console.log(element)
+           //alert(element)
+            desk.color = element
+
+            //looking for edits
+            element = document.getElementById(desk.outerDiv).getElementsByClassName('deskText')[0] //desktext
+            //element = JSON.stringify(element)
+            // element = element.replace('<p class=\"deskText\">','')
+            // element = element.replace('</p>','')
+            element = element.innerHTML
+            console.log(element)
+            desk.name = element
+        }
+    }
+
+    localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
 }
