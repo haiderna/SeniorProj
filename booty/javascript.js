@@ -1205,26 +1205,25 @@ function saveButton(){
             localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
         }else{ //if desk is present
             //retrieving style info for each desk from outerdiv
-            //position: absolute; left: 770px; top: 284px; z-index: 102; //example of element retrieved for reference
-            var element = document.getElementById(desk.outerDiv).getAttribute("style");
-            //console.log(element)
-            element = element.split(" ")
-            //console.log(element)
+                    //position: absolute; left: 770px; top: 284px; z-index: 102; //example of element retrieved for reference
+            var element = document.getElementById(desk.outerDiv).getAttribute("style"); 
+            element = element.split(" ")    //taking apart style attribute of outerdiv to find left and top
             //assigning to desk attributes
             desk.left = element[3].replace('px;','') //cleaning up
             desk.top = element[5].replace('px;','')
 
+            //finding width and height and assigning to desk attributes
+            deskImg = document.getElementById(desk.deskId)
+            desk.width = deskImg.getAttribute("width")
+            desk.height = deskImg.getAttribute("height")
+
+            //assigning rotate to desk object
             //retrieving style info for each desk from innerdiv
-            //width: 50px; height: 50px; //example of element retrieved for reference
-            //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
+                    //width: 50px; height: 50px; //example of element retrieved for reference
+                    //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
             element = document.getElementById(desk.innerDiv).getAttribute("style");
-           // console.log(element)
-           console.log(element)
-            element = element.split(" ")
-           // console.log(element)
-            //assigning 
-            desk.width = element[1].replace('px;','') //cleaning up
-            desk.height = element[3].replace('px;','')
+            element = element.split(" ") //taking apart style attribute to find rotate later on
+           
             if(element.length<6){
                 desk.rotate = null; //no rotation
             }else{
