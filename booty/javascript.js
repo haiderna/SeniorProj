@@ -1165,24 +1165,11 @@ function loadDivDesk(storedDesk) {
             continueActiveDesk();
             activateDeskName(storedDesk.name);
             activateDeskProject(storedDesk.project);
-            // var style = document.getElementById(divId).getAttribute("style");
-            // var stylearray = JSON.parse(style)
-            // var rotate = stylearray.transform
-            // alert("transform = " + rotate)
 
         } else if ($(this).hasClass("ui-selected")){
             $(this).removeClass("ui-selected");
             $(this).children(".ui-rotatable-handle").hide();
             stopActiveDesk();
-
-            // var style = document.getElementById(divId).getAttribute("style");
-            // var stylearray = JSON.parse(style)
-            // var rotate = stylearray.transform
-            // alert("transform = " + rotate)
-            // Desk.top = mainDiv.offsetTop; 
-            // Desk.left = mainDiv.offsetLeft; 
-            // deskArray[deskIndex] = Desk;
-            // localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
         }
     });
 
@@ -1235,10 +1222,6 @@ function saveButton(){
                     desk.left = element[j+1].replace('px;',''); //looking at the next array element over for left value
                     console.log("desk left = " + desk.left)
                 }
-                // desk.left = element.left //cleaning up
-                // desk.top = element.top
-               // style="position: absolute; left: 326px; top: 209.993px; z-index: 102;"
-               //position: absolute; left: 620.99px; top: 115.983px; z-index: 102;
             }
 
             //finding width and height and assigning to desk attributes
@@ -1271,11 +1254,9 @@ function saveButton(){
 
             //looking for edits
             element = document.getElementById(desk.outerDiv).getElementsByClassName('deskText')[0] //desktext
-            //element = JSON.stringify(element)
-            // element = element.replace('<p class=\"deskText\">','')
-            // element = element.replace('</p>','')
+            
             element = element.innerHTML
-            //console.log(element)
+            
             desk.name = element
         }
     }
