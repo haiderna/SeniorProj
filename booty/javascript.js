@@ -334,6 +334,12 @@ function insertDivDesk() {
     
     innerDiv.style.width = w;
     innerDiv.style.height = h;
+
+    newW = parseInt(w)+20;
+    newH = parseInt(h)+20;
+
+    outerDiv.style.width = newW;
+    outerDiv.style.height = newH;
     
     //SETTING DESKS TO ACTIVE AND NON ACTIVE
     $( mainDiv ).selectable({
@@ -421,7 +427,7 @@ function insertDivDesk() {
     outerDiv.appendChild(para);
 
     //positioning to a more central position
-    outerDiv.style.position = "absolute";
+    outerDiv.style.position = "relative";
     var left = mainDiv.offsetLeft;	
     var top = mainDiv.offsetTop;
     left = left + ($(mainDiv).width() / 2);
@@ -784,12 +790,15 @@ previewFile();
 ////////////////////////////
 
 function exportPDF() {
-    var contentToPrint = document.getElementById(floorPlan).innerHTML;
+    var contentToPrint = document.getElementById(floorPlan);
+    contentToPrint.style.position = "absolute";
+    var cont2 = contentToPrint.innerHTML;
+
 	var newWin = window.open("", "", "width=1040,height=630");
     newWin.document.write('<html><head><title>Seating Chart</title>');
     newWin.document.write('<link rel="stylesheet" href="styles.css" type="text/css"/>');
     newWin.document.write('</head><body>');
-	newWin.document.write(contentToPrint);
+	newWin.document.write(cont2);
 //        newWin.document.write('<br />');
 //        newWin.document.write(secondFloor);
 //        for (var i = 0; i < floorplans.length; i++){
@@ -806,6 +815,7 @@ function exportPDF() {
         newWin.print();
         newWin.close();
     };
+    contentToPrint.style.position = "relative";
 
 }
 
@@ -1092,6 +1102,12 @@ function loadDivDesk(storedDesk) {
     
     innerDiv.style.width = w;
     innerDiv.style.height = h;
+
+    newW = parseInt(w)+20;
+    newH = parseInt(h)+20;
+
+    outerDiv.style.width = newW;
+    outerDiv.style.height = newH;
     
     //SETTING DESKS TO ACTIVE AND NON ACTIVE
     $( mainDiv ).selectable({
@@ -1178,16 +1194,13 @@ function loadDivDesk(storedDesk) {
     outerDiv.appendChild(innerDiv);
     outerDiv.appendChild(para);
 
-    //positioning to a more central position
-    outerDiv.style.position = "absolute";
-    // var left = mainDiv.offsetLeft;   
-    // var top = mainDiv.offsetTop;
+    //loading position
+    outerDiv.style.position = "relative";
+
     var left = storedDesk.left
     var top = storedDesk.top
     outerDiv.style.left = left;
     outerDiv.style.top =  top;
-    // Desk.left = left;
-    // Desk.top = top;
 
     mainDiv.appendChild(outerDiv);
 
@@ -1199,18 +1212,34 @@ function saveButton(){
     //going through all desks
     for(var i=0; i<deskArray.length; i++){
         var desk = deskArray[i]; //current desk being iterated through
-        var outer = document.getElementById(desk.deskId)
+        var outer = document.getElementById(desk.deskId);
+
         if(outer==null){//if desk is not present/has been deleted
-            deskArray.splice(i,1)
-            localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
+            console.log("missing desk found " + i)
+            deskArray.splice(i,1);
+            localStorage.setItem("deskArray",JSON.stringify(deskArray)); //updating local storage
         }else{ //if desk is present
             //retrieving style info for each desk from outerdiv
                     //position: absolute; left: 770px; top: 284px; z-index: 102; //example of element retrieved for reference
             var element = document.getElementById(desk.outerDiv).getAttribute("style"); 
-            element = element.split(" ")    //taking apart style attribute of outerdiv to find left and top
+            console.log("style element = " + element)
+            element = element.split(" ");    //taking apart style attribute of outerdiv to find left and top
+            console.log("element split = " + element)
             //assigning to desk attributes
-            desk.left = element[3].replace('px;','') //cleaning up
-            desk.top = element[5].replace('px;','')
+            for(var j=0; j<element.length; j++){ //going through style attribute array
+                if(element[j] === "top:"){
+                    desk.top = element[j+1].replace('px;',''); //looking at the next array element over for the top value
+                    console.log("desk top = " + desk.top)
+                }
+                if(element[j] === "left:"){
+                    desk.left = element[j+1].replace('px;',''); //looking at the next array element over for left value
+                    console.log("desk left = " + desk.left)
+                }
+                // desk.left = element.left //cleaning up
+                // desk.top = element.top
+               // style="position: absolute; left: 326px; top: 209.993px; z-index: 102;"
+               //position: absolute; left: 620.99px; top: 115.983px; z-index: 102;
+            }
 
             //finding width and height and assigning to desk attributes
             deskImg = document.getElementById(desk.deskId)
@@ -1237,8 +1266,7 @@ function saveButton(){
             //width: 50px; height: 50px; //example of element retrieved for reference
             //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
             element = document.getElementById(desk.deskId).getAttribute("style");
-           console.log(element)
-           //alert(element)
+          // console.log(element)
             desk.color = element
 
             //looking for edits
@@ -1247,7 +1275,7 @@ function saveButton(){
             // element = element.replace('<p class=\"deskText\">','')
             // element = element.replace('</p>','')
             element = element.innerHTML
-            console.log(element)
+            //console.log(element)
             desk.name = element
         }
     }
