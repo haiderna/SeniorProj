@@ -335,8 +335,8 @@ function insertDivDesk() {
     innerDiv.style.width = w;
     innerDiv.style.height = h;
 
-    newW = parseInt(w)+20;
-    newH = parseInt(h)+20;
+    newW = parseInt(w)+0;
+    newH = parseInt(h)+0;
 
     outerDiv.style.width = newW;
     outerDiv.style.height = newH;
@@ -427,7 +427,7 @@ function insertDivDesk() {
     outerDiv.appendChild(para);
 
     //positioning to a more central position
-    outerDiv.style.position = "relative";
+    outerDiv.style.position = "absolute";
     var left = mainDiv.offsetLeft;	
     var top = mainDiv.offsetTop;
     left = left + ($(mainDiv).width() / 2);
@@ -789,16 +789,18 @@ previewFile();
 /////FUNCTION FOR PRINTING 
 ////////////////////////////
 
+
 function exportPDF() {
-    var contentToPrint = document.getElementById(floorPlan);
-    contentToPrint.style.position = "absolute";
-    var cont2 = contentToPrint.innerHTML;
+    var container = document.getElementById(floorPlan);
+    container.style.position = "absolute";
+
+    var cocontentToPrint = container.innerHTML;
 
 	var newWin = window.open("", "", "width=1040,height=630");
     newWin.document.write('<html><head><title>Seating Chart</title>');
     newWin.document.write('<link rel="stylesheet" href="styles.css" type="text/css"/>');
     newWin.document.write('</head><body>');
-	newWin.document.write(cont2);
+	newWin.document.write(cocontentToPrint);
 //        newWin.document.write('<br />');
 //        newWin.document.write(secondFloor);
 //        for (var i = 0; i < floorplans.length; i++){
@@ -815,7 +817,8 @@ function exportPDF() {
         newWin.print();
         newWin.close();
     };
-    contentToPrint.style.position = "relative";
+
+    container.style.position = "relative";
 
 }
 
@@ -1103,8 +1106,8 @@ function loadDivDesk(storedDesk) {
     innerDiv.style.width = w;
     innerDiv.style.height = h;
 
-    newW = parseInt(w)+20;
-    newH = parseInt(h)+20;
+    newW = parseInt(w)+0;
+    newH = parseInt(h)+0;
 
     outerDiv.style.width = newW;
     outerDiv.style.height = newH;
@@ -1174,7 +1177,6 @@ function loadDivDesk(storedDesk) {
     });
 
 
-
     innerDiv.appendChild(d_img);
     innerDiv.appendChild(btn);
 
@@ -1182,10 +1184,10 @@ function loadDivDesk(storedDesk) {
     outerDiv.appendChild(para);
 
     //loading position
-    outerDiv.style.position = "relative";
+    outerDiv.style.position = "absolute";
 
-    var left = storedDesk.left
-    var top = storedDesk.top
+    var left = storedDesk.left;
+    var top = storedDesk.top;
     outerDiv.style.left = left;
     outerDiv.style.top =  top;
 
