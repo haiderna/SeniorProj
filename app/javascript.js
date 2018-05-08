@@ -334,6 +334,12 @@ function insertDivDesk() {
     
     innerDiv.style.width = w;
     innerDiv.style.height = h;
+
+    newW = parseInt(w)+20;
+    newH = parseInt(h)+20;
+
+    outerDiv.style.width = newW;
+    outerDiv.style.height = newH;
     
     //SETTING DESKS TO ACTIVE AND NON ACTIVE
     $( mainDiv ).selectable({
@@ -421,7 +427,7 @@ function insertDivDesk() {
     outerDiv.appendChild(para);
 
     //positioning to a more central position
-    outerDiv.style.position = "absolute";
+    outerDiv.style.position = "relative";
     var left = mainDiv.offsetLeft;	
     var top = mainDiv.offsetTop;
     left = left + ($(mainDiv).width() / 2);
@@ -784,12 +790,15 @@ previewFile();
 ////////////////////////////
 
 function exportPDF() {
-    var contentToPrint = document.getElementById(floorPlan).innerHTML;
+    var contentToPrint = document.getElementById(floorPlan);
+    contentToPrint.style.position = "absolute";
+    var cont2 = contentToPrint.innerHTML;
+
 	var newWin = window.open("", "", "width=1040,height=630");
     newWin.document.write('<html><head><title>Seating Chart</title>');
     newWin.document.write('<link rel="stylesheet" href="styles.css" type="text/css"/>');
     newWin.document.write('</head><body>');
-	newWin.document.write(contentToPrint);
+	newWin.document.write(cont2);
 //        newWin.document.write('<br />');
 //        newWin.document.write(secondFloor);
 //        for (var i = 0; i < floorplans.length; i++){
@@ -806,6 +815,7 @@ function exportPDF() {
         newWin.print();
         newWin.close();
     };
+    contentToPrint.style.position = "relative";
 
 }
 
@@ -1092,6 +1102,12 @@ function loadDivDesk(storedDesk) {
     
     innerDiv.style.width = w;
     innerDiv.style.height = h;
+
+    newW = parseInt(w)+20;
+    newH = parseInt(h)+20;
+
+    outerDiv.style.width = newW;
+    outerDiv.style.height = newH;
     
     //SETTING DESKS TO ACTIVE AND NON ACTIVE
     $( mainDiv ).selectable({
@@ -1149,24 +1165,11 @@ function loadDivDesk(storedDesk) {
             continueActiveDesk();
             activateDeskName(storedDesk.name);
             activateDeskProject(storedDesk.project);
-            // var style = document.getElementById(divId).getAttribute("style");
-            // var stylearray = JSON.parse(style)
-            // var rotate = stylearray.transform
-            // alert("transform = " + rotate)
 
         } else if ($(this).hasClass("ui-selected")){
             $(this).removeClass("ui-selected");
             $(this).children(".ui-rotatable-handle").hide();
             stopActiveDesk();
-
-            // var style = document.getElementById(divId).getAttribute("style");
-            // var stylearray = JSON.parse(style)
-            // var rotate = stylearray.transform
-            // alert("transform = " + rotate)
-            // Desk.top = mainDiv.offsetTop; 
-            // Desk.left = mainDiv.offsetLeft; 
-            // deskArray[deskIndex] = Desk;
-            // localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
         }
     });
 
@@ -1178,16 +1181,13 @@ function loadDivDesk(storedDesk) {
     outerDiv.appendChild(innerDiv);
     outerDiv.appendChild(para);
 
-    //positioning to a more central position
-    outerDiv.style.position = "absolute";
-    // var left = mainDiv.offsetLeft;   
-    // var top = mainDiv.offsetTop;
+    //loading position
+    outerDiv.style.position = "relative";
+
     var left = storedDesk.left
     var top = storedDesk.top
     outerDiv.style.left = left;
     outerDiv.style.top =  top;
-    // Desk.left = left;
-    // Desk.top = top;
 
     mainDiv.appendChild(outerDiv);
 
@@ -1199,32 +1199,43 @@ function saveButton(){
     //going through all desks
     for(var i=0; i<deskArray.length; i++){
         var desk = deskArray[i]; //current desk being iterated through
-        var outer = document.getElementById(desk.deskId)
+        var outer = document.getElementById(desk.deskId);
+
         if(outer==null){//if desk is not present/has been deleted
-            deskArray.splice(i,1)
-            localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
+            console.log("missing desk found " + i)
+            deskArray.splice(i,1);
+            localStorage.setItem("deskArray",JSON.stringify(deskArray)); //updating local storage
         }else{ //if desk is present
             //retrieving style info for each desk from outerdiv
-            //position: absolute; left: 770px; top: 284px; z-index: 102; //example of element retrieved for reference
-            var element = document.getElementById(desk.outerDiv).getAttribute("style");
-            //console.log(element)
-            element = element.split(" ")
-            //console.log(element)
+                    //position: absolute; left: 770px; top: 284px; z-index: 102; //example of element retrieved for reference
+            var element = document.getElementById(desk.outerDiv).getAttribute("style"); 
+            console.log("style element = " + element)
+            element = element.split(" ");    //taking apart style attribute of outerdiv to find left and top
+            console.log("element split = " + element)
             //assigning to desk attributes
-            desk.left = element[3].replace('px;','') //cleaning up
-            desk.top = element[5].replace('px;','')
+            for(var j=0; j<element.length; j++){ //going through style attribute array
+                if(element[j] === "top:"){
+                    desk.top = element[j+1].replace('px;',''); //looking at the next array element over for the top value
+                    console.log("desk top = " + desk.top)
+                }
+                if(element[j] === "left:"){
+                    desk.left = element[j+1].replace('px;',''); //looking at the next array element over for left value
+                    console.log("desk left = " + desk.left)
+                }
+            }
 
+            //finding width and height and assigning to desk attributes
+            deskImg = document.getElementById(desk.deskId)
+            desk.width = deskImg.getAttribute("width")
+            desk.height = deskImg.getAttribute("height")
+
+            //assigning rotate to desk object
             //retrieving style info for each desk from innerdiv
-            //width: 50px; height: 50px; //example of element retrieved for reference
-            //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
+                    //width: 50px; height: 50px; //example of element retrieved for reference
+                    //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
             element = document.getElementById(desk.innerDiv).getAttribute("style");
-           // console.log(element)
-           console.log(element)
-            element = element.split(" ")
-           // console.log(element)
-            //assigning 
-            desk.width = element[1].replace('px;','') //cleaning up
-            desk.height = element[3].replace('px;','')
+            element = element.split(" ") //taking apart style attribute to find rotate later on
+           
             if(element.length<6){
                 desk.rotate = null; //no rotation
             }else{
@@ -1238,17 +1249,14 @@ function saveButton(){
             //width: 50px; height: 50px; //example of element retrieved for reference
             //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
             element = document.getElementById(desk.deskId).getAttribute("style");
-           console.log(element)
-           //alert(element)
+          // console.log(element)
             desk.color = element
 
             //looking for edits
             element = document.getElementById(desk.outerDiv).getElementsByClassName('deskText')[0] //desktext
-            //element = JSON.stringify(element)
-            // element = element.replace('<p class=\"deskText\">','')
-            // element = element.replace('</p>','')
+            
             element = element.innerHTML
-            console.log(element)
+            
             desk.name = element
         }
     }
