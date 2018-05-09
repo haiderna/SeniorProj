@@ -5,6 +5,7 @@ var deskIndex = 0;
 var roomObjectArray = [];
 var roomIndex = 0;
 
+//loading desks
 if(localStorage.getItem("deskArray")==null){ //if there is no local storage, initialize storage
     console.log("deskArray null")
     localStorage.setItem("deskArray",JSON.stringify(deskArray))
@@ -21,7 +22,7 @@ else{ //if there is already something stored in local, grab from it and then ini
     }
 }
 
-
+//loading rooms
 if(localStorage.getItem("roomObjectArray")==null){
     localStorage.setItem("roomObjectArray",JSON.stringify(roomObjectArray))
     localStorage.setItem("roomIndex",0)
@@ -29,7 +30,7 @@ if(localStorage.getItem("roomObjectArray")==null){
     localStorage.setItem("roomIndex",0)
 }else{
     roomIndex = localStorage.getItem("roomIndex")
-    roomObjectArray = localStorage.getItem("roomObjectArray")
+    roomObjectArray = JSON.parse(localStorage.getItem("roomObjectArray"))
     for (var z = 0; z<roomObjectArray.length; z++) {
        loadRoom(roomObjectArray[z]);
     }
@@ -100,7 +101,8 @@ $(document).ready(function() {
     roomIndex++;
 
     var mainDiv = document.getElementById(floorPlan);
-     
+    roomObj.floor = floorPlan;
+
  	//create the div to be draggable
  	var room = document.createElement('div');
  	room.className = 'room';
@@ -131,9 +133,9 @@ $(document).ready(function() {
 
  	mainDiv.append(room);
     
-    //getting positioning variables
  	$( '.room' ).draggable({ containment: 'parent' }).resizable();
 
+    //getting room positioning variables
     var style = document.getElementById(roomId).getAttribute('style')
     style = style.split(' ') //splitting up style attribute to get variables
     for(var i=0; i<style.length; i++){
@@ -150,45 +152,45 @@ $(document).ready(function() {
 
 //load rooms from local storage
 function loadRoom(roomObj){
-    var mainDiv = document.getElementById(floorPlan);
+    var roomId = roomObj.roomId;
+
+    var mainDiv = document.getElementById(roomObj.floor);
      
     //create the div to be draggable
     var room = document.createElement('div');
     room.className = 'room';
-    room.id = roomObj.roomId;
+    room.id = roomId;
 
     //cancel button to quit adding all the rooms
-    // var cancel = document.createElement('div');
-    // cancel.className = 'cancel';
-    // cancel.innerHTML = '&#10005';
-    // cancel.onclick = function (e) { room.parentNode.removeChild(room) };
-    // room.appendChild(cancel);
+    var cancel = document.createElement('div');
+    cancel.className = 'cancel';
+    cancel.innerHTML = '&#10005';
+    cancel.onclick = function (e) { room.parentNode.removeChild(room) };
+    room.appendChild(cancel);
 
-    // var span = document.createElement('span');
-    // span.className = 'deskCount';
-    // room.appendChild(span);
+    //currently displays counts of desks inside the room
+    var span = document.createElement('span');
+    span.className = 'deskCount';
+    room.appendChild(span);
 
-    //loading style attribute
-        //position: absolute; left: 167px; top: 627px; height: 145px; width: 276px; //example for reference
-    var style;
-
-    var left = roomObj.left;
-    var top = roomObj.top;
-
+    //set room to be inserted visibly in the middle of the page
     room.style.position = "absolute";
+    var left = roomObj.left;  
+    var top = roomObj.top;
     room.style.left = left;
     room.style.top =  top;
 
-    if(roomObj.width != null){
-        room.style.width = roomObj.width;
-    }
+    //set room dimensions
     if(roomObj.height != null){
         room.style.height = roomObj.height;
+    }
+    if(roomObj.width != null){
+        room.style.width = roomObj.width;
     }
 
     mainDiv.append(room);
     
-    //getting positioning variables
+
     $( '.room' ).draggable({ containment: 'parent' }).resizable();
 }
 
@@ -532,7 +534,6 @@ function insertDivDesk() {
 
      // alert(divId);
     deskIndex++;
-    localStorage.setItem("deskIndex",deskIndex) //updating local storage
 
     //should only trigger if person is not already in the database
     var input, filter;
@@ -1274,6 +1275,17 @@ function loadDivDesk(storedDesk) {
 function saveButton(){
     saveDesks();
     saveRooms();
+
+    if(deskArray.length>0 && roomObjectArray.length>0){
+        alert("Desk and room arrangement saved!")
+    }else if(deskArray.length==0 && roomObjectArray.length>0){
+        alert("Room arrangment saved! There are no desks to save.")
+    }else if(deskArray.length>0 && roomObjectArray.length==0){
+        alert("Desk arrangment saved! There are no rooms to save.")
+    }
+    else if(deskArray.length==0 && roomObjectArray.length==0){
+        alert("There was nothing on the floorplan to save...")
+    }
 }
 
 //save desks in local storage
@@ -1339,7 +1351,7 @@ function saveDesks(){
     }
 
     localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
-    alert("Seating arrangement saved!")
+    localStorage.setItem("deskIndex",deskIndex)
 }
 
 
@@ -1373,8 +1385,7 @@ function saveRooms(){
                 }
             }
         }   
-        localStorage.setItem("roomObjectArray",JSON.stringify(roomObjectArray))
     }
-    // console.log(roomObjectArray)
-    // console.log("height = " + room.height)
+    localStorage.setItem("roomObjectArray",JSON.stringify(roomObjectArray))
+    localStorage.setItem("roomIndex",roomIndex)
 }
