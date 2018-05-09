@@ -1,13 +1,10 @@
 var deskArray = [];
 var deskIndex = 0;
 
+
 var roomObjectArray = [];
 var roomIndex = 0;
 
-//localStorage.setItem("deskArray",)
-//console.log(localStorage.getItem("deskArray"))
-//localStorage.removeItem("deskArray")
-//setting up deskArray from local storage
 if(localStorage.getItem("deskArray")==null){ //if there is no local storage, initialize storage
     console.log("deskArray null")
     localStorage.setItem("deskArray",JSON.stringify(deskArray))
@@ -116,10 +113,12 @@ $(document).ready(function() {
  	cancel.onclick = function (e) { room.parentNode.removeChild(room) };
  	room.appendChild(cancel);
 
+    //currently displays counts of desks inside the room
  	var span = document.createElement('span');
  	span.className = 'deskCount';
  	room.appendChild(span);
 
+    //set room to be inserted visibly in the middle of the page
  	room.style.position = "absolute";
     var left = mainDiv.offsetLeft;	
     var top = mainDiv.offsetTop;
@@ -198,15 +197,6 @@ function deleteRoom() {
 	//get all rooms
 	var rooms = document.getElementsByClassName('room');
 
-	// //add delete buttons to all rooms
-	// for (var i = 0; i < rooms.length; i++) {
-	//   var cancel = document.createElement("div");
-	//   cancel.className = 'cancel';
-	//   var curr = rooms[i];
-	//   cancel.onclick = function (e) { curr.parentNode.removeChild(curr) };
-	//   curr.appendChild(cancel);
-	// }//end for
-
 	$('.cancel').css('visibility', 'visible');
 
 	//show button to remove delete buttons
@@ -218,6 +208,7 @@ function deleteRoom() {
 	stopAnchor.style.visibility = "visible";
 }
 
+//hides all the delete buttons
 function stopDeleting() {
 	$('.cancel').css("visibility", "hidden");
 
@@ -230,6 +221,8 @@ function stopDeleting() {
 	stopAnchor.style.visibility = "hidden";
 }
 
+//locks the rooms in place and makes them droppable
+//and interactable with desks
 function saveState() {
 	stopDeleting();
 	$('.room').draggable("disable");
@@ -288,6 +281,7 @@ function saveState() {
 	$('.desk').css('z-index', '101'); 
 }
 
+//unlocks the rooms and allows them to be edited
 function continueEdit() {
 	if ($('#editSubmenu').attr('aria-expanded') == "false") {
 		$('.room').droppable("destroy");
@@ -299,11 +293,13 @@ function continueEdit() {
 	}
 }
 
+//a desk has been selected and thus can be edited
 function continueActiveDesk(){
     $('#currentDesk').toggle(true);
     $('#inactiveDeskMessage').toggle(false);
 }
 
+//no desk is selected and thus nothing appears in the edit desk menu
 function stopActiveDesk(){
     $('#currentDesk').toggle(false);
     $('#inactiveDeskMessage').toggle(true);
@@ -313,6 +309,7 @@ function stopActiveDesk(){
 }
 
 
+//BIG DESK FUNCTION
 function insertDivDesk() {
 
     var mainDiv = document.getElementById(floorPlan);
@@ -547,7 +544,8 @@ function insertDivDesk() {
     //alert(testDiv.style.width);
 }
 
-
+//on a selected desk, allows editing of 
+//person name, project, and desk size
 function confirmDeskEdit(){
     if(!confirm('Are you sure you want to edit this desk as shown?')){
         return;
@@ -604,6 +602,7 @@ function updateAddDeskButton() {
     }
 }
 
+//checks to ensure the insert Desk menu has all values filled before enabling a desk to be added
 function isDeskReady(){
     if ($('#name').val() != '' && $('#projectDropdown').val() != '' && 
         $('#deskWidth').val() != '' & $('#deskHeight').val() != '') {
@@ -662,7 +661,7 @@ function deleteFloor(ident, listIdentifier) {
     
 }
 
-
+//adds a new floor based on image file upload
 function newFloor() {
 
     if(!confirm('Are you sure you want to upload this floorplan?')){
@@ -695,6 +694,8 @@ function newFloor() {
     newFloor.appendChild(newImg);
     
 
+    //adds a function to the new floorplan to unselect active desks
+    //when an area outside the desk is clicked
     $( newFloor ).on("click", (function(event) { 
         if(!$(event.target).closest('.desk').length) {
             stopActiveDesk();
@@ -706,6 +707,7 @@ function newFloor() {
     $(newFloor).hide();
     //ADD TO MENU LIST
     
+    //checks to see if the floorplan being added is being added to a pre-existing building or not
     for (var i = 0; i < buildings.length; i++) {
         if (building === buildings[i]) {
             match = true;
@@ -715,6 +717,7 @@ function newFloor() {
 
     var elemToFoo; 
 
+    //if the building does exist, we add to its submenu
     if (match === true) {
         var idUL = building + "subFloor";
         var ul = document.getElementById(idUL);
@@ -735,7 +738,10 @@ function newFloor() {
         //match = false;
         elemToFoo = li;
 
-    } else if  (match === false) {
+    } 
+    //if the building doesn't exist, we must make a new 
+    //submenu for the new building
+    else if  (match === false) {
 
         buildings.push(building);
         var submenu = document.getElementById("floorplanSubMenu");
@@ -820,24 +826,7 @@ function newFloorMenu2() {
       
 }
 
-
-//function newFloorMenu() {
-//    if (storeImage === " ") {
-//        alert("no new floor");
-//        
-//    } else {
-//        floorPlan = "newFloor";
-//        for (var i = 0; i < floorplans.length; i++){
-//            var elem = document.getElementById(floorplans[i]);
-//             $(elem).hide();
-//        }
-//        var newFl = document.getElementById("newFloor");
-//        $(newFl).show();
-//        
-//    } 
-//}
-
-
+//shows preview of floorplan being uploaded
 function previewFile(){
        var preview = document.getElementById('imgAnalyzer'); //selects the query named img
        var file    = document.querySelector('input[type=file]').files[0];
@@ -864,10 +853,6 @@ function previewFile(){
   }
 
 previewFile();
-
-
-
-
 
 ////////////////////////////////
 /////FUNCTION FOR PRINTING 
@@ -953,7 +938,7 @@ function readJSON(){
 
 //////////////
 /////////////
-/////// FUNCTIONS FOR COLORS ///////////
+/////// FUNCTIONS FOR COLORING THE SOLID DESK IMAGES ///////////
 ///////////
 /////////
 ///////
@@ -1102,6 +1087,10 @@ function convertHex(hex,opacity){
     result = ''+r+','+g+','+b+'';
     return result;
 }
+
+///////////////////////////////////////////////////////////////////
+///////////// DATABASE LOADING FUNCTIONS  ///////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 function loadDivDesk(storedDesk) {
     floorplan = storedDesk.floor
@@ -1300,7 +1289,6 @@ function saveDesks(){
             localStorage.setItem("deskArray",JSON.stringify(deskArray)); //updating local storage
         }else{ //if desk is present
             //retrieving style info for each desk from outerdiv
-                    //position: absolute; left: 770px; top: 284px; z-index: 102; //example of element retrieved for reference
             var element = document.getElementById(desk.outerDiv).getAttribute("style"); 
             console.log("style element = " + element)
             element = element.split(" ");    //taking apart style attribute of outerdiv to find left and top
@@ -1324,8 +1312,6 @@ function saveDesks(){
 
             //assigning rotate to desk object
             //retrieving style info for each desk from innerdiv
-                    //width: 50px; height: 50px; //example of element retrieved for reference
-                    //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
             element = document.getElementById(desk.innerDiv).getAttribute("style");
             element = element.split(" ") //taking apart style attribute to find rotate later on
            
@@ -1339,8 +1325,6 @@ function saveDesks(){
             }
 
             //retrieving style info for each desk from deskdiv
-            //width: 50px; height: 50px; //example of element retrieved for reference
-            //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
             element = document.getElementById(desk.deskId).getAttribute("style");
           // console.log(element)
             desk.color = element
@@ -1355,6 +1339,7 @@ function saveDesks(){
     }
 
     localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
+    alert("Seating arrangement saved!")
 }
 
 

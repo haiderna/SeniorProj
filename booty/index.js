@@ -2,16 +2,12 @@ var personArray = ["Cow Lady", "Dog Man", "Shaggy Mutt"];
 var personObjectArray = [];
 var projectArray = ["Barclays", "Regal", "WillowTree"]; 
 var projectColors = ["#000080", "#FF0000", "#1BD9C4"];
-
- //localStorage.removeItem("personObjectArray")
- //localStorage.removeItem("personArray")
      
 var buildings = ["HQ", "Treehouse", "Watchtower"];
 var listIds = ["HQ1", "HQ2", "TH1","TH2", "TH3","TH4","WT1" ];
 var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"];
 
 
-//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 localStorage.setItem("buildings",JSON.stringify(buildings))
 localStorage.setItem("listIds",JSON.stringify(listIds))
 localStorage.setItem("floorplans",JSON.stringify(floorplans))
@@ -22,7 +18,6 @@ if(localStorage.getItem("personArray")==null){ //if there is no local storage, i
 }else{ //if there is already something stored in local, grab from it and then initialize in javascript
     personArray = JSON.parse(localStorage.getItem("personArray"))
 }
-//alert(localStorage.getItem("personArray"))
 
 //setting up projectArray from local storage
 if(localStorage.getItem("projectArray")==null){ //if nothing in local
@@ -74,21 +69,19 @@ person1.name = "Cow Lady";
 person1.project = "Regal";
 person1.floorplan = "HQFloor1";
 personObjectArray.push(person1);
-//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 
 var person2 = new PersonClass();
 person2.name = "Dog Man";
 person2.project = "Regal";
 person2.floorplan = "HQFloor1";
 personObjectArray.push(person2);
-//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 
 var person3 = new PersonClass();
 person3.name = "Shaggy Mutt";
 person3.project = "Regal";
 person3.floorplan = "HQFloor1";
 personObjectArray.push(person3);
-//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
+
 //setting up personObjectArray from local storage
 if(localStorage.getItem("personObjectArray")==null){
     localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
@@ -98,12 +91,17 @@ if(localStorage.getItem("personObjectArray")==null){
 
 var floorPlan = "HQFloor1";
 
+//THESE FLOORPLANS ARE HARDCODED IN FOR WILLOWTREE
+//ADDED FLOORPLANS EXHIBIT THE SAME FUNCTIONALITY
+//toggles this floor to the active floorplan
 function HQFloor1() {
     floorPlan = "HQFloor1";
+    //hides all other floorplans
     for (var i = 0; i < floorplans.length; i++){
         var elem = document.getElementById(floorplans[i]);
         $(elem).hide()
     }
+    //shows this one
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
 
@@ -220,9 +218,12 @@ function WTFloor() {
 document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
 
+//the image source is the filled desk image
+//chosen by the user when adding desk
 var imageSource = "desk - filled.svg";
 
-//For Choosing which type of desk in Menu 
+//For Choosing which type of desk in Menu
+//and highlighting the button to show as selected 
 function singleDesk() {
    imageSource = "desk - filled.svg";
    $('#singleDesk').addClass('selectedDeskType');
@@ -241,8 +242,10 @@ function smallConferenceDesk(){
     $('#LargeConf').removeClass('selectedDeskType');
     $('#SmallConf').addClass('selectedDeskType');
 }
+
+
 // ============================================================================================
-// =============================== people =====================================================
+// =============================== people functions ===========================================
 // ============================================================================================
 
 //dynamic search for people
@@ -265,6 +268,7 @@ function searchPeople() {
     }
 }
 
+//adds a person from the person submenu
 function addPerson() {
     var input, filter;
     input = document.getElementById('peopleInput');
@@ -299,6 +303,8 @@ function addPerson() {
     //alert(JSON.parse(localStorage.getItem('personArray')))
 }
 
+//function originally implemented for people to be added from a different input field 
+//inside the add desk menu
 function addPersonFromDeskMenu(){
     var input, filter;
     input = document.getElementById('name');
@@ -330,10 +336,12 @@ function addPersonFromDeskMenu(){
     input.value = "";
 }
 
+//people that are loaded in from JSON files are 
+//added via this particular function
 function addPersonFromJSON(name){
     var filter = toTitleCase(name);
     if (personArray.includes(filter)){
-        // alert(filter + " already exists in the database.")
+        // alert(filter + " already exists in the database.") -- commented out as to avoid redundant alerts
         return;
     }
     personArray.push(filter);
@@ -342,7 +350,7 @@ function addPersonFromJSON(name){
     addToActiveDeskPersonSelection(personArray);
 }
 
-//creates list of people to display
+//adds all people to the display of the peoples menu
 function addToPersonList(array) {
     // Create the list element:
     var list = document.getElementById('peopleSubMenu');
@@ -351,6 +359,10 @@ function addToPersonList(array) {
     $("li").remove(".listedPerson");
 
     for(var i = 0; i < array.length; i++) {
+        //@innerbutton is the delete button used to remove the 
+        //display element and the person from storage
+        //@item is the listed display of the persons name
+        //@list is the submenu itself
         var innerButton = document.createElement("button");
         innerButton.className = "personDeleteButton"; 
         innerButton.innerHTML = 'REMOVE';
@@ -368,22 +380,26 @@ function addToPersonList(array) {
         
         list.appendChild(item);
        
+        //SEARCH FUNCTION
+        //upon click of the person name, it will navigate you to their location in the buildings
         item.onclick = function() { 
             var label = this.id;
             //alert(label);
-                     for (var j = 0; j < personObjectArray.length; j++){
-                        if (label === personObjectArray[j].name) {
-                        floorPlan = personObjectArray[j].floorplan;
-                            for (var k = 0; k < floorplans.length; k++){
-                                var elem = document.getElementById(floorplans[k]);
-                                $(elem).hide();
-                                 }
-                                var showFloorplan = document.getElementById(floorPlan);
-                                $(showFloorplan).show();
-                    }
+                for (var j = 0; j < personObjectArray.length; j++){
+                    if (label === personObjectArray[j].name) {
+                    floorPlan = personObjectArray[j].floorplan;
+                        for (var k = 0; k < floorplans.length; k++){
+                            var elem = document.getElementById(floorplans[k]);
+                            $(elem).hide();
+                                }
+                            var showFloorplan = document.getElementById(floorPlan);
+                            $(showFloorplan).show();
+                }
              }
         };
         
+        //@innerbutton is the delete button
+        //removes the person from the person arrays
         innerButton.onclick = function(){
             //alert(personObjectArray.length);
             var label = this.id;
@@ -404,17 +420,17 @@ function addToPersonList(array) {
                         localStorage.setItem("personArray",JSON.stringify(personArray)) //updating local storage
                     }         
                 }
+            //we must addToActiveDesk so that upon editing
             addToPersonList(personArray);
             addToActiveDeskPersonSelection(personArray);
             event.stopPropagation();
             
         };
     }
-    // return list;
 }
 
 
-
+//separate function to populate the people for the edit/active desk on the right taskbar
 function addToActiveDeskPersonSelection(array) {
 
     var activeName = document.getElementById('activeDeskName');
@@ -436,6 +452,7 @@ function addToActiveDeskPersonSelection(array) {
 // =============================== PROJECTS ===================================================
 // ============================================================================================
 
+//search function for project names
 function searchProjects() {
     var input, filter, ul, li, a, i;
     input = document.getElementById('projectInput');
@@ -455,6 +472,7 @@ function searchProjects() {
     }
 }
 
+//adding a new project
 function addProject() {
     var input, filter;
     input = document.getElementById('projectInput');
@@ -473,14 +491,17 @@ function addProject() {
     projectColors.push(""); //has to grow every time project array grows
     localStorage.setItem("projectColors",JSON.stringify(projectColors)) //updating local storage
 
+    //add to the display of projects
     addToProjectList(projectArray);
+    //add to the project select option in the desk insertion and desk editing
     addToDeskProjectDropDown(projectArray);
     input.value = "";
     searchProjects();
     alert("New Project added");
 }
 
-
+//separate function to add unique projects 
+//from the json file upload
 function addProjectFromJSON(proj) {
     var filter;
     filter = proj; // we don't want to TitleCase it 
@@ -500,14 +521,16 @@ function addProjectFromJSON(proj) {
     addToDeskProjectDropDown(projectArray);
 }
 
-//SHOWS PROJECTS AND COLORS NEXT TO IT
+//loads projectArray data and displays it in the project submenu
 function initializeProjectList(array) {
-    // Create the list element:
     var list = document.getElementById('projectSubMenu');
 
-
+    //first remove all projects if any exist
     $("li").remove(".listedProject");
     $("li").remove(".colorPickerAdded");
+
+    //for all projects inside the projectArray,
+    //create the project, the delete button, and the colorpicker
     for(var i = 0; i < array.length; i++) {
         var item = document.createElement('li');
         var inneritem = document.createElement('a');
@@ -532,32 +555,32 @@ function initializeProjectList(array) {
         item.appendChild(inneritem)
         list.appendChild(item);
         
+        //removes the current item from the list and refreshes the project list
         innerButton.onclick = function() {
-        //alert(projectArray.length);
-        var label = this.id;
+            //alert(projectArray.length);
+            var label = this.id;
+            for (var k = 0; k < projectArray.length; k++){
+                if (label === projectArray[k]) {
+                    projectArray.splice(k, 1);
+                    projectColors.splice(k,1);
+                    // alert(projectColors)
+                    // alert(projectArray.length);
+                    localStorage.setItem("projectArray",JSON.stringify(projectArray)) //updating local storage
+                    localStorage.setItem("projectColors",JSON.stringify(projectColors))//updating local stroage
+                }         
+            }    
+        initializeProjectList(projectArray);
+        initDeskProjectDropdown(projectArray);
         
-        for (var k = 0; k < projectArray.length; k++){
-                    if (label === projectArray[k]) {
-                        projectArray.splice(k, 1);
-                        projectColors.splice(k,1);
-                       // alert(projectColors)
-                       // alert(projectArray.length);
-                       localStorage.setItem("projectArray",JSON.stringify(projectArray)) //updating local storage
-                        localStorage.setItem("projectColors",JSON.stringify(projectColors))//updating local stroage
-                    }         
-                }    
-       initializeProjectList(projectArray);
-       initDeskProjectDropdown(projectArray);
-	
-	addColorPicker();
-	loadColorsIntoColorPickers();
-    };
+        addColorPicker();
+        loadColorsIntoColorPickers();
+        };
         // addColorPicker();
     }
     // return list;
 }
 
-//MODIFIED TO ADD A SINGLE ITEM
+//MODIFIED TO ADD A SINGLE ITEM for efficiency's sake instead of reloading whole array
 function addToProjectList(array) {
     var list = document.getElementById('projectSubMenu');
     var innerButton = document.createElement("button");
@@ -589,6 +612,7 @@ function addToProjectList(array) {
  
     addColorPicker();
     
+    //deleting an item function
     innerButton.onclick = function() {
        // alert(projectArray.length);
         var label = this.id;
@@ -610,6 +634,7 @@ function addToProjectList(array) {
 }
 
 //SHOWS PROJECTS AND COLORS INSIDE ADD DESK SUBMENU
+//AND INSIDE EDIT DESK SUBMENU
 function initDeskProjectDropdown(array) {
 
     //Populate select menu
@@ -647,6 +672,7 @@ function initDeskProjectDropdown(array) {
 
 }
 
+//ADD INDIVIDUAL PROJECTS TO DESK AND EDIT-DESK SUBMENU
 function addToDeskProjectDropDown(array) {
 
     var drop = document.getElementById('projectDropdown');
@@ -678,6 +704,7 @@ function addToDeskProjectDropDown(array) {
 // =============================== COLOR ======================================================
 // ============================================================================================
 
+//add color pickers for projects
 function addColorPicker() {
     $(".color-square").spectrum({
         showPalette: true,
@@ -719,7 +746,7 @@ function disableColorPicker() {
     $(".disabled-color").spectrum({ disable: true });
 }
 
-//fixes color to given project and stores it in color array
+//fixes color to given project and stores it in color array corresponding to projects
 function setColor(color, domElement){
     //get color from colorpicker
 
@@ -773,7 +800,6 @@ function activateDeskName(name) {
     $('#activeDeskName').selectpicker('val', name);
 }
 
-//CURRENTLY DOESN'T WORK??
 function activateDeskProject(proj) {
     $('#activeDeskProject').selectpicker('val', proj);
 }
@@ -793,150 +819,3 @@ function toTitleCase(str)
 function isEmpty(str){
     return !str.replace(/^\s+/g, '').length; // boolean (`true` if field is empty)
 }
-
-
-// ============================================================================================
-// ===============================SAVING=======================================================
-// ============================================================================================
-
-// function saveButton(){
-//     //going through all desks
-//     for(var i=0; i<deskArray.length; i++){
-//         var desk = deskArray[i]; //current desk being iterated through
-        
-//         //retrieving style info for each desk from outerdiv
-//         //position: absolute; left: 770px; top: 284px; z-index: 102; //example of element retrieved for reference
-//         var element = document.getElementById(desk.outerDiv).getAttribute("style");
-//         //console.log(element)
-//         element = element.split(" ")
-//         //console.log(element)
-//         //assigning to desk attributes
-//         desk.left = element[3].replace('px;','') //cleaning up
-//         desk.top = element[5].replace('px;','')
-
-//         //retrieving style info for each desk from innerdiv
-//         //width: 50px; height: 50px; //example of element retrieved for reference
-//         //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
-//         var element = document.getElementById(desk.innerDiv).getAttribute("style");
-//        // console.log(element)
-//         element = element.split(" ")
-//        // console.log(element)
-//         //assigning 
-//         desk.width = element[1].replace('px;','') //cleaning up
-//         desk.height = element[3].replace('px;','')
-//         if(element.length<6){
-//             desk.rotate = null; //no rotation
-//         }else{
-//             var rotateRad = element[5].replace('rotate(','') //cleaning up
-//             rotateRad = rotateRad.replace('rad);','')
-//             desk.rotate = rotateRad
-//         }
-//     }
-
-//     localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
-// }
-
-
-// ============================================================================================
-// ===============================DEPRECIATED SAVING FUNCTIONS FOR TESTING=======================================================
-// ============================================================================================
-
-//refreshes local Storage to default values
-function deleteLocalStorage(){
-
-}
-// function save(){
-//     saveIndex()
-//     (function () {
-//         var textFile = null,
-//         makeTextFile = function (text) {
-//             var data = new Blob([text], {type: 'text/plain'});
-
-//             // If we are replacing a previously generated file we need to
-//             // manually revoke the object URL to avoid memory leaks.
-//             if (textFile !== null) {
-//               window.URL.revokeObjectURL(textFile);
-//             }
-
-//             textFile = window.URL.createObjectURL(data);
-
-//             return textFile;
-//       };
-
-
-//       var create = document.getElementById('saveButton')
-
-//       create.addEventListener('click', function () {
-//         var link = document.createElement('a');
-//         link.setAttribute('download', 'floorplans.json');
-//         floors = floorDivsToString()
-//         link.href = makeTextFile(floors);
-//         document.body.appendChild(link);
-
-//         // wait for the link to be added to the document
-//         window.requestAnimationFrame(function () {
-//           var event = new MouseEvent('click');
-//           link.dispatchEvent(event);
-//           document.body.removeChild(link);
-//             });
-        
-//       }, false);
-//     })();
-// }
-
-// function floorDivsToString(){
-//      var floorSaves = "[" //JSON string containing floor divs
-
-//     for(var i=0; i<floorplans.length; i++){
-//         //alert("floor plan " + i)
-//         var floorplanName = floorplans[i] //current floorplan string name
-//         //  This gives you an HTMLElement object
-//         var element = document.getElementById(floorplans[i]);
-//         //  This gives you a string representing that element and its content
-//         var html = element.outerHTML;       
-//         //  This gives you a JSON object that you can send with jQuery.ajax's `data`
-//         // option, you can rename the property to whatever you want.
-//         var data = {}
-//         data[floorplanName] = html
-//         //var data = { floorplanName: html }; 
-
-//         //  This gives you a string in JSON syntax of the object above that you can 
-//         // send with XMLHttpRequest.
-//         var json = JSON.stringify(data);
-
-//          if(i==(floorplans.length-1)){ //if it's the last floorplan (so no comma after this one in the JSON string)
-//             floorSaves += json; //adding current floorplan to the full floorSaves JSON string
-//         }else{
-//             floorSaves += json + ",";
-//         }
-//     }
-
-//     floorSaves = floorSaves + "]" //putting in correct format
-
-//     alert(floorSaves)
-
-//     return floorSaves
-// }
-
-
-
-// function saveIndex(){
-//     // Save the page's HTML to a file that is automatically downloaded.
-
-//         // We make a Blob that contains the data to download.
-//         var file = new window.Blob([document.documentElement.innerHTML], { type: "text/html" });
-//         var URL = window.webkitURL || window.URL;
-
-//         // This is the URL that will download the data.
-//         var downloadUrl = URL.createObjectURL(file);
-
-//         var a = document.createElement("a");
-//         // This sets the file name.
-//         a.download = "index.html";
-//         a.href = downloadUrl;
-
-//         // Actually perform the download.
-//         document.body.appendChild(a);
-//         a.click();
-//         document.body.removeChild(a);
-// }
