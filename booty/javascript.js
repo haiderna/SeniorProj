@@ -1,10 +1,7 @@
 var deskArray = [];
 var deskIndex = 0;
-//localStorage.setItem("deskArray",)
-//console.log(localStorage.getItem("deskArray"))
-//localStorage.removeItem("deskArray")
-//setting up deskArray from local storage
-//alert(deskArray)
+
+
 if(localStorage.getItem("deskArray")==null){ //if there is no local storage, initialize storage
     console.log("deskArray null")
     localStorage.setItem("deskArray",JSON.stringify(deskArray))
@@ -16,9 +13,6 @@ if(localStorage.getItem("deskArray")==null){ //if there is no local storage, ini
 else{ //if there is already something stored in local, grab from it and then initialize in javascript
     deskArray = JSON.parse(localStorage.getItem("deskArray"))
     deskIndex = localStorage.getItem("deskIndex")
-    // var lastDeskId = dseskArray[deskArray.length-1].deskId
-    // deskIndex = lastDeskId.replace('desk','')
-    // console.log('deskindex = '+ deskIndex)
     for (var i = 0; i<deskArray.length; i++) {
         loadDivDesk(deskArray[i])
     }
@@ -1200,7 +1194,6 @@ function saveButton(){
             localStorage.setItem("deskArray",JSON.stringify(deskArray)); //updating local storage
         }else{ //if desk is present
             //retrieving style info for each desk from outerdiv
-                    //position: absolute; left: 770px; top: 284px; z-index: 102; //example of element retrieved for reference
             var element = document.getElementById(desk.outerDiv).getAttribute("style"); 
             console.log("style element = " + element)
             element = element.split(" ");    //taking apart style attribute of outerdiv to find left and top
@@ -1224,8 +1217,6 @@ function saveButton(){
 
             //assigning rotate to desk object
             //retrieving style info for each desk from innerdiv
-                    //width: 50px; height: 50px; //example of element retrieved for reference
-                    //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
             element = document.getElementById(desk.innerDiv).getAttribute("style");
             element = element.split(" ") //taking apart style attribute to find rotate later on
            
@@ -1239,8 +1230,6 @@ function saveButton(){
             }
 
             //retrieving style info for each desk from deskdiv
-            //width: 50px; height: 50px; //example of element retrieved for reference
-            //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
             element = document.getElementById(desk.deskId).getAttribute("style");
           // console.log(element)
             desk.color = element
@@ -1255,4 +1244,5 @@ function saveButton(){
     }
 
     localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
+    alert("Seating arrangement saved!")
 }
