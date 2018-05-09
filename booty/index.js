@@ -2,16 +2,12 @@ var personArray = ["Cow Lady", "Dog Man", "Shaggy Mutt"];
 var personObjectArray = [];
 var projectArray = ["Barclays", "Regal", "WillowTree"]; 
 var projectColors = ["#000080", "#FF0000", "#1BD9C4"];
-
- //localStorage.removeItem("personObjectArray")
- //localStorage.removeItem("personArray")
      
 var buildings = ["HQ", "Treehouse", "Watchtower"];
 var listIds = ["HQ1", "HQ2", "TH1","TH2", "TH3","TH4","WT1" ];
 var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"];
 
 
-//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 localStorage.setItem("buildings",JSON.stringify(buildings))
 localStorage.setItem("listIds",JSON.stringify(listIds))
 localStorage.setItem("floorplans",JSON.stringify(floorplans))
@@ -22,7 +18,6 @@ if(localStorage.getItem("personArray")==null){ //if there is no local storage, i
 }else{ //if there is already something stored in local, grab from it and then initialize in javascript
     personArray = JSON.parse(localStorage.getItem("personArray"))
 }
-//alert(localStorage.getItem("personArray"))
 
 //setting up projectArray from local storage
 if(localStorage.getItem("projectArray")==null){ //if nothing in local
@@ -67,21 +62,19 @@ person1.name = "Cow Lady";
 person1.project = "Regal";
 person1.floorplan = "HQFloor1";
 personObjectArray.push(person1);
-//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 
 var person2 = new PersonClass();
 person2.name = "Dog Man";
 person2.project = "Regal";
 person2.floorplan = "HQFloor1";
 personObjectArray.push(person2);
-//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 
 var person3 = new PersonClass();
 person3.name = "Shaggy Mutt";
 person3.project = "Regal";
 person3.floorplan = "HQFloor1";
 personObjectArray.push(person3);
-//localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
+
 //setting up personObjectArray from local storage
 if(localStorage.getItem("personObjectArray")==null){
     localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
@@ -819,150 +812,3 @@ function toTitleCase(str)
 function isEmpty(str){
     return !str.replace(/^\s+/g, '').length; // boolean (`true` if field is empty)
 }
-
-
-// ============================================================================================
-// ===============================SAVING=======================================================
-// ============================================================================================
-
-// function saveButton(){
-//     //going through all desks
-//     for(var i=0; i<deskArray.length; i++){
-//         var desk = deskArray[i]; //current desk being iterated through
-        
-//         //retrieving style info for each desk from outerdiv
-//         //position: absolute; left: 770px; top: 284px; z-index: 102; //example of element retrieved for reference
-//         var element = document.getElementById(desk.outerDiv).getAttribute("style");
-//         //console.log(element)
-//         element = element.split(" ")
-//         //console.log(element)
-//         //assigning to desk attributes
-//         desk.left = element[3].replace('px;','') //cleaning up
-//         desk.top = element[5].replace('px;','')
-
-//         //retrieving style info for each desk from innerdiv
-//         //width: 50px; height: 50px; //example of element retrieved for reference
-//         //width: 50px; height: 50px; transform: rotate(-0.2369rad); //if rotated
-//         var element = document.getElementById(desk.innerDiv).getAttribute("style");
-//        // console.log(element)
-//         element = element.split(" ")
-//        // console.log(element)
-//         //assigning 
-//         desk.width = element[1].replace('px;','') //cleaning up
-//         desk.height = element[3].replace('px;','')
-//         if(element.length<6){
-//             desk.rotate = null; //no rotation
-//         }else{
-//             var rotateRad = element[5].replace('rotate(','') //cleaning up
-//             rotateRad = rotateRad.replace('rad);','')
-//             desk.rotate = rotateRad
-//         }
-//     }
-
-//     localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
-// }
-
-
-// ============================================================================================
-// ===============================DEPRECIATED SAVING FUNCTIONS FOR TESTING=======================================================
-// ============================================================================================
-
-//refreshes local Storage to default values
-function deleteLocalStorage(){
-
-}
-// function save(){
-//     saveIndex()
-//     (function () {
-//         var textFile = null,
-//         makeTextFile = function (text) {
-//             var data = new Blob([text], {type: 'text/plain'});
-
-//             // If we are replacing a previously generated file we need to
-//             // manually revoke the object URL to avoid memory leaks.
-//             if (textFile !== null) {
-//               window.URL.revokeObjectURL(textFile);
-//             }
-
-//             textFile = window.URL.createObjectURL(data);
-
-//             return textFile;
-//       };
-
-
-//       var create = document.getElementById('saveButton')
-
-//       create.addEventListener('click', function () {
-//         var link = document.createElement('a');
-//         link.setAttribute('download', 'floorplans.json');
-//         floors = floorDivsToString()
-//         link.href = makeTextFile(floors);
-//         document.body.appendChild(link);
-
-//         // wait for the link to be added to the document
-//         window.requestAnimationFrame(function () {
-//           var event = new MouseEvent('click');
-//           link.dispatchEvent(event);
-//           document.body.removeChild(link);
-//             });
-        
-//       }, false);
-//     })();
-// }
-
-// function floorDivsToString(){
-//      var floorSaves = "[" //JSON string containing floor divs
-
-//     for(var i=0; i<floorplans.length; i++){
-//         //alert("floor plan " + i)
-//         var floorplanName = floorplans[i] //current floorplan string name
-//         //  This gives you an HTMLElement object
-//         var element = document.getElementById(floorplans[i]);
-//         //  This gives you a string representing that element and its content
-//         var html = element.outerHTML;       
-//         //  This gives you a JSON object that you can send with jQuery.ajax's `data`
-//         // option, you can rename the property to whatever you want.
-//         var data = {}
-//         data[floorplanName] = html
-//         //var data = { floorplanName: html }; 
-
-//         //  This gives you a string in JSON syntax of the object above that you can 
-//         // send with XMLHttpRequest.
-//         var json = JSON.stringify(data);
-
-//          if(i==(floorplans.length-1)){ //if it's the last floorplan (so no comma after this one in the JSON string)
-//             floorSaves += json; //adding current floorplan to the full floorSaves JSON string
-//         }else{
-//             floorSaves += json + ",";
-//         }
-//     }
-
-//     floorSaves = floorSaves + "]" //putting in correct format
-
-//     alert(floorSaves)
-
-//     return floorSaves
-// }
-
-
-
-// function saveIndex(){
-//     // Save the page's HTML to a file that is automatically downloaded.
-
-//         // We make a Blob that contains the data to download.
-//         var file = new window.Blob([document.documentElement.innerHTML], { type: "text/html" });
-//         var URL = window.webkitURL || window.URL;
-
-//         // This is the URL that will download the data.
-//         var downloadUrl = URL.createObjectURL(file);
-
-//         var a = document.createElement("a");
-//         // This sets the file name.
-//         a.download = "index.html";
-//         a.href = downloadUrl;
-
-//         // Actually perform the download.
-//         document.body.appendChild(a);
-//         a.click();
-//         document.body.removeChild(a);
-// }
