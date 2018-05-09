@@ -1,10 +1,13 @@
 var deskArray = [];
 var deskIndex = 0;
+
+var roomObjectArray = [];
+var roomIndex = 0;
+
 //localStorage.setItem("deskArray",)
 //console.log(localStorage.getItem("deskArray"))
 //localStorage.removeItem("deskArray")
 //setting up deskArray from local storage
-//alert(deskArray)
 if(localStorage.getItem("deskArray")==null){ //if there is no local storage, initialize storage
     console.log("deskArray null")
     localStorage.setItem("deskArray",JSON.stringify(deskArray))
@@ -16,11 +19,22 @@ if(localStorage.getItem("deskArray")==null){ //if there is no local storage, ini
 else{ //if there is already something stored in local, grab from it and then initialize in javascript
     deskArray = JSON.parse(localStorage.getItem("deskArray"))
     deskIndex = localStorage.getItem("deskIndex")
-    // var lastDeskId = dseskArray[deskArray.length-1].deskId
-    // deskIndex = lastDeskId.replace('desk','')
-    // console.log('deskindex = '+ deskIndex)
     for (var i = 0; i<deskArray.length; i++) {
         loadDivDesk(deskArray[i])
+    }
+}
+
+
+if(localStorage.getItem("roomObjectArray")==null){
+    localStorage.setItem("roomObjectArray",JSON.stringify(roomObjectArray))
+    localStorage.setItem("roomIndex",0)
+}else if(localStorage.getItem("roomObjectArray"=="[]")){
+    localStorage.setItem("roomIndex",0)
+}else{
+    roomIndex = localStorage.getItem("roomIndex")
+    roomObjectArray = localStorage.getItem("roomObjectArray")
+    for (var z = 0; z<roomObjectArray.length; z++) {
+       loadRoom(roomObjectArray[z]);
     }
 }
 
@@ -80,11 +94,20 @@ $(document).ready(function() {
 
 
  function insertRoom() {
+    //initializing room object
+    var roomObj = new RoomClass();
+    var roomId = "room"+roomIndex;
+    roomObj.roomId = roomId;
+
+    //incrementing for next desk
+    roomIndex++;
+
     var mainDiv = document.getElementById(floorPlan);
      
  	//create the div to be draggable
  	var room = document.createElement('div');
  	room.className = 'room';
+    room.id = roomId;
 
  	//cancel button to quit adding all the rooms
  	var cancel = document.createElement('div');
@@ -104,9 +127,70 @@ $(document).ready(function() {
     top = top + ($(mainDiv).height() / 4);
     room.style.left = left;
     room.style.top =  top;
+    roomObj.left = left;
+    roomObj.top = top;
 
  	mainDiv.append(room);
+    
+    //getting positioning variables
  	$( '.room' ).draggable({ containment: 'parent' }).resizable();
+
+    var style = document.getElementById(roomId).getAttribute('style')
+    style = style.split(' ') //splitting up style attribute to get variables
+    for(var i=0; i<style.length; i++){
+        if(style[i]==='left:'){
+            roomObj.left = style[i+1].replace('px;', '')//extracting left variable
+        }
+        if(style[i]==='top:'){
+            roomObj.top = style[i+1].replace('px;', '')//extracting left variable
+        }
+    }
+
+    roomObjectArray.push(roomObj)
+}
+
+//load rooms from local storage
+function loadRoom(roomObj){
+    var mainDiv = document.getElementById(floorPlan);
+     
+    //create the div to be draggable
+    var room = document.createElement('div');
+    room.className = 'room';
+    room.id = roomObj.roomId;
+
+    //cancel button to quit adding all the rooms
+    // var cancel = document.createElement('div');
+    // cancel.className = 'cancel';
+    // cancel.innerHTML = '&#10005';
+    // cancel.onclick = function (e) { room.parentNode.removeChild(room) };
+    // room.appendChild(cancel);
+
+    // var span = document.createElement('span');
+    // span.className = 'deskCount';
+    // room.appendChild(span);
+
+    //loading style attribute
+        //position: absolute; left: 167px; top: 627px; height: 145px; width: 276px; //example for reference
+    var style;
+
+    var left = roomObj.left;
+    var top = roomObj.top;
+
+    room.style.position = "absolute";
+    room.style.left = left;
+    room.style.top =  top;
+
+    if(roomObj.width != null){
+        room.style.width = roomObj.width;
+    }
+    if(roomObj.height != null){
+        room.style.height = roomObj.height;
+    }
+
+    mainDiv.append(room);
+    
+    //getting positioning variables
+    $( '.room' ).draggable({ containment: 'parent' }).resizable();
 }
 
 function deleteRoom() {
@@ -228,7 +312,7 @@ function stopActiveDesk(){
     $(".ui-rotatable-handle").hide();
 }
 
-//var deskIndex = 0;
+
 function insertDivDesk() {
 
     var mainDiv = document.getElementById(floorPlan);
@@ -1197,8 +1281,15 @@ function loadDivDesk(storedDesk) {
     d_img.style = color
 }
 
+//saving stuff in local storage
 function saveButton(){
-    //going through all desks
+    saveDesks();
+    saveRooms();
+}
+
+//save desks in local storage
+function saveDesks(){
+        //going through all desks
     for(var i=0; i<deskArray.length; i++){
         var desk = deskArray[i]; //current desk being iterated through
         var outer = document.getElementById(desk.deskId);
@@ -1264,4 +1355,41 @@ function saveButton(){
     }
 
     localStorage.setItem("deskArray",JSON.stringify(deskArray)) //updating local storage
+}
+
+
+function saveRooms(){
+    //going through all rooms
+    for(var i=0; i<roomObjectArray.length; i++){
+        var room = roomObjectArray[i]; //current desk being iterated through
+        var roomElement = document.getElementById(room.roomId);
+
+        if(roomElement==null){//if desk is not present/has been deleted
+            roomObjectArray.splice(i,1);
+            localStorage.setItem("roomObjectArray",JSON.stringify(roomObjectArray)); //updating local storage
+        }else{ //if desk is present
+            //retrieving style info
+                    //position: absolute; left: 664px; top: 264px; //example of element retrieved for reference
+            var element = document.getElementById(room.roomId).getAttribute("style"); 
+            element = element.split(" ");    //taking apart style attribute of outerdiv to find left and top
+            //assigning to desk attributes
+            for(var j=0; j<element.length; j++){ //going through style attribute array
+                if(element[j] === "top:"){
+                    room.top = element[j+1].replace('px;',''); //looking at the next array element over for the top value
+                }
+                if(element[j] === "left:"){
+                    room.left = element[j+1].replace('px;',''); //looking at the next array element over for left value
+                }
+                if(element[j]==="width:"){
+                    room.width = element[j+1].replace('px;','');
+                }
+                if(element[j]==="height:"){
+                    room.height = element[j+1].replace('px;','');
+                }
+            }
+        }   
+        localStorage.setItem("roomObjectArray",JSON.stringify(roomObjectArray))
+    }
+    // console.log(roomObjectArray)
+    // console.log("height = " + room.height)
 }
