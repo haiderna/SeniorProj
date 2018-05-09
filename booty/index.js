@@ -56,12 +56,13 @@ function PersonClass(name, project, floorplan){
 function ProjectClass(name){
     this.name = name;
 }
-function RoomClass(roomId, height, width, left, top){
+function RoomClass(roomId, height, width, left, top, floor){
     this.roomId = roomId;
     this.height = height;
     this.width = width;
     this.left = left;
     this.top = top;
+    this.floor = floor;
 }
 
 var person1 = new PersonClass();
