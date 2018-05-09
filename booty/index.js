@@ -421,7 +421,7 @@ function addToPersonList(array) {
                     }         
                 }
             //we must addToActiveDesk so that upon editing
-            //they can see the updated persons
+            addToPersonList(personArray);
             addToActiveDeskPersonSelection(personArray);
             event.stopPropagation();
             

@@ -1,265 +1,3 @@
-#sidebar {
-  min-height: calc(100vh);
-  height: 100%;
-}
-
-#right-sidebar {
-    position: absolute;
-    right: 0;
-    min-height: calc(100vh);
-    height: 100%;
-    min-width: 225px;
-    max-width: 225px;
-    background: #223547;
-    color: #fff;
-    transition: all 0.3s;
-    z-index: 1;
-}
-
-/* styling for input fields */
-input[type=text], select {
-    width: 200px;
-    padding: 2px;
-    color: black;
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-input[type=submit] {
-    width: 100px;
-    background-color: #375172;
-    color: white;
-    padding: 2px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type=submit]:hover {
-    background-color: #fff;
-    color: #375172;
-}
-
-#deskMenu{
-    list-style: none;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 20px;
-    background-color: #223547;
-    text-decoration: none;
-}
-
-#deskMenu li{
-    list-style: none;
-    margin-left: none;
-    padding: 0px;
-    text-align: left;
-}
-
-#deskMenu li a {
-    text-align: left;
-    padding-left: 0px !important;
-}
-
-#deskSubMenu{
-    list-style: none;
-    padding: 0px;
-}
-
-#DeskInfoMenu{
-    list-style: none;
-    padding: 0px;
-    margin: 0px;
-}
-
-.room{
-    position:absolute;
-    margin:0px;
-    min-width:40px;
-    min-height:40px;
-    width: 50px;
-    height: 50px;
-    background-color: transparent;
-    border:2px dashed grey;
-    z-index:100;
-}
-
-.room:hover{
-    /*background-color: rgba(27, 217, 176, 0.3);*/
-    background-color: rgba(43, 53, 71, 0.2);
-}
-    
-.cancel{
-    display:relative;
-    cursor:pointer;
-    margin:0;
-    float:right;
-    height:12px;
-    width:12px;
-    padding: 0 0 5px 0;
-    text-align:center;
-    font-size:10px;
-    color:white;
-    background-color:darkblue;
-    z-index:100;
-    visibility: hidden;
-}
-
-.cancel:hover{
-    background-color:red;
-    color: white;
-    font-weight: bold;
-}
-
-.deleteDeskButton{
-    display:relative;
-    cursor:pointer;
-    margin:0;
-    float:right;
-    height:12px;
-    width:12px;
-    padding: 0 0 5px 0;
-    text-align:center;
-    font-size:10px;
-    color:white;
-    background-color:darkblue;
-    z-index:1001;
-    visibility: hidden;
-}
-
-.deleteDeskButton:hover{
-    background-color:red;
-    color: white;
-    font-weight: bold;
-}
-
-.ui-selected > .innerDesk > .deleteDeskButton{
-    visibility: visible;
-}
-
-.ui-rotatable-handle{
-    z-index: 1000;
-}
-
-.desk{
-    flex: auto;
-    flex-direction: column;
-}
-
-.color-square{
-    width: 8px;
-    height: 8px;
-    display: inline-block;
-    /*float: right;*/
-    margin-right: 10px;
-    margin-left: 5px;
-}
-
-div.sp-replacer{
-    margin-right: 10px;
-    background-color: rgba(255, 255, 255,.2);
-}
-
-.set-color-button{
-    float: right;
-    margin-top: 3px;
-    height: 22px;
-    width: 40px;
-    font-size: 8pt;
-    text-align: center;
-    color: whitesmoke;
-    background: transparent;
-    border-radius: 3px;
-    border: 2px solid #375172;
-    /*background-color: #f0ad4e;*/
-    /*background-color: rgba(240,173,78,1.0);*/
-}
-
-.set-color-button:hover{
-    /*background-color: rgba(240,173,78,0.9);*/
-    background-color: #f0ad4e;
-}
-
-#ExportButton{
-    width:  75%
-}
-
-.desk-proj-color{
-    margin: 2px;
-    border-bottom: 2px solid lightgrey;
-}
-
-#floorplanSubMenu{
-    background-color: #223547;
-    border: 3px solid #223547;
-}
-
-
-#floorplanSubMenu ul{
-    padding-left: 0px;
-    cursor: pointer;
-}
-
-#floorplanSubMenu > li > a{
-    background-color: #375172;
-}
-
-#floorplanSubMenu li ul li{
-    color: #fff;
-    background-color: #223547;
-    padding: 10px;
-    list-style: none;
-}
-
-#floorplanSubMenu li ul li:hover{
-    color: #223547;
-    background-color: #fff;
-    padding: 10px;
-    list-style: none;
-}
-
-/* DEPRECATED WITH PROJECT SELECT MENU
-#deskProjectButton{
-    margin: 10px 20px 10px 0px;
-    width: 75%;
-}
-
-#deskProjectDropdown{
-    position: relative;
-    top: unset;
-    left: unset;
-    min-width: unset;
-    min-width: 75%;
-    margin-bottom: 10px;
-    margin-top: -10px;
-    border-bottom: 2px solid white;
-}
-
-#deskProjectDropdown.dropdown-menu > a.dropdown-item{
-    border-top: 2px solid white;
-    border-right: 2px solid white;
-    border-left: 2px solid white;
-    border-radius: 1px;
-    background-color: whitesmoke;
-    color: black;
-}
-
-#deskProjectDropdown.dropdown-menu > a.dropdown-item:hover{
-    background-color: lightgrey;
-}*/
-
-
-/*.desk-proj-color{
-    margin-top: 5px;
-    width: 12px;
-    height: 12px;
-    float: right;
-    border: 1px solid white;
-}*/
-
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 body {
@@ -280,6 +18,8 @@ a, a:hover, a:focus {
     text-decoration: none;
     transition: all 0.3s;
 }
+
+/* BOOTSTRAP NAVBAR STYLINGS */
 
 .wrapper {
     display: flex;
@@ -565,6 +305,240 @@ ul.nav.navbar-nav.navbar-right{
     -ms-transform:scale(0.90);
     transform:scale(0.90);
 }
+/* END OF DEFAULT BOOTSTRAP STYLINGS */
+
+
+#sidebar {
+  min-height: calc(100vh);
+  height: 100%;
+}
+
+#right-sidebar {
+    position: absolute;
+    right: 0;
+    min-height: calc(100vh);
+    height: 100%;
+    min-width: 225px;
+    max-width: 225px;
+    background: #223547;
+    color: #fff;
+    transition: all 0.3s;
+    z-index: 1;
+}
+
+/* styling for input fields */
+input[type=text], select {
+    width: 200px;
+    padding: 2px;
+    color: black;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100px;
+    background-color: #375172;
+    color: white;
+    padding: 2px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #fff;
+    color: #375172;
+}
+
+#deskMenu{
+    list-style: none;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    background-color: #223547;
+    text-decoration: none;
+}
+
+#deskMenu li{
+    list-style: none;
+    margin-left: none;
+    padding: 0px;
+    text-align: left;
+}
+
+#deskMenu li a {
+    text-align: left;
+    padding-left: 0px !important;
+}
+
+#deskSubMenu{
+    list-style: none;
+    padding: 0px;
+}
+
+#DeskInfoMenu{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.room{
+    position:absolute;
+    margin:0px;
+    min-width:40px;
+    min-height:40px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border:2px dashed grey;
+    z-index:100;
+}
+
+.room:hover{
+    background-color: rgba(43, 53, 71, 0.2);
+}
+
+.cancel{
+    /* ROOM DELETE BUTTONS */
+    display:relative;
+    cursor:pointer;
+    margin:0;
+    float:right;
+    height:12px;
+    width:12px;
+    padding: 0 0 5px 0;
+    text-align:center;
+    font-size:10px;
+    color:white;
+    background-color:darkblue;
+    z-index:100;
+    visibility: hidden;
+}
+
+.cancel:hover{
+    background-color:red;
+    color: white;
+    font-weight: bold;
+}
+
+.deleteDeskButton{
+    display:relative;
+    cursor:pointer;
+    margin:0;
+    float:right;
+    height:12px;
+    width:12px;
+    padding: 0 0 5px 0;
+    text-align:center;
+    font-size:10px;
+    color:white;
+    background-color:darkblue;
+    z-index:1001;
+    visibility: hidden;
+}
+
+.deleteDeskButton:hover{
+    background-color:red;
+    color: white;
+    font-weight: bold;
+}
+
+.ui-selected > .innerDesk > .deleteDeskButton{
+    visibility: visible;
+}
+
+.ui-rotatable-handle{
+    z-index: 1000;
+}
+
+/* shows desk counts inside rooms*/
+.deskCount {
+    position:absolute;
+    bottom:0;
+    right:0;
+}
+
+.desk{
+    flex: auto;
+    flex-direction: column;
+}
+
+.color-square{
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    /*float: right;*/
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+div.sp-replacer{
+    margin-right: 10px;
+    background-color: rgba(255, 255, 255,.2);
+}
+
+.set-color-button{
+    float: right;
+    margin-top: 3px;
+    height: 22px;
+    width: 40px;
+    font-size: 8pt;
+    text-align: center;
+    color: whitesmoke;
+    background: transparent;
+    border-radius: 3px;
+    border: 2px solid #375172;
+    /*background-color: #f0ad4e;*/
+    /*background-color: rgba(240,173,78,1.0);*/
+}
+
+.set-color-button:hover{
+    /*background-color: rgba(240,173,78,0.9);*/
+    background-color: #f0ad4e;
+}
+
+#ExportButton{
+    width:  75%
+}
+
+.desk-proj-color{
+    margin: 2px;
+    border-bottom: 2px solid lightgrey;
+}
+
+#floorplanSubMenu{
+    background-color: #223547;
+    border: 3px solid #223547;
+}
+
+
+#floorplanSubMenu ul{
+    padding-left: 0px;
+    cursor: pointer;
+}
+
+#floorplanSubMenu > li > a{
+    background-color: #375172;
+}
+
+#floorplanSubMenu li ul li{
+    color: #fff;
+    background-color: #223547;
+    padding: 10px;
+    list-style: none;
+}
+
+#floorplanSubMenu li ul li:hover{
+    color: #223547;
+    background-color: #fff;
+    padding: 10px;
+    list-style: none;
+}
+
+
 
 /** adjust later for smaller devices*/
 @media (max-width: 768px) {
@@ -688,18 +662,7 @@ ul.nav.navbar-nav.navbar-right{
     
 }
 
-.deskCount {
-    position:absolute;
-    bottom:0;
-    right:0;
-}
-
-/* .desk {
-    position: element(#HQFloor1);
-    transform: translateY(-100%);
-} */
-
-    
+/* selected desks get highlighted */
 .ui-selected {
     box-shadow:0 0 10px 5px #f0ad4e;
  }   
@@ -794,6 +757,7 @@ ul#activeDeskSubmenu > li > a > div > div > ul > li > a{
     overflow:scroll;
     -webkit-overflow-scrolling: touch;
 }
+
 #projectSubMenu{
     max-height: 300px;
     margin-bottom: 10px;
