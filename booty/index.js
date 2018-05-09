@@ -91,12 +91,17 @@ if(localStorage.getItem("personObjectArray")==null){
 
 var floorPlan = "HQFloor1";
 
+//THESE FLOORPLANS ARE HARDCODED IN FOR WILLOWTREE
+//ADDED FLOORPLANS EXHIBIT THE SAME FUNCTIONALITY
+//toggles this floor to the active floorplan
 function HQFloor1() {
     floorPlan = "HQFloor1";
+    //hides all other floorplans
     for (var i = 0; i < floorplans.length; i++){
         var elem = document.getElementById(floorplans[i]);
         $(elem).hide()
     }
+    //shows this one
     var showFloorplan = document.getElementById(floorPlan);
     $(showFloorplan).show();
 
@@ -213,9 +218,12 @@ function WTFloor() {
 document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
 
+//the image source is the filled desk image
+//chosen by the user when adding desk
 var imageSource = "desk - filled.svg";
 
-//For Choosing which type of desk in Menu 
+//For Choosing which type of desk in Menu
+//and highlighting the button to show as selected 
 function singleDesk() {
    imageSource = "desk - filled.svg";
    $('#singleDesk').addClass('selectedDeskType');
@@ -234,8 +242,10 @@ function smallConferenceDesk(){
     $('#LargeConf').removeClass('selectedDeskType');
     $('#SmallConf').addClass('selectedDeskType');
 }
+
+
 // ============================================================================================
-// =============================== people =====================================================
+// =============================== people functions ===========================================
 // ============================================================================================
 
 //dynamic search for people
@@ -258,6 +268,7 @@ function searchPeople() {
     }
 }
 
+//adds a person from the person submenu
 function addPerson() {
     var input, filter;
     input = document.getElementById('peopleInput');
@@ -292,6 +303,8 @@ function addPerson() {
     //alert(JSON.parse(localStorage.getItem('personArray')))
 }
 
+//function originally implemented for people to be added from a different input field 
+//inside the add desk menu
 function addPersonFromDeskMenu(){
     var input, filter;
     input = document.getElementById('name');
@@ -323,10 +336,12 @@ function addPersonFromDeskMenu(){
     input.value = "";
 }
 
+//people that are loaded in from JSON files are 
+//added via this particular function
 function addPersonFromJSON(name){
     var filter = toTitleCase(name);
     if (personArray.includes(filter)){
-        // alert(filter + " already exists in the database.")
+        // alert(filter + " already exists in the database.") -- commented out as to avoid redundant alerts
         return;
     }
     personArray.push(filter);
@@ -335,7 +350,7 @@ function addPersonFromJSON(name){
     addToActiveDeskPersonSelection(personArray);
 }
 
-//creates list of people to display
+//adds all people to the display of the peoples menu
 function addToPersonList(array) {
     // Create the list element:
     var list = document.getElementById('peopleSubMenu');
@@ -344,6 +359,10 @@ function addToPersonList(array) {
     $("li").remove(".listedPerson");
 
     for(var i = 0; i < array.length; i++) {
+        //@innerbutton is the delete button used to remove the 
+        //display element and the person from storage
+        //@item is the listed display of the persons name
+        //@list is the submenu itself
         var innerButton = document.createElement("button");
         innerButton.className = "personDeleteButton"; 
         innerButton.innerHTML = 'REMOVE';
@@ -361,22 +380,26 @@ function addToPersonList(array) {
         
         list.appendChild(item);
        
+        //SEARCH FUNCTION
+        //upon click of the person name, it will navigate you to their location in the buildings
         item.onclick = function() { 
             var label = this.id;
             //alert(label);
-                     for (var j = 0; j < personObjectArray.length; j++){
-                        if (label === personObjectArray[j].name) {
-                        floorPlan = personObjectArray[j].floorplan;
-                            for (var k = 0; k < floorplans.length; k++){
-                                var elem = document.getElementById(floorplans[k]);
-                                $(elem).hide();
-                                 }
-                                var showFloorplan = document.getElementById(floorPlan);
-                                $(showFloorplan).show();
-                    }
+                for (var j = 0; j < personObjectArray.length; j++){
+                    if (label === personObjectArray[j].name) {
+                    floorPlan = personObjectArray[j].floorplan;
+                        for (var k = 0; k < floorplans.length; k++){
+                            var elem = document.getElementById(floorplans[k]);
+                            $(elem).hide();
+                                }
+                            var showFloorplan = document.getElementById(floorPlan);
+                            $(showFloorplan).show();
+                }
              }
         };
         
+        //@innerbutton is the delete button
+        //removes the person from the person arrays
         innerButton.onclick = function(){
             //alert(personObjectArray.length);
             var label = this.id;
@@ -397,17 +420,17 @@ function addToPersonList(array) {
                         localStorage.setItem("personArray",JSON.stringify(personArray)) //updating local storage
                     }         
                 }
-            addToPersonList(personArray);
+            //we must addToActiveDesk so that upon editing
+            //they can see the updated persons
             addToActiveDeskPersonSelection(personArray);
             event.stopPropagation();
             
         };
     }
-    // return list;
 }
 
 
-
+//separate function to populate the people for the edit/active desk on the right taskbar
 function addToActiveDeskPersonSelection(array) {
 
     var activeName = document.getElementById('activeDeskName');
@@ -429,6 +452,7 @@ function addToActiveDeskPersonSelection(array) {
 // =============================== PROJECTS ===================================================
 // ============================================================================================
 
+//search function for project names
 function searchProjects() {
     var input, filter, ul, li, a, i;
     input = document.getElementById('projectInput');
@@ -448,6 +472,7 @@ function searchProjects() {
     }
 }
 
+//adding a new project
 function addProject() {
     var input, filter;
     input = document.getElementById('projectInput');
@@ -466,14 +491,17 @@ function addProject() {
     projectColors.push(""); //has to grow every time project array grows
     localStorage.setItem("projectColors",JSON.stringify(projectColors)) //updating local storage
 
+    //add to the display of projects
     addToProjectList(projectArray);
+    //add to the project select option in the desk insertion and desk editing
     addToDeskProjectDropDown(projectArray);
     input.value = "";
     searchProjects();
     alert("New Project added");
 }
 
-
+//separate function to add unique projects 
+//from the json file upload
 function addProjectFromJSON(proj) {
     var filter;
     filter = proj; // we don't want to TitleCase it 
@@ -493,14 +521,16 @@ function addProjectFromJSON(proj) {
     addToDeskProjectDropDown(projectArray);
 }
 
-//SHOWS PROJECTS AND COLORS NEXT TO IT
+//loads projectArray data and displays it in the project submenu
 function initializeProjectList(array) {
-    // Create the list element:
     var list = document.getElementById('projectSubMenu');
 
-
+    //first remove all projects if any exist
     $("li").remove(".listedProject");
     $("li").remove(".colorPickerAdded");
+
+    //for all projects inside the projectArray,
+    //create the project, the delete button, and the colorpicker
     for(var i = 0; i < array.length; i++) {
         var item = document.createElement('li');
         var inneritem = document.createElement('a');
@@ -525,32 +555,32 @@ function initializeProjectList(array) {
         item.appendChild(inneritem)
         list.appendChild(item);
         
+        //removes the current item from the list and refreshes the project list
         innerButton.onclick = function() {
-        //alert(projectArray.length);
-        var label = this.id;
+            //alert(projectArray.length);
+            var label = this.id;
+            for (var k = 0; k < projectArray.length; k++){
+                if (label === projectArray[k]) {
+                    projectArray.splice(k, 1);
+                    projectColors.splice(k,1);
+                    // alert(projectColors)
+                    // alert(projectArray.length);
+                    localStorage.setItem("projectArray",JSON.stringify(projectArray)) //updating local storage
+                    localStorage.setItem("projectColors",JSON.stringify(projectColors))//updating local stroage
+                }         
+            }    
+        initializeProjectList(projectArray);
+        initDeskProjectDropdown(projectArray);
         
-        for (var k = 0; k < projectArray.length; k++){
-                    if (label === projectArray[k]) {
-                        projectArray.splice(k, 1);
-                        projectColors.splice(k,1);
-                       // alert(projectColors)
-                       // alert(projectArray.length);
-                       localStorage.setItem("projectArray",JSON.stringify(projectArray)) //updating local storage
-                        localStorage.setItem("projectColors",JSON.stringify(projectColors))//updating local stroage
-                    }         
-                }    
-       initializeProjectList(projectArray);
-       initDeskProjectDropdown(projectArray);
-	
-	addColorPicker();
-	loadColorsIntoColorPickers();
-    };
+        addColorPicker();
+        loadColorsIntoColorPickers();
+        };
         // addColorPicker();
     }
     // return list;
 }
 
-//MODIFIED TO ADD A SINGLE ITEM
+//MODIFIED TO ADD A SINGLE ITEM for efficiency's sake instead of reloading whole array
 function addToProjectList(array) {
     var list = document.getElementById('projectSubMenu');
     var innerButton = document.createElement("button");
@@ -582,6 +612,7 @@ function addToProjectList(array) {
  
     addColorPicker();
     
+    //deleting an item function
     innerButton.onclick = function() {
        // alert(projectArray.length);
         var label = this.id;
@@ -603,6 +634,7 @@ function addToProjectList(array) {
 }
 
 //SHOWS PROJECTS AND COLORS INSIDE ADD DESK SUBMENU
+//AND INSIDE EDIT DESK SUBMENU
 function initDeskProjectDropdown(array) {
 
     //Populate select menu
@@ -640,6 +672,7 @@ function initDeskProjectDropdown(array) {
 
 }
 
+//ADD INDIVIDUAL PROJECTS TO DESK AND EDIT-DESK SUBMENU
 function addToDeskProjectDropDown(array) {
 
     var drop = document.getElementById('projectDropdown');
@@ -671,6 +704,7 @@ function addToDeskProjectDropDown(array) {
 // =============================== COLOR ======================================================
 // ============================================================================================
 
+//add color pickers for projects
 function addColorPicker() {
     $(".color-square").spectrum({
         showPalette: true,
@@ -712,7 +746,7 @@ function disableColorPicker() {
     $(".disabled-color").spectrum({ disable: true });
 }
 
-//fixes color to given project and stores it in color array
+//fixes color to given project and stores it in color array corresponding to projects
 function setColor(color, domElement){
     //get color from colorpicker
 
@@ -766,7 +800,6 @@ function activateDeskName(name) {
     $('#activeDeskName').selectpicker('val', name);
 }
 
-//CURRENTLY DOESN'T WORK??
 function activateDeskProject(proj) {
     $('#activeDeskProject').selectpicker('val', proj);
 }

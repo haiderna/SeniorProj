@@ -16,10 +16,12 @@
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 </head>
 
+<!-- loads the first floorplan HQFloor1 -->
 <body onload="HQFloor1()">
 
   <nav class="navbar">
     <div class="container-fluid">
+      <!-- top navbar begins here -->
       <div class="navbar-header">
         <a class="navbar-left" href="#"><img id="log" src = "WT_logo_white.png" style="margin-right: 15px; width: 175px; height: 40px; margin-top: 5px"></a>
       </div>
@@ -52,22 +54,6 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-          
-<!--        <li>
-          <a href="#" onclick="newFloor();">
-            <span class="glyphicon glyphicon-plus"></span> Press Me after Choosing File</button>
-          </a>
-        </li>
-        
-          <li> 
-            <img id="imgAnalyzer" src="" height="10" alt="Image preview...">
-          </li>
-          
-          
-          
-          <li>
-              <input type="file" onchange="previewFile()"><br>
-              <a href="#" onclick="alert('new');" ><span class="glyphicon glyphicon-plus"></span> Add new Floor</a></li>-->
         <li>
           <a href="#" onclick="exportPDF();">
             <span class="glyphicon glyphicon-export"></span> Export</button>
@@ -81,21 +67,10 @@
   </nav>
 
   <div id="mainClass" class="wrapper">
-    <!-- Left Sidebar -->
-
-    <nav id="sidebar"> <!-- change to class="active" to start off collapsed -->
-<!--       <div class="sidebar-header">
-        <h3> WillowTree
-          <h3>
-      </div> -->
-
+    <!-- left Sidebar begins here -->
+    <nav id="sidebar">
       <ul class="list-unstyled components">
-        <!-- <p>Seating Chart</p> -->
-        <!-- <li><a href="#">
-                  <i class="glyphicon glyphicon-object-align-vertical"></i> Add Desk 
-      </a>
-    </li> -->
-    <li>
+      <li>
       <!-- Link with dropdown items -->
       <a href="#deskSubMenu" data-toggle="collapse" aria-expanded="false">
                 <i class="glyphicon glyphicon-object-align-vertical"></i> Add Desk
@@ -130,11 +105,6 @@
                 </ul>
             </li>
           <li>
-            <!--  old implementation      
-            <button id="deskProjectButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Select Project  <span class="caret"></span></button>
-                  <div id="deskProjectDropdown" class="dropdown-menu">
-                    this is where the projects themselves go
-            </div> -->
 
       <select id="projectDropdown" class="selectpicker" data-live-search="true" title="Select Project..." data-width='75%' data-size="5" style="position:relative;">
         <!-- <option> Projects go in here ...</option> -->
@@ -142,6 +112,7 @@
 
           </li>
 
+          <!-- PLACE DESK BUTTON -->
           <li><button id="ExportButton" type="button" class="btn btn-primary"  onclick="insertDivDesk()" style="margin-top: 15px" >Place Desk </button></li>
         </ul>
 
@@ -284,9 +255,8 @@
 
     </div>
     
+    <!-- div for new floorplans to be added-->
     <div id="new">
-
-<!--      <image xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px"/>-->
 
     </div>
     
@@ -327,6 +297,7 @@
         </ul>
         </li><!-- end of edit rooms-->
 
+        <!-- active desk editing submenu -->
         <li>
           <a href="#activeDeskSubmenu" data-toggle="collapse" aria-expanded="false">
                 <i class="glyphicon glyphicon-blackboard"></i> 
