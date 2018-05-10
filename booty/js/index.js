@@ -221,24 +221,24 @@ document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 
 //the image source is the filled desk image
 //chosen by the user when adding desk
-var imageSource = "desk - filled.svg";
+var imageSource = "images/desk - filled.svg";
 
 //For Choosing which type of desk in Menu
 //and highlighting the button to show as selected 
 function singleDesk() {
-   imageSource = "desk - filled.svg";
+   imageSource = "images/desk - filled.svg";
    $('#singleDesk').addClass('selectedDeskType');
    $('#LargeConf').removeClass('selectedDeskType');
    $('#SmallConf').removeClass('selectedDeskType');
 }
 function largeConferenceDesk(){
-    imageSource = "large table - filled.svg";
+    imageSource = "images/large table - filled.svg";
     $('#singleDesk').removeClass('selectedDeskType');
     $('#LargeConf').addClass('selectedDeskType');
     $('#SmallConf').removeClass('selectedDeskType');
 }
 function smallConferenceDesk(){
-    imageSource = "small table - filled.svg";
+    imageSource = "images/small table - filled.svg";
     $('#singleDesk').removeClass('selectedDeskType');
     $('#LargeConf').removeClass('selectedDeskType');
     $('#SmallConf').addClass('selectedDeskType');
