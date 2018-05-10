@@ -1418,8 +1418,6 @@ function loadFloor(savedFloor){
     }
 
     var elemToFoo; 
-	console.log("hi")
-	console.log(match)
 
     //if the building does exist, we add to its submenu
     if (match === true) {
