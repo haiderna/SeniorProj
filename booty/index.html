@@ -30,23 +30,23 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Floorplan: <p id="labelFloorPlan"> None Selected </p>
           <span class="caret"></span></a>
           <ul class="dropdown-menu" id="floorplanSubMenu">
-            <li> <a> HQ </a>
+            <li id="HQlabel2"> <a id="HQlabel"> HQ </a>
                 <ul id="HQsubFloor">
-                    <li href="#" onclick="HQFloor1()" id="HQ1" > <a > Floor 1 </a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('HQFloor1', 'HQ1')"> REMOVE </button> </li>
-                    <li href="#" onclick="HQFloor2()" id="HQ2" > <a > Floor 2 </a><button type="button" class="floorDeleteButton" onclick="deleteFloor('HQFloor2', 'HQ2')"> REMOVE </button></li>
+                    <li href="#" onclick="HQFloor1()" id="HQ1" > <a > Floor 1 </a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('HQFloor1', 'HQ1', 'HQsubFloor','HQlabel')"> REMOVE </button> </li>
+                    <li href="#" onclick="HQFloor2()" id="HQ2" > <a > Floor 2 </a><button type="button" class="floorDeleteButton" onclick="deleteFloor('HQFloor2', 'HQ2','HQsubFloor','HQlabel')"> REMOVE </button></li>
                 </ul>
             </li>
-            <li> <a> Treehouse </a>
+            <li> <a id="THlabel"> Treehouse </a>
                  <ul id="TreehousesubFloor">
-                  <li href="#" onclick="THFloor1()" id="TH1"><a>Floor 1</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor1', 'TH1')"> REMOVE </button></li>
-                  <li href="#" onclick="THFloor2()" id="TH2"><a>Floor 2</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor2', 'TH2')"> REMOVE </button></li>
-                  <li href="#" onclick="THFloor3()" id="TH3"><a>Floor 3</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor3', 'TH3')"> REMOVE </button></li>
-                  <li href="#" onclick="THFloor4()" id="TH4"><a>Floor 4</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor4', 'TH4')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor1()" id="TH1"><a>Floor 1</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor1', 'TH1','TreehousesubFloor','THlabel')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor2()" id="TH2"><a>Floor 2</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor2', 'TH2','TreehousesubFloor','THlabel')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor3()" id="TH3"><a>Floor 3</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor3', 'TH3','TreehousesubFloor','THlabel')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor4()" id="TH4"><a>Floor 4</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor4', 'TH4','TreehousesubFloor','THlabel')"> REMOVE </button></li>
                 </ul>
             </li>
-            <li> <a > Watchtower </a>
+            <li> <a id="WTlabel"> Watchtower </a>
               <ul id="WatchtowersubFloor">
-                <li href="#" onclick="WTFloor()" id="WT1"><a>Floor 5</a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('WTFloor', 'WT1')"> REMOVE </button></li>
+                <li href="#" onclick="WTFloor()" id="WT1"><a>Floor 5</a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('WTFloor', 'WT1','WatchtowersubFloor','WTlabel')"> REMOVE </button></li>
               </ul>
             </li>
             
