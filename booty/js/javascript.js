@@ -9,16 +9,18 @@ var floorIndex = 0;
 var buildings = ["HQ", "Treehouse", "Watchtower"];
 var listIds = ["HQ1", "HQ2", "TH1","TH2", "TH3","TH4","WT1" ];
 
-//locking rooms
-saveState()
 
-//loading floors
+
+//loading floors and buildings
 if(localStorage.getItem("floorplanObjArray")==null){
+	//localStorage.setItem("buildings", JSON.stringify(buildings));
     localStorage.setItem("floorplanObjArray", JSON.stringify(floorplanObjArray));
     localStorage.setItem("floorIndex", 0)
 }else if(localStorage.getItem("floorplanObjArray")=="[]"){
+	//localStorage.setItem("buildings", JSON.stringify(buildings));
     localStorage.setItem("floorIndex",0)
 }else{
+	//buildings = JSON.parse(localStorage.getItem("buildings"))
     floorplanObjArray = JSON.parse(localStorage.getItem("floorplanObjArray"))
     floorIndex = localStorage.getItem("floorIndex")
 
@@ -40,6 +42,9 @@ if(localStorage.getItem("roomObjectArray")==null){
        loadRoom(roomObjectArray[z]);
     }
 }
+
+//locking rooms
+saveState()
 
 //loading desks
 if(localStorage.getItem("deskArray")==null){ //if there is no local storage, initialize storage
@@ -821,6 +826,7 @@ function newFloor() {
     if (match === true) {
         var idUL = building + "subFloor";
         var ul = document.getElementById(idUL);
+		console.log(ul)
         var li = document.createElement("li");
         li.setAttribute("id", listItemId);
         var butn = document.createElement("BUTTON");
@@ -835,6 +841,7 @@ function newFloor() {
         
         li.innerHTML = floorLabel;
         li.appendChild(butn);
+		console.log(ul)
         ul.appendChild(li);
         //match = false;
         elemToFoo = li;
@@ -889,7 +896,7 @@ function newFloor() {
         li.appendChild(ul);
         submenu.appendChild(li);
     }   
-
+	var floorLabelTwo = floorLabel;
     elemToFoo.onclick = function() {
         floorPlan = floorId;
         for (var i = 0; i < floorplans.length; i++){
@@ -899,7 +906,7 @@ function newFloor() {
        var showFloorplan = document.getElementById(floorPlan);
         $(showFloorplan).show();
          // alert(floorPlan);
-        document.getElementById("labelFloorPlan").innerHTML = building + floorLabel;  
+        document.getElementById("labelFloorPlan").innerHTML = building + floorLabelTwo;    
     };
     
     floorIndex++;
@@ -1405,10 +1412,14 @@ function loadFloor(savedFloor){
         if (building === buildings[i]) {
             match = true;
             break;
-        }
+        }else{
+			match = false
+		}
     }
 
     var elemToFoo; 
+	console.log("hi")
+	console.log(match)
 
     //if the building does exist, we add to its submenu
     if (match === true) {
@@ -1437,7 +1448,7 @@ function loadFloor(savedFloor){
     //submenu for the new building
     else if  (match === false) {
 
-        //buildings.push(building);
+        buildings.push(building);
         var submenu = document.getElementById("floorplanSubMenu");
         var li = document.createElement("li");
         var idThing = building + "subFloor";
@@ -1482,7 +1493,7 @@ function loadFloor(savedFloor){
         li.appendChild(ul);
         submenu.appendChild(li);
     }   
-
+	var floorLabelTwo = floorLabel;
     elemToFoo.onclick = function() {
         floorPlan = floorId;
         for (var i = 0; i < floorplans.length; i++){
@@ -1491,7 +1502,7 @@ function loadFloor(savedFloor){
         }
        var showFloorplan = document.getElementById(floorPlan);
         $(showFloorplan).show();
-        document.getElementById("labelFloorPlan").innerHTML = building + floorLabel;  
+        document.getElementById("labelFloorPlan").innerHTML = building + floorLabelTwo;    
     };
     
 
@@ -1505,9 +1516,7 @@ function saveButton(){
     saveRooms();
     saveFloors();
 
-    if(roomsave){
-        alert("Saved!")
-    }
+    alert("Saved!")
 }
 
 //save desks in local storage
@@ -1623,7 +1632,7 @@ function saveFloors(){
     localStorage.setItem("floorplanObjArray",JSON.stringify(floorplanObjArray))
     localStorage.setItem("floorIndex",floorIndex)
 
-    localStorage.setItem("buildings",JSON.stringify(buildings))
+   // localStorage.setItem("buildings",JSON.stringify(buildings))
 }
 
 //converts images to be stored locally
