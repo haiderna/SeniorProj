@@ -1,9 +1,25 @@
 var deskArray = [];
 var deskIndex = 0;
 
-
 var roomObjectArray = [];
 var roomIndex = 0;
+
+//loading rooms
+if(localStorage.getItem("roomObjectArray")==null){
+    localStorage.setItem("roomObjectArray",JSON.stringify(roomObjectArray))
+    localStorage.setItem("roomIndex",0)
+}else if(localStorage.getItem("roomObjectArray"=="[]")){
+    localStorage.setItem("roomIndex",0)
+}else{
+    roomIndex = localStorage.getItem("roomIndex")
+    roomObjectArray = JSON.parse(localStorage.getItem("roomObjectArray"))
+    for (var z = 0; z<roomObjectArray.length; z++) {
+       loadRoom(roomObjectArray[z]);
+    }
+}
+
+//locking rooms
+saveState()
 
 //loading desks
 if(localStorage.getItem("deskArray")==null){ //if there is no local storage, initialize storage
@@ -22,19 +38,7 @@ else{ //if there is already something stored in local, grab from it and then ini
     }
 }
 
-//loading rooms
-if(localStorage.getItem("roomObjectArray")==null){
-    localStorage.setItem("roomObjectArray",JSON.stringify(roomObjectArray))
-    localStorage.setItem("roomIndex",0)
-}else if(localStorage.getItem("roomObjectArray"=="[]")){
-    localStorage.setItem("roomIndex",0)
-}else{
-    roomIndex = localStorage.getItem("roomIndex")
-    roomObjectArray = JSON.parse(localStorage.getItem("roomObjectArray"))
-    for (var z = 0; z<roomObjectArray.length; z++) {
-       loadRoom(roomObjectArray[z]);
-    }
-}
+
 
 $(document).ready(function () {
     document.body.style.backgroundImage = "url('https://78.media.tumblr.com/b96c494a053a6f20a7cb7af1ca9b6f98/tumblr_inline_nn85tpbQkq1rewzq7_1280.png')";
