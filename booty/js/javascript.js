@@ -897,7 +897,7 @@ function exportPDF() {
 
 	var newWin = window.open("", "", "width=1040,height=630");
     newWin.document.write('<html><head><title>Seating Chart</title>');
-    newWin.document.write('<link rel="stylesheet" href="styles.css" type="text/css"/>');
+    newWin.document.write('<link rel="stylesheet" href="css/styles.css" type="text/css"/>');
     newWin.document.write('</head><body>');
 	newWin.document.write(cocontentToPrint);
 //        newWin.document.write('<br />');
