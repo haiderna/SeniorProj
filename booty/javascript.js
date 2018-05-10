@@ -631,8 +631,9 @@ var match = false;
 var storeImage = " ";
 var floorIndex = 0;
 
-function deleteFloor(ident, listIdentifier) {
-    //alert(floorplans);
+function deleteFloor(ident, listIdentifier, idThing, ancId) {
+   var UL = document.getElementById(idThing); 
+ //  alert(UL.childNodes.length);
   if (confirm("You sure you want to delete?")) {
         var id = ident;
         var listItem = listIdentifier;
@@ -655,8 +656,31 @@ function deleteFloor(ident, listIdentifier) {
             }
         
         }
-    
-    
+   
+        
+  
+        
+   ///DELETE BUILDING IF NO FLOORS ON IT 
+  
+   //alert(UL.childNodes.length);
+            if (UL.childNodes.length < 1){
+                //alert("less than one");
+                var buildToDel = document.getElementById(ancId).textContent;
+              //  alert(ancId);
+               document.getElementById(ancId).remove();
+                    for (var j= 0; j < buildings.length;j++){
+                        if (buildToDel === buildings[j]){
+                        buildings.splice(j,1);
+                           //alert(buildings);
+                            }  
+        
+                        }
+                    
+            }
+            
+            
+  
+   
     //.alert(listItem);
    // document.getElementById(listItem).remove();
     event.stopPropagation();
@@ -676,6 +700,7 @@ function newFloor() {
     var building = document.getElementById("building").value;
     var floorId = "newFloor"+floorIndex;
     var listItemId = floorIndex;
+    var ancId = "anc"+floorIndex;
     var divNew = document.getElementById("mainClass");
 
     floorLabel = document.getElementById("floorName").value;
@@ -694,7 +719,7 @@ function newFloor() {
     newImg.setAttribute("src", storeImage);
     newImg.setAttribute("id", "newImgFloor");
     newImg.setAttribute("style","width:" + maxW + "px");
-
+    
     
     newFloor.appendChild(newImg);
     
@@ -735,8 +760,9 @@ function newFloor() {
 
         butn.onclick = function() {
             //alert("is accessing");
-            deleteFloor(floorId, listItemId);
+            deleteFloor(floorId, listItemId, idUL, listItemId );
         }
+        
         li.innerHTML = floorLabel;
         li.appendChild(butn);
         ul.appendChild(li);
@@ -756,6 +782,7 @@ function newFloor() {
         //li.setAttribute("id", listItemId);
         var anc = document.createElement("a");
         anc.innerHTML = building;
+        anc.setAttribute("id", ancId);
 
         var ul = document.createElement("ul");
         ul.setAttribute("id", idThing);
@@ -781,10 +808,8 @@ function newFloor() {
         /** BREAKS ADDING NEW FLOORS */
          butn.onclick = function() {
              // alert(listItemId);
-            deleteFloor(floorId, listItemId);
-          //  document.getElementById(listItemId).remove();
-            //take it out of array 
-            
+            deleteFloor(floorId, listItemId, idThing, ancId);
+
         };
 
         li2.appendChild(anc2);
