@@ -3,14 +3,7 @@ var personObjectArray = [];
 var projectArray = ["Barclays", "Regal", "WillowTree"]; 
 var projectColors = ["#000080", "#FF0000", "#1BD9C4"];
      
-var buildings = ["HQ", "Treehouse", "Watchtower"];
-var listIds = ["HQ1", "HQ2", "TH1","TH2", "TH3","TH4","WT1" ];
 var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"];
-
-
-localStorage.setItem("buildings",JSON.stringify(buildings))
-localStorage.setItem("listIds",JSON.stringify(listIds))
-localStorage.setItem("floorplans",JSON.stringify(floorplans))
 
 //setting up personArray from local storage
 if(localStorage.getItem("personArray")==null){ //if there is no local storage, initialize storage
@@ -31,6 +24,13 @@ if(localStorage.getItem("projectColors")==null){ //if nothing in local
     localStorage.setItem("projectColors",JSON.stringify(projectColors))
 }else{ //if there is something in local grab from it and then initialize
     projectColors =  JSON.parse(localStorage.getItem("projectColors"))
+}
+
+//setting up floorplans array from local storage
+if(localStorage.getItem("floorplans")==null){ //if nothing in local
+    localStorage.setItem("floorplans",JSON.stringify(floorplans))
+}else{ //if there is something in local grab from it and then initialize
+    floorplans =  JSON.parse(localStorage.getItem("floorplans"))
 }
 
 function DeskClass(name, project, floor, image, height, width, left, top, rotate, deskId, outerDiv, innerDiv, color)
@@ -63,6 +63,14 @@ function RoomClass(roomId, height, width, left, top, floor){
     this.left = left;
     this.top = top;
     this.floor = floor;
+}
+function FloorplanClass(name, building, floorId, listItemId, ancId, floorDiv){
+    this.name = name;
+    this.building = building;
+    this.floorId = floorId;
+    this.listItemId = listItemId;
+    this.ancId = ancId;
+    this.floorDiv = floorDiv; //floor div that is appended
 }
 
 var person1 = new PersonClass();

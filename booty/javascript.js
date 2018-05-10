@@ -4,6 +4,29 @@ var deskIndex = 0;
 var roomObjectArray = [];
 var roomIndex = 0;
 
+var floorplanObjArray = [];
+var floorIndex = 0;
+var buildings = ["HQ", "Treehouse", "Watchtower"];
+var listIds = ["HQ1", "HQ2", "TH1","TH2", "TH3","TH4","WT1" ];
+
+//locking rooms
+saveState()
+
+//loading floors
+if(localStorage.getItem("floorplanObjArray")==null){
+    localStorage.setItem("floorplanObjArray", JSON.stringify(floorplanObjArray));
+    localStorage.setItem("floorIndex", 0)
+}else if(localStorage.getItem("floorplanObjArray")=="[]"){
+    localStorage.setItem("floorIndex",0)
+}else{
+    floorplanObjArray = JSON.parse(localStorage.getItem("floorplanObjArray"))
+    floorIndex = localStorage.getItem("floorIndex")
+
+    for (var i = 0; i<floorplanObjArray.length; i++) {
+        loadFloor(floorplanObjArray[i])
+    }
+}
+
 //loading rooms
 if(localStorage.getItem("roomObjectArray")==null){
     localStorage.setItem("roomObjectArray",JSON.stringify(roomObjectArray))
@@ -18,16 +41,11 @@ if(localStorage.getItem("roomObjectArray")==null){
     }
 }
 
-//locking rooms
-saveState()
-
 //loading desks
 if(localStorage.getItem("deskArray")==null){ //if there is no local storage, initialize storage
-    console.log("deskArray null")
     localStorage.setItem("deskArray",JSON.stringify(deskArray))
     localStorage.setItem("deskIndex",0)
 }else if(localStorage.getItem("deskArray"=="[]")){
-    console.log("deskArray empty")
     localStorage.setItem("deskIndex",0)
 }
 else{ //if there is already something stored in local, grab from it and then initialize in javascript
@@ -37,7 +55,6 @@ else{ //if there is already something stored in local, grab from it and then ini
         loadDivDesk(deskArray[i])
     }
 }
-
 
 
 $(document).ready(function () {
@@ -94,6 +111,18 @@ $(document).ready(function() {
        
 });
 
+function onloadDiv(){
+    floorPlan = floorplans[0];
+    for (var i = 0; i < floorplans.length; i++){
+        var elem = document.getElementById(floorplans[i]);
+        $(elem).hide()
+    }
+    //shows this one
+    var showFloorplan = document.getElementById(floorPlan);
+    $(showFloorplan).show();
+    
+    
+}
 
  function insertRoom() {
     //initializing room object
@@ -629,7 +658,7 @@ $('#deskHeight').change(updateAddDeskButton);
 var match = false;
 
 var storeImage = " ";
-var floorIndex = 0;
+
 
 function deleteFloor(ident, listIdentifier, idThing, ancId) {
    var UL = document.getElementById(idThing); 
@@ -663,20 +692,20 @@ function deleteFloor(ident, listIdentifier, idThing, ancId) {
    ///DELETE BUILDING IF NO FLOORS ON IT 
   
    //alert(UL.childNodes.length);
-            if (UL.childNodes.length < 1){
-                //alert("less than one");
-                var buildToDel = document.getElementById(ancId).textContent;
-              //  alert(ancId);
-               document.getElementById(ancId).remove();
-                    for (var j= 0; j < buildings.length;j++){
-                        if (buildToDel === buildings[j]){
-                        buildings.splice(j,1);
-                           //alert(buildings);
-                            }  
+            // if (UL.childNodes.length < 1){
+            //     //alert("less than one");
+            //     var buildToDel = document.getElementById(ancId).textContent;
+            //   //  alert(ancId);
+            //    document.getElementById(ancId).remove();
+            //         for (var j= 0; j < buildings.length;j++){
+            //             if (buildToDel === buildings[j]){
+            //             buildings.splice(j,1);
+            //                //alert(buildings);
+            //                 }  
         
-                        }
+            //             }
                     
-            }
+            // }
             
             
   
@@ -684,6 +713,32 @@ function deleteFloor(ident, listIdentifier, idThing, ancId) {
     //.alert(listItem);
    // document.getElementById(listItem).remove();
     event.stopPropagation();
+
+    //deleting floor from array
+    for(var i=0; i<floorplanObjArray.length; i++){
+       var floorplanObj = floorplanObjArray[i]
+      
+      if(floorplanObj.floorId == ident){
+            floorplanObjArray.splice(i,1)
+      }      
+    }   
+    //deleting rooms in array
+    for(var i=0; i<roomObjectArray.length; i++){
+       var roomobj = roomObjectArray[i]
+      
+      if(roomobj.floor == ident){
+            roomObjectArray.splice(i,1)
+      }      
+    }
+    //deleting desks in array
+    for(var i=0; i<desks.length; i++){
+       var deskobj = deskArray[i]
+      
+      if(deskobj.floor == ident){
+            deskArray.splice(i,1)
+      }      
+    }
+
   }else {
         event.stopPropagation();
     }
@@ -696,20 +751,29 @@ function newFloor() {
     if(!confirm('Are you sure you want to upload this floorplan?')){
         return;
     }
+    var newFloorObj = new FloorplanClass();
 
     var building = document.getElementById("building").value;
+    newFloorObj.building = building;
     var floorId = "newFloor"+floorIndex;
+    newFloorObj.floorId = floorId;
     var listItemId = floorIndex;
+    newFloorObj.listItemId = listItemId;
     var ancId = "anc"+floorIndex;
+    newFloorObj.ancId = ancId;
+
     var divNew = document.getElementById("mainClass");
 
     floorLabel = document.getElementById("floorName").value;
+    newFloorObj.name = floorLabel
 
     floorplans.push(floorId);
     listIds.push(listItemId);
     
     var newFloor = document.createElement("div");
     newFloor.setAttribute("id", floorId);
+
+   // newFloorObj.floorDiv = newFloor;
 
     //declare max width so it doesn't overlap on sidebars
     var maxW = screen.width - 450;
@@ -719,9 +783,15 @@ function newFloor() {
     newImg.setAttribute("src", storeImage);
     newImg.setAttribute("id", "newImgFloor");
     newImg.setAttribute("style","width:" + maxW + "px");
+
+    newFloorObj.img = storeImage;
     
     
     newFloor.appendChild(newImg);
+
+    //newFloorObj.floorDiv = newFloor
+
+   floorplanObjArray.push(newFloorObj)
     
 
     //adds a function to the new floorplan to unselect active desks
@@ -842,19 +912,6 @@ $("#newFloorButton").click(function(event) {
     // Removes focus of the button.
     $(this).blur();
 });
-
-
-function newFloorMenu2() {
-     floorPlan = "newFloor0";
-        for (var i = 0; i < floorplans.length; i++){
-            var elem = document.getElementById(floorplans[i]);
-             $(elem).hide();
-        }
-       var showFloorplan = document.getElementById(floorPlan);
-        $(showFloorplan).show();
-         alert(floorPlan);
-      
-}
 
 //shows preview of floorplan being uploaded
 function previewFile(){
@@ -1300,20 +1357,156 @@ function loadDivDesk(storedDesk) {
     d_img.style = color
 }
 
+//loading floors
+function loadFloor(savedFloor){
+    var building = savedFloor.building;
+    var floorId = savedFloor.floorId;
+    var listItemId = savedFloor.listItemId
+    var ancId = savedFloor.ancId;
+    var divNew = document.getElementById("mainClass");
+
+    floorLabel = savedFloor.name
+
+    floorplans.push(floorId);
+    listIds.push(listItemId);
+    
+    var newFloor = document.createElement("div");
+    newFloor.setAttribute("id", floorId);
+
+    // //declare max width so it doesn't overlap on sidebars
+    var maxW = screen.width - 450;
+    newFloor.setAttribute("style","width:" + maxW + "px");
+
+    var newImg = document.createElement("IMG");
+   // var savedImage = "data:image/png;base64," + savedFloor.img;
+    newImg.setAttribute("src", savedFloor.img);
+    newImg.setAttribute("id", "newImgFloor");
+   newImg.setAttribute("style","width:" + maxW + "px");
+    
+
+    newFloor.appendChild(newImg);
+    
+
+    //adds a function to the new floorplan to unselect active desks
+    //when an area outside the desk is clicked
+    $( newFloor ).on("click", (function(event) { 
+        if(!$(event.target).closest('.desk').length) {
+            stopActiveDesk();
+        }        
+        })
+    );
+   
+    divNew.appendChild(newFloor);
+    $(newFloor).hide();
+    //ADD TO MENU LIST
+    
+    // //checks to see if the floorplan being added is being added to a pre-existing building or not
+    for (var i = 0; i < buildings.length; i++) {
+        if (building === buildings[i]) {
+            match = true;
+            break;
+        }
+    }
+
+    var elemToFoo; 
+
+    //if the building does exist, we add to its submenu
+    if (match === true) {
+        var idUL = building + "subFloor";
+        var ul = document.getElementById(idUL);
+        var li = document.createElement("li");
+        li.setAttribute("id", listItemId);
+        var butn = document.createElement("BUTTON");
+        butn.innerHTML = "REMOVE";
+        butn.setAttribute("id", listItemId);
+        butn.className = "floorDeleteButton";
+
+        butn.onclick = function() {
+            //alert("is accessing");
+            deleteFloor(floorId, listItemId, idUL, listItemId );
+        }
+        
+        li.innerHTML = floorLabel;
+        li.appendChild(butn);
+        ul.appendChild(li);
+        //match = false;
+        elemToFoo = li;
+
+    } 
+    //if the building doesn't exist, we must make a new 
+    //submenu for the new building
+    else if  (match === false) {
+
+        //buildings.push(building);
+        var submenu = document.getElementById("floorplanSubMenu");
+        var li = document.createElement("li");
+        var idThing = building + "subFloor";
+        
+        //li.setAttribute("id", listItemId);
+        var anc = document.createElement("a");
+        anc.innerHTML = building;
+        anc.setAttribute("id", ancId);
+
+        var ul = document.createElement("ul");
+        ul.setAttribute("id", idThing);
+
+        var li2 = document.createElement("li");
+        li2.setAttribute("href", "#");
+        elemToFoo = li2;
+        li2.setAttribute("id", listItemId);
+        
+        var butn = document.createElement("BUTTON");
+        butn.innerHTML = "REMOVE";
+        butn.className = "floorDeleteButton";
+        /** BREAKS ADDING NEW FLOORS */
+        // butn.onclick = deleteFloor();
+       
+        
+       // butn.setAttribute("id", listItemId);
+        var anc2 = document.createElement("a");
+        anc2.innerHTML = floorLabel;
+        //ac2.setAttribute("id", listItemId);
+        anc2.appendChild(butn);
+
+        /** BREAKS ADDING NEW FLOORS */
+         butn.onclick = function() {
+             // alert(listItemId);
+            deleteFloor(floorId, listItemId, idThing, ancId);
+
+        };
+
+        li2.appendChild(anc2);
+        
+        ul.appendChild(li2);
+        li.appendChild(anc);
+        li.appendChild(ul);
+        submenu.appendChild(li);
+    }   
+
+    elemToFoo.onclick = function() {
+        floorPlan = floorId;
+        for (var i = 0; i < floorplans.length; i++){
+            var elem = document.getElementById(floorplans[i]);
+             $(elem).hide();
+        }
+       var showFloorplan = document.getElementById(floorPlan);
+        $(showFloorplan).show();
+        document.getElementById("labelFloorPlan").innerHTML = building + floorLabel;  
+    };
+    
+
+    match = false; 
+}
+
 //saving stuff in local storage
+
 function saveButton(){
     saveDesks();
     saveRooms();
+    saveFloors();
 
-    if(deskArray.length>0 && roomObjectArray.length>0){
-        alert("Desk and room arrangement saved!")
-    }else if(deskArray.length==0 && roomObjectArray.length>0){
-        alert("Room arrangment saved! There are no desks to save.")
-    }else if(deskArray.length>0 && roomObjectArray.length==0){
-        alert("Desk arrangment saved! There are no rooms to save.")
-    }
-    else if(deskArray.length==0 && roomObjectArray.length==0){
-        alert("There was nothing on the floorplan to save...")
+    if(roomsave){
+        alert("Saved!")
     }
 }
 
@@ -1387,7 +1580,7 @@ function saveDesks(){
 function saveRooms(){
     //going through all rooms
     for(var i=0; i<roomObjectArray.length; i++){
-        var room = roomObjectArray[i]; //current desk being iterated through
+        var room = roomObjectArray[i]; //current desk
         var roomElement = document.getElementById(room.roomId);
 
         if(roomElement==null){//if desk is not present/has been deleted
@@ -1417,4 +1610,32 @@ function saveRooms(){
     }
     localStorage.setItem("roomObjectArray",JSON.stringify(roomObjectArray))
     localStorage.setItem("roomIndex",roomIndex)
+}
+
+//saving floors and buildings
+function saveFloors(){
+    for(var i=0; i<floorplanObjArray.length; i++){
+       var floorplanObj = floorplanObjArray[i]
+       var div = document.getElementById(floorplanObj.floorId).innerHTML
+       floorplanObj.floorDiv = div;        
+    }   
+
+    localStorage.setItem("floorplanObjArray",JSON.stringify(floorplanObjArray))
+    localStorage.setItem("floorIndex",floorIndex)
+
+    localStorage.setItem("buildings",JSON.stringify(buildings))
+}
+
+//converts images to be stored locally
+function getBase64Image(img){
+     var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    var dataURL = canvas.toDataURL("image/png");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
