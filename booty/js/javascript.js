@@ -20,7 +20,8 @@ if(localStorage.getItem("floorplanObjArray")==null){
 	//localStorage.setItem("buildings", JSON.stringify(buildings));
     localStorage.setItem("floorIndex",0)
 }else{
-	//buildings = JSON.parse(localStorage.getItem("buildings"))
+	
+
     floorplanObjArray = JSON.parse(localStorage.getItem("floorplanObjArray"))
     floorIndex = localStorage.getItem("floorIndex")
 
@@ -451,7 +452,15 @@ function insertDivDesk() {
     var btn = document.createElement('div');
     btn.className = 'deleteDeskButton';
     btn.innerHTML = '&#10005';
-    btn.onclick = function (e) { document.getElementById(divId).remove(); };
+    btn.onclick = function (e) { 
+		for(var i=0; i<deskArray.length; i++){
+			var desk = deskArray[i]; //current desk being iterated through
+			if(desk.outerDiv == divId){
+				deskArray.splice(i,1)
+			}
+		}
+		document.getElementById(divId).remove(); 
+	};
     
     innerDiv.style.width = w;
     innerDiv.style.height = h;
@@ -691,7 +700,30 @@ function deleteFloor(ident, listIdentifier, idThing, ancId) {
         
         }
    
-        
+        //deleting floor from array
+    for(var i=0; i<floorplanObjArray.length; i++){
+       var floorplanObj = floorplanObjArray[i]
+      
+      if(floorplanObj.floorId == ident){
+            floorplanObjArray.splice(i,1)
+      }      
+    }   
+    //deleting rooms in array
+    for(var i=0; i<roomObjectArray.length; i++){
+       var roomobj = roomObjectArray[i]
+      
+      if(roomobj.floor == ident){
+            roomObjectArray.splice(i,1)
+      }      
+    }
+    //deleting desks in array
+    for(var i=0; i<desks.length; i++){
+       var deskobj = deskArray[i]
+      
+      if(deskobj.floor == ident){
+            deskArray.splice(i,1)
+      }      
+    }
   
         
    ///DELETE BUILDING IF NO FLOORS ON IT 
@@ -718,31 +750,6 @@ function deleteFloor(ident, listIdentifier, idThing, ancId) {
     //.alert(listItem);
    // document.getElementById(listItem).remove();
     event.stopPropagation();
-
-    //deleting floor from array
-    for(var i=0; i<floorplanObjArray.length; i++){
-       var floorplanObj = floorplanObjArray[i]
-      
-      if(floorplanObj.floorId == ident){
-            floorplanObjArray.splice(i,1)
-      }      
-    }   
-    //deleting rooms in array
-    for(var i=0; i<roomObjectArray.length; i++){
-       var roomobj = roomObjectArray[i]
-      
-      if(roomobj.floor == ident){
-            roomObjectArray.splice(i,1)
-      }      
-    }
-    //deleting desks in array
-    for(var i=0; i<desks.length; i++){
-       var deskobj = deskArray[i]
-      
-      if(deskobj.floor == ident){
-            deskArray.splice(i,1)
-      }      
-    }
 
   }else {
         event.stopPropagation();
@@ -1268,7 +1275,15 @@ function loadDivDesk(storedDesk) {
     var btn = document.createElement('div');
     btn.className = 'deleteDeskButton';
     btn.innerHTML = '&#10005';
-    btn.onclick = function (e) { document.getElementById(divId).remove(); };
+    btn.onclick = function (e) { 
+		for(var i=0; i<deskArray.length; i++){
+			var desk = deskArray[i]; //current desk being iterated through
+			if(desk.outerDiv == divId){
+				deskArray.splice(i,1)
+			}
+		}
+		document.getElementById(divId).remove(); 
+	};
     
     innerDiv.style.width = w;
     innerDiv.style.height = h;
@@ -1628,21 +1643,6 @@ function saveFloors(){
     }   
 
     localStorage.setItem("floorplanObjArray",JSON.stringify(floorplanObjArray))
+	localStorage.setItem("floorplans",JSON.stringify(floorplans))
     localStorage.setItem("floorIndex",floorIndex)
-
-   // localStorage.setItem("buildings",JSON.stringify(buildings))
-}
-
-//converts images to be stored locally
-function getBase64Image(img){
-     var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-
-    var dataURL = canvas.toDataURL("image/png");
-
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
