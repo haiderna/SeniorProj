@@ -64,13 +64,14 @@ function RoomClass(roomId, height, width, left, top, floor){
     this.top = top;
     this.floor = floor;
 }
-function FloorplanClass(name, building, floorId, listItemId, ancId, floorDiv){
+function FloorplanClass(name, building, floorId, listItemId, ancId, floorDiv, idUL){
     this.name = name;
     this.building = building;
     this.floorId = floorId;
     this.listItemId = listItemId;
     this.ancId = ancId;
     this.floorDiv = floorDiv; //floor div that is appended
+    this.idUL = idUL
 }
 
 var person1 = new PersonClass();

@@ -8,7 +8,27 @@ var floorplanObjArray = [];
 var floorIndex = 0;
 var buildings = ["HQ", "Treehouse", "Watchtower"];
 var listIds = ["HQ1", "HQ2", "TH1","TH2", "TH3","TH4","WT1" ];
+var originalFloors = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"];
 
+var deletedFloors= [];
+
+//for floors that are on index.html file
+if(localStorage.getItem("deletedFloors") == null){
+    localStorage.setItem("deletedFloors",deletedFloors)
+}else if(localStorage.getItem("deletedFloors")=="[]"){
+
+}else{
+    deletedFloors = JSON.parse(localStorage.getItem("deletedFloors"))
+
+    for(var i=0; i<deletedFloors.length; i++){
+        var deletedFloor= deletedFloors[i] 
+        var floorDiv = document.getElementById(deletedFloor)
+        floorDiv.style.display = "none"
+        var deletedFloor = deletedFloor.replace("Floor","")
+        var submenuDiv = document.getElementById(deletedFloor)
+        submenuDiv.style.display = "none"
+    }
+}
 
 
 //loading floors and buildings
@@ -680,9 +700,11 @@ function deleteFloor(ident, listIdentifier, idThing, ancId) {
   if (confirm("You sure you want to delete?")) {
         var id = ident;
         var listItem = listIdentifier;
+
+
     //delete floor plan from array 
         for (var j= 0; j < floorplans.length;j++){
-            if (id === floorplans[j]){
+            if (ident === floorplans[j]){
                 floorplans.splice(j,1);
                 //alert(floorplans);
                 document.getElementById(id).remove();
@@ -712,20 +734,26 @@ function deleteFloor(ident, listIdentifier, idThing, ancId) {
     for(var i=0; i<roomObjectArray.length; i++){
        var roomobj = roomObjectArray[i]
       
-      if(roomobj.floor == ident){
+      if(roomobj.floor === ident){
             roomObjectArray.splice(i,1)
       }      
     }
     //deleting desks in array
-    for(var i=0; i<desks.length; i++){
+    for(var i=0; i<deskArray.length; i++){
        var deskobj = deskArray[i]
       
-      if(deskobj.floor == ident){
+      if(deskobj.floor === ident){
             deskArray.splice(i,1)
       }      
     }
-  
-        
+    
+    //deleting original floorplan if applicable
+    for(var i=0; i<originalFloors.length; i++){
+      if(originalFloors[i] === ident){
+            deletedFloors.push(ident)
+      }      
+    }
+    
    ///DELETE BUILDING IF NO FLOORS ON IT 
   
    //alert(UL.childNodes.length);
@@ -1644,5 +1672,6 @@ function saveFloors(){
 
     localStorage.setItem("floorplanObjArray",JSON.stringify(floorplanObjArray))
 	localStorage.setItem("floorplans",JSON.stringify(floorplans))
+    localStorage.setItem("deletedFloors",JSON.stringify(deletedFloors))
     localStorage.setItem("floorIndex",floorIndex)
 }
