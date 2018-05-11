@@ -12,6 +12,26 @@ var originalFloors = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3"
 
 var deletedFloors= [];
 
+
+//loading floors and buildings
+if(localStorage.getItem("floorplanObjArray")==null){
+    //localStorage.setItem("buildings", JSON.stringify(buildings));
+    localStorage.setItem("floorplanObjArray", JSON.stringify(floorplanObjArray));
+    localStorage.setItem("floorIndex", 0)
+}else if(localStorage.getItem("floorplanObjArray")=="[]"){
+    //localStorage.setItem("buildings", JSON.stringify(buildings));
+    localStorage.setItem("floorIndex",0)
+}else{
+    
+
+    floorplanObjArray = JSON.parse(localStorage.getItem("floorplanObjArray"))
+    floorIndex = localStorage.getItem("floorIndex")
+
+    for (var i = 0; i<floorplanObjArray.length; i++) {
+        loadFloor(floorplanObjArray[i])
+    }
+}
+
 //for floors that are on index.html file
 if(localStorage.getItem("deletedFloors") == null){
     localStorage.setItem("deletedFloors",deletedFloors)
@@ -27,26 +47,6 @@ if(localStorage.getItem("deletedFloors") == null){
         var deletedFloor = deletedFloor.replace("Floor","")
         var submenuDiv = document.getElementById(deletedFloor)
         submenuDiv.style.display = "none"
-    }
-}
-
-
-//loading floors and buildings
-if(localStorage.getItem("floorplanObjArray")==null){
-	//localStorage.setItem("buildings", JSON.stringify(buildings));
-    localStorage.setItem("floorplanObjArray", JSON.stringify(floorplanObjArray));
-    localStorage.setItem("floorIndex", 0)
-}else if(localStorage.getItem("floorplanObjArray")=="[]"){
-	//localStorage.setItem("buildings", JSON.stringify(buildings));
-    localStorage.setItem("floorIndex",0)
-}else{
-	
-
-    floorplanObjArray = JSON.parse(localStorage.getItem("floorplanObjArray"))
-    floorIndex = localStorage.getItem("floorIndex")
-
-    for (var i = 0; i<floorplanObjArray.length; i++) {
-        loadFloor(floorplanObjArray[i])
     }
 }
 
