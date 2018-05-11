@@ -5,6 +5,10 @@ var projectColors = ["#000080", "#FF0000", "#1BD9C4"];
      
 var floorplans = ["HQFloor1", "HQFloor2", "THFloor1", "THFloor2", "THFloor3", "THFloor4", "WTFloor1"];
 
+///////////////////////////////////////////////////////////////////
+///////////// UPDATING VARIABLES FROM STORAGE ///////////////////////////////////
+///////////////////////////////////////////////////////////////////
+
 //setting up personArray from local storage
 if(localStorage.getItem("personArray")==null){ //if there is no local storage, initialize storage
     localStorage.setItem("personArray",JSON.stringify(personArray))
@@ -32,6 +36,10 @@ if(localStorage.getItem("floorplans")==null){ //if nothing in local
 }else{ //if there is something in local grab from it and then initialize
     floorplans =  JSON.parse(localStorage.getItem("floorplans"))
 }
+
+///////////////////////////////////////////////////////////////////
+///////////// CLASS FUNCTIONS ///////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 function DeskClass(name, project, floor, image, height, width, left, top, rotate, deskId, outerDiv, innerDiv, color)
 {   this.name = name; 
@@ -74,6 +82,9 @@ function FloorplanClass(name, building, floorId, listItemId, ancId, floorDiv, id
     this.idUL = idUL
 }
 
+
+//------------------ Default Objects ----------------------------------
+
 var person1 = new PersonClass();
 person1.name = "Cow Lady";
 person1.project = "Regal";
@@ -92,12 +103,20 @@ person3.project = "Regal";
 person3.floorplan = "HQFloor1";
 personObjectArray.push(person3);
 
-//setting up personObjectArray from local storage
+//--------------------------------------------------------------------
+
+/////UPDATING PERSON OBJECTS FROM STORAGE/////////////////
+
 if(localStorage.getItem("personObjectArray")==null){
     localStorage.setItem("personObjectArray",JSON.stringify(personObjectArray))
 }else{
     personObjectArray = JSON.parse(localStorage.getItem("personObjectArray"))
 }
+
+
+///////////////////////////////////////////////////////////////////
+///////////// ORIGINAL WILLOWTREE FLOORS ///////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 var floorPlan = "HQFloor1";
 
@@ -227,6 +246,10 @@ function WTFloor() {
     );
 document.getElementById("labelFloorPlan").innerHTML = floorPlan;
 }
+
+///////////////////////////////////////////////////////////////////
+///////////// DESKTYPES ///////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 //the image source is the filled desk image
 //chosen by the user when adding desk
