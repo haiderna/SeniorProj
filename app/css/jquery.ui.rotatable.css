@@ -1,0 +1,9 @@
+.ui-rotatable-handle {
+    background: #bf4;
+    margin-left: auto;
+    margin-right: auto;
+    width: 14px;
+    height: 14px;
+    border-radius: 8px;
+    border: 2px solid #fff;
+}

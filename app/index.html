@@ -4,47 +4,47 @@
   <title>WillowTree Apps Seating Chart</title>
   <!-- boostrap css-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <!-- custom css -->
-  <link rel="stylesheet" href="custom.css">
   <!-- compiled styles.less into css -->
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/>
   <!-- for rotation -->
-  <link rel="stylesheet" href="jquery.ui.rotatable.css">
+  <link rel="stylesheet" href="css/jquery.ui.rotatable.css">
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 </head>
 
-<body onload="HQFloor1()">
+<!-- loads the first floorplan HQFloor1 -->
+<body onload="onloadDiv()">
 
   <nav class="navbar">
     <div class="container-fluid">
+      <!-- top navbar begins here -->
       <div class="navbar-header">
-        <a class="navbar-left" href="#"><img id="log" src = "WT_logo_white.png" style="margin-right: 15px; width: 175px; height: 40px; margin-top: 5px"></a>
+        <a class="navbar-left" href="#"><img id="log" src = "images/WT_logo_white.png" style="margin-right: 15px; width: 175px; height: 40px; margin-top: 5px"></a>
       </div>
       <ul class="nav navbar-nav">
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Floorplan: <p id="labelFloorPlan"> None Selected </p>
           <span class="caret"></span></a>
           <ul class="dropdown-menu" id="floorplanSubMenu">
-            <li> <a> HQ </a>
+            <li id="HQlabel2"> <a id="HQlabel"> HQ </a>
                 <ul id="HQsubFloor">
-                    <li href="#" onclick="HQFloor1()" id="HQ1" > <a > Floor 1 </a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('HQFloor1', 'HQ1')"> REMOVE </button> </li>
-                    <li href="#" onclick="HQFloor2()" id="HQ2" > <a > Floor 2 </a><button type="button" class="floorDeleteButton" onclick="deleteFloor('HQFloor2', 'HQ2')"> REMOVE </button></li>
+                    <li href="#" onclick="HQFloor1()" id="HQ1" > <a > Floor 1 </a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('HQFloor1', 'HQ1', 'HQsubFloor','HQlabel')"> REMOVE </button> </li>
+                    <li href="#" onclick="HQFloor2()" id="HQ2" > <a > Floor 2 </a><button type="button" class="floorDeleteButton" onclick="deleteFloor('HQFloor2', 'HQ2','HQsubFloor','HQlabel')"> REMOVE </button></li>
                 </ul>
             </li>
-            <li> <a> Treehouse </a>
+            <li> <a id="THlabel"> Treehouse </a>
                  <ul id="TreehousesubFloor">
-                  <li href="#" onclick="THFloor1()" id="TH1"><a>Floor 1</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor1', 'TH1')"> REMOVE </button></li>
-                  <li href="#" onclick="THFloor2()" id="TH2"><a>Floor 2</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor2', 'TH2')"> REMOVE </button></li>
-                  <li href="#" onclick="THFloor3()" id="TH3"><a>Floor 3</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor3', 'TH3')"> REMOVE </button></li>
-                  <li href="#" onclick="THFloor4()" id="TH4"><a>Floor 4</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor4', 'TH4')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor1()" id="TH1"><a>Floor 1</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor1', 'TH1','TreehousesubFloor','THlabel')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor2()" id="TH2"><a>Floor 2</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor2', 'TH2','TreehousesubFloor','THlabel')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor3()" id="TH3"><a>Floor 3</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor3', 'TH3','TreehousesubFloor','THlabel')"> REMOVE </button></li>
+                  <li href="#" onclick="THFloor4()" id="TH4"><a>Floor 4</a><button type="button" class="floorDeleteButton" onclick="deleteFloor('THFloor4', 'TH4','TreehousesubFloor','THlabel')"> REMOVE </button></li>
                 </ul>
             </li>
-            <li> <a > Watchtower </a>
+            <li> <a id="WTlabel"> Watchtower </a>
               <ul id="WatchtowersubFloor">
-                <li href="#" onclick="WTFloor()" id="WT1"><a>Floor 5</a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('WTFloor', 'WT1')"> REMOVE </button></li>
+                <li href="#" onclick="WTFloor()" id="WT1"><a>Floor 5</a> <button type="button" class="floorDeleteButton" onclick="deleteFloor('WTFloor', 'WT1','WatchtowersubFloor','WTlabel')"> REMOVE </button></li>
               </ul>
             </li>
             
@@ -52,22 +52,6 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-          
-<!--        <li>
-          <a href="#" onclick="newFloor();">
-            <span class="glyphicon glyphicon-plus"></span> Press Me after Choosing File</button>
-          </a>
-        </li>
-        
-          <li> 
-            <img id="imgAnalyzer" src="" height="10" alt="Image preview...">
-          </li>
-          
-          
-          
-          <li>
-              <input type="file" onchange="previewFile()"><br>
-              <a href="#" onclick="alert('new');" ><span class="glyphicon glyphicon-plus"></span> Add new Floor</a></li>-->
         <li>
           <a href="#" onclick="exportPDF();">
             <span class="glyphicon glyphicon-export"></span> Export</button>
@@ -81,21 +65,10 @@
   </nav>
 
   <div id="mainClass" class="wrapper">
-    <!-- Left Sidebar -->
-
-    <nav id="sidebar"> <!-- change to class="active" to start off collapsed -->
-<!--       <div class="sidebar-header">
-        <h3> WillowTree
-          <h3>
-      </div> -->
-
+    <!-- left Sidebar begins here -->
+    <nav id="sidebar">
       <ul class="list-unstyled components">
-        <!-- <p>Seating Chart</p> -->
-        <!-- <li><a href="#">
-                  <i class="glyphicon glyphicon-object-align-vertical"></i> Add Desk 
-      </a>
-    </li> -->
-    <li>
+      <li>
       <!-- Link with dropdown items -->
       <a href="#deskSubMenu" data-toggle="collapse" aria-expanded="false">
                 <i class="glyphicon glyphicon-object-align-vertical"></i> Add Desk
@@ -113,9 +86,9 @@
                     </li>
                     <li id="Type" title="Type" style="margin-bottom: 10px;">
                       <label for="Type" style="display: block; margin-bottom: 5px;">Type</label>
-                        <button id="singleDesk" onclick="singleDesk()"><img src="Single Desk@2x.svg" width="40" height="40"></button>
-                        <button id="LargeConf" onclick="largeConferenceDesk()"><img src="Large Conf.svg" width="40" height="40"></button>
-                        <button id="SmallConf" onclick="smallConferenceDesk()"><img src="Small conf.svg" width="40" height="40"></button>
+                        <button id="singleDesk" onclick="singleDesk()"><img src="images/Single Desk@2x.svg" width="40" height="40"></button>
+                        <button id="LargeConf" onclick="largeConferenceDesk()"><img src="images/Large Conf.svg" width="40" height="40"></button>
+                        <button id="SmallConf" onclick="smallConferenceDesk()"><img src="images/Small conf.svg" width="40" height="40"></button>
                     </li>
                     <li id="Dimensions">
                          <form action="#">
@@ -130,11 +103,6 @@
                 </ul>
             </li>
           <li>
-            <!--  old implementation      
-            <button id="deskProjectButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Select Project  <span class="caret"></span></button>
-                  <div id="deskProjectDropdown" class="dropdown-menu">
-                    this is where the projects themselves go
-            </div> -->
 
       <select id="projectDropdown" class="selectpicker" data-live-search="true" title="Select Project..." data-width='75%' data-size="5" style="position:relative;">
         <!-- <option> Projects go in here ...</option> -->
@@ -142,6 +110,7 @@
 
           </li>
 
+          <!-- PLACE DESK BUTTON -->
           <li><button id="ExportButton" type="button" class="btn btn-primary"  onclick="insertDivDesk()" style="margin-top: 15px" >Place Desk </button></li>
         </ul>
 
@@ -244,49 +213,48 @@
 
     <div id="HQFloor1">
 
-      <image xlink:href="HQ-1st-Floor.png" src="HQ1.png" width="1040px" height="630px"/>
+      <image xlink:href="images/HQ-1st-Floor.png" src="images/HQ1.png" width="1040px" height="630px"/>
 
     </div>
 
     <div id="HQFloor2">
 
-      <image xlink:href="HQ-2nd-Floor.png" src="2ndfloor.png" width="1040px" height="630px"/>
+      <image xlink:href="images/HQ-2nd-Floor.png" src="images/2ndfloor.png" width="1040px" height="630px"/>
 
     </div>
 
     <div id="THFloor1">
 
-      <image xlink:href="TH1.png" src="TH1.png" width="1040px" height="630px"/>
+      <image xlink:href="images/TH1.png" src="images/TH1.png" width="1040px" height="630px"/>
 
     </div>
 
     <div id="THFloor2">
 
-      <image xlink:href="TH2.png" src="TH2.png" width="1040px" height="630px"/>
+      <image xlink:href="images/TH2.png" src="images/TH2.png" width="1040px" height="630px"/>
 
     </div>
 
     <div id="THFloor3">
 
-      <image xlink:href="TH3.png" src="TH3.png" width="1040px" height="630px"/>
+      <image xlink:href="images/TH3.png" src="images/TH3.png" width="1040px" height="630px"/>
 
     </div>
 
     <div id="THFloor4">
 
-      <image xlink:href="TH4.png" src="TH4.png" width="1040px" height="630px"/>
+      <image xlink:href="images/TH4.png" src="images/TH4.png" width="1040px" height="630px"/>
 
     </div>
 
     <div id="WTFloor1">
 
-      <image xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px"/>
+      <image xlink:href="images/WT1.png" src="images/WT1.png" width="630px" height="1040px"/>
 
     </div>
     
+    <!-- div for new floorplans to be added-->
     <div id="new">
-
-<!--      <image xlink:href="WT1.png" src="WT1.png" width="630px" height="1040px"/>-->
 
     </div>
     
@@ -327,6 +295,7 @@
         </ul>
         </li><!-- end of edit rooms-->
 
+        <!-- active desk editing submenu -->
         <li>
           <a href="#activeDeskSubmenu" data-toggle="collapse" aria-expanded="false">
                 <i class="glyphicon glyphicon-blackboard"></i> 
@@ -384,15 +353,15 @@
   <!-- boostrap js -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-  <script src = "bootstrap3-typeahead.min.js"></script>
+  <script src = "js/bootstrap3-typeahead.min.js"></script>
   <!-- custom script -->  
  <!--  <script src="server.js"></script> -->
-  <script src="index.js"></script>
-  <script src="javascript.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/javascript.js"></script>
   <script src="https://cdnjs.com/libraries/less.js/"></script>
 
   <!-- essential scripts -->
-  <script src="jquery.ui.rotatable.js"></script>
+  <script src="js/jquery.ui.rotatable.js"></script>
 
 
 </body>
